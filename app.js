@@ -19,6 +19,7 @@ async function json(url) {
 /** Returns a warning string when the league is not in the shape the
  *  format assumes, or null when everything is normal. */
 export function leagueWarning(ownedCount, ghostRosterId) {
+  if (ownedCount === 0) return null; // no league data loaded; caller owns the error UI
   if (ghostRosterId === null) {
     return 'All six roster slots are owned. There is no median matchup this ' +
            'season — every week is three straight head-to-head games.';
@@ -92,12 +93,16 @@ function wireNav() {
 
 if (typeof document !== 'undefined') {
   wireNav();
+  let snapshotLoaded = true;
   loadSnapshot()
     .catch((e) => {
+      snapshotLoaded = false;
       console.error(e);
       $('freshness').textContent = 'Could not load the snapshot.';
     })
-    .then(() => refreshLive())
+    .then(() => {
+      if (snapshotLoaded) return refreshLive();
+    })
     .catch((e) => console.warn('live refresh failed, snapshot still shown', e));
 }
 
