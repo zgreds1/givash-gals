@@ -1,0 +1,86 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --line: #262b36;
+  --text: #e7e9ee;
+  --muted: #8b94a7;
+  --win: #4ade80;
+  --pen: #f87171;
+  --accent: #60a5fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+header {
+  padding: 1.5rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+h1 { margin: 0; font-size: 1.6rem; letter-spacing: -0.02em; }
+
+.tagline { margin: 0.15rem 0 1rem; color: var(--muted); font-size: 0.9rem; }
+
+nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+nav button {
+  background: var(--panel);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+nav button.active { color: var(--text); border-color: var(--accent); }
+
+.freshness { margin: 0.85rem 0 0; font-size: 0.8rem; color: var(--muted); }
+.freshness.live { color: var(--win); }
+
+.banner {
+  margin: 1rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #b45309;
+  background: #2a1e0c;
+  color: #fcd34d;
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+
+main { padding: 1rem; max-width: 60rem; margin: 0 auto; }
+
+.empty { color: var(--muted); padding: 2rem 0; text-align: center; }
+
+table.standings { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+
+.standings th {
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+  padding: 0.5rem 0.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.standings td { padding: 0.6rem 0.4rem; border-bottom: 1px solid var(--line); }
+
+.standings .num, .standings th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.standings .rank { color: var(--muted); width: 2.5rem; }
+.standings .team { font-weight: 600; }
+.standings .muted { color: var(--muted); }
+.hint { font-weight: 400; text-transform: none; letter-spacing: 0; opacity: 0.7; }
+
+@media (max-width: 34rem) {
+  .standings .muted { display: none; }
+  main { padding: 0.75rem; }
+}
