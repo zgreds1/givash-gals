@@ -58,3 +58,24 @@ test('team names are escaped', () => {
   assert.doesNotMatch(html, /<script>/);
   assert.match(html, /&lt;script&gt;/);
 });
+
+test('renderResults escapes hostile team names and penalty player names', () => {
+  const hostileWeek = {
+    ...WEEK,
+    teams: {
+      ...WEEK.teams,
+      1: {
+        ...WEEK.teams[1],
+        penalties: [{ ...WEEK.teams[1].penalties[0], name: '<img src=x onerror=alert(1)>' }],
+      },
+    },
+  };
+  const hostileTeams = { ...TEAMS, 1: '<script>alert(1)</script>' };
+
+  const html = renderResults([hostileWeek], hostileTeams);
+
+  assert.doesNotMatch(html, /<script>/);
+  assert.doesNotMatch(html, /<img /);
+  assert.match(html, /&lt;script&gt;/);
+  assert.match(html, /&lt;img /);
+});
