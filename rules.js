@@ -87,3 +87,88 @@ export function adjustedScore(entry, byes, players) {
     penalties,
   };
 }
+
+/**
+ * Resolve one week into matchup outcomes.
+ *
+ * The league runs 6 roster slots for 5 managers, so Sleeper schedules
+ * three matchups and one of them contains the unowned ghost roster. The
+ * real team in that pairing plays the league median instead of an
+ * opponent. If Sleeper instead omits the ghost, the leftover real roster
+ * (null matchup_id, or unpaired) is the median team.
+ *
+ * @param {number} week
+ * @param {Array} matchups - raw Sleeper matchups/{week} payload
+ * @param {number|null} ghostRosterId - roster with owner_id === null
+ * @param {Set<string>} byes
+ * @param {Object} players
+ */
+export function resolveWeek(week, matchups, ghostRosterId, byes, players) {
+  const scored = matchups.map((m) => ({
+    rosterId: m.roster_id,
+    matchupId: m.matchup_id ?? null,
+    ...adjustedScore(m, byes, players),
+  }));
+
+  const real = scored.filter((s) => s.rosterId !== ghostRosterId);
+
+  const teams = {};
+  for (const s of real) {
+    teams[s.rosterId] = { raw: s.raw, adjusted: s.adjusted, penalties: s.penalties };
+  }
+
+  // Group by Sleeper's matchup_id, then strip the ghost out of each group.
+  const groups = new Map();
+  for (const s of scored) {
+    if (s.matchupId === null) continue;
+    if (!groups.has(s.matchupId)) groups.set(s.matchupId, []);
+    groups.get(s.matchupId).push(s);
+  }
+
+  const h2hPairs = [];
+  let medianTeam = null;
+  for (const pair of groups.values()) {
+    const reals = pair.filter((s) => s.rosterId !== ghostRosterId);
+    if (reals.length === 2) h2hPairs.push(reals);
+    else if (reals.length === 1) medianTeam = reals[0];
+  }
+
+  // Fallback: Sleeper omitted the ghost, so a real roster is unpaired.
+  if (!medianTeam) {
+    const paired = new Set(h2hPairs.flat().map((s) => s.rosterId));
+    medianTeam = real.find((s) => !paired.has(s.rosterId)) || null;
+  }
+
+  const medianPool = h2hPairs
+    .flat()
+    .map((s) => s.adjusted)
+    .sort((a, b) => b - a);
+
+  const median = medianPool.length === 4 ? round2((medianPool[1] + medianPool[2]) / 2) : null;
+
+  const out = [];
+  for (const [a, b] of h2hPairs) {
+    let winner = null;
+    if (a.adjusted < b.adjusted) winner = a.rosterId;
+    else if (b.adjusted < a.adjusted) winner = b.rosterId;
+    out.push({ type: 'h2h', rosterIds: [a.rosterId, b.rosterId], winner });
+  }
+
+  if (medianTeam) {
+    let result = 'T';
+    if (median !== null) {
+      if (medianTeam.adjusted < median) result = 'W';
+      else if (medianTeam.adjusted > median) result = 'L';
+    }
+    out.push({ type: 'median', rosterId: medianTeam.rosterId, line: median, result });
+  }
+
+  return {
+    week,
+    played: real.some((s) => Math.abs(s.raw) >= EPS),
+    median,
+    medianPool,
+    teams,
+    matchups: out,
+  };
+}
