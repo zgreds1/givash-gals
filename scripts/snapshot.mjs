@@ -42,7 +42,7 @@ export function buildSnapshot({ rosters, users, schedule, players, weekPayloads 
   const userById = Object.fromEntries(users.map((u) => [u.user_id, u]));
   const teams = {};
   for (const r of rosters) {
-    if (r.roster_id === ghostRosterId) continue;
+    if (!r.owner_id) continue;
     const u = userById[r.owner_id];
     teams[String(r.roster_id)] =
       u?.metadata?.team_name || u?.display_name || `Roster ${r.roster_id}`;
@@ -129,7 +129,7 @@ async function main() {
 }
 
 /** Pull players/nfl at most once a day and keep the slim map on disk. */
-async function refreshPlayers() {
+export async function refreshPlayers(fetchImpl = fetch) {
   const slimPath = path.join(DATA, 'players-slim.json');
   const stampPath = path.join(DATA, '.players-stamp');
   const today = new Date().toISOString().slice(0, 10);
@@ -140,12 +140,21 @@ async function refreshPlayers() {
     }
   }
 
-  const res = await fetch(`${API_BASE}/v1/players/nfl`);
-  if (!res.ok) {
+  let raw;
+  try {
+    const res = await fetchImpl(`${API_BASE}/v1/players/nfl`);
+    if (!res.ok) throw new Error(`players/nfl ${res.status}`);
+    raw = await res.json();
+  } catch (e) {
+    // Network failure (DNS, TLS, timeout) or a bad HTTP status: both are
+    // recoverable as long as yesterday's slim map is still on disk. Only
+    // the rosters/users/schedule/matchups already archived this run are
+    // more valuable than a day-old player map, so degrade rather than abort.
     if (existsSync(slimPath)) return JSON.parse(await readFile(slimPath, 'utf8'));
-    throw new Error(`players/nfl ${res.status}`);
+    throw e;
   }
-  const slim = slimPlayers(await res.json());
+
+  const slim = slimPlayers(raw);
   await writeFile(slimPath, JSON.stringify(slim));
   await writeFile(stampPath, today);
   return slim;

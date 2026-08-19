@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { slimPlayers, buildSnapshot } from '../scripts/snapshot.mjs';
+import { readFile, writeFile } from 'node:fs/promises';
+import { slimPlayers, buildSnapshot, refreshPlayers } from '../scripts/snapshot.mjs';
 import { mkEntry, SCHEDULE } from './helpers.js';
 
 test('slimPlayers keeps only active skill players and three fields', () => {
@@ -62,4 +63,49 @@ test('a team name falls back to the display name when no team_name is set', () =
     weekPayloads: {},
   });
   assert.equal(snap.meta.teams['1'], 'The Gals');
+});
+
+test('buildSnapshot excludes any unowned roster from the teams map, not just the ghost', () => {
+  const snap = buildSnapshot({
+    rosters: [
+      { roster_id: 1, owner_id: 'u1' },
+      { roster_id: 2, owner_id: 'u2' },
+      { roster_id: 3, owner_id: 'u3' },
+      { roster_id: 4, owner_id: null },
+      { roster_id: 5, owner_id: null },
+      { roster_id: 6, owner_id: null },
+    ],
+    users: [
+      { user_id: 'u1', display_name: 'Team 1' },
+      { user_id: 'u2', display_name: 'Team 2' },
+      { user_id: 'u3', display_name: 'Team 3' },
+    ],
+    schedule: SCHEDULE,
+    players: {},
+    weekPayloads: {},
+  });
+  assert.equal(snap.meta.ghostRosterId, 4);
+  assert.equal(Object.keys(snap.meta.teams).length, 3);
+  assert.equal(snap.meta.teams['5'], undefined);
+  assert.equal(snap.meta.teams['6'], undefined);
+});
+
+test('refreshPlayers falls back to the cached slim map when fetch rejects', async () => {
+  const stampPath = new URL('../data/.players-stamp', import.meta.url);
+  const slimPath = new URL('../data/players-slim.json', import.meta.url);
+  const originalStamp = await readFile(stampPath, 'utf8');
+  const cached = JSON.parse(await readFile(slimPath, 'utf8'));
+
+  try {
+    // Force staleness so refreshPlayers must actually attempt a fetch
+    // instead of short-circuiting on the freshness check.
+    await writeFile(stampPath, '2000-01-01');
+    const rejecting = async () => {
+      throw new Error('network down');
+    };
+    const result = await refreshPlayers(rejecting);
+    assert.deepEqual(result, cached);
+  } finally {
+    await writeFile(stampPath, originalStamp);
+  }
 });
