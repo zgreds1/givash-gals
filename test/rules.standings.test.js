@@ -104,17 +104,18 @@ test('teams tied on every criterion are flagged rather than ordered arbitrarily'
 });
 
 test('three-way tie with partial H2H data flags all unresolved pairs', () => {
-  // Rosters 1, 2, 3 all finish 1-1 on 200 adjusted PF. Roster 2 beat roster 3.
-  // Roster 1 never played either. All three should be flagged because 1 cannot
-  // be separated from 2 or 3, even though 2 and 3 have H2H data.
+  // Rosters 1, 2, 3 all finish 1-1 on 200 adjusted PF. Roster 1 never played
+  // 2 or 3. Roster 2 beat roster 3. All three should be flagged because 1
+  // cannot be separated from either 2 or 3.
   const rows = standings([
     week(1, { 1: T(100), 2: T(100), 3: T(100), 4: T(300) }, [
-      { type: 'h2h', rosterIds: [1, 2], winner: 1 },
-      { type: 'h2h', rosterIds: [3, 4], winner: 3 },
-    ]),
-    week(2, { 1: T(100), 2: T(100), 3: T(100), 4: T(300) }, [
-      { type: 'h2h', rosterIds: [1, 4], winner: 4 },
+      { type: 'h2h', rosterIds: [1, 4], winner: 1 },
       { type: 'h2h', rosterIds: [2, 3], winner: 2 },
+    ]),
+    week(2, { 1: T(100), 2: T(100), 3: T(100), 4: T(300), 5: T(300) }, [
+      { type: 'h2h', rosterIds: [1, 5], winner: 5 },
+      { type: 'h2h', rosterIds: [2, 4], winner: 4 },
+      { type: 'h2h', rosterIds: [3, 5], winner: 3 },
     ]),
   ]);
   const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
@@ -123,7 +124,8 @@ test('three-way tie with partial H2H data flags all unresolved pairs', () => {
   assert.equal(by[1].adjPF, 200);
   assert.equal(by[2].adjPF, 200);
   assert.equal(by[3].adjPF, 200);
-  // All three should be flagged as unresolved
+  // All three should be flagged: 1 cannot separate from 2 or 3, even though
+  // 2 and 3 can separate from each other
   assert.equal(by[1].unresolvedTie, true);
   assert.equal(by[2].unresolvedTie, true);
   assert.equal(by[3].unresolvedTie, true);

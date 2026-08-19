@@ -263,9 +263,9 @@ export function standings(weeks) {
     return 0;
   });
 
-  // Flag teams in equivalence classes. Partition by winPct and adjPF. If any
-  // pair within a class cannot be separated by head-to-head, flag all members
-  // of that class (since the sort order is now arbitrary).
+  // Flag teams in equivalence classes. Partition by winPct and adjPF. A team
+  // is flagged if there exists at least one OTHER team in its class that
+  // head-to-head does not separate it from.
   const classes = new Map();
   for (const row of list) {
     const key = `${row.winPct}:${row.adjPF}`;
@@ -276,25 +276,17 @@ export function standings(weeks) {
   for (const members of classes.values()) {
     if (members.length < 2) continue; // No tie possible in a class of 1
 
-    // Check if there are any unresolved pairs in this class
-    let hasUnresolvedPair = false;
-    for (let i = 0; i < members.length && !hasUnresolvedPair; i++) {
-      for (let j = i + 1; j < members.length && !hasUnresolvedPair; j++) {
-        const a = members[i];
-        const b = members[j];
+    // For each team in this class, check if it has any unresolved peer
+    for (const a of members) {
+      const unresolved = members.some((b) => {
+        if (b === a) return false;
         const pa = h2hPct(a.rosterId, b.rosterId);
         const pb = h2hPct(b.rosterId, a.rosterId);
         const h2hSeparates = pa !== null && pb !== null && pa !== pb;
-        if (!h2hSeparates) {
-          hasUnresolvedPair = true;
-        }
-      }
-    }
-
-    // If any pair is unresolved, flag all members in this class
-    if (hasUnresolvedPair) {
-      for (const member of members) {
-        member.unresolvedTie = true;
+        return !h2hSeparates;
+      });
+      if (unresolved) {
+        a.unresolvedTie = true;
       }
     }
   }
