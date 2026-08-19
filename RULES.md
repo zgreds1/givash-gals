@@ -81,9 +81,13 @@ system is an adjusted score — there is only one kind.
 
 ## Scope
 
-Weeks 1-18 are all treated as regular-season weeks. There is no playoff
-bracket — Sleeper's own bracket assumes 6 teams and highest-score-wins, so it
-cannot be reused.
+**There are no playoffs.** All 18 weeks are regular-season weeks and count
+identically — weeks 15-18 are ordinary weeks, not a bracket. The standings
+after week 18 are the final rankings; whoever finishes first has won the
+league.
+
+(Sleeper's own bracket is ignored entirely. It assumes 6 teams and
+highest-score-wins, so it could not be used even if we wanted one.)
 
 A week is scored only if Sleeper's pairings read as one of two shapes: **two
 head-to-head matchups plus one team on the median** (the normal 5-manager

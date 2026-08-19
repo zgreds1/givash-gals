@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { renderResults, renderStandings } from '../render.js';
+import { renderResults, renderStandings, renderRules } from '../render.js';
 
 const TEAMS = { 1: 'Alpha', 2: 'Bravo', 5: 'Echo' };
 
@@ -97,4 +97,11 @@ test('a degenerate week says so instead of rendering an empty shell', () => {
   assert.match(html, /Week 3/);
   assert.match(html, /do not fit the league format/i);
   assert.doesNotMatch(html, /winner/);
+});
+
+test('the rules page states there are no playoffs and that 18 weeks decide it', () => {
+  const html = renderRules();
+  assert.match(html, /No playoffs/i);
+  assert.match(html, /18/);
+  assert.match(html, /final rankings/i);
 });

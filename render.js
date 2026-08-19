@@ -141,6 +141,12 @@ export function renderRules() {
        playing each other.</p>
     <p>That team <strong>wins if it finishes below the line</strong>.</p>
 
+    <h2>No playoffs</h2>
+    <p>There is no playoff bracket. All <strong>18 weeks</strong> are
+       regular-season weeks, and the standings after week 18 are the
+       <strong>final rankings</strong> &mdash; whoever finishes on top has won
+       the league.</p>
+
     <h2>Standings</h2>
     <p>Win%, then <strong>lowest</strong> adjusted points-for, then
        head-to-head. A median win counts the same as any other win.</p>
