@@ -25,10 +25,15 @@ Confirmed against the Sleeper API on 2026-08-19:
 | Season | 2026, `season_type: regular`, currently `pre_draft` |
 | `total_rosters` | 6 |
 | Real managers | 5 (one roster stays unowned) |
-| Starters | 19 (confirmed from `data/raw/rosters.json`) |
+| Starters | 19 — QB×3, RB×4, WR×4, TE×2, FLEX×4, K×1, DEF×1 (confirmed from `data/raw/rosters.json`, re-confirmed against `roster_positions` 2026-08-19) |
 | Bench | 5 |
 | `playoff_week_start` | 15 |
 | Regular season start | 2026-09-13 (week 1) |
+
+The starter count is **not stable**: this spec was first written against 18 starters
+(QB×2) and the league has since been changed to three QB slots. `rules.js` iterates the
+actual `starters` array from each matchup entry and never assumes a count, so a further
+roster-settings change needs no code change — only this row updating.
 
 API capabilities confirmed by probe:
 
