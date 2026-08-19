@@ -315,10 +315,11 @@ the treatment used by `dankest-keepers/KEEPER_RULES.md`.
 **In scope:** regular season weeks 1–18, standings, per-week results with full penalty
 itemisation, and the rules page.
 
-**Out of scope for this version:** a playoff bracket. Sleeper's bracket assumes 6 teams
-and highest-score-wins, so it cannot be reused. Weeks 15–18 are displayed as ordinary
-weeks in the standings and results. A lowest-wins bracket can be added once the playoff
-format is decided.
+**There are no playoffs, by design.** This is the league's format, not a deferred
+feature. All 18 weeks are regular-season weeks and count identically; weeks 15–18 are
+displayed as ordinary weeks in the standings and results. The standings after week 18
+are the final rankings. Sleeper's own bracket is ignored entirely — it assumes 6 teams
+and highest-score-wins, so it could not be reused in any case.
 
 Also out of scope: draft or keeper tooling, trade and waiver history, projections, and
 any write operation against Sleeper.
