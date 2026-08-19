@@ -8,7 +8,7 @@ const NO_BYES = new Set();
 const NO_PLAYERS = {}; // every id unknown — the harshest case for adjustedScore
 
 test('the engine resolves a real Sleeper payload without throwing', () => {
-  const r = resolveWeek(1, REAL, 6, NO_BYES, NO_PLAYERS);
+  const r = resolveWeek(1, REAL, new Set([6]), NO_BYES, NO_PLAYERS);
   assert.equal(r.week, 1);
   assert.equal(r.played, true);
   assert.equal(Object.keys(r.teams).length, 5); // ghost excluded

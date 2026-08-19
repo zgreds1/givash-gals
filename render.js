@@ -77,6 +77,15 @@ export function renderResults(weeks, teams) {
           <p class="empty">Not played yet.</p></article>`;
       }
 
+      // The engine refused to resolve this week, so it carries no matchups.
+      // Say so instead of rendering an empty shell.
+      if (wk.degenerate) {
+        return `<article class="week"><h2>Week ${wk.week}</h2>
+          <p class="empty">Sleeper's pairings do not fit the league format this week,
+          so nothing could be scored. The week is excluded from the standings.</p>
+          </article>`;
+      }
+
       const cards = wk.matchups
         .map((m) => {
           if (m.type === 'h2h') {

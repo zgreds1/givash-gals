@@ -79,3 +79,22 @@ test('renderResults escapes hostile team names and penalty player names', () => 
   assert.match(html, /&lt;script&gt;/);
   assert.match(html, /&lt;img /);
 });
+
+test('win% renders three real decimals, not a rounded 2-decimal value', () => {
+  const html = renderStandings(
+    [{
+      rosterId: 1, w: 2, l: 1, t: 0, gp: 3, winPct: 2 / 3,
+      adjPF: 300, rawPF: 300, median: { w: 0, l: 0, t: 0 }, unresolvedTie: false,
+    }],
+    { 1: 'Alpha' },
+  );
+  assert.match(html, /\.667/);
+  assert.doesNotMatch(html, /\.670/);
+});
+
+test('a degenerate week says so instead of rendering an empty shell', () => {
+  const html = renderResults([{ ...WEEK, degenerate: true, matchups: [] }], TEAMS);
+  assert.match(html, /Week 3/);
+  assert.match(html, /do not fit the league format/i);
+  assert.doesNotMatch(html, /winner/);
+});

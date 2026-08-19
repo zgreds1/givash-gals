@@ -1,8 +1,7 @@
 // Page controller. Paints the committed snapshot immediately, then
 // re-fetches only the current week from Sleeper and recomputes.
 
-import { LAST_WEEK } from './config.js';
-import { createClient, findGhostRosterId } from './sleeper.js';
+import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from './sleeper.js';
 import { byeTeams, resolveWeek, standings } from './rules.js';
 import { renderStandings, renderResults, renderRules } from './render.js';
 
@@ -31,6 +30,16 @@ export function leagueWarning(ownedCount, ghostRosterId) {
   return null;
 }
 
+/**
+ * Below 5 owned rosters the median is computed over the wrong population,
+ * so there is no honest table to draw: the banner stands alone. Six owned
+ * rosters is a different, still-scorable shape (three straight head-to-head
+ * matchups) and keeps its tables.
+ */
+export function showTables(ownedCount) {
+  return !(ownedCount > 0 && ownedCount < 5);
+}
+
 function paintBanner() {
   const msg = leagueWarning(Object.keys(state.teams).length, state.ghostRosterId);
   const el = $('banner');
@@ -39,8 +48,14 @@ function paintBanner() {
 }
 
 function paint() {
-  $('standings').innerHTML = renderStandings(standings(state.weeks), state.teams);
-  $('results').innerHTML = renderResults(state.weeks, state.teams);
+  const owned = Object.keys(state.teams).length;
+  if (showTables(owned)) {
+    $('standings').innerHTML = renderStandings(standings(state.weeks), state.teams);
+    $('results').innerHTML = renderResults(state.weeks, state.teams);
+  } else {
+    $('standings').innerHTML = '';
+    $('results').innerHTML = '';
+  }
   $('rules').innerHTML = renderRules();
   const when = state.generatedAt ? new Date(state.generatedAt).toLocaleString() : 'unknown';
   $('freshness').textContent = state.live
@@ -59,22 +74,35 @@ async function loadSnapshot() {
   paint();
 }
 
+/**
+ * Two Sleeper calls, and only two: /state/nfl and matchups/{week}.
+ *
+ * Rosters and the NFL schedule come from the committed snapshot instead.
+ * The schedule endpoint is undocumented and immutable for the season, so
+ * fetching it on every page load risks a 404 that would kill the live
+ * refresh and buys nothing. Reading rosters from the same snapshot as the
+ * team names also stops the page holding a fresh ghost id against a stale
+ * name map.
+ */
 async function refreshLive() {
   const client = createClient();
   const [st, rosters, schedule, players] = await Promise.all([
     client.state(),
-    client.rosters(),
-    client.schedule(),
+    json('data/raw/rosters.json'),
+    json('data/raw/schedule.json'),
     json('data/players-slim.json'),
   ]);
 
-  const week = Math.min(Number(st.week) || 1, LAST_WEEK);
-  const ghost = findGhostRosterId(rosters) ?? state.ghostRosterId;
+  const week = currentWeek(st);
+  if (week === 0) return; // preseason: nothing real to score yet
+
+  state.ghostRosterId = findGhostRosterId(rosters) ?? state.ghostRosterId;
+  const excluded = unownedRosterIds(rosters);
   const payload = await client.matchups(week);
   if (!Array.isArray(payload) || payload.length === 0) return;
 
-  const fresh = resolveWeek(week, payload, ghost, byeTeams(schedule, week), players);
-  if (!fresh.played) return;
+  const fresh = resolveWeek(week, payload, excluded, byeTeams(schedule, week), players);
+  if (!fresh.played || fresh.degenerate) return;
 
   state.weeks = state.weeks.filter((w) => w.week !== week).concat(fresh);
   state.weeks.sort((a, b) => a.week - b.week);

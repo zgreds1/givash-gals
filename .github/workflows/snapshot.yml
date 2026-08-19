@@ -52,5 +52,8 @@ jobs:
             echo "no change"
           else
             git commit -m "snapshot: $(date -u +%Y-%m-%d\ %H:%M) UTC"
+            # A human commit can land between checkout and push; rebase onto it
+            # rather than failing the run.
+            git pull --rebase
             git push
           fi

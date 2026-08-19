@@ -8,12 +8,36 @@
 // 14.6 MB and Sleeper asks it be pulled at most once a day. The snapshot
 // script fetches it and commits a slim map instead.
 
-import { API_BASE, LEAGUE_ID, SEASON } from './config.js';
+import { API_BASE, LAST_WEEK, LEAGUE_ID, SEASON } from './config.js';
+
+/** Every roster slot with no owner. The engine strips all of them, not just
+ *  the one displayed as the ghost, so the median is never computed over a
+ *  population that includes an empty slot. */
+export function unownedRosterIds(rosters) {
+  return new Set(rosters.filter((r) => !r.owner_id).map((r) => r.roster_id));
+}
 
 /** The roster nobody owns. Lowest id wins so the answer is stable. */
 export function findGhostRosterId(rosters) {
-  const unowned = rosters.filter((r) => !r.owner_id).map((r) => r.roster_id);
+  const unowned = [...unownedRosterIds(rosters)];
   return unowned.length ? Math.min(...unowned) : null;
+}
+
+/**
+ * The current league week, or 0 when there is nothing real to score.
+ *
+ * /state/nfl counts preseason weeks in the same `week` field, so without
+ * the `season_type` guard a preseason run archives weeks of zeros and
+ * publishes them as real results.
+ *
+ * @param {{week:number, season_type:string}} state
+ */
+export function currentWeek(state, lastWeek = LAST_WEEK) {
+  const type = state?.season_type;
+  if (type !== 'regular' && type !== 'post') return 0;
+  const week = Number(state.week);
+  if (!Number.isFinite(week) || week < 1) return 0;
+  return Math.min(week, lastWeek);
 }
 
 export function createClient({
@@ -49,7 +73,6 @@ export function createClient({
   return {
     get,
     state: () => get('/v1/state/nfl'),
-    league: () => get(`/v1/league/${LEAGUE_ID}`),
     users: () => get(`/v1/league/${LEAGUE_ID}/users`),
     rosters: () => get(`/v1/league/${LEAGUE_ID}/rosters`),
     matchups: (week) => get(`/v1/league/${LEAGUE_ID}/matchups/${week}`),

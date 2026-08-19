@@ -30,9 +30,13 @@ modules. Nothing to install.
 the scheduled GitHub Action import it unchanged, so the live page and the
 committed archive cannot disagree.
 
-The page paints instantly from `data/standings.json`, then re-fetches only
-the current week from Sleeper and recomputes client-side — two API calls per
-load. A scheduled Action archives the raw weekly payloads to `data/raw/` and
+The page paints instantly from the committed snapshot — it recomputes the
+table from `data/weeks.json` through the same engine, taking team names, the
+ghost roster id and the snapshot timestamp from `data/standings.json`. It
+then re-fetches only the current week from Sleeper and recomputes
+client-side — two API calls per load, `/state/nfl` and `matchups/{week}`.
+Rosters and the NFL schedule are read from `data/raw/`, not the API. A
+scheduled Action archives the raw weekly payloads to `data/raw/` and
 refreshes the snapshot. The Action is a safety net, not the freshness
 mechanism; freshness comes from the live fetch.
 

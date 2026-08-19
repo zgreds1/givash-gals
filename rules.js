@@ -97,27 +97,38 @@ export function adjustedScore(entry, byes, players) {
  * opponent. If Sleeper instead omits the ghost, the leftover real roster
  * (null matchup_id, or unpaired) is the median team.
  *
+ * Every excluded roster is stripped before anything is computed, so an
+ * under-filled league never contributes an unowned score to the median.
+ *
+ * The format only resolves when the payload reduces to exactly two
+ * head-to-head pairs plus at most one leftover. Anything else — Sleeper's
+ * own playoff bracket from week 15, or too few owned rosters — is reported
+ * as `degenerate: true` with **no** matchups at all. Emitting a partial
+ * week would invent records out of a payload we cannot read.
+ *
  * @param {number} week
  * @param {Array} matchups - raw Sleeper matchups/{week} payload
- * @param {number|null} ghostRosterId - roster with owner_id === null
+ * @param {Set<number>} excludedRosterIds - every roster with no owner
  * @param {Set<string>} byes
  * @param {Object} players
  */
-export function resolveWeek(week, matchups, ghostRosterId, byes, players) {
+export function resolveWeek(week, matchups, excludedRosterIds, byes, players) {
+  const excluded = excludedRosterIds ?? new Set();
+
   const scored = matchups.map((m) => ({
     rosterId: m.roster_id,
     matchupId: m.matchup_id ?? null,
     ...adjustedScore(m, byes, players),
   }));
 
-  const real = scored.filter((s) => s.rosterId !== ghostRosterId);
+  const real = scored.filter((s) => !excluded.has(s.rosterId));
 
   const teams = {};
   for (const s of real) {
     teams[s.rosterId] = { raw: s.raw, adjusted: s.adjusted, penalties: s.penalties };
   }
 
-  // Group by Sleeper's matchup_id, then strip the ghost out of each group.
+  // Group by Sleeper's matchup_id, then strip excluded rosters from each group.
   const groups = new Map();
   for (const s of scored) {
     if (s.matchupId === null) continue;
@@ -126,18 +137,27 @@ export function resolveWeek(week, matchups, ghostRosterId, byes, players) {
   }
 
   const h2hPairs = [];
-  let medianTeam = null;
+  const medianCandidates = [];
+  let oversizedGroup = false;
   for (const pair of groups.values()) {
-    const reals = pair.filter((s) => s.rosterId !== ghostRosterId);
+    const reals = pair.filter((s) => !excluded.has(s.rosterId));
     if (reals.length === 2) h2hPairs.push(reals);
-    else if (reals.length === 1) medianTeam = reals[0];
+    else if (reals.length === 1) medianCandidates.push(reals[0]);
+    else if (reals.length > 2) oversizedGroup = true;
+    // reals.length === 0: a group of excluded rosters only — nothing to score.
   }
 
   // Fallback: Sleeper omitted the ghost, so a real roster is unpaired.
-  if (!medianTeam) {
+  let leftovers = [];
+  if (medianCandidates.length === 0) {
     const paired = new Set(h2hPairs.flat().map((s) => s.rosterId));
-    medianTeam = real.find((s) => !paired.has(s.rosterId)) || null;
+    leftovers = real.filter((s) => !paired.has(s.rosterId));
   }
+
+  const candidates = medianCandidates.length ? medianCandidates : leftovers;
+  const medianTeam = candidates.length === 1 ? candidates[0] : null;
+
+  const degenerate = h2hPairs.length !== 2 || candidates.length > 1 || oversizedGroup;
 
   const medianPool = h2hPairs
     .flat()
@@ -147,25 +167,28 @@ export function resolveWeek(week, matchups, ghostRosterId, byes, players) {
   const median = medianPool.length === 4 ? round2((medianPool[1] + medianPool[2]) / 2) : null;
 
   const out = [];
-  for (const [a, b] of h2hPairs) {
-    let winner = null;
-    if (a.adjusted < b.adjusted) winner = a.rosterId;
-    else if (b.adjusted < a.adjusted) winner = b.rosterId;
-    out.push({ type: 'h2h', rosterIds: [a.rosterId, b.rosterId], winner });
-  }
+  if (!degenerate) {
+    for (const [a, b] of h2hPairs) {
+      let winner = null;
+      if (a.adjusted < b.adjusted) winner = a.rosterId;
+      else if (b.adjusted < a.adjusted) winner = b.rosterId;
+      out.push({ type: 'h2h', rosterIds: [a.rosterId, b.rosterId], winner });
+    }
 
-  if (medianTeam) {
-    let result = 'T';
-    if (median !== null) {
+    // A median matchup without a line is not a matchup. Never award the
+    // half-win a missing line would otherwise imply.
+    if (medianTeam && median !== null) {
+      let result = 'T';
       if (medianTeam.adjusted < median) result = 'W';
       else if (medianTeam.adjusted > median) result = 'L';
+      out.push({ type: 'median', rosterId: medianTeam.rosterId, line: median, result });
     }
-    out.push({ type: 'median', rosterId: medianTeam.rosterId, line: median, result });
   }
 
   return {
     week,
     played: real.some((s) => Math.abs(s.raw) >= EPS),
+    degenerate,
     median,
     medianPool,
     teams,
@@ -207,7 +230,10 @@ export function standings(weeks) {
   };
 
   for (const wk of weeks) {
-    if (!wk.played) continue;
+    // A degenerate week has no matchups, but its `teams` map is still
+    // populated. Skipping it wholesale is what keeps adjusted points-for
+    // from accruing for a week that was never actually resolved.
+    if (!wk.played || wk.degenerate) continue;
 
     for (const [id, t] of Object.entries(wk.teams)) {
       const r = ensure(Number(id));
@@ -244,7 +270,10 @@ export function standings(weeks) {
 
   const list = [...rows.values()].map((r) => ({
     ...r,
-    winPct: r.gp === 0 ? 0 : round2((r.w + 0.5 * r.t) / r.gp),
+    // Deliberately not rounded: the table prints three decimals, and a
+    // 2-decimal value would render 2-1 as .670 instead of .667. Equal
+    // records produce bit-identical quotients, so equality still holds.
+    winPct: r.gp === 0 ? 0 : (r.w + 0.5 * r.t) / r.gp,
   }));
 
   const h2hPct = (a, b) => {

@@ -13,8 +13,13 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { API_BASE, LAST_WEEK } from '../config.js';
-import { createClient, findGhostRosterId } from '../sleeper.js';
+import { API_BASE } from '../config.js';
+import {
+  createClient,
+  currentWeek,
+  findGhostRosterId,
+  unownedRosterIds,
+} from '../sleeper.js';
 import { byeTeams, resolveWeek, standings } from '../rules.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -37,7 +42,10 @@ export function slimPlayers(raw) {
 
 /** Pure: everything the site needs, computed from already-fetched data. */
 export function buildSnapshot({ rosters, users, schedule, players, weekPayloads }) {
+  // Every unowned slot is stripped from the engine; the lowest one is still
+  // reported as the ghost because that is what the page labels and explains.
   const ghostRosterId = findGhostRosterId(rosters);
+  const excluded = unownedRosterIds(rosters);
 
   const userById = Object.fromEntries(users.map((u) => [u.user_id, u]));
   const teams = {};
@@ -52,10 +60,44 @@ export function buildSnapshot({ rosters, users, schedule, players, weekPayloads 
     .map(Number)
     .sort((a, b) => a - b)
     .map((w) =>
-      resolveWeek(w, weekPayloads[w], ghostRosterId, byeTeams(schedule, w), players),
+      resolveWeek(w, weekPayloads[w], excluded, byeTeams(schedule, w), players),
     );
 
   return { standings: standings(weeks), weeks, meta: { ghostRosterId, teams } };
+}
+
+/**
+ * Write `{generatedAt, ...body}` as JSON, but only stamp a new timestamp
+ * when the substantive content actually changed.
+ *
+ * The Action commits whenever `data/` differs. An unconditional timestamp
+ * makes every run differ, so the workflow's "commit only on change" guard
+ * can never be true and history fills with ~13 empty commits a week.
+ *
+ * @param {string} file
+ * @param {Object} body - everything except generatedAt, in key order
+ * @param {string} now - ISO timestamp to use when the content is new
+ * @returns {Promise<{generatedAt:string, changed:boolean}>}
+ */
+export async function writeStamped(file, body, now) {
+  const next = JSON.stringify(body);
+  let generatedAt = now;
+  let changed = true;
+
+  if (existsSync(file)) {
+    try {
+      const { generatedAt: prevAt, ...prevBody } = JSON.parse(await readFile(file, 'utf8'));
+      if (prevAt && JSON.stringify(prevBody) === next) {
+        generatedAt = prevAt;
+        changed = false;
+      }
+    } catch {
+      // Unreadable or malformed: treat it as new content and rewrite.
+    }
+  }
+
+  await writeFile(file, JSON.stringify({ generatedAt, ...body }, null, 2));
+  return { generatedAt, changed };
 }
 
 async function readRaw() {
@@ -87,7 +129,12 @@ async function main() {
     weekPayloads = await readRaw();
   } else {
     const state = await client.state();
-    const current = Math.min(Number(state.week) || 1, LAST_WEEK);
+    // 0 during the preseason: /state/nfl counts preseason weeks in the same
+    // field, and archiving those would publish a season of zeros.
+    const current = currentWeek(state);
+    if (current === 0) {
+      console.log(`snapshot: season_type "${state.season_type}" — no real weeks to archive`);
+    }
 
     [rosters, users, schedule] = await Promise.all([
       client.rosters(),
@@ -111,20 +158,19 @@ async function main() {
   }
 
   const snap = buildSnapshot({ rosters, users, schedule, players, weekPayloads });
-  const generatedAt = new Date().toISOString();
+  const now = new Date().toISOString();
 
-  await writeFile(
+  const s = await writeStamped(
     path.join(DATA, 'standings.json'),
-    JSON.stringify({ generatedAt, ...snap.meta, standings: snap.standings }, null, 2),
+    { ...snap.meta, standings: snap.standings },
+    now,
   );
-  await writeFile(
-    path.join(DATA, 'weeks.json'),
-    JSON.stringify({ generatedAt, weeks: snap.weeks }, null, 2),
-  );
+  const w = await writeStamped(path.join(DATA, 'weeks.json'), { weeks: snap.weeks }, now);
 
   console.log(
-    `snapshot: ${snap.weeks.filter((w) => w.played).length} played weeks, ` +
-      `ghost roster ${snap.meta.ghostRosterId}`,
+    `snapshot: ${snap.weeks.filter((x) => x.played).length} played weeks, ` +
+      `ghost roster ${snap.meta.ghostRosterId}, ` +
+      (s.changed || w.changed ? 'content changed' : 'content unchanged'),
   );
 }
 

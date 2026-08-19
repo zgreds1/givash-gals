@@ -49,6 +49,10 @@ The league has 5 managers in 6 roster slots. The roster nobody owns is the
 Sleeper pairs against the ghost plays the **league median** instead of an
 opponent.
 
+Before the league fills, more than one slot is unowned. **Every** unowned
+roster is excluded, not just the lowest-numbered one, so the median is never
+averaged over an empty team's score.
+
 The median is the average of the **2nd and 3rd highest adjusted scores among
 the four teams playing head-to-head** that week. The ghost and the median
 team are both excluded from that pool.
@@ -78,5 +82,9 @@ system is an adjusted score — there is only one kind.
 ## Scope
 
 Weeks 1-18 are all treated as regular-season weeks. There is no playoff
-bracket — Sleeper's assumes 6 teams and highest-score-wins, so it cannot be
-reused.
+bracket — Sleeper's own bracket assumes 6 teams and highest-score-wins, so it
+cannot be reused.
+
+If Sleeper's pairings for a week cannot be read as two head-to-head matchups
+plus one median team, that week is reported as unresolvable and is excluded
+from the standings entirely. Nothing is guessed.

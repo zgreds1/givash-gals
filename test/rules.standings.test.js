@@ -155,3 +155,38 @@ test('a team H2H-separated from all tied peers is not flagged', () => {
   assert.equal(by[2].unresolvedTie, true);
   assert.equal(by[3].unresolvedTie, true);
 });
+
+test('a degenerate week contributes nothing at all, not even points-for', () => {
+  // The bug this guards: a degenerate week has no matchups but still has a
+  // populated teams map, so points-for accrued while gp stayed 0 and a
+  // phantom 0-0-0 row appeared beside real records.
+  const bad = week(2, { 1: T(90), 2: T(110), 3: T(95) }, []);
+  bad.degenerate = true;
+
+  const rows = standings([
+    week(1, { 1: T(100), 2: T(120) }, [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }]),
+    bad,
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  assert.equal(rows.length, 2);          // roster 3 never appears
+  assert.equal(by[3], undefined);
+  assert.equal(by[1].adjPF, 100);        // not 190
+  assert.equal(by[1].gp, 1);
+});
+
+test('a played but degenerate week is skipped even when it is the only week', () => {
+  const bad = week(1, { 1: T(90), 2: T(110) }, []);
+  bad.degenerate = true;
+  assert.deepEqual(standings([bad]), []);
+});
+
+test('win% is not rounded to two decimals', () => {
+  const rows = standings([
+    week(1, { 1: T(90), 2: T(110) }, [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }]),
+    week(2, { 1: T(90), 2: T(110) }, [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }]),
+    week(3, { 1: T(120), 2: T(100) }, [{ type: 'h2h', rosterIds: [1, 2], winner: 2 }]),
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  assert.deepEqual([by[1].w, by[1].l], [2, 1]);
+  assert.equal(by[1].winPct.toFixed(3), '0.667'); // not 0.670
+});
