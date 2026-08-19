@@ -133,7 +133,10 @@ async function main() {
     // field, and archiving those would publish a season of zeros.
     const current = currentWeek(state);
     if (current === 0) {
-      console.log(`snapshot: season_type "${state.season_type}" — no real weeks to archive`);
+      console.log(
+        `snapshot: season_type "${state.season_type}" — no real weeks to archive, ` +
+          'rescoring whatever is already in data/raw',
+      );
     }
 
     [rosters, users, schedule] = await Promise.all([
@@ -153,6 +156,12 @@ async function main() {
       weekPayloads[w] = payload;
       await writeFile(path.join(RAW, `wk${w}.json`), JSON.stringify(payload));
     }
+
+    // Off-season: /state/nfl reports no real week, but a finished season is
+    // still sitting in data/raw. Rescore the archive rather than publishing
+    // an empty site over a completed 18 weeks. The cron runs year-round, so
+    // without this the standings blank themselves some time in February.
+    if (current === 0) weekPayloads = await readRaw();
 
     players = await refreshPlayers();
   }

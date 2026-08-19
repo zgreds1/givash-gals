@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveWeek, byeTeams } from '../rules.js';
+import { resolveWeek, byeTeams, standings } from '../rules.js';
 import { mkEntry, PLAYERS, SCHEDULE } from './helpers.js';
 
 const WK3 = byeTeams(SCHEDULE, 3);
@@ -216,4 +216,65 @@ test('the five-owned shape resolves exactly as it did before the Set signature',
     { type: 'h2h', rosterIds: [3, 4], winner: 4 },
     { type: 'median', rosterId: 5, line: 107.9, result: 'W' },
   ]);
+});
+
+// --- all six slots owned ------------------------------------------------
+//
+// Spec section 10: with no ghost roster the week degrades to three straight
+// head-to-head matchups and no median. That is a readable payload, not a
+// degenerate one, and it must score exactly as it did before the
+// degenerate flag existed.
+
+/** Three clean pairs, no ghost, nobody left over. */
+function sixOwnedWeek() {
+  return [
+    solo(1, 1, 100), solo(2, 1, 110),
+    solo(3, 2, 90), solo(4, 2, 95),
+    solo(5, 3, 120), solo(6, 3, 80),
+  ];
+}
+
+test('a fully owned six-manager league is not degenerate', () => {
+  const r = resolveWeek(3, sixOwnedWeek(), new Set(), WK3, PLAYERS);
+  assert.equal(r.degenerate, false);
+  assert.equal(r.median, null); // no median team, so no line
+  assert.deepEqual(r.matchups, [
+    { type: 'h2h', rosterIds: [1, 2], winner: 1 },
+    { type: 'h2h', rosterIds: [3, 4], winner: 3 },
+    { type: 'h2h', rosterIds: [5, 6], winner: 6 },
+  ]);
+  assert.equal(r.matchups.filter((m) => m.type === 'median').length, 0);
+});
+
+test('a fully owned six-manager league produces six standings rows', () => {
+  const rows = standings([resolveWeek(3, sixOwnedWeek(), new Set(), WK3, PLAYERS)]);
+  assert.equal(rows.length, 6);
+  const by = Object.fromEntries(rows.map((x) => [x.rosterId, x]));
+  assert.deepEqual([by[1].w, by[1].l, by[1].gp], [1, 0, 1]);
+  assert.deepEqual([by[2].w, by[2].l, by[2].gp], [0, 1, 1]);
+  assert.deepEqual([by[6].w, by[6].l, by[6].gp], [1, 0, 1]);
+  assert.equal(by[5].adjPF, 120);
+});
+
+test('three pairs plus a leftover is still degenerate — the loosening is bounded', () => {
+  const ms = sixOwnedWeek().concat(solo(7, 4, 105));
+  const r = resolveWeek(3, ms, EXCLUDED, WK3, PLAYERS);
+  assert.equal(r.degenerate, true);
+  assert.deepEqual(r.matchups, []);
+});
+
+test('the still-degenerate shapes stay degenerate after the six-owned fix', () => {
+  const deg = (ms, excl = EXCLUDED) => resolveWeek(3, ms, excl, WK3, PLAYERS).degenerate;
+  // zero pairs
+  assert.equal(deg([solo(1, 1, 100)]), true);
+  // one pair
+  assert.equal(deg([solo(1, 1, 100), solo(2, 1, 110), solo(3, 2, 90)]), true);
+  // two pairs but two median candidates
+  assert.equal(
+    deg([solo(1, 1, 100), solo(2, 1, 110), solo(3, 2, 90), solo(4, 2, 95),
+         solo(5, 3, 120), solo(7, 4, 80)], new Set([6])),
+    true,
+  );
+  // four pairs
+  assert.equal(deg(sixOwnedWeek().concat([solo(7, 4, 105), solo(8, 4, 99)])), true);
 });

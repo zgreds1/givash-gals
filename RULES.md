@@ -85,6 +85,8 @@ Weeks 1-18 are all treated as regular-season weeks. There is no playoff
 bracket — Sleeper's own bracket assumes 6 teams and highest-score-wins, so it
 cannot be reused.
 
-If Sleeper's pairings for a week cannot be read as two head-to-head matchups
-plus one median team, that week is reported as unresolvable and is excluded
-from the standings entirely. Nothing is guessed.
+A week is scored only if Sleeper's pairings read as one of two shapes: **two
+head-to-head matchups plus one team on the median** (the normal 5-manager
+case), or **three straight head-to-head matchups and no median** (every slot
+owned). Any other shape is reported as unresolvable and excluded from the
+standings entirely. Nothing is guessed.

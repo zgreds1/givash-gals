@@ -157,7 +157,16 @@ export function resolveWeek(week, matchups, excludedRosterIds, byes, players) {
   const candidates = medianCandidates.length ? medianCandidates : leftovers;
   const medianTeam = candidates.length === 1 ? candidates[0] : null;
 
-  const degenerate = h2hPairs.length !== 2 || candidates.length > 1 || oversizedGroup;
+  // Two readable shapes, and only two:
+  //   5 managers in 6 slots -> two pairs plus the one team on the median;
+  //   all 6 slots owned     -> three straight pairs and no median at all.
+  // Everything else — 0 or 1 pairs, two teams left over, a group holding
+  // more than two real rosters — is Sleeper's own bracket or an unfilled
+  // league, and is refused rather than guessed at.
+  const readable =
+    (h2hPairs.length === 2 && candidates.length <= 1) ||
+    (h2hPairs.length === 3 && candidates.length === 0);
+  const degenerate = !readable || oversizedGroup;
 
   const medianPool = h2hPairs
     .flat()

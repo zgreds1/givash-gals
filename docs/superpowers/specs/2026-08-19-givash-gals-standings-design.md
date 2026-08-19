@@ -171,8 +171,10 @@ and the GitHub Action, so the live page and the archive cannot disagree.
 as the single real roster left over. Defensively it also treats a real roster with
 `matchup_id: null`, or a real roster left unpaired, as the median team — covering the
 possibility that Sleeper omits unowned rosters from the matchups payload rather than
-scheduling them. Any other shape — two leftovers, fewer than two head-to-head pairs, or
-Sleeper's own week-15 bracket — sets `degenerate: true` and emits no matchups at all;
+scheduling them. Three clean pairs with no leftover — all six slots owned — is equally readable and scores
+as three straight head-to-head matchups with no median. Any other shape — two leftovers,
+fewer than two pairs, a group of more than two real rosters, or Sleeper's own week-15
+bracket — sets `degenerate: true` and emits no matchups at all;
 `standings()` then skips that week entirely rather than accruing points-for for a week it
 could not resolve.
 
@@ -188,7 +190,9 @@ lock** per endpoint. It never fetches `players/nfl`; it reads the committed slim
    `regular` or `post`; in the preseason `N` is 0 and nothing is archived.
 2. `GET` league, users, rosters, and the 2026 schedule
 3. `GET matchups/{1..N}` — every week, not just the current one, so that Sleeper's
-   retroactive stat corrections propagate into past results
+   retroactive stat corrections propagate into past results. When `N` is 0 (preseason or
+   off-season) the archive in `data/raw/` is rescored instead, so a finished season is
+   never overwritten with an empty one
 4. Write each response verbatim to `data/raw/wk{N}.json`
 5. Once per day, fetch `players/nfl`, reduce it to active skill-position players as
    `{position, team, name}`, and write `data/players-slim.json`
@@ -272,6 +276,8 @@ backoff.
   from the engine, which leaves too few teams to form a week and marks it `degenerate`.
 - **No ghost roster found** (all 6 slots owned): fall back to three straight head-to-head
   matchups and no median, surfacing a visible banner that the format assumption changed.
+  Three clean pairs with nobody left over is an explicitly readable shape in `resolveWeek`
+  — it is **not** degenerate — so the tables render normally underneath that banner.
 - **Unknown player id** in `starters`: treated as a non-DEF starter, so a 0 incurs +20.
   Logged for visibility.
 
