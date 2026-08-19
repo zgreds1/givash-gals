@@ -172,3 +172,109 @@ export function resolveWeek(week, matchups, ghostRosterId, byes, players) {
     matchups: out,
   };
 }
+
+/**
+ * Season standings from resolved weeks.
+ *
+ * Sort order: win% descending, then adjusted points-for ASCENDING (lower
+ * is better in this format), then head-to-head among the tied teams.
+ * Teams that none of those separate are flagged rather than ordered by
+ * accident.
+ *
+ * @param {WeekResult[]} weeks
+ */
+export function standings(weeks) {
+  const rows = new Map();
+  const ensure = (id) => {
+    if (!rows.has(id)) {
+      rows.set(id, {
+        rosterId: id, w: 0, l: 0, t: 0, gp: 0,
+        adjPF: 0, rawPF: 0,
+        median: { w: 0, l: 0, t: 0 },
+        unresolvedTie: false,
+      });
+    }
+    return rows.get(id);
+  };
+
+  // rosterId -> opponentId -> {w,l,t}, used only for the H2H tiebreak
+  const h2h = new Map();
+  const noteH2H = (a, b, outcome) => {
+    if (!h2h.has(a)) h2h.set(a, new Map());
+    const m = h2h.get(a);
+    if (!m.has(b)) m.set(b, { w: 0, l: 0, t: 0 });
+    m.get(b)[outcome] += 1;
+  };
+
+  for (const wk of weeks) {
+    if (!wk.played) continue;
+
+    for (const [id, t] of Object.entries(wk.teams)) {
+      const r = ensure(Number(id));
+      r.adjPF = round2(r.adjPF + t.adjusted);
+      r.rawPF = round2(r.rawPF + t.raw);
+    }
+
+    for (const m of wk.matchups) {
+      if (m.type === 'h2h') {
+        const [a, b] = m.rosterIds;
+        const ra = ensure(a);
+        const rb = ensure(b);
+        ra.gp += 1;
+        rb.gp += 1;
+        if (m.winner === null) {
+          ra.t += 1; rb.t += 1;
+          noteH2H(a, b, 't'); noteH2H(b, a, 't');
+        } else {
+          const loser = m.winner === a ? b : a;
+          ensure(m.winner).w += 1;
+          ensure(loser).l += 1;
+          noteH2H(m.winner, loser, 'w');
+          noteH2H(loser, m.winner, 'l');
+        }
+      } else {
+        const r = ensure(m.rosterId);
+        r.gp += 1;
+        if (m.result === 'W') { r.w += 1; r.median.w += 1; }
+        else if (m.result === 'L') { r.l += 1; r.median.l += 1; }
+        else { r.t += 1; r.median.t += 1; }
+      }
+    }
+  }
+
+  const list = [...rows.values()].map((r) => ({
+    ...r,
+    winPct: r.gp === 0 ? 0 : round2((r.w + 0.5 * r.t) / r.gp),
+  }));
+
+  const h2hPct = (a, b) => {
+    const rec = h2h.get(a)?.get(b);
+    if (!rec) return null;
+    const g = rec.w + rec.l + rec.t;
+    return g === 0 ? null : (rec.w + 0.5 * rec.t) / g;
+  };
+
+  list.sort((a, b) => {
+    if (b.winPct !== a.winPct) return b.winPct - a.winPct;
+    if (a.adjPF !== b.adjPF) return a.adjPF - b.adjPF; // lower is better
+    const pa = h2hPct(a.rosterId, b.rosterId);
+    const pb = h2hPct(b.rosterId, a.rosterId);
+    if (pa !== null && pb !== null && pa !== pb) return pb - pa;
+    return 0;
+  });
+
+  // Flag any pair that survived every criterion.
+  for (let i = 0; i < list.length - 1; i++) {
+    const a = list[i];
+    const b = list[i + 1];
+    const pa = h2hPct(a.rosterId, b.rosterId);
+    const pb = h2hPct(b.rosterId, a.rosterId);
+    const h2hSeparates = pa !== null && pb !== null && pa !== pb;
+    if (a.winPct === b.winPct && a.adjPF === b.adjPF && !h2hSeparates) {
+      a.unresolvedTie = true;
+      b.unresolvedTie = true;
+    }
+  }
+
+  return list;
+}
