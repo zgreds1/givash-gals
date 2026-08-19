@@ -4,7 +4,7 @@
 import { LAST_WEEK } from './config.js';
 import { createClient, findGhostRosterId } from './sleeper.js';
 import { byeTeams, resolveWeek, standings } from './rules.js';
-import { renderStandings, renderResults } from './render.js';
+import { renderStandings, renderResults, renderRules } from './render.js';
 
 const state = { weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false };
 
@@ -41,6 +41,7 @@ function paintBanner() {
 function paint() {
   $('standings').innerHTML = renderStandings(standings(state.weeks), state.teams);
   $('results').innerHTML = renderResults(state.weeks, state.teams);
+  $('rules').innerHTML = renderRules();
   const when = state.generatedAt ? new Date(state.generatedAt).toLocaleString() : 'unknown';
   $('freshness').textContent = state.live
     ? 'Live · updated just now'

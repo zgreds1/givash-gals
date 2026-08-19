@@ -1,5 +1,7 @@
 // Pure HTML builders. No fetching, no state — easy to eyeball and to test.
 
+import { PENALTY } from './config.js';
+
 const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
@@ -106,4 +108,32 @@ export function renderResults(weeks, teams) {
       return `<article class="week"><h2>Week ${wk.week}</h2>${cards}</article>`;
     })
     .join('');
+}
+
+export function renderRules() {
+  return `<div class="rules">
+    <h2>Lowest score wins</h2>
+    <p>Every matchup goes to the <strong>lower</strong> adjusted score. An exact
+       tie counts half a win.</p>
+
+    <h2>The +${PENALTY} penalty</h2>
+    <p>Each starter that scores <strong>exactly 0</strong> adds
+       <strong>${PENALTY}</strong> to your total. Empty slots count as 0.
+       Penalties stack.</p>
+    <p><strong>Exception:</strong> a DEF that is not on bye is exempt — 0 is a
+       legitimate defensive score in this league. A DEF on bye is not exempt.</p>
+    <p>Negative scores are kept as-is. A kicker at &minus;1 stays at &minus;1;
+       that is a reward, not something to punish.</p>
+
+    <h2>The median matchup</h2>
+    <p>Five managers occupy six roster slots. Each week the team Sleeper pairs
+       against the empty roster plays the <strong>league median</strong>: the
+       average of the 2nd and 3rd highest adjusted scores among the four teams
+       playing each other.</p>
+    <p>That team <strong>wins if it finishes below the line</strong>.</p>
+
+    <h2>Standings</h2>
+    <p>Win%, then <strong>lowest</strong> adjusted points-for, then
+       head-to-head. A median win counts the same as any other win.</p>
+  </div>`;
 }
