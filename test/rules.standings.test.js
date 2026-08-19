@@ -130,3 +130,28 @@ test('three-way tie with partial H2H data flags all unresolved pairs', () => {
   assert.equal(by[2].unresolvedTie, true);
   assert.equal(by[3].unresolvedTie, true);
 });
+
+test('a team H2H-separated from all tied peers is not flagged', () => {
+  const rows = standings([
+    week(1, { 1: T(100), 2: T(100), 3: T(100) }, [
+      { type: 'h2h', rosterIds: [1, 2], winner: 1 },
+      { type: 'median', rosterId: 3, line: 100, result: 'W' },
+    ]),
+    week(2, { 1: T(100), 2: T(100), 3: T(100) }, [
+      { type: 'h2h', rosterIds: [1, 3], winner: 1 },
+      { type: 'median', rosterId: 2, line: 100, result: 'W' },
+    ]),
+    week(3, { 1: T(100), 2: T(100), 3: T(100) }, [
+      { type: 'median', rosterId: 1, line: 100, result: 'L' },
+      { type: 'median', rosterId: 2, line: 100, result: 'W' },
+      { type: 'median', rosterId: 3, line: 100, result: 'W' },
+    ]),
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  // All three tie at 2-1 on 300 adjPF. Roster 1 beat both others head-to-head,
+  // so its rank is not arbitrary and it must not carry a T- prefix.
+  assert.equal(by[1].unresolvedTie, false);
+  // Rosters 2 and 3 never met, so nothing separates them.
+  assert.equal(by[2].unresolvedTie, true);
+  assert.equal(by[3].unresolvedTie, true);
+});
