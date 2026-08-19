@@ -84,3 +84,74 @@ table.standings { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
   .standings .muted { display: none; }
   main { padding: 0.75rem; }
 }
+
+.week { margin: 0 0 2rem; }
+
+.week h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.75rem;
+  align-items: start;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.side { min-width: 0; }
+.side .name { font-weight: 600; margin-bottom: 0.2rem; }
+
+.side .adj {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.side .raw { font-size: 0.78rem; color: var(--muted); }
+
+/* The winner is the LOW score — make that unmissable. */
+.side.winner .adj { color: var(--win); }
+.side.winner .name::after { content: " ✓"; color: var(--win); }
+
+.vs {
+  align-self: center;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+}
+
+.penalties { list-style: none; margin: 0.5rem 0 0; padding: 0; font-size: 0.78rem; }
+.penalties li { color: var(--muted); margin-bottom: 0.15rem; }
+.penalties em { font-style: normal; opacity: 0.75; }
+.pen { color: var(--pen); font-weight: 700; margin-right: 0.25rem; }
+
+.pool { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+.pool span {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  opacity: 0.45;
+}
+
+/* The two scores that were actually averaged. */
+.pool span.used { opacity: 1; color: var(--text); border-color: var(--accent); }
+
+@media (max-width: 34rem) {
+  .card { grid-template-columns: 1fr; }
+  .vs { text-align: left; }
+}

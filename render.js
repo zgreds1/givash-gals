@@ -36,3 +36,74 @@ export function renderStandings(rows, teams) {
     <tbody>${body}</tbody>
   </table>`;
 }
+
+const REASON = {
+  zeroed: 'scored 0',
+  'empty-slot': 'empty slot',
+  'bye-def': 'DEF on bye',
+};
+
+const money = (n) => n.toFixed(2);
+
+function penaltyList(penalties) {
+  if (!penalties.length) return '';
+  const items = penalties
+    .map((p) => `<li><span class="pen">+20</span> ${esc(p.name)} <em>${esc(REASON[p.reason] || p.reason)}</em></li>`)
+    .join('');
+  return `<ul class="penalties">${items}</ul>`;
+}
+
+function teamBlock(rosterId, team, teams, isWinner) {
+  const name = teams[String(rosterId)] || `Roster ${rosterId}`;
+  return `<div class="side ${isWinner ? 'winner' : ''}">
+    <div class="name">${esc(name)}</div>
+    <div class="adj">${money(team.adjusted)}</div>
+    <div class="raw">raw ${money(team.raw)}</div>
+    ${penaltyList(team.penalties)}
+  </div>`;
+}
+
+export function renderResults(weeks, teams) {
+  if (!weeks.length) return '<p class="empty">No weeks to show yet.</p>';
+
+  return weeks
+    .slice()
+    .sort((a, b) => b.week - a.week)
+    .map((wk) => {
+      if (!wk.played) {
+        return `<article class="week"><h2>Week ${wk.week}</h2>
+          <p class="empty">Not played yet.</p></article>`;
+      }
+
+      const cards = wk.matchups
+        .map((m) => {
+          if (m.type === 'h2h') {
+            const [a, b] = m.rosterIds;
+            return `<div class="card h2h">
+              ${teamBlock(a, wk.teams[a], teams, m.winner === a)}
+              <div class="vs">${m.winner === null ? 'TIE' : 'vs'}</div>
+              ${teamBlock(b, wk.teams[b], teams, m.winner === b)}
+            </div>`;
+          }
+
+          const pool = wk.medianPool
+            .map((s, i) => `<span class="${i === 1 || i === 2 ? 'used' : ''}">${money(s)}</span>`)
+            .join('');
+
+          return `<div class="card median">
+            ${teamBlock(m.rosterId, wk.teams[m.rosterId], teams, m.result === 'W')}
+            <div class="vs">${m.result === 'T' ? 'TIE' : 'vs median'}</div>
+            <div class="side line ${m.result === 'L' ? 'winner' : ''}">
+              <div class="name">League median</div>
+              <div class="adj">${m.line === null ? '—' : money(m.line)}</div>
+              <div class="raw">avg of 2nd &amp; 3rd</div>
+              <div class="pool">${pool}</div>
+            </div>
+          </div>`;
+        })
+        .join('');
+
+      return `<article class="week"><h2>Week ${wk.week}</h2>${cards}</article>`;
+    })
+    .join('');
+}
