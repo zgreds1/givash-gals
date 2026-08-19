@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Givash Gals</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Givash Gals</h1>
+      <p class="tagline">Lowest score wins.</p>
+      <nav>
+        <button data-view="standings" class="active">Standings</button>
+        <button data-view="results">Results</button>
+        <button data-view="rules">Rules</button>
+      </nav>
+      <p id="freshness" class="freshness">Loading…</p>
+    </header>
+    <div id="banner" class="banner" hidden></div>
+
+    <main>
+      <section id="standings" class="view"></section>
+      <section id="results" class="view" hidden></section>
+      <section id="rules" class="view" hidden></section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

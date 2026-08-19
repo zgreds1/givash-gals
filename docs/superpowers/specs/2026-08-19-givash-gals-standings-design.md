@@ -25,10 +25,15 @@ Confirmed against the Sleeper API on 2026-08-19:
 | Season | 2026, `season_type: regular`, currently `pre_draft` |
 | `total_rosters` | 6 |
 | Real managers | 5 (one roster stays unowned) |
-| Starters | 18 — QB×2, RB×4, WR×4, TE×2, FLEX×4, K×1, DEF×1 |
+| Starters | 19 — QB×3, RB×4, WR×4, TE×2, FLEX×4, K×1, DEF×1 (confirmed from `data/raw/rosters.json`, re-confirmed against `roster_positions` 2026-08-19) |
 | Bench | 5 |
 | `playoff_week_start` | 15 |
 | Regular season start | 2026-09-13 (week 1) |
+
+The starter count is **not stable**: this spec was first written against 18 starters
+(QB×2) and the league has since been changed to three QB slots. `rules.js` iterates the
+actual `starters` array from each matchup entry and never assumes a count, so a further
+roster-settings change needs no code change — only this row updating.
 
 API capabilities confirmed by probe:
 
@@ -41,7 +46,6 @@ API capabilities confirmed by probe:
 - `players/nfl` is 14.6 MB and Sleeper asks that it be fetched at most once per day.
   Reduced to the fields this project needs, it is 3,229 players / 112 KB raw /
   37 KB gzipped.
-- Sleeper serves `ETag` headers, so settled weeks support conditional `304` requests.
 
 ## 3. The ghost roster
 
@@ -63,7 +67,7 @@ displayed, and never contributes to the median.
 
 ### 4.1 Adjusted score
 
-A team's adjusted score is the sum of its 18 starters' points, plus a **+20 penalty**
+A team's adjusted score is the sum of its 19 starters' points, plus a **+20 penalty**
 for each starter meeting the zero condition.
 
 **Zero condition — a starter incurs +20 when its score is exactly 0**, tested as
@@ -160,13 +164,19 @@ and the GitHub Action, so the live page and the archive cannot disagree.
 | --- | --- | --- |
 | `byeTeams` | `(schedule, week) -> Set<string>` | NFL teams idle in a given week |
 | `adjustedScore` | `(entry, byes, players) -> {raw, adjusted, penalties[]}` | Section 4.1; `penalties[]` carries `{playerId, name, reason}` where reason is one of `zeroed`, `empty-slot`, `bye-def` |
-| `resolveWeek` | `(matchups, ghostRosterId, byes, players) -> WeekResult` | Sections 4.3–4.4 |
+| `resolveWeek` | `(week, matchups, excludedRosterIds, byes, players) -> WeekResult` | Sections 4.3–4.4. `excludedRosterIds` is a `Set` of every unowned roster. Returns `degenerate: true` with no matchups when the payload cannot be read as two head-to-head pairs plus at most one median team |
 | `standings` | `(weeks[]) -> StandingsRow[]` | Section 5 |
 
-`resolveWeek` identifies the median team as the real roster paired with `ghostRosterId`.
-Defensively it also treats a real roster with `matchup_id: null`, or a real roster left
-unpaired, as the median team — covering the possibility that Sleeper omits unowned
-rosters from the matchups payload rather than scheduling them.
+`resolveWeek` strips every roster in `excludedRosterIds`, then identifies the median team
+as the single real roster left over. Defensively it also treats a real roster with
+`matchup_id: null`, or a real roster left unpaired, as the median team — covering the
+possibility that Sleeper omits unowned rosters from the matchups payload rather than
+scheduling them. Three clean pairs with no leftover — all six slots owned — is equally readable and scores
+as three straight head-to-head matchups with no median. Any other shape — two leftovers,
+fewer than two pairs, a group of more than two real rosters, or Sleeper's own week-15
+bracket — sets `degenerate: true` and emits no matchups at all;
+`standings()` then skips that week entirely rather than accruing points-for for a week it
+could not resolve.
 
 ### 6.2 `sleeper.js` — the data layer
 
@@ -176,10 +186,13 @@ lock** per endpoint. It never fetches `players/nfl`; it reads the committed slim
 
 ### 6.3 `scripts/snapshot.mjs` — the Action script
 
-1. `GET /state/nfl` for the current week `N`
+1. `GET /state/nfl` for the current week `N`. Weeks only count when `season_type` is
+   `regular` or `post`; in the preseason `N` is 0 and nothing is archived.
 2. `GET` league, users, rosters, and the 2026 schedule
 3. `GET matchups/{1..N}` — every week, not just the current one, so that Sleeper's
-   retroactive stat corrections propagate into past results
+   retroactive stat corrections propagate into past results. When `N` is 0 (preseason or
+   off-season) the archive in `data/raw/` is rescored instead, so a finished season is
+   never overwritten with an empty one
 4. Write each response verbatim to `data/raw/wk{N}.json`
 5. Once per day, fetch `players/nfl`, reduce it to active skill-position players as
    `{position, team, name}`, and write `data/players-slim.json`
@@ -206,8 +219,9 @@ On page load:
 
 1. Render immediately from committed `data/standings.json` and `data/weeks.json`, labelled
    with the snapshot timestamp.
-2. Fetch `/state/nfl` and `matchups/{N}` for the current week only — two requests. Weeks
-   1..N−1 are settled and come from the snapshot.
+2. Fetch `/state/nfl` and `matchups/{N}` for the current week only — two requests, and
+   only two. Weeks 1..N−1 are settled and come from the snapshot, as do the rosters and
+   the NFL schedule.
 3. Recompute the current week with `rules.js`, merge, and relabel as live.
 
 If step 2 or 3 fails, the snapshot remains on screen with its original timestamp. The
@@ -223,7 +237,9 @@ page is never blank and never silently stale-but-labelled-live.
   - `0 0-4 * * 1` — Sunday night through Monday midnight ET
   - `0 13 * * 2` — Tuesday morning sweep after Monday night
 - The job commits only when `data/` actually changed, keeping history as a clean
-  one-commit-per-scoring-change log. The built-in `GITHUB_TOKEN` with `contents: write`
+  one-commit-per-scoring-change log. `generatedAt` is carried forward unchanged when the
+  substantive content is identical, so an unchanged run rewrites byte-identical files and
+  the guard actually fires. The built-in `GITHUB_TOKEN` with `contents: write`
   covers the push; no user secrets are needed.
 - The Action is a safety net, not the freshness mechanism. Freshness comes from the
   live fetch on page load.
@@ -238,8 +254,9 @@ Sleeper's stated limit is under 1,000 calls per minute, enforced by IP block.
 | One page load | 2 | 0.2% |
 
 Mitigations: the browser never fetches the 14.6 MB player dump; the Action fetches it at
-most once daily; conditional `If-None-Match` requests on settled weeks return bodiless
-`304`s; and the client enforces a 30-second refetch floor with an in-flight lock.
+most once daily; the page reads the rosters and the NFL schedule from the committed
+snapshot rather than the API; and the client enforces a 30-second refetch floor with an
+in-flight lock.
 
 Residual risk is that GitHub Actions runners use shared IPs and could inherit another
 tenant's usage. This is non-fatal by construction — a failed Action leaves a stale
@@ -254,9 +271,13 @@ backoff.
   recorded scores are shown as upcoming, not as 0-0 ties. A week counts as played once at
   least one roster has a nonzero raw score.
 - **Fewer than 5 owned rosters:** the site reports the league as not yet ready rather than
-  computing a median over the wrong population.
+  computing a median over the wrong population. The standings and results tables are
+  suppressed outright — the banner is shown alone — and every unowned roster is excluded
+  from the engine, which leaves too few teams to form a week and marks it `degenerate`.
 - **No ghost roster found** (all 6 slots owned): fall back to three straight head-to-head
   matchups and no median, surfacing a visible banner that the format assumption changed.
+  Three clean pairs with nobody left over is an explicitly readable shape in `resolveWeek`
+  — it is **not** degenerate — so the tables render normally underneath that banner.
 - **Unknown player id** in `starters`: treated as a non-DEF starter, so a 0 incurs +20.
   Logged for visibility.
 

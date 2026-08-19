@@ -1,0 +1,11 @@
+{
+  "name": "givash-gals",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "snapshot": "node scripts/snapshot.mjs",
+    "replay": "node scripts/snapshot.mjs --replay"
+  }
+}
