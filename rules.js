@@ -227,8 +227,8 @@ export function standings(weeks) {
           noteH2H(a, b, 't'); noteH2H(b, a, 't');
         } else {
           const loser = m.winner === a ? b : a;
-          ensure(m.winner).w += 1;
-          ensure(loser).l += 1;
+          (m.winner === a ? ra : rb).w += 1;
+          (m.winner === a ? rb : ra).l += 1;
           noteH2H(m.winner, loser, 'w');
           noteH2H(loser, m.winner, 'l');
         }
@@ -263,16 +263,39 @@ export function standings(weeks) {
     return 0;
   });
 
-  // Flag any pair that survived every criterion.
-  for (let i = 0; i < list.length - 1; i++) {
-    const a = list[i];
-    const b = list[i + 1];
-    const pa = h2hPct(a.rosterId, b.rosterId);
-    const pb = h2hPct(b.rosterId, a.rosterId);
-    const h2hSeparates = pa !== null && pb !== null && pa !== pb;
-    if (a.winPct === b.winPct && a.adjPF === b.adjPF && !h2hSeparates) {
-      a.unresolvedTie = true;
-      b.unresolvedTie = true;
+  // Flag teams in equivalence classes. Partition by winPct and adjPF. If any
+  // pair within a class cannot be separated by head-to-head, flag all members
+  // of that class (since the sort order is now arbitrary).
+  const classes = new Map();
+  for (const row of list) {
+    const key = `${row.winPct}:${row.adjPF}`;
+    if (!classes.has(key)) classes.set(key, []);
+    classes.get(key).push(row);
+  }
+
+  for (const members of classes.values()) {
+    if (members.length < 2) continue; // No tie possible in a class of 1
+
+    // Check if there are any unresolved pairs in this class
+    let hasUnresolvedPair = false;
+    for (let i = 0; i < members.length && !hasUnresolvedPair; i++) {
+      for (let j = i + 1; j < members.length && !hasUnresolvedPair; j++) {
+        const a = members[i];
+        const b = members[j];
+        const pa = h2hPct(a.rosterId, b.rosterId);
+        const pb = h2hPct(b.rosterId, a.rosterId);
+        const h2hSeparates = pa !== null && pb !== null && pa !== pb;
+        if (!h2hSeparates) {
+          hasUnresolvedPair = true;
+        }
+      }
+    }
+
+    // If any pair is unresolved, flag all members in this class
+    if (hasUnresolvedPair) {
+      for (const member of members) {
+        member.unresolvedTie = true;
+      }
     }
   }
 
