@@ -1,4 +1,9 @@
-// Sleeper HTTP layer. The only place in the project that touches the network.
+// Sleeper HTTP layer: the rate-limited client everything on the page and in
+// scripts/snapshot.mjs goes through.
+//
+// One deliberate exception, not a client to route through here:
+// scripts/build-leaderboard.mjs fetches past seasons with bare fetch, because
+// every path on this client hardcodes the current SEASON.
 //
 // Two hard guards against Sleeper's IP block (their limit is under 1000
 // calls/minute): a minimum interval between identical requests, and a

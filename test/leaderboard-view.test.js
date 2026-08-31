@@ -5,6 +5,7 @@ import {
   renderLeaderboard,
   selectRows,
   stepMinGp,
+  stepperHtml,
 } from '../leaderboard-view.js';
 
 const row = (o) => ({
@@ -133,4 +134,56 @@ test('the owner column shows the manager name or FA', () => {
   const html = renderLeaderboard([ROWS[0], ROWS[3]], view);
   assert.match(html, /Alpha FC/);
   assert.match(html, />FA</);
+});
+
+test('the stepper buttons report themselves disabled at each end (spec 6.10)', () => {
+  // stepMinGp is the clamp behind the buttons; this pins the buttons
+  // themselves, so a season cannot be stepped past its ends with no
+  // explanation on screen.
+  const minus = (html) => /data-step="-1"( disabled)?/.exec(html)[1] !== undefined;
+  const plus = (html) => /data-step="1"( disabled)?/.exec(html)[1] !== undefined;
+
+  const bottom = stepperHtml(1, 17);
+  assert.equal(minus(bottom), true);
+  assert.equal(plus(bottom), false);
+
+  const top = stepperHtml(17, 17);
+  assert.equal(minus(top), false);
+  assert.equal(plus(top), true);
+
+  const middle = stepperHtml(9, 17);
+  assert.equal(minus(middle), false);
+  assert.equal(plus(middle), false);
+
+  // A season with a single game is both ends at once.
+  const only = stepperHtml(1, 1);
+  assert.equal(minus(only), true);
+  assert.equal(plus(only), true);
+});
+
+test('the stepper reads out the current threshold', () => {
+  assert.match(stepperHtml(3, 17), /<span class="readout">3\+ games<\/span>/);
+});
+
+test('a hostile owner label renders inert', () => {
+  // The label comes from the caller-supplied teams map, which is Sleeper's
+  // user metadata — no more trusted than a player name.
+  const html = renderLeaderboard([row({ id: 'a' })], {
+    ownerOf: new Map([['a', '1']]),
+    labels: new Map([['1', '<img src=x onerror=alert(1)>']]),
+  });
+  assert.doesNotMatch(html, /<img /);
+  assert.match(html, /&lt;img /);
+});
+
+test('unknown ownership renders an em dash, not a claim that everyone is free', () => {
+  // Spec 5: both roster sources failed. Availability is unknown, and "FA" in
+  // the accent colour on every row would be a positive claim we cannot make.
+  const html = renderLeaderboard([ROWS[0]], { ownershipKnown: false });
+  assert.doesNotMatch(html, />FA</);
+  assert.match(html, /<td class="owner">—<\/td>/);
+
+  // The default is unchanged: ownership known, nobody rostered, so FA.
+  const known = renderLeaderboard([ROWS[0]], { ownerOf: new Map() });
+  assert.match(known, /<td class="owner fa">FA<\/td>/);
 });

@@ -66,6 +66,22 @@ export function stepMinGp(minGp, delta, maxGp) {
 }
 
 /**
+ * The minimum-games stepper's markup. Split out of the mount closure so a
+ * test can assert the disabled ends (spec §6.10) without a DOM; controls()
+ * calls this, so there is only ever one copy of the markup.
+ *
+ * Both arguments are internal numbers, never Sleeper strings.
+ */
+export function stepperHtml(minGp, maxGp) {
+  const top = Math.max(1, maxGp || 1);
+  return `<span class="stepper">
+             <button data-step="-1"${minGp <= 1 ? ' disabled' : ''}>&minus;</button>
+             <span class="readout">${minGp}+ games</span>
+             <button data-step="1"${minGp >= top ? ' disabled' : ''}>+</button>
+           </span>`;
+}
+
+/**
  * Filter and sort. Pure: the input array is never touched.
  *
  * Sorting has two modes. With no sortKey the table is ordered ascending by
@@ -119,7 +135,10 @@ export function renderLeaderboard(rows, view = {}) {
     return `<p class="empty">${esc(view.emptyMessage || 'No players match these filters.')}</p>`;
   }
 
-  const { sortKey = null, sortDir = 1, metric = 'total', ownerOf = null, labels = new Map() } = view;
+  const {
+    sortKey = null, sortDir = 1, metric = 'total',
+    ownerOf = null, labels = new Map(), ownershipKnown = true,
+  } = view;
 
   const head = COLUMNS.map(([k, label, num, sortable]) => {
     const arrow = sortKey === k ? ` <span class="dir">${sortDir === 1 ? '↑' : '↓'}</span>` : '';
@@ -130,14 +149,18 @@ export function renderLeaderboard(rows, view = {}) {
   const body = rows
     .map((r, i) => {
       const value = ownerOf ? ownerOf.get(r.id) : undefined;
-      const owner = value === undefined ? 'FA' : labels.get(value) || value;
+      // When both roster sources failed, availability is unknown, not free —
+      // an accent-coloured "FA" on every row is a positive claim we cannot
+      // make (spec §5).
+      const isFa = ownershipKnown && value === undefined;
+      const owner = !ownershipKnown ? '—' : isFa ? 'FA' : labels.get(value) || value;
       const cnt = (n) => (n ? `<b>${n}</b>` : '0');
       return `<tr>
         <td class="rank">${i + 1}</td>
         <td class="name">${esc(r.name)}</td>
         <td class="team">${esc(r.team)}</td>
         <td class="pos">${esc(r.pos)}</td>
-        <td class="owner${value === undefined ? ' fa' : ''}">${esc(owner)}</td>
+        <td class="owner${isFa ? ' fa' : ''}">${esc(owner)}</td>
         <td class="num">${r.gp}</td>
         <td class="num">${money(r.raw)}</td>
         <td class="num pen">${cnt(r.pen)}</td>
@@ -199,6 +222,8 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     owner: 'all',
     ownerOf: idx.ownerOf,
     labels: idx.labels,
+    // Both roster sources failed: the Owner column says "—", not "FA".
+    ownershipKnown: rosterSource !== 'none',
   };
 
   async function rowsFor(season) {
@@ -206,7 +231,10 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
       try {
         cache[season] = (await json(`data/leaderboard-${season}.json`)).rows || [];
       } catch {
-        cache[season] = null; // load failed; distinct from "loaded, empty"
+        // Leave nothing cached, so toggling away and back retries. Caching
+        // the failure would make one flaky fetch permanent for the page.
+        delete cache[season];
+        return null; // distinct from "loaded, empty"
       }
     }
     return cache[season];
@@ -248,14 +276,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
           `${esc(o.label)}</option>`,
       )
       .join('');
-    const stepper =
-      view.metric === 'ppg'
-        ? `<span class="stepper">
-             <button data-step="-1"${view.minGp <= 1 ? ' disabled' : ''}>&minus;</button>
-             <span class="readout">${view.minGp}+ games</span>
-             <button data-step="1"${view.minGp >= maxGp ? ' disabled' : ''}>+</button>
-           </span>`
-        : '';
+    const stepper = view.metric === 'ppg' ? stepperHtml(view.minGp, maxGp) : '';
 
     return `<div class="controls">
       ${seasonBar()}
@@ -283,9 +304,10 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     if (view.minGp > maxGp) view.minGp = maxGp;
 
     const shown = selectRows(all, view);
+    // Not escaped here: renderLeaderboard escapes the whole message.
     view.emptyMessage = all.length
       ? 'No players match these filters.'
-      : `No games played yet in ${esc(view.season)}.`;
+      : `No games played yet in ${view.season}.`;
 
     el.innerHTML = controls(shown, maxGp) + notes(all) + renderLeaderboard(shown, view);
     wire();

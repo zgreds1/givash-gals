@@ -76,7 +76,10 @@ async function loadSnapshot() {
 }
 
 /**
- * Two Sleeper calls, and only two: /state/nfl and matchups/{week}.
+ * Three Sleeper calls, and only three: /state/nfl, matchups/{week}, and
+ * stats/{week}. The stats call is what makes the opportunity rule live —
+ * without it the page would show a +20 for a player already targeted this
+ * afternoon — and it degrades to {} rather than failing the refresh.
  *
  * Rosters and the NFL schedule come from the committed snapshot instead.
  * The schedule endpoint is undocumented and immutable for the season, so
