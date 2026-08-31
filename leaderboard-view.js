@@ -11,7 +11,7 @@ import { createClient } from './sleeper.js';
 export const POSITION_TABS = ['All', 'QB', 'RB', 'WR', 'TE', 'FLEX', 'K', 'DEF'];
 export const FLEX_POSITIONS = new Set(['RB', 'WR', 'TE']);
 
-/** [key, label, numeric, sortable] */
+/** [key, label, numeric, sortable, hint] — hint becomes a title tooltip */
 const COLUMNS = [
   ['rank', '#', false, false],
   ['name', 'Player', false, true],
@@ -21,9 +21,15 @@ const COLUMNS = [
   ['gp', 'GP', true, true],
   ['raw', 'Raw', true, true],
   ['pen', '+20s', true, true],
-  ['truePen', 'True +20s', true, true],
-  ['saved', 'Saved', true, true],
-  ['total', 'Adj Total', true, true],
+  [
+    'truePen',
+    'True +20s',
+    true,
+    true,
+    'Zeros he was there for: games he actually played and still scored exactly 0. ' +
+      'A week he missed entirely counts in +20s but not here.',
+  ],
+  ['total', 'Total', true, true],
   ['ppg', 'PPG', true, true],
 ];
 
@@ -33,7 +39,7 @@ const COLUMNS = [
  * @param {Array} rosters - Sleeper /league/{id}/rosters
  * @param {Object<string, string>} teams - roster id -> team name
  * @returns {{ownerOf: Map<string,string>, labels: Map<string,string>,
- *            options: Array<{value: string, label: string}>, drafted: boolean}}
+ *            options: Array<{value: string, label: string}>}}
  */
 export function ownershipIndex(rosters, teams = {}) {
   const ownerOf = new Map();
@@ -52,7 +58,7 @@ export function ownershipIndex(rosters, teams = {}) {
     for (const id of r.players || []) ownerOf.set(String(id), value);
   }
 
-  return { ownerOf, labels, options, drafted: ownerOf.size > 0 };
+  return { ownerOf, labels, options };
 }
 
 /**
@@ -140,10 +146,11 @@ export function renderLeaderboard(rows, view = {}) {
     ownerOf = null, labels = new Map(), ownershipKnown = true,
   } = view;
 
-  const head = COLUMNS.map(([k, label, num, sortable]) => {
+  const head = COLUMNS.map(([k, label, num, sortable, hint]) => {
     const arrow = sortKey === k ? ` <span class="dir">${sortDir === 1 ? '↑' : '↓'}</span>` : '';
     const cls = [num ? 'num' : '', sortable ? 'sortable' : ''].filter(Boolean).join(' ');
-    return `<th class="${cls}" data-k="${k}">${label}${arrow}</th>`;
+    const tip = hint ? ` title="${esc(hint)}"` : '';
+    return `<th class="${cls}"${tip} data-k="${k}">${label}${arrow}</th>`;
   }).join('');
 
   const body = rows
@@ -165,7 +172,6 @@ export function renderLeaderboard(rows, view = {}) {
         <td class="num">${money(r.raw)}</td>
         <td class="num pen">${cnt(r.pen)}</td>
         <td class="num pen">${cnt(r.truePen)}</td>
-        <td class="num saved">${cnt(r.saved)}</td>
         <td class="num${metric === 'total' ? ' metric' : ''}">${money(r.total)}</td>
         <td class="num${metric === 'ppg' ? ' metric' : ''}">${money(r.ppg)}</td>
       </tr>`;
@@ -240,19 +246,19 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     return cache[season];
   }
 
-  function notes(rows) {
+  /**
+   * Only degraded states get a note. The board explains itself otherwise, and
+   * a standing explainer above every table is a line you stop reading by the
+   * second visit. These two are different: they say the data is not what it
+   * normally is, and without them a degraded board looks like a healthy one.
+   */
+  function notes() {
     const out = [];
     if (rosterSource === 'snapshot') {
       out.push('Rosters could not be fetched live; showing the last snapshot.');
     }
     if (rosterSource === 'none') {
       out.push('Rosters unavailable, so ownership is unknown.');
-    }
-    if (rosterSource !== 'none' && !idx.drafted) {
-      out.push('The draft has not happened yet, so every player is a free agent.');
-    }
-    if (rows && rows.length) {
-      out.push('Low is good — rank 1 is the worst scorer. Ties break by adjusted total.');
     }
     return out.length ? `<p class="note">${out.map(esc).join(' ')}</p>` : '';
   }
@@ -309,7 +315,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
       ? 'No players match these filters.'
       : `No games played yet in ${view.season}.`;
 
-    el.innerHTML = controls(shown, maxGp) + notes(all) + renderLeaderboard(shown, view);
+    el.innerHTML = controls(shown, maxGp) + notes() + renderLeaderboard(shown, view);
     wire();
     if (focusSearch) {
       const input = el.querySelector('#lb-q');

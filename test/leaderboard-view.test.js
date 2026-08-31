@@ -84,19 +84,33 @@ test('ownershipIndex maps every rostered player to its manager', () => {
   assert.equal(idx.ownerOf.get('a'), '1');
   assert.equal(idx.ownerOf.get('c'), '2');
   assert.equal(idx.ownerOf.get('d'), undefined);
-  assert.equal(idx.drafted, true);
   assert.deepEqual(idx.options.map((o) => o.label), [
     'All players', 'Free agents', 'Alpha FC', 'Bravo FC',
   ]);
 });
 
-test('ownershipIndex reports an undrafted league', () => {
+test('an undrafted league leaves every player unowned', () => {
   const idx = ownershipIndex(
     [{ roster_id: 1, owner_id: 'u1', players: [] }],
     { 1: 'Alpha FC' },
   );
-  assert.equal(idx.drafted, false);
   assert.equal(idx.ownerOf.size, 0);
+  // The manager is still selectable even though nobody is on his roster.
+  assert.deepEqual(idx.options.map((o) => o.value), ['all', 'fa', '1']);
+});
+
+test('the Saved column is gone from both header and body', () => {
+  const html = renderLeaderboard([row({ saved: 3 })], {});
+  assert.doesNotMatch(html, />Saved</);
+  // the row still carries the field; it is simply not shown
+  assert.doesNotMatch(html, /class="num saved"/);
+});
+
+test('True +20s carries a hover explanation and nothing else does', () => {
+  const html = renderLeaderboard([row({})], {});
+  const titled = [...html.matchAll(/<th class="[^"]*" title="([^"]*)"/g)].map((m) => m[1]);
+  assert.equal(titled.length, 1);
+  assert.match(titled[0], /games he actually played and still scored exactly 0/);
 });
 
 test('the owner filter separates free agents from rostered players', () => {

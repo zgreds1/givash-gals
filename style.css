@@ -217,6 +217,12 @@ table.leaderboard th {
 }
 
 table.leaderboard th.sortable { cursor: pointer; }
+
+/* The only header with a tooltip; the dots are the affordance that says so. */
+table.leaderboard th[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
 table.leaderboard th.num, table.leaderboard td.num {
   text-align: right;
   font-variant-numeric: tabular-nums;
