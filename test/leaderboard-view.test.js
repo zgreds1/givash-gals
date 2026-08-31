@@ -118,7 +118,7 @@ test('True +20s carries a hover explanation and nothing else does', () => {
   const html = renderLeaderboard([row({})], {});
   const titled = [...html.matchAll(/<th class="[^"]*" title="([^"]*)"/g)].map((m) => m[1]);
   assert.equal(titled.length, 1);
-  assert.match(titled[0], /games he actually played and still scored exactly 0/);
+  assert.match(titled[0], /Zeros in games actually played/);
 });
 
 test('the owner filter separates free agents from rostered players', () => {

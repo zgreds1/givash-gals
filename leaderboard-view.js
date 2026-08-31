@@ -21,14 +21,7 @@ const COLUMNS = [
   ['gp', 'GP', true, true],
   ['raw', 'Raw', true, true],
   ['pen', '+20s', true, true],
-  [
-    'truePen',
-    'True +20s',
-    true,
-    true,
-    'Zeros he was there for: games he actually played and still scored exactly 0. ' +
-      'A week he missed entirely counts in +20s but not here.',
-  ],
+  ['truePen', 'True +20s', true, true, 'Zeros in games actually played'],
   ['total', 'Total', true, true],
   ['ppg', 'PPG', true, true],
 ];
