@@ -58,11 +58,14 @@ function paint() {
     $('results').innerHTML = '';
   }
   $('rules').innerHTML = renderRules();
-  const when = state.generatedAt ? new Date(state.generatedAt).toLocaleString() : 'unknown';
-  $('freshness').textContent = state.live
-    ? 'Live · updated just now'
-    : `Snapshot · as of ${when}`;
+  // Only the live badge earns header space. The snapshot's timestamp used to
+  // sit here, but writeStamped deliberately keeps the old stamp when nothing
+  // substantive changed — so a correct, current page would advertise a date
+  // over a week old and read as broken. Silence is the honest default; the
+  // element stays for the live badge and for load errors.
+  $('freshness').textContent = state.live ? 'Live · updated just now' : '';
   $('freshness').className = state.live ? 'freshness live' : 'freshness';
+  $('freshness').hidden = !state.live;
   paintBanner();
 }
 
@@ -155,6 +158,7 @@ if (typeof document !== 'undefined') {
     .catch((e) => {
       snapshotLoaded = false;
       console.error(e);
+      $('freshness').hidden = false;
       $('freshness').textContent = 'Could not load the snapshot.';
     })
     .then(() => {
