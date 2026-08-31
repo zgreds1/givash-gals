@@ -89,12 +89,15 @@ export function stepperHtml(minGp, maxGp) {
            </span>`;
 }
 
+/** The column the board is ranked by when no header has been clicked. */
+export const DEFAULT_SORT = 'total';
+
 /**
  * Filter and sort. Pure: the input array is never touched.
  *
  * Sorting has two modes. With no sortKey the table is ordered ascending by
- * the active metric, because in this league low is good and rank 1 is the
- * worst scorer. A clicked header overrides that.
+ * total, because in this league low is good and rank 1 is the worst scorer.
+ * A clicked header overrides that.
  *
  * Ties fall back to ascending total, worst first. That works because sort is
  * stable and rows arrive pre-sorted by total; the tie test in
@@ -102,7 +105,7 @@ export function stepperHtml(minGp, maxGp) {
  */
 export function selectRows(rows, view = {}) {
   const {
-    tab = 'All', metric = 'total', minGp = 1, q = '',
+    tab = 'All', minGp = 1, q = '',
     sortKey = null, sortDir = 1, owner = 'all', ownerOf = null,
   } = view;
 
@@ -117,7 +120,10 @@ export function selectRows(rows, view = {}) {
     });
   }
 
-  if (metric === 'ppg') out = out.filter((r) => r.gp >= minGp);
+  // The threshold applies to every column, not just PPG. A player with two
+  // games is noise in a total-points ranking too, and the stepper is now
+  // always on screen, so a filter that silently did nothing would be a lie.
+  out = out.filter((r) => r.gp >= minGp);
 
   if (q) {
     const s = q.toLowerCase();
@@ -126,7 +132,7 @@ export function selectRows(rows, view = {}) {
     );
   }
 
-  const key = sortKey || metric;
+  const key = sortKey || DEFAULT_SORT;
   const dir = sortKey ? sortDir : 1;
   return out.sort((a, b) => {
     const va = a[key];
@@ -144,9 +150,14 @@ export function renderLeaderboard(rows, view = {}) {
   }
 
   const {
-    sortKey = null, sortDir = 1, metric = 'total',
+    sortKey = null, sortDir = 1,
     ownerOf = null, labels = new Map(), ownershipKnown = true,
   } = view;
+
+  // Highlight whichever column the board is actually ranked by, which is
+  // Total until a header is clicked. Pinning the highlight to Total would
+  // point at the wrong column the moment someone sorts by PPG.
+  const rankedBy = sortKey || DEFAULT_SORT;
 
   // A sortable header is a real <button> so it is reachable and operable by
   // keyboard; its click bubbles to the <th>, which is where wire() listens,
@@ -185,15 +196,15 @@ export function renderLeaderboard(rows, view = {}) {
         <td class="num">${money(r.raw)}</td>
         <td class="num pen">${cnt(r.pen)}</td>
         <td class="num pen">${cnt(r.truePen)}</td>
-        <td class="num${metric === 'total' ? ' metric' : ''}">${money(r.total)}</td>
-        <td class="num${metric === 'ppg' ? ' metric' : ''}">${money(r.ppg)}</td>
+        <td class="num${rankedBy === 'total' ? ' metric' : ''}">${money(r.total)}</td>
+        <td class="num${rankedBy === 'ppg' ? ' metric' : ''}">${money(r.ppg)}</td>
       </tr>`;
     })
     .join('');
 
   return `<div class="table-wrap"><table class="leaderboard">
-    <caption class="sr-only">Player leaderboard, ${
-      metric === 'ppg' ? 'points per game' : 'total points'
+    <caption class="sr-only">Player leaderboard, ranked by ${
+      rankedBy === 'ppg' ? 'points per game' : 'total points'
     }, lowest first</caption>
     <thead><tr>${head}</tr></thead>
     <tbody>${body}</tbody>
@@ -236,7 +247,6 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
   const view = {
     season: seasons[0],
     tab: 'All',
-    metric: 'total',
     minGp: 1,
     q: '',
     sortKey: null,
@@ -305,7 +315,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
           `${esc(o.label)}</option>`,
       )
       .join('');
-    const stepper = view.metric === 'ppg' ? stepperHtml(view.minGp, maxGp) : '';
+    const stepper = stepperHtml(view.minGp, maxGp);
 
     return `<div class="controls">
       ${seasonBar()}
@@ -314,14 +324,6 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
       <select id="lb-owner" aria-label="Filter by owner"${
         rosterSource === 'none' ? ' disabled' : ''
       }>${owners}</select>
-      <div class="tabs" role="group" aria-label="Metric">
-        <button type="button" data-metric="total" aria-pressed="${view.metric === 'total'}"${on(
-          view.metric === 'total',
-        )}>Total</button>
-        <button type="button" data-metric="ppg" aria-pressed="${view.metric === 'ppg'}"${on(
-          view.metric === 'ppg',
-        )}>PPG</button>
-      </div>
       ${stepper}
       <input id="lb-q" type="search" aria-label="Search player or team"
              placeholder="Search player / team" value="${esc(view.q)}" />
@@ -370,12 +372,6 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
         paint();
       };
     }
-    for (const b of el.querySelectorAll('[data-metric]')) {
-      b.onclick = () => {
-        view.metric = b.dataset.metric;
-        paint();
-      };
-    }
     for (const b of el.querySelectorAll('[data-step]')) {
       b.onclick = async () => {
         const all = (await rowsFor(view.season)) || [];
@@ -401,7 +397,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     for (const th of el.querySelectorAll('th.sortable')) {
       th.onclick = () => {
         const k = th.dataset.k;
-        // Three states: ascending, descending, back to the metric sort.
+        // Three states: ascending, descending, back to the default sort.
         if (view.sortKey === k) {
           if (view.sortDir === -1) {
             view.sortKey = null;

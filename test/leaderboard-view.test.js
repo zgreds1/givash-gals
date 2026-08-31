@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  DEFAULT_SORT,
   ownershipIndex,
   renderLeaderboard,
   selectRows,
@@ -20,15 +21,17 @@ const ROWS = [
   row({ id: 'd', name: 'Delta', pos: 'DEF', team: 'KC', gp: 17, total: 40, ppg: 4 }),
 ];
 
-test('the default sort is ascending by the active metric', () => {
-  assert.deepEqual(selectRows(ROWS, { metric: 'total' }).map((r) => r.id), ['a', 'b', 'c', 'd']);
-  assert.deepEqual(selectRows(ROWS, { metric: 'ppg' }).map((r) => r.id), ['a', 'b', 'c', 'd']);
+test('the default sort is ascending by total', () => {
+  // There is no metric toggle: with no clicked header the board is always
+  // ranked by total, worst (lowest) first.
+  assert.deepEqual(selectRows(ROWS, {}).map((r) => r.id), ['a', 'b', 'c', 'd']);
+  assert.equal(DEFAULT_SORT, 'total');
 });
 
-test('an explicit sort key overrides the metric and honours direction', () => {
-  const asc = selectRows(ROWS, { metric: 'total', sortKey: 'gp', sortDir: 1 });
+test('an explicit sort key overrides the default and honours direction', () => {
+  const asc = selectRows(ROWS, { sortKey: 'gp', sortDir: 1 });
   assert.deepEqual(asc.map((r) => r.id), ['b', 'c', 'a', 'd']);
-  const desc = selectRows(ROWS, { metric: 'total', sortKey: 'gp', sortDir: -1 });
+  const desc = selectRows(ROWS, { sortKey: 'gp', sortDir: -1 });
   assert.deepEqual(desc.map((r) => r.id), ['a', 'd', 'c', 'b']);
 });
 
@@ -49,9 +52,14 @@ test('position tabs filter, and FLEX means RB, WR or TE', () => {
   assert.equal(selectRows(ROWS, { tab: 'All' }).length, 4);
 });
 
-test('the minimum-games filter applies to PPG only', () => {
-  assert.equal(selectRows(ROWS, { metric: 'ppg', minGp: 10 }).length, 2);
-  assert.equal(selectRows(ROWS, { metric: 'total', minGp: 10 }).length, 4);
+test('the minimum-games filter applies to every ranking, not just PPG', () => {
+  // b has 2 games and c has 9, so a threshold of 10 drops both whatever the
+  // board is sorted by. The stepper is always on screen now, and a control
+  // that only sometimes does something is worse than no control.
+  assert.deepEqual(selectRows(ROWS, { minGp: 10 }).map((r) => r.id), ['a', 'd']);
+  assert.deepEqual(selectRows(ROWS, { minGp: 10, sortKey: 'ppg', sortDir: 1 })
+    .map((r) => r.id), ['a', 'd']);
+  assert.equal(selectRows(ROWS, { minGp: 1 }).length, 4);
 });
 
 test('search matches name or team, case insensitively', () => {
