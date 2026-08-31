@@ -177,6 +177,7 @@ Claude-Session: https://claude.ai/code/session_011PA6rQeKHPcb1fEkiCQk1k"
   - `adjustWeek(points, played, isDef, hadOpp) => { adj: number, penalized: boolean }`
   - `slimWeek(weekStats, players, scoring) => { [id]: { pts, gp, opp } }`
   - `slimForLeaderboard(rawPlayers) => { [id]: { pos, team, name } }`
+  - `opportunityIds(slim) => string[]` — sorted ids in a slim week that had a chance
   - `buildLeaderboard(players, weeks, savedLog = null) => Row[]`
   - `LEADERBOARD_POSITIONS: string[]`
   - Row: `{ id, name, team, pos, gp, raw, pen, truePen, saved, total, ppg }`
@@ -191,6 +192,7 @@ import assert from 'node:assert/strict';
 import {
   adjustWeek,
   buildLeaderboard,
+  opportunityIds,
   scoreWeek,
   slimForLeaderboard,
   slimWeek,
@@ -330,6 +332,16 @@ test('buildLeaderboard fills the saved log when one is supplied', () => {
   assert.deepEqual(log, [
     { week: 2, id: 'E', name: 'Targeted Zero', pos: 'WR', team: 'NYJ' },
   ]);
+});
+
+test('opportunityIds returns the flagged ids, sorted', () => {
+  const slim = {
+    c: { pts: 0, gp: 1, opp: 1 },
+    a: { pts: 4, gp: 1, opp: 0 },
+    b: { pts: 0, gp: 1, opp: 1 },
+  };
+  assert.deepEqual(opportunityIds(slim), ['b', 'c']);
+  assert.deepEqual(opportunityIds({}), []);
 });
 
 test('an empty season yields no rows rather than throwing', () => {
@@ -529,7 +541,7 @@ export function buildLeaderboard(players, weeks, savedLog = null) {
 - [ ] **Step 4: Run the full suite**
 
 Run: `npm test`
-Expected: PASS, 133 tests.
+Expected: PASS, 134 tests.
 
 - [ ] **Step 5: Commit**
 
@@ -743,7 +755,7 @@ This is the real test of the port. The old local board and the new committed eng
 - [ ] **Step 5: Run the full suite**
 
 Run: `npm test`
-Expected: PASS, 133 tests. No new tests here — the verification in Step 4 is a one-time port check against a frozen artifact, not something to re-run forever.
+Expected: PASS, 134 tests. No new tests here — the verification in Step 4 is a one-time port check against a frozen artifact, not something to re-run forever.
 
 - [ ] **Step 6: Commit**
 
@@ -950,13 +962,21 @@ Replace the body of the week loop's stats handling:
       await writeFile(path.join(RAW, `stats${w}.json`), JSON.stringify(slim));
 ```
 
-In the off-season rescue block, alongside `weekPayloads = await readRaw();` add:
+Replace the off-season rescue line `if (current === 0) weekPayloads = await readRaw();` with:
 
 ```js
-    if (current === 0) slimWeeks = await readSlimWeeks();
+    // Off-season: /state/nfl reports no real week, but a finished season is
+    // still sitting in data/raw. Rescore the archive rather than publishing
+    // an empty site over a completed 18 weeks.
+    if (current === 0) {
+      weekPayloads = await readRaw();
+      slimWeeks = await readSlimWeeks();
+      opportunities = {};
+      for (const [w, slim] of Object.entries(slimWeeks)) {
+        opportunities[Number(w)] = opportunityIds(slim);
+      }
+    }
 ```
-
-and derive `opportunities` from it the same way the replay branch does.
 
 Finally, after the existing `writeStamped` calls for standings and weeks, add:
 
@@ -983,7 +1003,7 @@ Import `SEASON` from `../config.js` (the file currently imports only `API_BASE`)
 - [ ] **Step 5: Run the full suite**
 
 Run: `npm test`
-Expected: PASS, 137 tests.
+Expected: PASS, 138 tests.
 
 - [ ] **Step 6: Run the snapshot for real and inspect it**
 
@@ -1352,7 +1372,7 @@ export function renderLeaderboard(rows, view = {}) {
 - [ ] **Step 5: Run the full suite**
 
 Run: `npm test`
-Expected: PASS, 153 tests.
+Expected: PASS, 154 tests.
 
 - [ ] **Step 6: Commit**
 
@@ -1734,17 +1754,17 @@ table.leaderboard th .dir { opacity: 0.7; }
 - [ ] **Step 5: Run the full suite**
 
 Run: `npm test`
-Expected: PASS, 153 tests. No new tests: this task is DOM wiring, which this project does not test.
+Expected: PASS, 154 tests. No new tests: this task is DOM wiring, which this project does not test.
 
 - [ ] **Step 6: Check it in a real browser**
 
 Serve the site and drive it headlessly:
 
 ```bash
-node --run-if-present serve 2>/dev/null || npx --yes http-server -p 8125 -s &
+python -m http.server 8125
 ```
 
-If `npx` is unavailable offline, use `python -m http.server 8125` from the repo root instead. Then open `http://localhost:8125/` in a browser and confirm, by hand:
+There is no `serve` script in `package.json`; the site is plain static files, so any static server works. Then open `http://localhost:8125/` in a browser and confirm, by hand:
 
 1. The **Players** tab appears in the nav and the other three tabs still work.
 2. Clicking Players loads a table; the season toggle shows `2026 | 2025` with 2026 active.
@@ -1811,7 +1831,7 @@ last-season-saved.json
 - [ ] **Step 4: Run the full suite**
 
 Run: `npm test`
-Expected: PASS, **140 tests** — 153 minus the 13 in the deleted `test/last-season.test.js`. That coverage moved to `test/leaderboard.test.js` in Task 2, so nothing is lost; the local count simply stops double-counting it. This is also the first run where the local and CI counts agree.
+Expected: PASS, **141 tests** — 154 minus the 13 in the deleted `test/last-season.test.js`. That coverage moved to `test/leaderboard.test.js` in Task 2, so nothing is lost; the local count simply stops double-counting it. This is also the first run where the local and CI counts agree.
 
 - [ ] **Step 5: Regenerate your saved-opportunity list from the new CLI**
 
@@ -1839,7 +1859,7 @@ Expected: empty output.
 
 ## Final verification
 
-- [ ] `npm test` — 140 passing, 0 failing, locally and in CI alike.
+- [ ] `npm test` — 141 passing, 0 failing, locally and in CI alike.
 - [ ] `git status --short` — clean.
 - [ ] `node scripts/snapshot.mjs --replay` runs without error and leaves `data/` unchanged (`git status --short` still empty afterwards).
 - [ ] `data/leaderboard-2025.json` has 709 rows; `data/leaderboard-2026.json` has 0 until week 1.
