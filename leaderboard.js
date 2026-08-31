@@ -56,6 +56,11 @@ export function adjustWeek(points, played, isDef, hadOpp) {
  * played. `pts` is the RAW score, before any penalty: keeping adjustment out
  * of the archive means changing PENALTY never invalidates a stored week.
  *
+ * The `gp` gate answers "did this count as a game played", which is the
+ * leaderboard's question. It is NOT the penalty rule's question — that one
+ * asks only whether a chance existed, and is archived separately from the
+ * raw payload (see scripts/snapshot.mjs). Do not conflate the two.
+ *
  * @param {Object<string, Object>|null} weekStats
  * @param {Object<string, {pos: string, team: string, name: string}>} players
  * @param {Object<string, number>} scoring
@@ -69,13 +74,6 @@ export function slimWeek(weekStats, players, scoring) {
     out[id] = { pts: scoreWeek(s, scoring), gp: 1, opp: hadOpportunity(s) ? 1 : 0 };
   }
   return out;
-}
-
-/** Ids in a slim week that had a scoring chance, sorted for a stable archive. */
-export function opportunityIds(slim) {
-  return Object.keys(slim || {})
-    .filter((id) => slim[id].opp)
-    .sort();
 }
 
 /**

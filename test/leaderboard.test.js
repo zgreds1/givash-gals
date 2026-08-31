@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import {
   adjustWeek,
   buildLeaderboard,
-  opportunityIds,
   scoreWeek,
   slimForLeaderboard,
   slimWeek,
@@ -143,16 +142,6 @@ test('buildLeaderboard fills the saved log when one is supplied', () => {
   assert.deepEqual(log, [
     { week: 2, id: 'E', name: 'Targeted Zero', pos: 'WR', team: 'NYJ' },
   ]);
-});
-
-test('opportunityIds returns the flagged ids, sorted', () => {
-  const slim = {
-    c: { pts: 0, gp: 1, opp: 1 },
-    a: { pts: 4, gp: 1, opp: 0 },
-    b: { pts: 0, gp: 1, opp: 1 },
-  };
-  assert.deepEqual(opportunityIds(slim), ['b', 'c']);
-  assert.deepEqual(opportunityIds({}), []);
 });
 
 test('an empty season yields no rows rather than throwing', () => {

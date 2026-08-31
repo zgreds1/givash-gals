@@ -2,3 +2,7 @@ node_modules/
 .DS_Store
 *.log
 .superpowers/
+
+# Per-season build cache for scripts/build-leaderboard.mjs: ~23 MB a season,
+# rebuildable from Sleeper. data/raw/ (no suffix) IS committed and must stay.
+data/raw-*/

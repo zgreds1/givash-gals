@@ -4,12 +4,15 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import {
+  archivedOpportunityIds,
   slimPlayers,
   buildSnapshot,
   buildSeasonLeaderboard,
   refreshPlayers,
   writeStamped,
 } from '../scripts/snapshot.mjs';
+import { opportunitySet } from '../rules.js';
+import { slimForLeaderboard, slimWeek } from '../leaderboard.js';
 import { mkEntry, SCHEDULE } from './helpers.js';
 
 test('slimPlayers keeps only active skill players and three fields', () => {
@@ -98,7 +101,7 @@ test('buildSnapshot excludes any unowned roster from the teams map, not just the
   assert.equal(snap.meta.teams['6'], undefined);
 });
 
-test('refreshPlayers falls back to the cached slim map when fetch rejects', async () => {
+test('refreshPlayers falls back to the cached maps when fetch rejects', async () => {
   const stampPath = new URL('../data/.players-stamp', import.meta.url);
   const slimPath = new URL('../data/players-slim.json', import.meta.url);
   const originalStamp = await readFile(stampPath, 'utf8');
@@ -112,7 +115,10 @@ test('refreshPlayers falls back to the cached slim map when fetch rejects', asyn
       throw new Error('network down');
     };
     const result = await refreshPlayers(rejecting);
-    assert.deepEqual(result, cached);
+    assert.deepEqual(result.slim, cached);
+    // players-all.json may not exist yet on a fresh clone; either way the run
+    // must come back with a usable leaderboard map rather than aborting.
+    assert.ok(Object.keys(result.all).length > 0);
   } finally {
     await writeFile(stampPath, originalStamp);
   }
@@ -267,4 +273,59 @@ test('an unchanged leaderboard does not restamp, so the Action commits nothing',
   assert.equal(second.changed, false);
   assert.equal(second.generatedAt, first.generatedAt);
   await rm(dir, { recursive: true, force: true });
+});
+
+test('the archived opportunity ids come off the raw payload, gp flag and all', () => {
+  // Regression: deriving these from the slimmed week gated them on gp >= 1 and
+  // on membership of the active player map. Neither is part of the penalty
+  // rule, which asks only whether a chance existed. Sleeper's gp flag lags an
+  // in-progress game, so the Sunday cron would have archived an empty set and
+  // published +20s that app.js's live refresh correctly withholds.
+  const raw = {
+    A: { gp: 1, rec_tgt: 3 },   // targeted, gp caught up
+    B: { gp: 0, rec_tgt: 1 },   // targeted, gp has NOT caught up yet
+    C: { rush_att: 2 },         // carried the ball, no gp field at all
+    D: { gp: 1, rec: 4 },       // played, but no chance stat recorded
+    ZZ: { gp: 0, pass_att: 1 }, // threw a pass, in no player map
+  };
+
+  assert.deepEqual(archivedOpportunityIds(raw), ['A', 'B', 'C', 'ZZ']);
+  // Pinned to rules.js by construction, not by a parallel implementation.
+  assert.deepEqual(archivedOpportunityIds(raw), [...opportunitySet(raw)].sort());
+
+  // The leaderboard's slim week keeps its own, narrower gate — and that is
+  // exactly why the opportunity archive must not be derived from it.
+  const map = { pos: 'WR', team: 'NYJ', name: 'Someone' };
+  const players = { A: map, B: map, C: map, D: map };
+  assert.deepEqual(Object.keys(slimWeek(raw, players, { rec: 1 })).sort(), ['A', 'D']);
+});
+
+test('a player cut mid-season keeps his row, because the board is built from players-all', () => {
+  // Sleeper flips `active` to false the moment a player is cut, dropping him
+  // out of players-slim. His games and his accumulated +20s are most of the
+  // point of this board, so the season path reads the unfiltered map.
+  const raw = {
+    A: { position: 'QB', team: 'CIN', full_name: 'Quincy Back', active: true },
+    C: { position: 'WR', team: 'NYJ', full_name: 'Cut Loose', active: false },
+  };
+  const slim = slimPlayers(raw);
+  const all = slimForLeaderboard(raw);
+  assert.equal(slim.C, undefined);
+  assert.ok(all.C);
+
+  const scoring = { pass_yd: 0.04, rec: 1 };
+  const rawWeek = { A: { gp: 1, pass_yd: 250 }, C: { gp: 1 } };
+
+  // The archive is slimmed against the same unfiltered map, or the cut
+  // player's week would be gone before the leaderboard ever ran.
+  assert.equal(slimWeek(rawWeek, slim, scoring).C, undefined);
+  const weeks = { 1: slimWeek(rawWeek, all, scoring) };
+
+  assert.equal(buildSeasonLeaderboard(slim, weeks).find((r) => r.id === 'C'), undefined);
+
+  const row = buildSeasonLeaderboard(all, weeks).find((r) => r.id === 'C');
+  assert.equal(row.name, 'Cut Loose');
+  assert.equal(row.gp, 1);
+  assert.equal(row.truePen, 1); // played, scored 0, had no chance
+  assert.equal(row.total, 20);
 });
