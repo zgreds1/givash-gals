@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { adjustedScore, byeTeams, opportunitySet } from '../rules.js';
+import { adjustedScore, byeTeams, opportunitySet, hadOpportunity } from '../rules.js';
 import { mkEntry, PLAYERS, SCHEDULE } from './helpers.js';
 
 const WK3 = byeTeams(SCHEDULE, 3); // nobody on bye
@@ -122,4 +122,36 @@ test('an opportunity does not rescue a DEF on bye', () => {
 test('omitting the opportunity set penalises zeroes as before', () => {
   const r = adjustedScore(mkEntry(1, 1, [['8205', 0]]), WK3, PLAYERS);
   assert.equal(r.adjusted, 20);
+});
+
+test('hadOpportunity recognises each of the five opportunity stats', () => {
+  assert.equal(hadOpportunity({ rec_tgt: 1 }), true);
+  assert.equal(hadOpportunity({ pass_att: 1 }), true);
+  assert.equal(hadOpportunity({ rush_att: 1 }), true);
+  assert.equal(hadOpportunity({ fga: 1 }), true);
+  assert.equal(hadOpportunity({ xpa: 1 }), true);
+});
+
+test('hadOpportunity is false for a player who touched none of them', () => {
+  assert.equal(hadOpportunity({ gp: 1, off_snp: 40, tkl: 2 }), false);
+  assert.equal(hadOpportunity({}), false);
+  assert.equal(hadOpportunity(undefined), false);
+  assert.equal(hadOpportunity(null), false);
+});
+
+test('hadOpportunity ignores zeroed attempt stats', () => {
+  assert.equal(
+    hadOpportunity({ rec_tgt: 0, rush_att: 0, pass_att: 0, fga: 0, xpa: 0 }),
+    false,
+  );
+});
+
+test('opportunitySet delegates to hadOpportunity for every id', () => {
+  const week = {
+    A: { rec_tgt: 3 },
+    B: { off_snp: 12 },
+    C: { xpa: 1 },
+    D: null,
+  };
+  assert.deepEqual([...opportunitySet(week)].sort(), ['A', 'C']);
 });

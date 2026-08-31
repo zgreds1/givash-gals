@@ -39,6 +39,22 @@ export function byeTeams(schedule, week) {
 export const OPPORTUNITY_STATS = ['rec_tgt', 'pass_att', 'rush_att', 'fga', 'xpa'];
 
 /**
+ * Did this stat line represent a chance to score? A target, pass attempt,
+ * rush attempt, field-goal attempt, or extra-point attempt all count: the
+ * player was sent out to do something, so a 0 is failure rather than absence.
+ *
+ * @param {Object|undefined} stats - one player's week from Sleeper
+ * @returns {boolean}
+ */
+export function hadOpportunity(stats) {
+  if (!stats) return false;
+  for (const k of OPPORTUNITY_STATS) {
+    if ((stats[k] ?? 0) > 0) return true;
+  }
+  return false;
+}
+
+/**
  * Player ids that recorded at least one opportunity in a week's stats payload.
  * Kept here rather than in the data layer because what counts as an
  * opportunity is a league rule, not a transport detail.
@@ -49,13 +65,7 @@ export const OPPORTUNITY_STATS = ['rec_tgt', 'pass_att', 'rush_att', 'fga', 'xpa
 export function opportunitySet(weekStats) {
   const out = new Set();
   for (const [id, s] of Object.entries(weekStats || {})) {
-    if (!s) continue;
-    for (const k of OPPORTUNITY_STATS) {
-      if ((s[k] ?? 0) > 0) {
-        out.add(id);
-        break;
-      }
-    }
+    if (hadOpportunity(s)) out.add(id);
   }
   return out;
 }
