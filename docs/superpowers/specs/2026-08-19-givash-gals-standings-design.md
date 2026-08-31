@@ -71,7 +71,13 @@ A team's adjusted score is the sum of its 19 starters' points, plus a **+20 pena
 for each starter meeting the zero condition.
 
 **Zero condition — a starter incurs +20 when its score is exactly 0**, tested as
-`Math.abs(points) < 1e-9`, with one exception:
+`Math.abs(points) < 1e-9`, with two exceptions:
+
+- **A player who had an opportunity is exempt.** Recording any of `rec_tgt`,
+  `pass_att`, `rush_att`, `fga` or `xpa` in that week means the player was given a
+  chance to score, so a 0 is failure rather than absence. Sourced from
+  `stats/nfl/regular/{season}/{week}`, reduced by `opportunitySet()` to a Set of player
+  ids. Empty starter slots are never exempt.
 
 - **A DEF that is not on bye is exempt.** A defense scoring exactly 0 is a legitimate
   outcome of this league's scoring settings (`pts_allow_21_27: 0.0`), so it is not
@@ -163,8 +169,8 @@ and the GitHub Action, so the live page and the archive cannot disagree.
 | Function | Signature | Purpose |
 | --- | --- | --- |
 | `byeTeams` | `(schedule, week) -> Set<string>` | NFL teams idle in a given week |
-| `adjustedScore` | `(entry, byes, players) -> {raw, adjusted, penalties[]}` | Section 4.1; `penalties[]` carries `{playerId, name, reason}` where reason is one of `zeroed`, `empty-slot`, `bye-def` |
-| `resolveWeek` | `(week, matchups, excludedRosterIds, byes, players) -> WeekResult` | Sections 4.3–4.4. `excludedRosterIds` is a `Set` of every unowned roster. Returns `degenerate: true` with no matchups when the payload cannot be read as two head-to-head pairs plus at most one median team |
+| `adjustedScore` | `(entry, byes, players, opportunities) -> {raw, adjusted, penalties[]}` | Section 4.1; `penalties[]` carries `{playerId, name, reason}` where reason is one of `zeroed`, `empty-slot`, `bye-def` |
+| `resolveWeek` | `(week, matchups, excludedRosterIds, byes, players, opportunities) -> WeekResult` | Sections 4.3–4.4. `excludedRosterIds` is a `Set` of every unowned roster. Returns `degenerate: true` with no matchups when the payload cannot be read as two head-to-head pairs plus at most one median team |
 | `standings` | `(weeks[]) -> StandingsRow[]` | Section 5 |
 
 `resolveWeek` strips every roster in `excludedRosterIds`, then identifies the median team

@@ -2,7 +2,7 @@
 // re-fetches only the current week from Sleeper and recomputes.
 
 import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from './sleeper.js';
-import { byeTeams, resolveWeek, standings } from './rules.js';
+import { byeTeams, resolveWeek, standings, opportunitySet } from './rules.js';
 import { renderStandings, renderResults, renderRules } from './render.js';
 
 const state = { weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false };
@@ -98,10 +98,22 @@ async function refreshLive() {
 
   state.ghostRosterId = findGhostRosterId(rosters) ?? state.ghostRosterId;
   const excluded = unownedRosterIds(rosters);
-  const payload = await client.matchups(week);
+  // Opportunity stats must be live: a stale set would show a +20 for a player
+  // who has already been targeted this afternoon.
+  const [payload, weekStats] = await Promise.all([
+    client.matchups(week),
+    client.stats(week).catch(() => ({})),
+  ]);
   if (!Array.isArray(payload) || payload.length === 0) return;
 
-  const fresh = resolveWeek(week, payload, excluded, byeTeams(schedule, week), players);
+  const fresh = resolveWeek(
+    week,
+    payload,
+    excluded,
+    byeTeams(schedule, week),
+    players,
+    opportunitySet(weekStats),
+  );
   if (!fresh.played || fresh.degenerate) return;
 
   state.weeks = state.weeks.filter((w) => w.week !== week).concat(fresh);

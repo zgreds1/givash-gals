@@ -131,6 +131,10 @@ export function renderRules() {
        Penalties stack.</p>
     <p><strong>Exception:</strong> a DEF that is not on bye is exempt — 0 is a
        legitimate defensive score in this league. A DEF on bye is not exempt.</p>
+    <p><strong>Exception:</strong> a player who had a <strong>target, pass
+       attempt, rush attempt, field-goal attempt or extra-point attempt</strong>
+       is exempt. They were given a chance and failed, and the format punishes
+       absence, not failure. An empty starter slot is never exempt.</p>
     <p>Negative scores are kept as-is. A kicker at &minus;1 stays at &minus;1;
        that is a reward, not something to punish.</p>
 

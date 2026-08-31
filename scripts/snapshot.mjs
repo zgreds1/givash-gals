@@ -20,7 +20,7 @@ import {
   findGhostRosterId,
   unownedRosterIds,
 } from '../sleeper.js';
-import { byeTeams, resolveWeek, standings } from '../rules.js';
+import { byeTeams, resolveWeek, standings, opportunitySet } from '../rules.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data');
@@ -41,7 +41,7 @@ export function slimPlayers(raw) {
 }
 
 /** Pure: everything the site needs, computed from already-fetched data. */
-export function buildSnapshot({ rosters, users, schedule, players, weekPayloads }) {
+export function buildSnapshot({ rosters, users, schedule, players, weekPayloads, opportunities = {} }) {
   // Every unowned slot is stripped from the engine; the lowest one is still
   // reported as the ghost because that is what the page labels and explains.
   const ghostRosterId = findGhostRosterId(rosters);
@@ -60,7 +60,14 @@ export function buildSnapshot({ rosters, users, schedule, players, weekPayloads 
     .map(Number)
     .sort((a, b) => a - b)
     .map((w) =>
-      resolveWeek(w, weekPayloads[w], excluded, byeTeams(schedule, w), players),
+      resolveWeek(
+        w,
+        weekPayloads[w],
+        excluded,
+        byeTeams(schedule, w),
+        players,
+        new Set(opportunities[w] || []),
+      ),
     );
 
   return { standings: standings(weeks), weeks, meta: { ghostRosterId, teams } };
@@ -100,6 +107,16 @@ export async function writeStamped(file, body, now) {
   return { generatedAt, changed };
 }
 
+async function readOpps() {
+  if (!existsSync(RAW)) return {};
+  const out = {};
+  for (const f of await readdir(RAW)) {
+    const m = /^opps(\d+)\.json$/.exec(f);
+    if (m) out[Number(m[1])] = JSON.parse(await readFile(path.join(RAW, f), 'utf8'));
+  }
+  return out;
+}
+
 async function readRaw() {
   if (!existsSync(RAW)) return {};
   const out = {};
@@ -119,6 +136,7 @@ async function main() {
   let users;
   let schedule;
   let weekPayloads;
+  let opportunities = {};
   let players;
 
   if (replay) {
@@ -127,6 +145,7 @@ async function main() {
     schedule = JSON.parse(await readFile(path.join(RAW, 'schedule.json'), 'utf8'));
     players = JSON.parse(await readFile(path.join(DATA, 'players-slim.json'), 'utf8'));
     weekPayloads = await readRaw();
+    opportunities = await readOpps();
   } else {
     const state = await client.state();
     // 0 during the preseason: /state/nfl counts preseason weeks in the same
@@ -150,11 +169,18 @@ async function main() {
     await writeFile(path.join(RAW, 'schedule.json'), JSON.stringify(schedule));
 
     weekPayloads = {};
+    opportunities = {};
     for (let w = 1; w <= current; w++) {
       const payload = await client.matchups(w);
       if (!Array.isArray(payload) || payload.length === 0) continue;
       weekPayloads[w] = payload;
       await writeFile(path.join(RAW, `wk${w}.json`), JSON.stringify(payload));
+
+      // Archive only the ids that had a scoring chance, not the ~570 KB raw
+      // stats payload: that id list is all the engine needs to replay a week.
+      const ids = [...opportunitySet(await client.stats(w))].sort();
+      opportunities[w] = ids;
+      await writeFile(path.join(RAW, `opps${w}.json`), JSON.stringify(ids));
     }
 
     // Off-season: /state/nfl reports no real week, but a finished season is
@@ -166,7 +192,7 @@ async function main() {
     players = await refreshPlayers();
   }
 
-  const snap = buildSnapshot({ rosters, users, schedule, players, weekPayloads });
+  const snap = buildSnapshot({ rosters, users, schedule, players, weekPayloads, opportunities });
   const now = new Date().toISOString();
 
   const s = await writeStamped(

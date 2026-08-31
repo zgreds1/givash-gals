@@ -34,7 +34,8 @@ The page paints instantly from the committed snapshot — it recomputes the
 table from `data/weeks.json` through the same engine, taking team names, the
 ghost roster id and the snapshot timestamp from `data/standings.json`. It
 then re-fetches only the current week from Sleeper and recomputes
-client-side — two API calls per load, `/state/nfl` and `matchups/{week}`.
+client-side — three API calls per load: `/state/nfl`, `matchups/{week}`, and
+`stats/nfl/regular/{season}/{week}` for the opportunity rule.
 Rosters and the NFL schedule are read from `data/raw/`, not the API. A
 scheduled Action archives the raw weekly payloads to `data/raw/` and
 refreshes the snapshot. The Action is a safety net, not the freshness

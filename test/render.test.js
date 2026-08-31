@@ -105,3 +105,10 @@ test('the rules page states there are no playoffs and that 18 weeks decide it', 
   assert.match(html, /18/);
   assert.match(html, /final rankings/i);
 });
+
+test('the rules page states the opportunity exemption', () => {
+  const html = renderRules();
+  assert.match(html, /rush attempt/i);
+  assert.match(html, /extra-point attempt/i);
+  assert.match(html, /empty starter slot is never exempt/i);
+});

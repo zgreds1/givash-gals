@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { adjustedScore, byeTeams } from '../rules.js';
+import { adjustedScore, byeTeams, opportunitySet } from '../rules.js';
 import { mkEntry, PLAYERS, SCHEDULE } from './helpers.js';
 
 const WK3 = byeTeams(SCHEDULE, 3); // nobody on bye
@@ -74,5 +74,52 @@ test('an unknown player id at zero is penalised as a normal starter', () => {
 test('a missing starters_points entry counts as zero', () => {
   const entry = { roster_id: 1, matchup_id: 1, starters: ['8205'], starters_points: [] };
   const r = adjustedScore(entry, WK3, PLAYERS);
+  assert.equal(r.adjusted, 20);
+});
+
+// --- opportunity rule -------------------------------------------------------
+
+test('opportunitySet collects every player with a scoring chance', () => {
+  const stats = {
+    tgt: { rec_tgt: 3 },
+    passer: { pass_att: 12 },
+    runner: { rush_att: 1 },
+    kicker: { fga: 2 },
+    xp: { xpa: 4 },
+    blocker: { off_snp: 40, rec_tgt: 0, rush_att: 0 },
+  };
+  const s = opportunitySet(stats);
+  assert.deepEqual([...s].sort(), ['kicker', 'passer', 'runner', 'tgt', 'xp']);
+  assert.equal(s.has('blocker'), false);
+});
+
+test('a starter at zero WITH an opportunity is not penalised', () => {
+  const entry = mkEntry(1, 1, [['8205', 0]]);
+  const r = adjustedScore(entry, WK3, PLAYERS, new Set(['8205']));
+  assert.equal(r.adjusted, 0);
+  assert.deepEqual(r.penalties, []);
+});
+
+test('a starter at zero WITHOUT an opportunity is still penalised', () => {
+  const entry = mkEntry(1, 1, [['8205', 0]]);
+  const r = adjustedScore(entry, WK3, PLAYERS, new Set(['4199']));
+  assert.equal(r.adjusted, 20);
+  assert.equal(r.penalties[0].reason, 'zeroed');
+});
+
+test('an opportunity does not rescue an empty starter slot', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(['0']));
+  assert.equal(r.adjusted, 20);
+  assert.equal(r.penalties[0].reason, 'empty-slot');
+});
+
+test('an opportunity does not rescue a DEF on bye', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['HOU', 0]]), WK8, PLAYERS, new Set(['HOU']));
+  assert.equal(r.adjusted, 20);
+  assert.equal(r.penalties[0].reason, 'bye-def');
+});
+
+test('omitting the opportunity set penalises zeroes as before', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['8205', 0]]), WK3, PLAYERS);
   assert.equal(r.adjusted, 20);
 });

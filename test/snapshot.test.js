@@ -198,3 +198,31 @@ test('buildSnapshot excludes every unowned roster from the engine, not just the 
   assert.deepEqual(snap.standings, []);      // and nothing accrues
   assert.equal(snap.meta.ghostRosterId, 4);  // still reported for display
 });
+
+test('buildSnapshot applies the opportunity rule from archived id lists', () => {
+  const players = {
+    4199: { pos: 'WR', team: 'MIN', name: 'Justin Jefferson' },
+    8205: { pos: 'RB', team: 'ATL', name: 'Bijan Robinson' },
+  };
+  const rosters = [1, 2, 3, 4, 5]
+    .map((i) => ({ roster_id: i, owner_id: `u${i}` }))
+    .concat([{ roster_id: 6, owner_id: null }]);
+  const users = [1, 2, 3, 4, 5].map((i) => ({ user_id: `u${i}`, display_name: `T${i}` }));
+  // roster 1 starts a zeroed RB; everyone else scores normally
+  const week = [
+    mkEntry(1, 1, [['4199', 50], ['8205', 0]]),
+    mkEntry(2, 1, [['4199', 60]]),
+    mkEntry(3, 2, [['4199', 70]]),
+    mkEntry(4, 2, [['4199', 80]]),
+    mkEntry(5, 3, [['4199', 65]]),
+    mkEntry(6, 3, [['4199', 0]]),
+  ];
+  const base = { rosters, users, schedule: SCHEDULE, players, weekPayloads: { 3: week } };
+
+  const without = buildSnapshot(base);
+  assert.equal(without.weeks[0].teams[1].adjusted, 70); // 50 raw + 20 penalty
+
+  const withOpp = buildSnapshot({ ...base, opportunities: { 3: ['8205'] } });
+  assert.equal(withOpp.weeks[0].teams[1].adjusted, 50); // targeted, so spared
+  assert.deepEqual(withOpp.weeks[0].teams[1].penalties, []);
+});

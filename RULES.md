@@ -13,7 +13,13 @@ adjusted scores are a tie, worth 0.5 in the standings.
 Each starter that scores **exactly 0** adds **20 points** to your total.
 "Exactly 0" means `Math.abs(points) < 1e-9`.
 
-One exception: **a DEF that is not on bye is exempt.** A defense scoring 0 is
+**First exception: a player who had a chance to score is exempt.** If they
+recorded a **target, pass attempt, rush attempt, field-goal attempt, or
+extra-point attempt**, a 0 costs nothing. They were sent out and failed, and
+this format punishes absence, not failure. A player who suited up but was never
+involved — a blocking tight end with no targets — still takes the +20.
+
+Second exception: **a DEF that is not on bye is exempt.** A defense scoring 0 is
 a legitimate outcome under this league's settings (`pts_allow_21_27` is 0.0),
 so it is not punished. A DEF whose NFL team *is* on bye is penalised like
 anyone else.
@@ -23,7 +29,8 @@ Deliberate consequences:
 - **Negative scores are kept.** A kicker at -1 for a missed field goal stays
   at -1. A negative is a reward here; the penalty exists to punish absent
   lineups, not good ones.
-- **An empty starter slot counts as 0 and takes +20.**
+- **An empty starter slot counts as 0 and takes +20**, always — no opportunity
+  can rescue an empty slot.
 - **Penalties stack.** Four zeroes is +80.
 
 ### Worked example

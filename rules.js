@@ -33,6 +33,34 @@ export function byeTeams(schedule, week) {
 }
 
 /**
+ * Raw stat keys that mean "this player was given a chance to score".
+ * A zero alongside any of these is failure, not absence, and is not punished.
+ */
+export const OPPORTUNITY_STATS = ['rec_tgt', 'pass_att', 'rush_att', 'fga', 'xpa'];
+
+/**
+ * Player ids that recorded at least one opportunity in a week's stats payload.
+ * Kept here rather than in the data layer because what counts as an
+ * opportunity is a league rule, not a transport detail.
+ *
+ * @param {Object<string, Object>} weekStats - Sleeper stats/nfl/regular/{yr}/{wk}
+ * @returns {Set<string>}
+ */
+export function opportunitySet(weekStats) {
+  const out = new Set();
+  for (const [id, s] of Object.entries(weekStats || {})) {
+    if (!s) continue;
+    for (const k of OPPORTUNITY_STATS) {
+      if ((s[k] ?? 0) > 0) {
+        out.add(id);
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+/**
  * A team's adjusted score: raw starter points plus PENALTY for each
  * starter that scored exactly zero.
  *
@@ -48,7 +76,7 @@ export function byeTeams(schedule, week) {
  * @param {Set<string>} byes - NFL teams on bye this week
  * @param {Object<string,{pos:string,team:string,name:string}>} players
  */
-export function adjustedScore(entry, byes, players) {
+export function adjustedScore(entry, byes, players, opportunities = new Set()) {
   const starters = entry.starters || [];
   const points = entry.starters_points || [];
   const penalties = [];
@@ -73,6 +101,9 @@ export function adjustedScore(entry, byes, players) {
       }
       continue; // DEF not on bye: exempt
     }
+
+    // Given a chance and failed — the format punishes absence, not failure.
+    if (opportunities.has(id)) continue;
 
     penalties.push({
       playerId: id,
@@ -112,13 +143,20 @@ export function adjustedScore(entry, byes, players) {
  * @param {Set<string>} byes
  * @param {Object} players
  */
-export function resolveWeek(week, matchups, excludedRosterIds, byes, players) {
+export function resolveWeek(
+  week,
+  matchups,
+  excludedRosterIds,
+  byes,
+  players,
+  opportunities = new Set(),
+) {
   const excluded = excludedRosterIds ?? new Set();
 
   const scored = matchups.map((m) => ({
     rosterId: m.roster_id,
     matchupId: m.matchup_id ?? null,
-    ...adjustedScore(m, byes, players),
+    ...adjustedScore(m, byes, players, opportunities),
   }));
 
   const real = scored.filter((s) => !excluded.has(s.rosterId));
