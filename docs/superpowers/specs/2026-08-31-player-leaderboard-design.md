@@ -132,7 +132,7 @@ in step. That was wrong, because the two files answer different questions and
 so cannot be derived from one another:
 
 - **`opps{N}.json` — the penalty rule.** Every id in the *raw* payload with a
-  target, pass attempt, rush attempt, FG attempt or XP attempt, sorted. It is
+  catch, pass completion, rush attempt, FG attempt or XP attempt, sorted. It is
   written before any slimming, ungated by `gp` and ungated by the player map,
   because the rule asks only whether a chance existed. Deriving it from the
   slim week would inherit `slimWeek`'s `gp >= 1` gate, and Sleeper's `gp` flag
@@ -300,8 +300,11 @@ New coverage:
 11. A player present in `players-all.json` but absent from `players-slim.json`
     still gets a leaderboard row, with his games and his `+20`s intact (§4.4).
 12. The ids archived to `opps{N}.json` for a raw payload equal
-    `opportunitySet` of that payload: a player with a target but `gp: 0` is
-    still recorded as having had a chance (§4.3).
+    `opportunitySet` of that payload: a player with a catch but `gp: 0` is
+    still recorded as having been involved (§4.3).
+14. A target and a pass attempt do **not** exempt: a receiver targeted eight
+    times who catches none, and a quarterback who goes 0-for-5, both take the
+    `+20` (`RULES.md`, "The +20 penalty").
 13. With ownership unknown, the Owner column renders `—` and no row claims
     `FA` (§5).
 

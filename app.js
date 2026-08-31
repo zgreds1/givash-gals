@@ -78,8 +78,8 @@ async function loadSnapshot() {
 /**
  * Three Sleeper calls, and only three: /state/nfl, matchups/{week}, and
  * stats/{week}. The stats call is what makes the opportunity rule live —
- * without it the page would show a +20 for a player already targeted this
- * afternoon — and it degrades to {} rather than failing the refresh.
+ * without it the page would show a +20 for a player who has already caught a
+ * pass this afternoon — and it degrades to {} rather than failing the refresh.
  *
  * Rosters and the NFL schedule come from the committed snapshot instead.
  * The schedule endpoint is undocumented and immutable for the season, so
@@ -103,7 +103,7 @@ async function refreshLive() {
   state.ghostRosterId = findGhostRosterId(rosters) ?? state.ghostRosterId;
   const excluded = unownedRosterIds(rosters);
   // Opportunity stats must be live: a stale set would show a +20 for a player
-  // who has already been targeted this afternoon.
+  // who has already caught a pass this afternoon.
   const [payload, weekStats] = await Promise.all([
     client.matchups(week),
     client.stats(week).catch(() => ({})),

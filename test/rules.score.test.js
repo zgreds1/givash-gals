@@ -79,18 +79,28 @@ test('a missing starters_points entry counts as zero', () => {
 
 // --- opportunity rule -------------------------------------------------------
 
-test('opportunitySet collects every player with a scoring chance', () => {
+test('opportunitySet collects every player who did something', () => {
   const stats = {
-    tgt: { rec_tgt: 3 },
-    passer: { pass_att: 12 },
+    catcher: { rec: 3 },
+    passer: { pass_cmp: 12 },
     runner: { rush_att: 1 },
     kicker: { fga: 2 },
     xp: { xpa: 4 },
-    blocker: { off_snp: 40, rec_tgt: 0, rush_att: 0 },
+    blocker: { off_snp: 40, rec: 0, rush_att: 0 },
   };
   const s = opportunitySet(stats);
-  assert.deepEqual([...s].sort(), ['kicker', 'passer', 'runner', 'tgt', 'xp']);
+  assert.deepEqual([...s].sort(), ['catcher', 'kicker', 'passer', 'runner', 'xp']);
   assert.equal(s.has('blocker'), false);
+});
+
+test('being thrown at is not doing something: targets and pass attempts do not exempt', () => {
+  // The whole point of the rule change. A receiver targeted 8 times who catches
+  // none of them, and a quarterback who goes 0-for-5, both take the +20.
+  const stats = {
+    dropped: { gp: 1, rec_tgt: 8, rec: 0 },
+    incomplete: { gp: 1, pass_att: 5, pass_cmp: 0 },
+  };
+  assert.equal(opportunitySet(stats).size, 0);
 });
 
 test('a starter at zero WITH an opportunity is not penalised', () => {
@@ -124,12 +134,19 @@ test('omitting the opportunity set penalises zeroes as before', () => {
   assert.equal(r.adjusted, 20);
 });
 
-test('hadOpportunity recognises each of the five opportunity stats', () => {
-  assert.equal(hadOpportunity({ rec_tgt: 1 }), true);
-  assert.equal(hadOpportunity({ pass_att: 1 }), true);
+test('hadOpportunity recognises each of the five completed actions', () => {
+  assert.equal(hadOpportunity({ rec: 1 }), true);
+  assert.equal(hadOpportunity({ pass_cmp: 1 }), true);
   assert.equal(hadOpportunity({ rush_att: 1 }), true);
   assert.equal(hadOpportunity({ fga: 1 }), true);
   assert.equal(hadOpportunity({ xpa: 1 }), true);
+});
+
+test('hadOpportunity rejects the two intention stats, however many of them', () => {
+  assert.equal(hadOpportunity({ rec_tgt: 8 }), false);
+  assert.equal(hadOpportunity({ pass_att: 40 }), false);
+  // and a target alongside a catch is exempt for the catch, not the target
+  assert.equal(hadOpportunity({ rec_tgt: 8, rec: 1 }), true);
 });
 
 test('hadOpportunity is false for a player who touched none of them', () => {
@@ -139,16 +156,16 @@ test('hadOpportunity is false for a player who touched none of them', () => {
   assert.equal(hadOpportunity(null), false);
 });
 
-test('hadOpportunity ignores zeroed attempt stats', () => {
+test('hadOpportunity ignores zeroed stats', () => {
   assert.equal(
-    hadOpportunity({ rec_tgt: 0, rush_att: 0, pass_att: 0, fga: 0, xpa: 0 }),
+    hadOpportunity({ rec: 0, rush_att: 0, pass_cmp: 0, fga: 0, xpa: 0 }),
     false,
   );
 });
 
 test('opportunitySet delegates to hadOpportunity for every id', () => {
   const week = {
-    A: { rec_tgt: 3 },
+    A: { rec: 3 },
     B: { off_snp: 12 },
     C: { xpa: 1 },
     D: null,

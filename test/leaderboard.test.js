@@ -16,6 +16,7 @@ const PLAYERS = {
   B: { pos: 'DEF', team: 'HOU', name: 'Houston Texans' },
   D: { pos: 'WR', team: 'NYJ', name: 'Drops Everything' },
   E: { pos: 'WR', team: 'NYJ', name: 'Targeted Zero' },
+  F: { pos: 'WR', team: 'NYJ', name: 'Hands Of Stone' },
 };
 
 test('scoreWeek multiplies raw stats by league weights and ignores unknown keys', () => {
@@ -52,14 +53,16 @@ test('negative scores pass through untouched', () => {
 
 test('slimWeek keeps only known ids that actually played', () => {
   const raw = {
-    A: { gp: 1, rec: 4 },
-    D: { gp: 1, rec_tgt: 2 },
+    A: { gp: 1, rec: 4 }, // caught 4, scored 4
+    D: { gp: 1, rush_att: 2 }, // scores nothing under SCORING, but he ran
+    F: { gp: 1, rec_tgt: 6 }, // targeted 6 times, caught none: not a chance
     E: { rec: 9 }, // no gp: did not play
     ZZ: { gp: 1, rec: 4 }, // unknown id
   };
   assert.deepEqual(slimWeek(raw, PLAYERS, SCORING), {
-    A: { pts: 4, gp: 1, opp: 0 },
+    A: { pts: 4, gp: 1, opp: 1 },
     D: { pts: 0, gp: 1, opp: 1 },
+    F: { pts: 0, gp: 1, opp: 0 },
   });
 });
 
@@ -91,7 +94,7 @@ test('slimForLeaderboard keeps fantasy positions regardless of active flag', () 
 test('buildLeaderboard aggregates totals, PPG, and penalties per player', () => {
   const weeks = [
     // week 1: A scores 10; B (DEF) plays to a 0; D plays and scores 0 with no
-    // chance; E plays, scores 0, but was targeted.
+    // chance; E plays, scores 0, but caught a pass.
     {
       A: { pts: 10, gp: 1, opp: 0 },
       B: { pts: 0, gp: 1, opp: 0 },
@@ -114,7 +117,7 @@ test('buildLeaderboard aggregates totals, PPG, and penalties per player', () => 
   assert.deepEqual(pick('B'), { gp: 2, raw: 5, pen: 0, truePen: 0, saved: 0, total: 5, ppg: 2.5 });
   // wk1 a TRUE +20; wk2 missed -> +20 but not true. total 40, ppg 20.
   assert.deepEqual(pick('D'), { gp: 1, raw: 0, pen: 2, truePen: 1, saved: 0, total: 40, ppg: 20 });
-  // targeted and scored 0 -> saved. wk2 missed -> +20.
+  // caught a pass and scored 0 -> saved. wk2 missed -> +20.
   assert.deepEqual(pick('E'), { gp: 1, raw: 0, pen: 1, truePen: 0, saved: 1, total: 20, ppg: 0 });
 
   // ascending by total: lowest (best) first
@@ -149,7 +152,7 @@ test('an empty season yields no rows rather than throwing', () => {
 });
 
 test('a slim week survives a JSON round trip unchanged', () => {
-  const raw = { A: { gp: 1, pass_yd: 3 }, D: { gp: 1, rec_tgt: 1 } };
+  const raw = { A: { gp: 1, pass_yd: 3 }, D: { gp: 1, rec: 1 } };
   const slim = slimWeek(raw, PLAYERS, SCORING);
   const viaDisk = JSON.parse(JSON.stringify(slim));
   assert.deepEqual(buildLeaderboard(PLAYERS, [slim]), buildLeaderboard(PLAYERS, [viaDisk]));

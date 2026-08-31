@@ -33,15 +33,20 @@ export function byeTeams(schedule, week) {
 }
 
 /**
- * Raw stat keys that mean "this player was given a chance to score".
- * A zero alongside any of these is failure, not absence, and is not punished.
+ * Raw stat keys that mean "this player actually did something".
+ *
+ * The bar is a completed action, not an intention. A target and a pass
+ * attempt were both dropped from this list deliberately: on either one the
+ * player may have done nothing at all — the ball can arrive uncatchable, or
+ * never arrive. A catch, a completion, a carry and a kick attempt are things
+ * the player demonstrably did.
  */
-export const OPPORTUNITY_STATS = ['rec_tgt', 'pass_att', 'rush_att', 'fga', 'xpa'];
+export const OPPORTUNITY_STATS = ['rec', 'pass_cmp', 'rush_att', 'fga', 'xpa'];
 
 /**
- * Did this stat line represent a chance to score? A target, pass attempt,
- * rush attempt, field-goal attempt, or extra-point attempt all count: the
- * player was sent out to do something, so a 0 is failure rather than absence.
+ * Did this stat line show the player doing something? A catch, a completion,
+ * a rush attempt, a field-goal attempt, or an extra-point attempt all count:
+ * the player was involved and failed, which is not the same as being absent.
  *
  * @param {Object|undefined} stats - one player's week from Sleeper
  * @returns {boolean}

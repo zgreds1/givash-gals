@@ -73,9 +73,12 @@ for each starter meeting the zero condition.
 **Zero condition — a starter incurs +20 when its score is exactly 0**, tested as
 `Math.abs(points) < 1e-9`, with two exceptions:
 
-- **A player who had an opportunity is exempt.** Recording any of `rec_tgt`,
-  `pass_att`, `rush_att`, `fga` or `xpa` in that week means the player was given a
-  chance to score, so a 0 is failure rather than absence. Sourced from
+- **A player who actually did something is exempt.** Recording any of `rec`,
+  `pass_cmp`, `rush_att`, `fga` or `xpa` in that week means the player was
+  involved, so a 0 is failure rather than absence. The bar is a completed
+  action, not an intention: `rec_tgt` and `pass_att` were both removed on
+  2026-08-31, because on either one the player may have done nothing at all.
+  Sourced from
   `stats/nfl/regular/{season}/{week}`, reduced by `opportunitySet()` to a Set of player
   ids. Empty starter slots are never exempt.
 

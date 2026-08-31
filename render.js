@@ -131,10 +131,15 @@ export function renderRules() {
        Penalties stack.</p>
     <p><strong>Exception:</strong> a DEF that is not on bye is exempt — 0 is a
        legitimate defensive score in this league. A DEF on bye is not exempt.</p>
-    <p><strong>Exception:</strong> a player who had a <strong>target, pass
-       attempt, rush attempt, field-goal attempt or extra-point attempt</strong>
-       is exempt. They were given a chance and failed, and the format punishes
-       absence, not failure. An empty starter slot is never exempt.</p>
+    <p><strong>Exception:</strong> a player who recorded a <strong>catch, pass
+       completion, rush attempt, field-goal attempt or extra-point attempt</strong>
+       is exempt. They were involved and failed, and the format punishes
+       absence, not failure.</p>
+    <p>The bar is a completed action, not an intention. A <strong>target</strong>
+       and a <strong>pass attempt</strong> do not count — on either one the
+       player may have done nothing at all. A receiver targeted eight times who
+       catches none of them takes the +${PENALTY}; so does a quarterback who
+       goes 0-for-5. An empty starter slot is never exempt.</p>
     <p>Negative scores are kept as-is. A kicker at &minus;1 stays at &minus;1;
        that is a reward, not something to punish.</p>
 

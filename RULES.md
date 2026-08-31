@@ -13,11 +13,22 @@ adjusted scores are a tie, worth 0.5 in the standings.
 Each starter that scores **exactly 0** adds **20 points** to your total.
 "Exactly 0" means `Math.abs(points) < 1e-9`.
 
-**First exception: a player who had a chance to score is exempt.** If they
-recorded a **target, pass attempt, rush attempt, field-goal attempt, or
-extra-point attempt**, a 0 costs nothing. They were sent out and failed, and
-this format punishes absence, not failure. A player who suited up but was never
-involved — a blocking tight end with no targets — still takes the +20.
+**First exception: a player who actually did something is exempt.** If they
+recorded a **catch, pass completion, rush attempt, field-goal attempt, or
+extra-point attempt**, a 0 costs nothing. They were involved and failed, and
+this format punishes absence, not failure.
+
+The bar is a completed action, not an intention. A **target** and a **pass
+attempt** do not count: on either one the player may have done nothing at all —
+the ball can arrive uncatchable, or never arrive. A receiver targeted eight
+times who catches none of them takes the +20. A quarterback who goes 0-for-5
+takes the +20. A carry, a kick attempt, a catch and a completion are all things
+the player demonstrably did, so those still exempt.
+
+This exception is deliberately narrow. Under this league's 0.5 PPR it almost
+cannot fire on a catch at all — a reception is worth 0.5, so landing on exactly
+0 needs the receiving yards to cancel it out precisely. It happened once in all
+of 2025: Charlie Woerner, week 3, one catch for −5 yards.
 
 Second exception: **a DEF that is not on bye is exempt.** A defense scoring 0 is
 a legitimate outcome under this league's settings (`pts_allow_21_27` is 0.0),

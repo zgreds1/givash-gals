@@ -108,7 +108,17 @@ test('the rules page states there are no playoffs and that 18 weeks decide it', 
 
 test('the rules page states the opportunity exemption', () => {
   const html = renderRules();
+  assert.match(html, /catch, pass\s+completion/i);
   assert.match(html, /rush attempt/i);
   assert.match(html, /extra-point attempt/i);
   assert.match(html, /empty starter slot is never exempt/i);
+});
+
+test('the rules page says a target and a pass attempt do NOT exempt', () => {
+  // The copy has to carry the negative half of the rule; stating only what
+  // exempts would leave a reader to assume a target still counts.
+  const html = renderRules();
+  assert.match(html, /completed action, not an intention/i);
+  assert.match(html, /targeted eight times/i);
+  assert.match(html, /0-for-5/);
 });

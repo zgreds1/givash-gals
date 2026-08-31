@@ -230,7 +230,7 @@ test('buildSnapshot applies the opportunity rule from archived id lists', () => 
   assert.equal(without.weeks[0].teams[1].adjusted, 70); // 50 raw + 20 penalty
 
   const withOpp = buildSnapshot({ ...base, opportunities: { 3: ['8205'] } });
-  assert.equal(withOpp.weeks[0].teams[1].adjusted, 50); // targeted, so spared
+  assert.equal(withOpp.weeks[0].teams[1].adjusted, 50); // caught a pass, so spared
   assert.deepEqual(withOpp.weeks[0].teams[1].penalties, []);
 });
 
@@ -282,11 +282,11 @@ test('the archived opportunity ids come off the raw payload, gp flag and all', (
   // in-progress game, so the Sunday cron would have archived an empty set and
   // published +20s that app.js's live refresh correctly withholds.
   const raw = {
-    A: { gp: 1, rec_tgt: 3 },   // targeted, gp caught up
-    B: { gp: 0, rec_tgt: 1 },   // targeted, gp has NOT caught up yet
+    A: { gp: 1, rec: 3 },       // caught passes, gp caught up
+    B: { gp: 0, rec: 1 },       // caught a pass, gp has NOT caught up yet
     C: { rush_att: 2 },         // carried the ball, no gp field at all
-    D: { gp: 1, rec: 4 },       // played, but no chance stat recorded
-    ZZ: { gp: 0, pass_att: 1 }, // threw a pass, in no player map
+    D: { gp: 1, rec_tgt: 4 },   // targeted 4 times, caught none: not a chance
+    ZZ: { gp: 0, pass_cmp: 1 }, // completed a pass, in no player map
   };
 
   assert.deepEqual(archivedOpportunityIds(raw), ['A', 'B', 'C', 'ZZ']);
