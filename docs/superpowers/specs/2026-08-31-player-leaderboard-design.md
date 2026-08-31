@@ -144,7 +144,8 @@ so cannot be derived from one another:
   output.
 - **`stats{N}.json` — the leaderboard.** Gated on `gp >= 1`, because the
   leaderboard counts games played, and restricted to ids `players-all.json`
-  can name (§4.4). Roughly ~22 KB per week, ~400 KB for a full season.
+  can name (§4.4). Measured against the real 2025 payloads: ~15 KB per week,
+  **270 KB** for a full 18-week season.
 
 Both exist so `--replay` still works offline. **No migration is required**:
 `data/raw/` currently holds no week files at all.
@@ -311,10 +312,14 @@ still throws if the engine ever diverges from Sleeper on covered lines.
 
 - The Players tab costs one Sleeper call (rosters) the first time it is opened.
   Visitors who never open it pay nothing.
-- `data/` grows by roughly **900 KB** over a full season: ~400 KB of
-  `stats{N}.json`, ~15 KB of `opps{N}.json`, ~330 KB of leaderboards (two
+- `data/` grows by roughly **880 KB** over a full season, all figures measured
+  against the real 2025 payloads rather than estimated: **270 KB** of
+  `stats{N}.json`, **49 KB** of `opps{N}.json`, ~330 KB of leaderboards (two
   seasons × 165 KB, pretty-printed per §4.1), and 233 KB of
-  `players-all.json` once. The per-season build cache under `data/raw-{season}/`
+  `players-all.json`. That last is not a one-off: `refreshPlayers` rewrites it
+  whenever the daily stamp goes stale, so repository *history* gains a fresh
+  233 KB blob per refresh day — the same property `players-slim.json` already
+  had, now doubled. The per-season build cache under `data/raw-{season}/`
   is ~23 MB and is **not** committed — `.gitignore` carries `data/raw-*/`,
   which deliberately does not match the committed `data/raw/`. The repository
   stays small enough for GitHub Pages.
