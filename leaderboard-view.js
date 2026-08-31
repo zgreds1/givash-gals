@@ -81,9 +81,11 @@ export function stepMinGp(minGp, delta, maxGp) {
 export function stepperHtml(minGp, maxGp) {
   const top = Math.max(1, maxGp || 1);
   return `<span class="stepper">
-             <button data-step="-1"${minGp <= 1 ? ' disabled' : ''}>&minus;</button>
+             <button type="button" data-step="-1"${minGp <= 1 ? ' disabled' : ''}
+                     aria-label="Lower the minimum games played">&minus;</button>
              <span class="readout">${minGp}+ games</span>
-             <button data-step="1"${minGp >= top ? ' disabled' : ''}>+</button>
+             <button type="button" data-step="1"${minGp >= top ? ' disabled' : ''}
+                     aria-label="Raise the minimum games played">+</button>
            </span>`;
 }
 
@@ -146,11 +148,22 @@ export function renderLeaderboard(rows, view = {}) {
     ownerOf = null, labels = new Map(), ownershipKnown = true,
   } = view;
 
+  // A sortable header is a real <button> so it is reachable and operable by
+  // keyboard; its click bubbles to the <th>, which is where wire() listens,
+  // so there is still only one handler. aria-sort tells a screen reader what
+  // the arrow glyph tells everyone else.
   const head = COLUMNS.map(([k, label, num, sortable, hint]) => {
-    const arrow = sortKey === k ? ` <span class="dir">${sortDir === 1 ? '↑' : '↓'}</span>` : '';
+    const sorted = sortKey === k;
+    const arrow = sorted
+      ? ` <span class="dir" aria-hidden="true">${sortDir === 1 ? '↑' : '↓'}</span>`
+      : '';
     const cls = [num ? 'num' : '', sortable ? 'sortable' : ''].filter(Boolean).join(' ');
     const tip = hint ? ` title="${esc(hint)}"` : '';
-    return `<th class="${cls}"${tip} data-k="${k}">${label}${arrow}</th>`;
+    const aria = sorted ? ` aria-sort="${sortDir === 1 ? 'ascending' : 'descending'}"` : '';
+    const inner = sortable
+      ? `<button type="button" class="th-btn">${label}${arrow}</button>`
+      : `${label}${arrow}`;
+    return `<th class="${cls}"${tip} data-k="${k}" scope="col"${aria}>${inner}</th>`;
   }).join('');
 
   const body = rows
@@ -178,10 +191,13 @@ export function renderLeaderboard(rows, view = {}) {
     })
     .join('');
 
-  return `<table class="leaderboard">
+  return `<div class="table-wrap"><table class="leaderboard">
+    <caption class="sr-only">Player leaderboard, ${
+      metric === 'ppg' ? 'points per game' : 'total points'
+    }, lowest first</caption>
     <thead><tr>${head}</tr></thead>
     <tbody>${body}</tbody>
-  </table>`;
+  </table></div>`;
 }
 
 async function defaultJson(url) {
@@ -265,15 +281,22 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
 
   function seasonBar() {
     const btns = seasons
-      .map((s) => `<button data-season="${s}"${s === view.season ? ' class="on"' : ''}>${s}</button>`)
+      .map(
+        (s) =>
+          `<button type="button" data-season="${s}" aria-pressed="${s === view.season}"` +
+          `${s === view.season ? ' class="on"' : ''}>${s}</button>`,
+      )
       .join('');
-    return `<div class="tabs seasons">${btns}</div>`;
+    return `<div class="tabs seasons" role="group" aria-label="Season">${btns}</div>`;
   }
 
   function controls(rows, maxGp) {
     const on = (c) => (c ? ' class="on"' : '');
     const tabs = POSITION_TABS.map(
-      (t) => `<button data-tab="${t}"${on(t === view.tab)}>${t}</button>`,
+      (t) =>
+        `<button type="button" data-tab="${t}" aria-pressed="${t === view.tab}"${on(
+          t === view.tab,
+        )}>${t}</button>`,
     ).join('');
     const owners = idx.options
       .map(
@@ -286,15 +309,24 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
 
     return `<div class="controls">
       ${seasonBar()}
-      <div class="tabs">${tabs}</div>
+      <div class="tabs" role="group" aria-label="Position">${tabs}</div>
       <span class="spacer"></span>
-      <select id="lb-owner"${rosterSource === 'none' ? ' disabled' : ''}>${owners}</select>
-      <button data-metric="total"${on(view.metric === 'total')}>Total</button>
-      <button data-metric="ppg"${on(view.metric === 'ppg')}>PPG</button>
+      <select id="lb-owner" aria-label="Filter by owner"${
+        rosterSource === 'none' ? ' disabled' : ''
+      }>${owners}</select>
+      <div class="tabs" role="group" aria-label="Metric">
+        <button type="button" data-metric="total" aria-pressed="${view.metric === 'total'}"${on(
+          view.metric === 'total',
+        )}>Total</button>
+        <button type="button" data-metric="ppg" aria-pressed="${view.metric === 'ppg'}"${on(
+          view.metric === 'ppg',
+        )}>PPG</button>
+      </div>
       ${stepper}
-      <input id="lb-q" placeholder="Search player / team" value="${esc(view.q)}" />
+      <input id="lb-q" type="search" aria-label="Search player or team"
+             placeholder="Search player / team" value="${esc(view.q)}" />
     </div>
-    <div class="count">${rows ? `${rows.length} players` : ''}</div>`;
+    <div class="count" role="status">${rows ? `${rows.length} players` : ''}</div>`;
   }
 
   async function paint(focusSearch = false) {

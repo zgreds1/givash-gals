@@ -17,26 +17,33 @@ export function renderStandings(rows, teams) {
       const name = teams[String(r.rosterId)] || `Roster ${r.rosterId}`;
       const rank = r.unresolvedTie ? `T-${i + 1}` : String(i + 1);
       const med = `${r.median.w}-${r.median.l}-${r.median.t}`;
+      // data-label is what each cell is called once the table collapses to
+      // one card per team under 34rem and the header row is hidden.
       return `<tr>
         <td class="rank">${esc(rank)}</td>
-        <td class="team">${esc(name)}</td>
-        <td>${r.w}-${r.l}-${r.t}</td>
-        <td>${r.winPct.toFixed(3).replace(/^0/, '')}</td>
-        <td class="num">${r.adjPF.toFixed(2)}</td>
-        <td class="num muted">${r.rawPF.toFixed(2)}</td>
-        <td class="num muted">${med}</td>
+        <th class="team" scope="row">${esc(name)}</th>
+        <td class="record" data-label="Record">${r.w}-${r.l}-${r.t}</td>
+        <td class="pct" data-label="Win%">${r.winPct.toFixed(3).replace(/^0/, '')}</td>
+        <td class="num adjpf" data-label="Adj PF">${r.adjPF.toFixed(2)}</td>
+        <td class="num muted" data-label="Raw PF">${r.rawPF.toFixed(2)}</td>
+        <td class="num muted" data-label="vs Median">${med}</td>
       </tr>`;
     })
     .join('');
 
-  return `<table class="standings">
+  return `<div class="table-wrap"><table class="standings">
+    <caption>Standings &mdash; lowest adjusted points wins</caption>
     <thead><tr>
-      <th></th><th>Team</th><th>Record</th><th>Win%</th>
-      <th class="num">Adj PF <span class="hint">(low is good)</span></th>
-      <th class="num">Raw PF</th><th class="num">vs Median</th>
+      <th scope="col"><span class="sr-only">Rank</span></th>
+      <th scope="col">Team</th>
+      <th scope="col">Record</th>
+      <th scope="col">Win%</th>
+      <th class="num" scope="col">Adj PF <span class="hint">low is good</span></th>
+      <th class="num" scope="col">Raw PF</th>
+      <th class="num" scope="col">vs Median</th>
     </tr></thead>
     <tbody>${body}</tbody>
-  </table>`;
+  </table></div>`;
 }
 
 const REASON = {
@@ -50,15 +57,27 @@ const money = (n) => n.toFixed(2);
 function penaltyList(penalties) {
   if (!penalties.length) return '';
   const items = penalties
-    .map((p) => `<li><span class="pen">+20</span> ${esc(p.name)} <em>${esc(REASON[p.reason] || p.reason)}</em></li>`)
+    .map(
+      (p) =>
+        `<li><span class="pen">+20</span><span class="who">${esc(p.name)}</span>` +
+        `<em>${esc(REASON[p.reason] || p.reason)}</em></li>`,
+    )
     .join('');
   return `<ul class="penalties">${items}</ul>`;
 }
 
+/* A check mark drawn as SVG rather than a glyph or an emoji: it inherits the
+ * winner colour and font size, and the visually-hidden word carries the
+ * meaning for screen readers (colour alone never does). */
+const WIN_MARK =
+  '<svg class="win-mark" viewBox="0 0 20 20" fill="none" stroke="currentColor" ' +
+  'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M4 10.5l4 4 8-9"/></svg><span class="sr-only">Winner</span>';
+
 function teamBlock(rosterId, team, teams, isWinner) {
   const name = teams[String(rosterId)] || `Roster ${rosterId}`;
   return `<div class="side ${isWinner ? 'winner' : ''}">
-    <div class="name">${esc(name)}</div>
+    <div class="name">${isWinner ? WIN_MARK : ''}${esc(name)}</div>
     <div class="adj">${money(team.adjusted)}</div>
     <div class="raw">raw ${money(team.raw)}</div>
     ${penaltyList(team.penalties)}
@@ -105,7 +124,7 @@ export function renderResults(weeks, teams) {
             ${teamBlock(m.rosterId, wk.teams[m.rosterId], teams, m.result === 'W')}
             <div class="vs">${m.result === 'T' ? 'TIE' : 'vs median'}</div>
             <div class="side line ${m.result === 'L' ? 'winner' : ''}">
-              <div class="name">League median</div>
+              <div class="name">${m.result === 'L' ? WIN_MARK : ''}League median</div>
               <div class="adj">${m.line === null ? '—' : money(m.line)}</div>
               <div class="raw">avg of 2nd &amp; 3rd</div>
               <div class="pool">${pool}</div>

@@ -131,10 +131,32 @@ async function refreshLive() {
 
 function wireNav() {
   let playersMounted = false;
-  for (const btn of document.querySelectorAll('nav button')) {
+  const buttons = [...document.querySelectorAll('nav button')];
+
+  // role="tablist" promises arrow-key movement between tabs. Every tab stays
+  // in the tab order (manual activation), so this only adds the arrows.
+  const arrows = { ArrowLeft: -1, ArrowRight: 1, Home: 'first', End: 'last' };
+  for (const [i, btn] of buttons.entries()) {
+    btn.addEventListener('keydown', (e) => {
+      const move = arrows[e.key];
+      if (move === undefined) return;
+      e.preventDefault();
+      const next =
+        move === 'first' ? 0
+        : move === 'last' ? buttons.length - 1
+        : (i + move + buttons.length) % buttons.length;
+      buttons[next].focus();
+    });
+  }
+
+  for (const btn of buttons) {
     btn.addEventListener('click', () => {
-      for (const b of document.querySelectorAll('nav button')) b.classList.remove('active');
+      for (const b of document.querySelectorAll('nav button')) {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      }
       btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
       for (const v of document.querySelectorAll('.view')) v.hidden = true;
       $(btn.dataset.view).hidden = false;
 

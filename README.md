@@ -21,8 +21,33 @@ python -m http.server 8125        # then open http://localhost:8125
 
 ## Dependencies
 
-None. Node 22 supplies `fetch` and `node:test`; the site is vanilla ES
-modules. Nothing to install.
+Nothing to install. Node 22 supplies `fetch` and `node:test`; the site is
+vanilla ES modules with no build step.
+
+The one runtime dependency is two Google Fonts — **Fira Sans** for prose and
+**Fira Code** for every number — loaded from `fonts.googleapis.com` in
+`index.html`. They are a progressive enhancement, not a requirement: the
+stack falls back to the system UI sans and the system monospace, and because
+the fallbacks are also tabular the tables do not reflow if the request is
+blocked.
+
+## Design
+
+The look is an "editorial stat sheet": a light near-white ground, hairline
+rules instead of boxes, and monospaced tabular numerals so columns of scores
+line up. Its tokens come from the UI UX Pro Max design-system generator and
+are recorded in `design-system/givash-gals/MASTER.md` — the palette, the type
+pairing, the 8/10 density spacing scale.
+
+`style.css` deviates from that file in exactly three places, all documented
+in the file header: the accent, win and penalty colours are darkened, because
+the generated values are *fill* colours and this site uses them as small text
+on near-white, where they fail the 4.5:1 contrast floor.
+
+Two colour meanings are load-bearing and never carried by colour alone:
+green marks the *lower* score (the winner in this league) and is always
+accompanied by a check mark and a visually-hidden "Winner"; red marks a +20
+penalty and always sits next to the literal text `+20`.
 
 The empty `.nojekyll` file at the root is load-bearing. GitHub Pages runs
 Jekyll over the whole repository by default, and Jekyll's Liquid parser

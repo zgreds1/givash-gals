@@ -10,3 +10,8 @@ data/raw-*/
 # Throwaway verification scripts and screenshots
 *.tmp.py
 players-tab.png
+
+# Throwaway redesign preview, not part of the site
+preview.html
+.claude/skills/
+design-system/
