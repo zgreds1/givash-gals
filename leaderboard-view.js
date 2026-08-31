@@ -5,6 +5,8 @@
 // touches document, and it holds no logic worth testing.
 
 import { esc } from './render.js';
+import { LEADERBOARD_SEASONS } from './config.js';
+import { createClient } from './sleeper.js';
 
 export const POSITION_TABS = ['All', 'QB', 'RB', 'WR', 'TE', 'FLEX', 'K', 'DEF'];
 export const FLEX_POSITIONS = new Set(['RB', 'WR', 'TE']);
@@ -151,4 +153,205 @@ export function renderLeaderboard(rows, view = {}) {
     <thead><tr>${head}</tr></thead>
     <tbody>${body}</tbody>
   </table>`;
+}
+
+async function defaultJson(url) {
+  const res = await fetch(url, { cache: 'no-cache' });
+  if (!res.ok) throw new Error(`${url} ${res.status}`);
+  return res.json();
+}
+
+/**
+ * Mount the Players tab into `el`. Called once, the first time the tab is
+ * opened, so a visitor who never looks at it pays nothing.
+ *
+ * Rosters come from Sleeper live rather than from the committed snapshot: the
+ * cron only runs Sunday evening through Tuesday, and the free-agent list is
+ * most useful precisely on the days the snapshot would be stale.
+ */
+export async function mountLeaderboard(el, { teams = {}, json = defaultJson, client } = {}) {
+  const api = client || createClient();
+  const seasons = LEADERBOARD_SEASONS;
+  const cache = {};
+
+  let rosters = [];
+  let rosterSource = 'live';
+  try {
+    rosters = await api.rosters();
+  } catch {
+    try {
+      rosters = await json('data/raw/rosters.json');
+      rosterSource = 'snapshot';
+    } catch {
+      rosterSource = 'none';
+    }
+  }
+  const idx = ownershipIndex(rosters, teams);
+
+  const view = {
+    season: seasons[0],
+    tab: 'All',
+    metric: 'total',
+    minGp: 1,
+    q: '',
+    sortKey: null,
+    sortDir: 1,
+    owner: 'all',
+    ownerOf: idx.ownerOf,
+    labels: idx.labels,
+  };
+
+  async function rowsFor(season) {
+    if (cache[season] === undefined) {
+      try {
+        cache[season] = (await json(`data/leaderboard-${season}.json`)).rows || [];
+      } catch {
+        cache[season] = null; // load failed; distinct from "loaded, empty"
+      }
+    }
+    return cache[season];
+  }
+
+  function notes(rows) {
+    const out = [];
+    if (rosterSource === 'snapshot') {
+      out.push('Rosters could not be fetched live; showing the last snapshot.');
+    }
+    if (rosterSource === 'none') {
+      out.push('Rosters unavailable, so ownership is unknown.');
+    }
+    if (rosterSource !== 'none' && !idx.drafted) {
+      out.push('The draft has not happened yet, so every player is a free agent.');
+    }
+    if (rows && rows.length) {
+      out.push('Low is good — rank 1 is the worst scorer. Ties break by adjusted total.');
+    }
+    return out.length ? `<p class="note">${out.map(esc).join(' ')}</p>` : '';
+  }
+
+  function controls(rows, maxGp) {
+    const on = (c) => (c ? ' class="on"' : '');
+    const tabs = POSITION_TABS.map(
+      (t) => `<button data-tab="${t}"${on(t === view.tab)}>${t}</button>`,
+    ).join('');
+    const seasonBtns = seasons
+      .map((s) => `<button data-season="${s}"${on(s === view.season)}>${s}</button>`)
+      .join('');
+    const owners = idx.options
+      .map(
+        (o) =>
+          `<option value="${esc(o.value)}"${o.value === view.owner ? ' selected' : ''}>` +
+          `${esc(o.label)}</option>`,
+      )
+      .join('');
+    const stepper =
+      view.metric === 'ppg'
+        ? `<span class="stepper">
+             <button data-step="-1"${view.minGp <= 1 ? ' disabled' : ''}>&minus;</button>
+             <span class="readout">${view.minGp}+ games</span>
+             <button data-step="1"${view.minGp >= maxGp ? ' disabled' : ''}>+</button>
+           </span>`
+        : '';
+
+    return `<div class="controls">
+      <div class="tabs seasons">${seasonBtns}</div>
+      <div class="tabs">${tabs}</div>
+      <span class="spacer"></span>
+      <select id="lb-owner"${rosterSource === 'none' ? ' disabled' : ''}>${owners}</select>
+      <button data-metric="total"${on(view.metric === 'total')}>Total</button>
+      <button data-metric="ppg"${on(view.metric === 'ppg')}>PPG</button>
+      ${stepper}
+      <input id="lb-q" placeholder="Search player / team" value="${esc(view.q)}" />
+    </div>
+    <div class="count">${rows ? `${rows.length} players` : ''}</div>`;
+  }
+
+  async function paint(focusSearch = false) {
+    const all = await rowsFor(view.season);
+    if (all === null) {
+      el.innerHTML = `<p class="empty">Could not load the ${esc(view.season)} leaderboard.</p>`;
+      wire();
+      return;
+    }
+
+    const maxGp = all.reduce((m, r) => Math.max(m, r.gp), 1);
+    if (view.minGp > maxGp) view.minGp = maxGp;
+
+    const shown = selectRows(all, view);
+    view.emptyMessage = all.length
+      ? 'No players match these filters.'
+      : `No games played yet in ${view.season}.`;
+
+    el.innerHTML = controls(shown, maxGp) + notes(all) + renderLeaderboard(shown, view);
+    wire();
+    if (focusSearch) {
+      const input = el.querySelector('#lb-q');
+      input.focus();
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  }
+
+  function wire() {
+    for (const b of el.querySelectorAll('[data-season]')) {
+      b.onclick = () => {
+        view.season = b.dataset.season;
+        view.sortKey = null;
+        paint();
+      };
+    }
+    for (const b of el.querySelectorAll('[data-tab]')) {
+      b.onclick = () => {
+        view.tab = b.dataset.tab;
+        paint();
+      };
+    }
+    for (const b of el.querySelectorAll('[data-metric]')) {
+      b.onclick = () => {
+        view.metric = b.dataset.metric;
+        paint();
+      };
+    }
+    for (const b of el.querySelectorAll('[data-step]')) {
+      b.onclick = async () => {
+        const all = (await rowsFor(view.season)) || [];
+        const maxGp = all.reduce((m, r) => Math.max(m, r.gp), 1);
+        view.minGp = stepMinGp(view.minGp, Number(b.dataset.step), maxGp);
+        paint();
+      };
+    }
+    const owner = el.querySelector('#lb-owner');
+    if (owner) {
+      owner.onchange = () => {
+        view.owner = owner.value;
+        paint();
+      };
+    }
+    const q = el.querySelector('#lb-q');
+    if (q) {
+      q.oninput = () => {
+        view.q = q.value;
+        paint(true);
+      };
+    }
+    for (const th of el.querySelectorAll('th.sortable')) {
+      th.onclick = () => {
+        const k = th.dataset.k;
+        // Three states: ascending, descending, back to the metric sort.
+        if (view.sortKey === k) {
+          if (view.sortDir === -1) {
+            view.sortKey = null;
+            view.sortDir = 1;
+          } else {
+            view.sortDir = -1;
+          }
+        } else {
+          view.sortKey = k;
+          view.sortDir = 1;
+        }
+        paint();
+      };
+    }
+  }
+
+  await paint();
 }

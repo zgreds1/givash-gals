@@ -39,7 +39,16 @@ client-side — three API calls per load: `/state/nfl`, `matchups/{week}`, and
 Rosters and the NFL schedule are read from `data/raw/`, not the API. A
 scheduled Action archives the raw weekly payloads to `data/raw/` and
 refreshes the snapshot. The Action is a safety net, not the freshness
-mechanism; freshness comes from the live fetch.
+mechanism; freshness comes from the live fetch. Opening the Players tab costs
+one further call, for rosters, once per page load — the tab is mounted lazily
+the first time it's clicked, so a visitor who never opens it pays nothing.
 
 `--replay` rescores the whole season from `data/raw/` with zero API calls, so
 a mid-season rule change can be applied retroactively.
+
+`leaderboard.js` is the pure per-player scoring engine behind the Players
+tab: one row per player for a season, under this league's own rules.
+`scripts/build-leaderboard.mjs` runs it over a season's archived weeks to
+write `data/leaderboard-{season}.json`; `leaderboard-view.js` holds the
+filtering, sorting and rendering that turns those rows into the table, plus
+the DOM controller that mounts it.

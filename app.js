@@ -4,6 +4,7 @@
 import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from './sleeper.js';
 import { byeTeams, resolveWeek, standings, opportunitySet } from './rules.js';
 import { renderStandings, renderResults, renderRules } from './render.js';
+import { mountLeaderboard } from './leaderboard-view.js';
 
 const state = { weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false };
 
@@ -123,12 +124,23 @@ async function refreshLive() {
 }
 
 function wireNav() {
+  let playersMounted = false;
   for (const btn of document.querySelectorAll('nav button')) {
     btn.addEventListener('click', () => {
       for (const b of document.querySelectorAll('nav button')) b.classList.remove('active');
       btn.classList.add('active');
       for (const v of document.querySelectorAll('.view')) v.hidden = true;
       $(btn.dataset.view).hidden = false;
+
+      // The leaderboard costs a roster call and two JSON fetches, so it is
+      // built the first time it is asked for and never again.
+      if (btn.dataset.view === 'players' && !playersMounted) {
+        playersMounted = true;
+        mountLeaderboard($('players'), { teams: state.teams }).catch((e) => {
+          console.error(e);
+          $('players').innerHTML = '<p class="empty">Could not load the leaderboard.</p>';
+        });
+      }
     });
   }
 }
