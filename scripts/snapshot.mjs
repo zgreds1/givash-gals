@@ -13,14 +13,15 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { API_BASE } from '../config.js';
+import { API_BASE, SEASON } from '../config.js';
 import {
   createClient,
   currentWeek,
   findGhostRosterId,
   unownedRosterIds,
 } from '../sleeper.js';
-import { byeTeams, resolveWeek, standings, opportunitySet } from '../rules.js';
+import { byeTeams, resolveWeek, standings } from '../rules.js';
+import { buildLeaderboard, opportunityIds, slimWeek } from '../leaderboard.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data');
@@ -74,6 +75,25 @@ export function buildSnapshot({ rosters, users, schedule, players, weekPayloads,
 }
 
 /**
+ * Aggregate a season of archived slim weeks into leaderboard rows.
+ *
+ * Weeks arrive as an object keyed by week number, which has no reliable
+ * ordering, so they are sorted into a dense array first. Getting this wrong
+ * would silently shorten the season and drop the missed-week penalties that
+ * `total` depends on.
+ *
+ * @param {Object} players - slim player map
+ * @param {Object<number, Object>} slimWeeks - keyed by week number
+ */
+export function buildSeasonLeaderboard(players, slimWeeks) {
+  const nums = Object.keys(slimWeeks).map(Number).sort((a, b) => a - b);
+  if (!nums.length) return [];
+  const dense = [];
+  for (let w = 1; w <= nums[nums.length - 1]; w++) dense.push(slimWeeks[w] || {});
+  return buildLeaderboard(players, dense);
+}
+
+/**
  * Write `{generatedAt, ...body}` as JSON, but only stamp a new timestamp
  * when the substantive content actually changed.
  *
@@ -107,11 +127,11 @@ export async function writeStamped(file, body, now) {
   return { generatedAt, changed };
 }
 
-async function readOpps() {
+async function readSlimWeeks() {
   if (!existsSync(RAW)) return {};
   const out = {};
   for (const f of await readdir(RAW)) {
-    const m = /^opps(\d+)\.json$/.exec(f);
+    const m = /^stats(\d+)\.json$/.exec(f);
     if (m) out[Number(m[1])] = JSON.parse(await readFile(path.join(RAW, f), 'utf8'));
   }
   return out;
@@ -135,8 +155,10 @@ async function main() {
   let rosters;
   let users;
   let schedule;
+  let league;
   let weekPayloads;
   let opportunities = {};
+  let slimWeeks = {};
   let players;
 
   if (replay) {
@@ -145,7 +167,11 @@ async function main() {
     schedule = JSON.parse(await readFile(path.join(RAW, 'schedule.json'), 'utf8'));
     players = JSON.parse(await readFile(path.join(DATA, 'players-slim.json'), 'utf8'));
     weekPayloads = await readRaw();
-    opportunities = await readOpps();
+    league = JSON.parse(await readFile(path.join(RAW, 'league.json'), 'utf8'));
+    slimWeeks = await readSlimWeeks();
+    for (const [w, slim] of Object.entries(slimWeeks)) {
+      opportunities[Number(w)] = opportunityIds(slim);
+    }
   } else {
     const state = await client.state();
     // 0 during the preseason: /state/nfl counts preseason weeks in the same
@@ -158,15 +184,19 @@ async function main() {
       );
     }
 
-    [rosters, users, schedule] = await Promise.all([
+    players = await refreshPlayers();
+
+    [rosters, users, schedule, league] = await Promise.all([
       client.rosters(),
       client.users(),
       client.schedule(),
+      client.league(),
     ]);
 
     await writeFile(path.join(RAW, 'rosters.json'), JSON.stringify(rosters));
     await writeFile(path.join(RAW, 'users.json'), JSON.stringify(users));
     await writeFile(path.join(RAW, 'schedule.json'), JSON.stringify(schedule));
+    await writeFile(path.join(RAW, 'league.json'), JSON.stringify(league));
 
     weekPayloads = {};
     opportunities = {};
@@ -176,20 +206,26 @@ async function main() {
       weekPayloads[w] = payload;
       await writeFile(path.join(RAW, `wk${w}.json`), JSON.stringify(payload));
 
-      // Archive only the ids that had a scoring chance, not the ~570 KB raw
-      // stats payload: that id list is all the engine needs to replay a week.
-      const ids = [...opportunitySet(await client.stats(w))].sort();
-      opportunities[w] = ids;
-      await writeFile(path.join(RAW, `opps${w}.json`), JSON.stringify(ids));
+      // Archive the slim per-player line rather than the ~570 KB raw payload:
+      // points, whether they played, and whether they had a chance. That is
+      // everything both the engine and the leaderboard need to replay a week.
+      const slim = slimWeek(await client.stats(w), players, league.scoring_settings);
+      slimWeeks[w] = slim;
+      opportunities[w] = opportunityIds(slim);
+      await writeFile(path.join(RAW, `stats${w}.json`), JSON.stringify(slim));
     }
 
     // Off-season: /state/nfl reports no real week, but a finished season is
     // still sitting in data/raw. Rescore the archive rather than publishing
-    // an empty site over a completed 18 weeks. The cron runs year-round, so
-    // without this the standings blank themselves some time in February.
-    if (current === 0) weekPayloads = await readRaw();
-
-    players = await refreshPlayers();
+    // an empty site over a completed 18 weeks.
+    if (current === 0) {
+      weekPayloads = await readRaw();
+      slimWeeks = await readSlimWeeks();
+      opportunities = {};
+      for (const [w, slim] of Object.entries(slimWeeks)) {
+        opportunities[Number(w)] = opportunityIds(slim);
+      }
+    }
   }
 
   const snap = buildSnapshot({ rosters, users, schedule, players, weekPayloads, opportunities });
@@ -202,10 +238,18 @@ async function main() {
   );
   const w = await writeStamped(path.join(DATA, 'weeks.json'), { weeks: snap.weeks }, now);
 
+  const rows = buildSeasonLeaderboard(players, slimWeeks);
+  const lb = await writeStamped(
+    path.join(DATA, `leaderboard-${SEASON}.json`),
+    { season: SEASON, rows },
+    now,
+  );
+
   console.log(
     `snapshot: ${snap.weeks.filter((x) => x.played).length} played weeks, ` +
       `ghost roster ${snap.meta.ghostRosterId}, ` +
-      (s.changed || w.changed ? 'content changed' : 'content unchanged'),
+      `${rows.length} players on the ${SEASON} board, ` +
+      (s.changed || w.changed || lb.changed ? 'content changed' : 'content unchanged'),
   );
 }
 

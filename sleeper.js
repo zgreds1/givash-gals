@@ -75,6 +75,7 @@ export function createClient({
     state: () => get('/v1/state/nfl'),
     users: () => get(`/v1/league/${LEAGUE_ID}/users`),
     rosters: () => get(`/v1/league/${LEAGUE_ID}/rosters`),
+    league: () => get(`/v1/league/${LEAGUE_ID}`),
     matchups: (week) => get(`/v1/league/${LEAGUE_ID}/matchups/${week}`),
     stats: (week) => get(`/v1/stats/nfl/regular/${SEASON}/${week}`),
     schedule: () => get(`/schedule/nfl/regular/${SEASON}`),

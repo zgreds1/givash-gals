@@ -119,7 +119,7 @@ test('the client exposes only the endpoints the project uses', () => {
   const c = createClient({ fetchImpl: async () => ({ ok: true, json: async () => ({}) }) });
   assert.deepEqual(
     Object.keys(c).sort(),
-    ['get', 'matchups', 'rosters', 'schedule', 'state', 'stats', 'users'],
+    ['get', 'league', 'matchups', 'rosters', 'schedule', 'state', 'stats', 'users'],
   );
 });
 
@@ -134,4 +134,17 @@ test('stats hits the weekly stats endpoint for the configured season', async () 
   });
   await c.stats(7);
   assert.ok(seen[0].endsWith('/v1/stats/nfl/regular/2026/7'), seen[0]);
+});
+
+test('league hits the league endpoint', async () => {
+  const seen = [];
+  const c = createClient({
+    fetchImpl: async (url) => {
+      seen.push(url);
+      return { ok: true, json: async () => ({}) };
+    },
+    now: () => 0,
+  });
+  await c.league();
+  assert.ok(seen[0].endsWith('/v1/league/1395797781926408192'), seen[0]);
 });

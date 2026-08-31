@@ -6,6 +6,7 @@ import path from 'node:path';
 import {
   slimPlayers,
   buildSnapshot,
+  buildSeasonLeaderboard,
   refreshPlayers,
   writeStamped,
 } from '../scripts/snapshot.mjs';
@@ -225,4 +226,45 @@ test('buildSnapshot applies the opportunity rule from archived id lists', () => 
   const withOpp = buildSnapshot({ ...base, opportunities: { 3: ['8205'] } });
   assert.equal(withOpp.weeks[0].teams[1].adjusted, 50); // targeted, so spared
   assert.deepEqual(withOpp.weeks[0].teams[1].penalties, []);
+});
+
+test('buildSeasonLeaderboard orders weeks by number, not by object key order', () => {
+  const players = {
+    A: { pos: 'QB', team: 'CIN', name: 'Quincy Back' },
+    B: { pos: 'WR', team: 'NYJ', name: 'Wide Out' },
+  };
+  // Deliberately out of order: week 2 declared first.
+  const slim = {
+    2: { A: { pts: 4, gp: 1, opp: 0 } },
+    1: { A: { pts: 6, gp: 1, opp: 0 }, B: { pts: 1, gp: 1, opp: 0 } },
+  };
+  const rows = buildSeasonLeaderboard(players, slim);
+  const a = rows.find((r) => r.id === 'A');
+  const b = rows.find((r) => r.id === 'B');
+  assert.equal(a.gp, 2);
+  assert.equal(a.raw, 10);
+  // B missed week 2, so it takes one penalty — which only lands correctly if
+  // the season is two weeks long rather than one.
+  assert.equal(b.pen, 1);
+  assert.equal(b.total, 21);
+});
+
+test('buildSeasonLeaderboard returns no rows for a season with no weeks', () => {
+  assert.deepEqual(buildSeasonLeaderboard({ A: { pos: 'QB', team: 'CIN', name: 'Q' } }, {}), []);
+});
+
+test('an unchanged leaderboard does not restamp, so the Action commits nothing', async () => {
+  // The cron runs ~13 times a week. A leaderboard that restamps on every run
+  // would defeat the workflow's commit-only-on-change guard by itself.
+  const dir = await mkdtemp(path.join(tmpdir(), 'lb-'));
+  const file = path.join(dir, 'leaderboard-2026.json');
+  const body = { season: '2026', rows: [{ id: 'A', total: 20 }] };
+
+  const first = await writeStamped(file, body, '2026-09-14T00:00:00.000Z');
+  const second = await writeStamped(file, body, '2026-09-14T01:00:00.000Z');
+
+  assert.equal(first.changed, true);
+  assert.equal(second.changed, false);
+  assert.equal(second.generatedAt, first.generatedAt);
+  await rm(dir, { recursive: true, force: true });
 });
