@@ -12,9 +12,7 @@ inverted league the interesting question is the opposite of the usual one: not
 who scores the most, but who reliably scores nothing — and, on the waiver wire,
 which of those players is still available.
 
-A local-only board (`last-season.html`, built by `scripts/build-last-season.mjs`)
-already answers this for 2025. It is not on the site, is not filterable by
-availability, and holds a second private copy of the opportunity rule.
+
 
 ## 2. Scope
 
@@ -170,14 +168,47 @@ rather than letting a correct-but-identical list look broken.
 
 Controls, in one bar: season toggle `2026 | 2025`; position tabs
 `All / QB / RB / WR / TE / FLEX / K / DEF`; the ownership dropdown; a
-`Total | PPG` metric switch with a minimum-games selector shown only for PPG;
-a search box over name and team. Column headers sort.
+`Total | PPG` metric switch with the minimum-games stepper (§4.7) shown only
+for PPG; a search box over name and team.
 
-Default sort is **ascending** — lowest is rank 1 — because in this league that
-is the top of the board.
+Columns are `#`, `Player`, `Team`, `Pos`, `Owner`, `GP`, `Raw`, `+20s`,
+`True +20s`, `Saved`, `Adj Total`, `PPG`.
+
+**Sorting.** Two modes. By default the table is sorted ascending by the active
+metric — `Adj Total` or `PPG` — so rank 1 is the worst scorer, which in this
+league is the top of the board. Clicking a column header overrides that: first
+click sorts ascending, second descending, third clears back to the metric sort.
+Ascending first on every column, for the same reason. `#` and `Owner` are not
+sortable — `#` is not data, and the ownership dropdown groups by manager better
+than a sort would.
+
+**Ties break by adjusted total, worst first.** The comparator itself has no
+tiebreaker; this holds because `Array.prototype.sort` is stable and `rows`
+arrives pre-sorted ascending by `total` (§4.1). That is currently an accident of
+two details lining up, so it is stated here and pinned by a test (§6.9) rather
+than left to chance.
+
+Filtering runs before sorting, and `#` is row position in the result — not a
+global rank — so it always reads 1..N over what is on screen.
 
 Filtering and sorting live in `selectRows(rows, view)`, a pure function the
 tests call directly. `mountLeaderboard` owns the DOM and nothing else.
+
+### 4.7 The minimum-games stepper
+
+Shown only in PPG mode. A `−` button, a readout, and a `+` button:
+
+    −  1+ games  +
+
+**It defaults to 1**, so nothing is hidden until you choose to hide it. Each
+press moves by one game. The range is 1 to the highest `gp` present in the
+season's rows, and the buttons disable at each end rather than silently
+no-opping — stepping past the top would empty the table with no explanation.
+
+At 1 the PPG board is topped by players with a single game. That is understood
+and intended: the stepper exists so the threshold is raised deliberately and
+visibly, one game at a time, instead of being imposed by a default the reader
+never chose.
 
 ## 5. Error handling and degenerate states
 
@@ -211,6 +242,10 @@ New coverage:
 6. The empty-season state renders the message, not a table.
 7. Escaping: a hostile player or team name renders inert.
 8. `writeStamped` still suppresses a no-op leaderboard commit.
+9. **Tie ordering (§4.6):** rows tied on the sort key come out ordered by
+   ascending `total`. Guards the stability assumption.
+10. The stepper clamps: `−` at 1 and `+` at the season's highest `gp` are both
+    no-ops, and the corresponding button reports itself disabled.
 
 The `pts_std` sanity check moves into `build-leaderboard.mjs` unchanged and
 still throws if the engine ever diverges from Sleeper on covered lines.
