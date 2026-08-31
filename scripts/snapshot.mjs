@@ -137,6 +137,15 @@ async function readSlimWeeks() {
   return out;
 }
 
+/** Opportunity ids per week, from the archived slim weeks. */
+function deriveOpportunities(slimWeeks) {
+  const out = {};
+  for (const [w, slim] of Object.entries(slimWeeks)) {
+    out[Number(w)] = opportunityIds(slim);
+  }
+  return out;
+}
+
 async function readRaw() {
   if (!existsSync(RAW)) return {};
   const out = {};
@@ -167,11 +176,8 @@ async function main() {
     schedule = JSON.parse(await readFile(path.join(RAW, 'schedule.json'), 'utf8'));
     players = JSON.parse(await readFile(path.join(DATA, 'players-slim.json'), 'utf8'));
     weekPayloads = await readRaw();
-    league = JSON.parse(await readFile(path.join(RAW, 'league.json'), 'utf8'));
     slimWeeks = await readSlimWeeks();
-    for (const [w, slim] of Object.entries(slimWeeks)) {
-      opportunities[Number(w)] = opportunityIds(slim);
-    }
+    opportunities = deriveOpportunities(slimWeeks);
   } else {
     const state = await client.state();
     // 0 during the preseason: /state/nfl counts preseason weeks in the same
@@ -221,10 +227,7 @@ async function main() {
     if (current === 0) {
       weekPayloads = await readRaw();
       slimWeeks = await readSlimWeeks();
-      opportunities = {};
-      for (const [w, slim] of Object.entries(slimWeeks)) {
-        opportunities[Number(w)] = opportunityIds(slim);
-      }
+      opportunities = deriveOpportunities(slimWeeks);
     }
   }
 
@@ -272,9 +275,10 @@ export async function refreshPlayers(fetchImpl = fetch) {
     raw = await res.json();
   } catch (e) {
     // Network failure (DNS, TLS, timeout) or a bad HTTP status: both are
-    // recoverable as long as yesterday's slim map is still on disk. Only
-    // the rosters/users/schedule/matchups already archived this run are
-    // more valuable than a day-old player map, so degrade rather than abort.
+    // recoverable as long as yesterday's slim map is still on disk. A
+    // day-old player map is still good enough to score a week, and it beats
+    // aborting the whole run over one flaky endpoint, so degrade rather
+    // than abort.
     if (existsSync(slimPath)) return JSON.parse(await readFile(slimPath, 'utf8'));
     throw e;
   }
