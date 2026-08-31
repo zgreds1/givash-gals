@@ -229,14 +229,18 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     return out.length ? `<p class="note">${out.map(esc).join(' ')}</p>` : '';
   }
 
+  function seasonBar() {
+    const btns = seasons
+      .map((s) => `<button data-season="${s}"${s === view.season ? ' class="on"' : ''}>${s}</button>`)
+      .join('');
+    return `<div class="tabs seasons">${btns}</div>`;
+  }
+
   function controls(rows, maxGp) {
     const on = (c) => (c ? ' class="on"' : '');
     const tabs = POSITION_TABS.map(
       (t) => `<button data-tab="${t}"${on(t === view.tab)}>${t}</button>`,
     ).join('');
-    const seasonBtns = seasons
-      .map((s) => `<button data-season="${s}"${on(s === view.season)}>${s}</button>`)
-      .join('');
     const owners = idx.options
       .map(
         (o) =>
@@ -254,7 +258,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
         : '';
 
     return `<div class="controls">
-      <div class="tabs seasons">${seasonBtns}</div>
+      ${seasonBar()}
       <div class="tabs">${tabs}</div>
       <span class="spacer"></span>
       <select id="lb-owner"${rosterSource === 'none' ? ' disabled' : ''}>${owners}</select>
@@ -269,7 +273,8 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
   async function paint(focusSearch = false) {
     const all = await rowsFor(view.season);
     if (all === null) {
-      el.innerHTML = `<p class="empty">Could not load the ${esc(view.season)} leaderboard.</p>`;
+      el.innerHTML = `<div class="controls">${seasonBar()}</div>
+        <p class="empty">Could not load the ${esc(view.season)} leaderboard.</p>`;
       wire();
       return;
     }
@@ -280,7 +285,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     const shown = selectRows(all, view);
     view.emptyMessage = all.length
       ? 'No players match these filters.'
-      : `No games played yet in ${view.season}.`;
+      : `No games played yet in ${esc(view.season)}.`;
 
     el.innerHTML = controls(shown, maxGp) + notes(all) + renderLeaderboard(shown, view);
     wire();
