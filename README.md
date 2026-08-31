@@ -24,6 +24,13 @@ python -m http.server 8125        # then open http://localhost:8125
 None. Node 22 supplies `fetch` and `node:test`; the site is vanilla ES
 modules. Nothing to install.
 
+The empty `.nojekyll` file at the root is load-bearing. GitHub Pages runs
+Jekyll over the whole repository by default, and Jekyll's Liquid parser
+treats `{{` as a variable opening — so a JSDoc line like
+`{{ownerOf: Map<string,string>}}` inside `docs/` fails the *site* build. This
+is a plain static site with no templating, so Jekyll is switched off entirely
+rather than escaping braces in prose that has nothing to do with the site.
+
 ## How it works
 
 `rules.js` is a pure engine holding every league rule. Both the browser and
