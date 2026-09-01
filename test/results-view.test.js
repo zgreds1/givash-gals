@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { displayWeek, pairsFromPayload, medianRosterId } from '../results-view.js';
+import { readFileSync } from 'node:fs';
+import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -90,4 +91,81 @@ test('there is no median team when every roster slot is owned', () => {
   // The standings page already warns about this shape: six owned rosters is
   // three straight head-to-head games and no median at all.
   assert.equal(medianRosterId([[1, 2], [3, 4], [5, 6]], null), null);
+});
+
+const POSITIONS = [
+  'QB', 'QB', 'QB', 'RB', 'RB', 'RB', 'RB', 'WR', 'WR', 'WR', 'WR',
+  'TE', 'TE', 'FLEX', 'FLEX', 'FLEX', 'FLEX', 'K', 'DEF',
+  'BN', 'BN', 'BN', 'BN', 'BN',
+];
+
+const PLAYERS = {
+  a: { name: 'Ann QB', pos: 'QB', team: 'CIN' },
+  b: { name: 'Bo RB', pos: 'RB', team: 'ATL' },
+  c: { name: 'Cy WR', pos: 'WR', team: 'MIN' },
+};
+
+test('slots come from roster_positions, in order, and BN is not a slot', () => {
+  const entry = { starters: ['a', 'b'], starters_points: [17.4, 24.9], players: ['a', 'b', 'c'],
+                  players_points: { a: 17.4, b: 24.9, c: 8.1 } };
+  const { starters, bench } = lineupRows(entry, POSITIONS, PLAYERS);
+
+  assert.equal(starters.length, 2);
+  assert.deepEqual(starters.map((r) => r.slot), ['QB', 'RB']);
+  assert.deepEqual(starters.map((r) => r.points), [17.4, 24.9]);
+
+  assert.equal(bench.length, 1);
+  assert.equal(bench[0].name, 'Cy WR');
+  assert.equal(bench[0].points, 8.1);
+});
+
+test('a player who cannot fill his slot is labelled by his own position', () => {
+  // spec 6.1: starters[i] filling the i-th non-BN roster_positions entry was
+  // verified against the real archived week-1 payload on 2026-09-01 (114
+  // starters across 6 rosters, 0 mismatches). The cross-check below stays in
+  // place anyway, as protection if Sleeper ever changes that ordering: a WR
+  // sitting in a QB row would otherwise be shown as a QB on no evidence.
+  const entry = { starters: ['c'], starters_points: [8.1], players: ['c'], players_points: { c: 8.1 } };
+  const { starters } = lineupRows(entry, POSITIONS, PLAYERS);
+  assert.equal(starters[0].slot, 'WR', 'a WR in the first QB slot is labelled WR');
+});
+
+test('FLEX accepts RB, WR and TE and nothing else', () => {
+  assert.equal(slotFits('FLEX', 'RB'), true);
+  assert.equal(slotFits('FLEX', 'WR'), true);
+  assert.equal(slotFits('FLEX', 'TE'), true);
+  assert.equal(slotFits('FLEX', 'QB'), false);
+  assert.equal(slotFits('QB', 'QB'), true);
+  assert.equal(slotFits('QB', 'RB'), false);
+});
+
+test('an unknown position never contradicts the slot', () => {
+  // Half of "unknown" is not evidence of a mismatch.
+  assert.equal(slotFits('QB', ''), true);
+  assert.equal(slotFits('', 'QB'), true);
+});
+
+test('an empty starting slot is marked, not named "0"', () => {
+  // Sleeper writes '0' into an unfilled slot, and an empty slot is exactly
+  // what earns the +20 — it must be legible, not rendered as a player id.
+  const entry = { starters: ['0'], starters_points: [0], players: [], players_points: {} };
+  const { starters } = lineupRows(entry, POSITIONS, PLAYERS);
+  assert.equal(starters[0].empty, true);
+  assert.equal(starters[0].slot, 'QB', 'the slot is still known even when unfilled');
+  assert.notEqual(starters[0].name, '0');
+});
+
+test('an id missing from the player map renders as the id, not as blank', () => {
+  const entry = { starters: ['zz'], starters_points: [3], players: ['zz'], players_points: { zz: 3 } };
+  const { starters } = lineupRows(entry, POSITIONS, PLAYERS);
+  assert.equal(starters[0].name, 'zz');
+});
+
+test('the real 19/5 league shape round-trips', () => {
+  const payload = JSON.parse(readFileSync('test/fixtures/league-week.json', 'utf8'));
+  const { starters, bench } = lineupRows(payload[0], POSITIONS, {});
+  assert.equal(starters.length, 19, '19 starters, per roster_positions');
+  assert.equal(bench.length, 5, '5 bench');
+  assert.equal(starters.at(-1).slot, 'DEF');
+  assert.equal(starters.at(-2).slot, 'K');
 });

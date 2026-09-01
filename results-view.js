@@ -78,3 +78,67 @@ export function medianRosterId(pairs, ghostRosterId) {
   }
   return null;
 }
+
+/** Sleeper writes this into a starting slot nobody filled. Not a player id. */
+const EMPTY_SLOT = '0';
+
+const FLEX_POSITIONS = new Set(['RB', 'WR', 'TE']);
+
+/**
+ * Can a player of position `pos` legally occupy slot `slot`?
+ *
+ * Unknown on either side returns true: half of "unknown" is not evidence of
+ * a mismatch, and contradicting a slot on no evidence is worse than trusting
+ * it.
+ */
+export function slotFits(slot, pos) {
+  if (!slot || !pos) return true;
+  if (slot === 'FLEX') return FLEX_POSITIONS.has(pos);
+  return slot === pos;
+}
+
+/**
+ * One matchup entry, split into slot-ordered starters and a bench.
+ *
+ * The i-th starter fills the i-th non-BN roster_positions entry. That
+ * mapping was verified directly against the real archived week-1 payload on
+ * 2026-09-01: 114 starters across all 6 rosters, 0 mismatches between a
+ * starter's actual position and the slot its index maps to (spec 6.1). The
+ * cross-check below is kept anyway, not because the mapping is in doubt, but
+ * as protection if Sleeper ever changes that ordering later — each row falls
+ * back to labelling itself with the player's real position on a mismatch,
+ * rather than confidently showing a WR in a QB row.
+ */
+export function lineupRows(entry, rosterPositions, players = {}) {
+  const slots = (rosterPositions || []).filter((p) => p !== 'BN');
+  const starterIds = entry?.starters || [];
+  const starterPts = entry?.starters_points || [];
+  const playerPts = entry?.players_points || {};
+
+  const row = (id, slot, points) => {
+    const key = String(id);
+    if (key === EMPTY_SLOT) {
+      return { id: key, name: 'Empty slot', pos: '', slot, points: Number(points || 0), empty: true };
+    }
+    const p = players[key];
+    const pos = p?.pos || '';
+    return {
+      id: key,
+      name: p?.name || key,
+      pos,
+      slot: slotFits(slot, pos) ? slot : pos,
+      points: Number(points || 0),
+      empty: false,
+    };
+  };
+
+  const starters = starterIds.map((id, i) => row(id, slots[i] || '', starterPts[i]));
+
+  const started = new Set(starterIds.map(String));
+  const bench = (entry?.players || [])
+    .map(String)
+    .filter((id) => id !== EMPTY_SLOT && !started.has(id))
+    .map((id) => row(id, players[id]?.pos || 'BN', playerPts[id]));
+
+  return { starters, bench };
+}
