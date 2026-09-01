@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek } from '../results-view.js';
+import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -298,4 +298,78 @@ test('a week marked not-played renders the upcoming fixtures even when it carrie
   assert.match(html, /Alpha/);
   assert.match(html, /League median/);
   assert.doesNotMatch(html, /360/);
+});
+
+const DETAIL_PLAYERS = {
+  a: { name: 'Ann QB', pos: 'QB', team: 'CIN' },
+  // Keyed '8205', not 'b': PLAYED's roster-1 penalty (defined by task 7,
+  // shared and not redeclared here) names playerId '8205' as the player it
+  // zeroed. Real penalties always carry the zeroed starter's own id
+  // (rules.js adjustedScore), so the fixture's zeroed player must share
+  // that id for the per-row +20 match to be testable at all.
+  8205: { name: 'Bo RB', pos: 'RB', team: 'ATL' },
+  z: { name: 'Zed WR', pos: 'WR', team: 'MIN' },
+};
+const DETAIL_POSITIONS = ['QB', 'RB', 'BN'];
+const DETAIL_PAYLOAD = [
+  { roster_id: 1, matchup_id: 1, starters: ['a', '8205'], starters_points: [17.4, 0],
+    players: ['a', '8205', 'z'], players_points: { a: 17.4, 8205: 0, z: 8.1 } },
+  { roster_id: 2, matchup_id: 1, starters: ['a', '8205'], starters_points: [9.2, 12.5],
+    players: ['a', '8205'], players_points: { a: 9.2, 8205: 12.5 } },
+];
+
+test('a head-to-head detail lists both lineups with the bench', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.match(html, /Ann QB/);
+  assert.match(html, /Zed WR/, 'the bench is shown too');
+  assert.match(html, /Bench/i);
+  assert.match(html, /17\.40/);
+});
+
+test('a zeroed starter is marked with the penalty that made him one', () => {
+  // This is the league's whole identity; a detail view that hid it would be
+  // showing Sleeper's numbers, not this league's.
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.match(html, /\+20/);
+});
+
+test('a median detail shows the line and marks the two scores averaged', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'median', rosterId: 5, line: 107.9, result: 'W' },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.match(html, /League median/);
+  assert.match(html, /107\.90/);
+  assert.match(html, /class="[^"]*used/, 'the two averaged scores are marked');
+  assert.match(html, /avg of 2nd/);
+});
+
+test('the detail escapes team and player names', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD,
+    teams: { 1: '<script>x</script>', 2: 'Bravo' },
+    rosterPositions: DETAIL_POSITIONS,
+    players: { ...DETAIL_PLAYERS, a: { name: '<img src=x>', pos: 'QB', team: 'CIN' } },
+  });
+  assert.match(html, /&lt;script&gt;/);
+  assert.match(html, /&lt;img /);
+});
+
+test('a missing payload entry does not throw', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 9], winner: 1 },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.match(html, /Ann QB/);
 });

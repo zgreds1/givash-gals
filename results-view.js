@@ -269,3 +269,97 @@ function playedCard(m, index, wk, teams, detailAvailable) {
     </div>
   </div>`;
 }
+
+const entryFor = (payload, rosterId) =>
+  (payload || []).find((e) => e.roster_id === rosterId) || null;
+
+const penaltyIds = (resolved, rosterId) =>
+  new Set((resolved?.teams?.[rosterId]?.penalties || []).map((p) => String(p.playerId)));
+
+function playerCell(row, penalised, align) {
+  const pen = penalised ? '<span class="pen">+20</span>' : '';
+  const nameCls = row.empty ? 'lineup-name empty' : 'lineup-name';
+  return `<div class="lineup-side ${align}">
+    <span class="${nameCls}">${esc(row.name)}</span>
+    <span class="lineup-pts">${money(row.points)}</span>
+    ${pen}
+  </div>`;
+}
+
+function lineupTable(left, right, leftPen, rightPen) {
+  return left
+    .map((row, i) => {
+      const other = right ? right[i] : null;
+      return `<div class="lineup-row">
+        ${playerCell(row, leftPen.has(row.id), 'left')}
+        <span class="lineup-slot">${esc(row.slot || '—')}</span>
+        ${other ? playerCell(other, rightPen.has(other.id), 'right') : '<span></span>'}
+      </div>`;
+    })
+    .join('');
+}
+
+/**
+ * The drill-down: one matchup, both lineups, starters then bench.
+ *
+ * A median matchup has no opposing roster, so the right-hand column becomes
+ * the line and the four adjusted scores it was drawn from — the two that
+ * were averaged marked, same treatment as the summary card's pool.
+ */
+export function renderMatchupDetail({
+  week, matchup, resolved, payload, teams = {}, rosterPositions = [], players = {},
+}) {
+  const name = (id) => teams[String(id)] || `Roster ${id}`;
+  const isMedian = matchup.type === 'median';
+  const leftId = isMedian ? matchup.rosterId : matchup.rosterIds[0];
+  const rightId = isMedian ? null : matchup.rosterIds[1];
+
+  const left = lineupRows(entryFor(payload, leftId), rosterPositions, players);
+  const right = rightId === null
+    ? null
+    : lineupRows(entryFor(payload, rightId), rosterPositions, players);
+
+  const leftPen = penaltyIds(resolved, leftId);
+  const rightPen = rightId === null ? new Set() : penaltyIds(resolved, rightId);
+
+  const leftTeam = resolved?.teams?.[leftId];
+  const rightTeam = rightId === null ? null : resolved?.teams?.[rightId];
+  const leftWon = isMedian ? matchup.result === 'W' : matchup.winner === leftId;
+
+  const pool = (resolved?.medianPool || [])
+    .map((s, i) => `<span class="${i === 1 || i === 2 ? 'used' : ''}">${money(s)}</span>`)
+    .join('');
+
+  const header = isMedian
+    ? `<div class="detail-head">
+         <div class="side ${leftWon ? 'winner' : ''}">
+           <div class="name">${leftWon ? WIN_MARK : ''}${esc(name(leftId))}</div>
+           <div class="adj">${leftTeam ? money(leftTeam.adjusted) : '—'}</div>
+         </div>
+         <div class="side line ${leftWon ? '' : 'winner'}">
+           <div class="name">League median</div>
+           <div class="adj">${matchup.line === null ? '—' : money(matchup.line)}</div>
+           <div class="raw">avg of 2nd &amp; 3rd</div>
+           <div class="pool">${pool}</div>
+         </div>
+       </div>`
+    : `<div class="detail-head">
+         <div class="side ${leftWon ? 'winner' : ''}">
+           <div class="name">${leftWon ? WIN_MARK : ''}${esc(name(leftId))}</div>
+           <div class="adj">${leftTeam ? money(leftTeam.adjusted) : '—'}</div>
+         </div>
+         <div class="side ${!leftWon && matchup.winner !== null ? 'winner' : ''}">
+           <div class="name">${!leftWon && matchup.winner !== null ? WIN_MARK : ''}${esc(name(rightId))}</div>
+           <div class="adj">${rightTeam ? money(rightTeam.adjusted) : '—'}</div>
+         </div>
+       </div>`;
+
+  return `<div class="detail">
+    <button type="button" class="back" data-back>&larr; Week ${week}</button>
+    ${header}
+    <h3 class="lineup-head">Starters</h3>
+    <div class="lineup">${lineupTable(left.starters, right?.starters ?? null, leftPen, rightPen)}</div>
+    <h3 class="lineup-head">Bench</h3>
+    <div class="lineup">${lineupTable(left.bench, right?.bench ?? null, leftPen, rightPen)}</div>
+  </div>`;
+}
