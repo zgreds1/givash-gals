@@ -9,6 +9,7 @@ import {
   buildSnapshot,
   buildSeasonLeaderboard,
   buildPairings,
+  buildRosterPlayers,
   refreshPlayers,
   writeStamped,
 } from '../scripts/snapshot.mjs';
@@ -372,4 +373,48 @@ test('buildPairings keys every fetched week and drops the empty ones', () => {
   });
   assert.deepEqual(Object.keys(out), ['1']);
   assert.deepEqual(out['1'], [[1, 3], [2, 4], [5, 6]]);
+});
+
+test('roster players cover everyone who ever appeared, not just current rosters', () => {
+  // A player dropped in week 5 still started in week 3, and the week 3
+  // detail view has to name him. Building from current rosters alone would
+  // print a bare Sleeper id in that row forever.
+  const all = {
+    p1: { pos: 'QB', team: 'CIN', name: 'Current Guy' },
+    p2: { pos: 'RB', team: 'ATL', name: 'Dropped Guy' },
+    p3: { pos: 'WR', team: 'MIN', name: 'Never Rostered' },
+  };
+  const out = buildRosterPlayers(
+    all,
+    [{ roster_id: 1, players: ['p1'] }],
+    { 3: [{ roster_id: 1, starters: ['p2'], players: ['p1', 'p2'] }] },
+  );
+
+  assert.deepEqual(Object.keys(out).sort(), ['p1', 'p2']);
+  assert.deepEqual(out.p2, { name: 'Dropped Guy', pos: 'RB', team: 'ATL' });
+  assert.equal(out.p3, undefined, 'never rostered: not our problem to carry');
+});
+
+test('an unknown id still gets an entry, so the detail view can name the slot', () => {
+  const out = buildRosterPlayers({}, [{ roster_id: 1, players: ['ghost'] }], {});
+  assert.deepEqual(out.ghost, { name: 'ghost', pos: '', team: '' });
+});
+
+test('the empty starter slot is not a player and is never carried', () => {
+  // Sleeper writes '0' into an unfilled starting slot. It is not an id.
+  const out = buildRosterPlayers({}, [], { 1: [{ starters: ['0'], players: ['0'] }] });
+  assert.deepEqual(out, {});
+});
+
+test('names come from the slim map shape the snapshot actually passes', () => {
+  // playersAll is slimForLeaderboard's output: {pos, team, name}. An earlier
+  // draft of this function read full_name/position - the raw Sleeper fields -
+  // which yields {name: '<id>', pos: '', team: ''} for every player at the
+  // real call site while still passing a hand-written fixture.
+  const out = buildRosterPlayers(
+    { 4034: { pos: 'RB', team: 'CAR', name: 'Christian McCaffrey' } },
+    [{ roster_id: 1, players: ['4034'] }],
+    {},
+  );
+  assert.deepEqual(out['4034'], { name: 'Christian McCaffrey', pos: 'RB', team: 'CAR' });
 });

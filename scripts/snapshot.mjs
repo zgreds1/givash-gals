@@ -133,6 +133,49 @@ export function buildSeasonLeaderboard(players, slimWeeks) {
 }
 
 /**
+ * Names for every player the detail view might have to render.
+ *
+ * Built from the union of current rosters and every archived week, because
+ * the detail view shows bench players and a player dropped in week 5 still
+ * started in week 3. Current rosters alone would leave that row showing a
+ * bare Sleeper id.
+ *
+ * This file exists at all because players-slim.json is filtered to active
+ * skill players — which is exactly the filter that removes the inactive and
+ * IR players who fill bench slots.
+ *
+ * @param {Object} playersAll - slimForLeaderboard's output, {id: {pos, team,
+ *   name}} — NOT a raw Sleeper record. There is no full_name/position here.
+ */
+export function buildRosterPlayers(playersAll, rosters, weekPayloads) {
+  const ids = new Set();
+  const add = (id) => {
+    const s = String(id);
+    // '0' is Sleeper's unfilled starting slot, not a player.
+    if (s && s !== '0') ids.add(s);
+  };
+
+  for (const r of rosters || []) for (const id of r.players || []) add(id);
+  for (const payload of Object.values(weekPayloads || {})) {
+    for (const e of payload || []) {
+      for (const id of e.players || []) add(id);
+      for (const id of e.starters || []) add(id);
+    }
+  }
+
+  const out = {};
+  for (const id of [...ids].sort()) {
+    // playersAll is slimForLeaderboard's output - {pos, team, name} - not a
+    // raw Sleeper record. Reading full_name/position here would silently
+    // yield the bare id for every player, which is the exact failure this
+    // file exists to prevent.
+    const p = (playersAll || {})[id];
+    out[id] = { name: p?.name || id, pos: p?.pos || '', team: p?.team || '' };
+  }
+  return out;
+}
+
+/**
  * Write `{generatedAt, ...body}` as JSON, but only stamp a new timestamp
  * when the substantive content actually changed.
  *
@@ -375,6 +418,14 @@ async function main() {
     await writeStamped(path.join(DATA, 'pairings.json'), { pairings }, now);
   }
 
+  // Unlike pairings.json, playersAll/rosters/weekPayloads are all in scope
+  // on --replay too, so this one can and should be written every run.
+  const rp = await writeStamped(
+    path.join(DATA, 'roster-players.json'),
+    { players: buildRosterPlayers(playersAll, rosters, weekPayloads) },
+    now,
+  );
+
   // playersAll, not players: a player cut mid-season drops out of the active
   // map, and naming him is most of the point of this board.
   const rows = buildSeasonLeaderboard(playersAll, slimWeeks);
@@ -388,7 +439,7 @@ async function main() {
     `snapshot: ${snap.weeks.filter((x) => x.played).length} played weeks, ` +
       `ghost roster ${snap.meta.ghostRosterId}, ` +
       `${rows.length} players on the ${SEASON} board, ` +
-      (s.changed || w.changed || lb.changed ? 'content changed' : 'content unchanged'),
+      (s.changed || w.changed || rp.changed || lb.changed ? 'content changed' : 'content unchanged'),
   );
 }
 
