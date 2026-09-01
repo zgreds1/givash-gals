@@ -370,3 +370,132 @@ export function renderMatchupDetail({
     <div class="lineup">${lineupTable(left.bench, right?.bench ?? null, leftPen, rightPen)}</div>
   </div>`;
 }
+
+/** Every week 1..lastWeek, flagged with whether the engine has scored it. */
+export function weekOptions(weeks, lastWeek = LAST_WEEK) {
+  const played = new Set((weeks || []).filter((w) => w.played).map((w) => w.week));
+  const out = [];
+  for (let w = 1; w <= lastWeek; w++) out.push({ week: w, played: played.has(w) });
+  return out;
+}
+
+async function defaultJson(url) {
+  const res = await fetch(url, { cache: 'no-cache' });
+  if (!res.ok) throw new Error(`${url} ${res.status}`);
+  return res.json();
+}
+
+/**
+ * Mount the Results tab into `el`.
+ *
+ * Holds three pieces of state: the selected week, the selected matchup
+ * within it, and a lazy cache of raw week payloads. Everything else is
+ * recomputed from the arguments on every paint, the same way
+ * mountLeaderboard works.
+ *
+ * `livePayloads` is the current week's payload that refreshLive already
+ * fetched, so opening the live week's detail costs no request.
+ */
+export async function mountResults(el, {
+  teams = {}, weeks = [], ghostRosterId = null, seasonStart = null,
+  rosterPositions = [], livePayloads = {}, json = defaultJson, now = () => new Date(),
+} = {}) {
+  const byWeek = new Map((weeks || []).map((w) => [w.week, w]));
+  const cache = { ...livePayloads };
+  let pairings = null;
+  let players = null;
+
+  const view = { week: displayWeek(now(), seasonStart), matchup: null };
+
+  try {
+    pairings = (await json('data/pairings.json')).pairings || {};
+  } catch {
+    pairings = {};   // no schedule: upcoming weeks say "not published yet"
+  }
+
+  async function payloadFor(week) {
+    if (cache[week] !== undefined) return cache[week];
+    try {
+      cache[week] = await json(`data/raw/wk${week}.json`);
+    } catch {
+      cache[week] = null;   // never archived: the week loses its drill-down
+    }
+    return cache[week];
+  }
+
+  async function playerMap() {
+    if (players) return players;
+    try {
+      players = (await json('data/roster-players.json')).players || {};
+    } catch {
+      players = {};
+    }
+    return players;
+  }
+
+  function picker() {
+    const btns = weekOptions(weeks)
+      .map(
+        ({ week, played }) =>
+          `<button type="button" data-week="${week}" aria-pressed="${week === view.week}"` +
+          ` class="${week === view.week ? 'on' : ''}${played ? ' played' : ''}">${week}</button>`,
+      )
+      .join('');
+    return `<div class="controls">
+      <button type="button" data-step="-1" aria-label="Previous week"${view.week <= 1 ? ' disabled' : ''}>&larr;</button>
+      <div class="tabs weeks" role="group" aria-label="Week">${btns}</div>
+      <button type="button" data-step="1" aria-label="Next week"${view.week >= LAST_WEEK ? ' disabled' : ''}>&rarr;</button>
+    </div>`;
+  }
+
+  async function paint() {
+    const resolved = byWeek.get(view.week);
+    const payload = resolved?.played ? await payloadFor(view.week) : null;
+
+    if (view.matchup !== null && resolved?.played && payload) {
+      el.innerHTML = renderMatchupDetail({
+        week: view.week,
+        matchup: resolved.matchups[view.matchup],
+        resolved, payload, teams, rosterPositions,
+        players: await playerMap(),
+      });
+    } else {
+      el.innerHTML = picker() + renderWeek({
+        week: view.week,
+        resolved,
+        pairs: pairings[String(view.week)] || [],
+        ghostRosterId, teams,
+        detailAvailable: Boolean(payload),
+      });
+    }
+    wire();
+  }
+
+  function wire() {
+    for (const b of el.querySelectorAll('[data-week]')) {
+      b.onclick = () => { view.week = Number(b.dataset.week); view.matchup = null; paint(); };
+    }
+    for (const b of el.querySelectorAll('[data-step]')) {
+      b.onclick = () => {
+        const next = view.week + Number(b.dataset.step);
+        view.week = Math.min(LAST_WEEK, Math.max(1, next));
+        view.matchup = null;
+        paint();
+      };
+    }
+    for (const c of el.querySelectorAll('[data-matchup]')) {
+      const open = () => { view.matchup = Number(c.dataset.matchup); paint(); };
+      c.onclick = open;
+      // The card is a div with role="button", so Enter and Space are ours
+      // to implement — a real button cannot wrap this grid without
+      // flattening it.
+      c.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      };
+    }
+    const back = el.querySelector('[data-back]');
+    if (back) back.onclick = () => { view.matchup = null; paint(); };
+  }
+
+  await paint();
+}

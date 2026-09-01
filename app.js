@@ -5,8 +5,12 @@ import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from '
 import { byeTeams, resolveWeek, standings, opportunitySet } from './rules.js';
 import { renderStandings, renderRules } from './render.js';
 import { mountLeaderboard } from './leaderboard-view.js';
+import { mountResults } from './results-view.js';
 
-const state = { weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false };
+const state = {
+  weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false,
+  livePayloads: {}, seasonStart: null, rosterPositions: [],
+};
 
 const $ = (id) => document.getElementById(id);
 
@@ -73,6 +77,8 @@ async function loadSnapshot() {
   state.ghostRosterId = s.ghostRosterId ?? null;
   state.generatedAt = s.generatedAt;
   state.weeks = w.weeks || [];
+  state.seasonStart = s.seasonStart ?? null;
+  state.rosterPositions = s.rosterPositions || [];
   paint();
 }
 
@@ -111,6 +117,11 @@ async function refreshLive() {
   ]);
   if (!Array.isArray(payload) || payload.length === 0) return;
 
+  // Kept, not discarded: the Results detail for the live week reads this
+  // instead of re-fetching data/raw/wk{N}.json, which the Action may not
+  // have written yet anyway.
+  state.livePayloads[week] = payload;
+
   const fresh = resolveWeek(
     week,
     payload,
@@ -129,6 +140,7 @@ async function refreshLive() {
 
 function wireNav() {
   let playersMounted = false;
+  let resultsMounted = false;
   const buttons = [...document.querySelectorAll('nav button')];
 
   // role="tablist" promises arrow-key movement between tabs. Every tab stays
@@ -165,6 +177,17 @@ function wireNav() {
         mountLeaderboard($('players'), { teams: state.teams }).catch((e) => {
           console.error(e);
           $('players').innerHTML = '<p class="empty">Could not load the leaderboard.</p>';
+        });
+      }
+
+      // Mounted lazily, like the leaderboard above: a visitor who never
+      // opens Results downloads neither pairings.json nor
+      // roster-players.json.
+      if (btn.dataset.view === 'results' && !resultsMounted) {
+        resultsMounted = true;
+        mountResults($('results'), state).catch((e) => {
+          console.error(e);
+          $('results').innerHTML = '<p class="empty">Could not load the results.</p>';
         });
       }
     });

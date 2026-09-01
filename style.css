@@ -608,6 +608,19 @@ table.standings {
   .fixture .side-name:last-child { text-align: left; }
 }
 
+/* --- Results week picker -------------------------------------------- */
+
+.controls .weeks button {
+  min-width: 2.25rem;
+  padding: var(--space-md) var(--space-sm);
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A week with results reads differently from one that has not happened. */
+.controls .weeks button.played { color: var(--ink); border-color: var(--line-strong); }
+.controls .weeks button.on { color: var(--card); background: var(--primary); border-color: var(--primary); }
+
 /* --- Players tab --------------------------------------------------- */
 
 .controls {

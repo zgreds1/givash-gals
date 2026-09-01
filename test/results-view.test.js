@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail } from '../results-view.js';
+import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail, weekOptions } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -413,4 +413,12 @@ test('bench players beyond the shorter side are not dropped', () => {
   assert.match(html, /Reed Bench One/);
   assert.match(html, /Reed Bench Two/, 'a row past the shorter side length is not dropped');
   assert.match(html, /Reed Bench Three/, 'a row past the shorter side length is not dropped');
+});
+
+test('the picker offers every week and marks the played ones', () => {
+  const opts = weekOptions([{ week: 1, played: true }, { week: 2, played: false }], 18);
+  assert.equal(opts.length, 18);
+  assert.deepEqual(opts[0], { week: 1, played: true });
+  assert.deepEqual(opts[1], { week: 2, played: false });
+  assert.deepEqual(opts[17], { week: 18, played: false });
 });
