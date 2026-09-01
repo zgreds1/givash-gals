@@ -8,6 +8,7 @@ import {
   slimPlayers,
   buildSnapshot,
   buildSeasonLeaderboard,
+  buildPairings,
   refreshPlayers,
   writeStamped,
 } from '../scripts/snapshot.mjs';
@@ -356,4 +357,19 @@ test('buildSnapshot tolerates a missing state, so --replay still works', () => {
   });
   assert.equal(snap.meta.seasonStart, null);
   assert.deepEqual(snap.meta.rosterPositions, []);
+});
+
+test('buildPairings keys every fetched week and drops the empty ones', () => {
+  // A week Sleeper has not generated yet comes back as [] rather than 404.
+  // Keying it anyway would draw an upcoming week with no matchups in it.
+  const out = buildPairings({
+    1: [
+      { roster_id: 1, matchup_id: 1 }, { roster_id: 3, matchup_id: 1 },
+      { roster_id: 2, matchup_id: 2 }, { roster_id: 4, matchup_id: 2 },
+      { roster_id: 5, matchup_id: 3 }, { roster_id: 6, matchup_id: 3 },
+    ],
+    2: [],
+  });
+  assert.deepEqual(Object.keys(out), ['1']);
+  assert.deepEqual(out['1'], [[1, 3], [2, 4], [5, 6]]);
 });

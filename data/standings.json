@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-23T17:23:53.027Z",
+  "generatedAt": "2026-09-01T08:54:09.374Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -8,5 +8,32 @@
     "4": "Ben-Gvir's balagan",
     "5": "Nsanders10"
   },
+  "seasonStart": "2026-09-09",
+  "rosterPositions": [
+    "QB",
+    "QB",
+    "QB",
+    "RB",
+    "RB",
+    "RB",
+    "RB",
+    "WR",
+    "WR",
+    "WR",
+    "WR",
+    "TE",
+    "TE",
+    "FLEX",
+    "FLEX",
+    "FLEX",
+    "FLEX",
+    "K",
+    "DEF",
+    "BN",
+    "BN",
+    "BN",
+    "BN",
+    "BN"
+  ],
   "standings": []
 }

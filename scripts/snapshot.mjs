@@ -13,7 +13,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { API_BASE, LEAGUE_ID, SEASON } from '../config.js';
+import { API_BASE, LAST_WEEK, LEAGUE_ID, SEASON } from '../config.js';
 import {
   createClient,
   currentWeek,
@@ -22,6 +22,7 @@ import {
 } from '../sleeper.js';
 import { byeTeams, opportunitySet, resolveWeek, standings } from '../rules.js';
 import { buildLeaderboard, slimForLeaderboard, slimWeek } from '../leaderboard.js';
+import { pairsFromPayload } from '../results-view.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data');
@@ -94,6 +95,22 @@ export function buildSnapshot({
       rosterPositions,
     },
   };
+}
+
+/**
+ * The whole season's schedule, keyed by week.
+ *
+ * Pure so it can be tested without the network; the fetching lives in main().
+ * A week Sleeper has not generated returns [] rather than 404, and keying it
+ * would draw an upcoming week containing no matchups.
+ */
+export function buildPairings(payloadsByWeek) {
+  const out = {};
+  for (const [week, payload] of Object.entries(payloadsByWeek || {})) {
+    const pairs = pairsFromPayload(payload);
+    if (pairs.length) out[week] = pairs;
+  }
+  return out;
 }
 
 /**
@@ -212,6 +229,7 @@ async function main() {
   let slimWeeks = {};
   let players;
   let playersAll;
+  let pairings = null;
 
   if (replay) {
     rosters = JSON.parse(await readFile(path.join(RAW, 'rosters.json'), 'utf8'));
@@ -317,6 +335,16 @@ async function main() {
       await writeFile(path.join(RAW, `stats${w}.json`), JSON.stringify(slim));
     }
 
+    // The whole season's pairings, not just the played weeks: this is what
+    // lets the Results tab show an upcoming schedule. 18 calls per Action
+    // run, zero per page load. The client's single-flight cache makes the
+    // weeks already fetched above free.
+    const schedulePayloads = {};
+    for (let w = 1; w <= LAST_WEEK; w++) {
+      schedulePayloads[w] = await client.matchups(w).catch(() => []);
+    }
+    pairings = buildPairings(schedulePayloads);
+
     // Off-season: /state/nfl reports no real week, but a finished season is
     // still sitting in data/raw. Rescore the archive rather than publishing
     // an empty site over a completed 18 weeks.
@@ -340,6 +368,12 @@ async function main() {
     now,
   );
   const w = await writeStamped(path.join(DATA, 'weeks.json'), { weeks: snap.weeks }, now);
+
+  // --replay has no network, so it must leave a good pairings.json alone
+  // rather than overwrite it with nothing.
+  if (pairings) {
+    await writeStamped(path.join(DATA, 'pairings.json'), { pairings }, now);
+  }
 
   // playersAll, not players: a player cut mid-season drops out of the active
   // map, and naming him is most of the point of this board.
