@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T09:01:45.387Z",
+  "generatedAt": "2026-09-01T17:13:20.049Z",
   "players": {
     "19": {
       "name": "Joe Flacco",
@@ -36,15 +36,15 @@
       "pos": "QB",
       "team": "NYG"
     },
-    "2307": {
-      "name": "Marcus Mariota",
-      "pos": "QB",
-      "team": "WAS"
-    },
     "2374": {
       "name": "Tyler Lockett",
       "pos": "WR",
       "team": "—"
+    },
+    "2505": {
+      "name": "Darren Waller",
+      "pos": "TE",
+      "team": "CAR"
     },
     "3198": {
       "name": "Derrick Henry",
@@ -110,11 +110,6 @@
       "name": "Kendrick Bourne",
       "pos": "WR",
       "team": "ARI"
-    },
-    "4866": {
-      "name": "Saquon Barkley",
-      "pos": "RB",
-      "team": "PHI"
     },
     "4881": {
       "name": "Lamar Jackson",
@@ -226,10 +221,10 @@
       "pos": "QB",
       "team": "SF"
     },
-    "7547": {
-      "name": "Amon-Ra St. Brown",
-      "pos": "WR",
-      "team": "DET"
+    "7528": {
+      "name": "Najee Harris",
+      "pos": "RB",
+      "team": "NYG"
     },
     "7564": {
       "name": "Ja'Marr Chase",
@@ -295,11 +290,6 @@
       "name": "Jeremy Ruckert",
       "pos": "TE",
       "team": "NYJ"
-    },
-    "8151": {
-      "name": "Kenneth Walker",
-      "pos": "RB",
-      "team": "KC"
     },
     "8154": {
       "name": "Brian Robinson",
@@ -441,6 +431,11 @@
       "pos": "RB",
       "team": "DET"
     },
+    "11370": {
+      "name": "Chris Brooks",
+      "pos": "RB",
+      "team": "GB"
+    },
     "11435": {
       "name": "Emanuel Wilson",
       "pos": "RB",
@@ -470,6 +465,11 @@
       "name": "Audric Estime",
       "pos": "RB",
       "team": "NO"
+    },
+    "11581": {
+      "name": "MarShawn Lloyd",
+      "pos": "RB",
+      "team": "GB"
     },
     "11597": {
       "name": "Theo Johnson",
@@ -536,6 +536,11 @@
       "pos": "WR",
       "team": "DEN"
     },
+    "12494": {
+      "name": "Kyle McCord",
+      "pos": "QB",
+      "team": "MIA"
+    },
     "12495": {
       "name": "Ollie Gordon",
       "pos": "RB",
@@ -571,11 +576,6 @@
       "pos": "RB",
       "team": "GB"
     },
-    "12507": {
-      "name": "Omarion Hampton",
-      "pos": "RB",
-      "team": "LAC"
-    },
     "12522": {
       "name": "Cam Ward",
       "pos": "QB",
@@ -585,11 +585,6 @@
       "name": "Shedeur Sanders",
       "pos": "QB",
       "team": "CLE"
-    },
-    "12527": {
-      "name": "Ashton Jeanty",
-      "pos": "RB",
-      "team": "LV"
     },
     "12530": {
       "name": "Travis Hunter",
@@ -631,11 +626,6 @@
       "pos": "QB",
       "team": "LV"
     },
-    "13272": {
-      "name": "Carson Beck",
-      "pos": "QB",
-      "team": "ARI"
-    },
     "13278": {
       "name": "Max Klare",
       "pos": "TE",
@@ -656,6 +646,11 @@
       "pos": "WR",
       "team": "MIA"
     },
+    "13337": {
+      "name": "Emmett Johnson",
+      "pos": "RB",
+      "team": "KC"
+    },
     "13345": {
       "name": "Jonah Coleman",
       "pos": "RB",
@@ -670,6 +665,11 @@
       "name": "Eli Stowers",
       "pos": "TE",
       "team": "PHI"
+    },
+    "13414": {
+      "name": "Kaelon Black",
+      "pos": "RB",
+      "team": "SF"
     },
     "13421": {
       "name": "Eli Raridon",
