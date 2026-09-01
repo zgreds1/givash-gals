@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail, weekOptions } from '../results-view.js';
+import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail, weekOptions, mountResults } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -421,4 +421,49 @@ test('the picker offers every week and marks the played ones', () => {
   assert.deepEqual(opts[0], { week: 1, played: true });
   assert.deepEqual(opts[1], { week: 2, played: false });
   assert.deepEqual(opts[17], { week: 18, played: false });
+});
+
+test('a mounted view reads state fresh, so a repaint reflects changes made after mounting', async () => {
+  // mountResults must not freeze weeks/teams/ghostRosterId/rosterPositions
+  // at mount time. state.weeks starts empty (nothing loaded yet, the tab
+  // clicked before loadSnapshot even resolves), a played week is pushed in
+  // afterwards, and repaint() must draw it without a remount — exactly what
+  // refreshLive() finishing after someone has already opened the tab looks
+  // like.
+  let html = '';
+  const el = {
+    set innerHTML(v) { html = v; },
+    get innerHTML() { return html; },
+    querySelectorAll: () => [],
+    querySelector: () => null,
+  };
+  const state = {
+    weeks: [],
+    teams: { 1: 'Alpha', 2: 'Bravo' },
+    ghostRosterId: 6,
+    seasonStart: START,
+    rosterPositions: [],
+    livePayloads: {},
+    json: async (url) => {
+      if (url === 'data/pairings.json') return { pairings: {} };
+      throw new Error(`unexpected fetch: ${url}`);
+    },
+    now: () => local(2026, 9, 9), // week 1
+  };
+
+  const { repaint } = await mountResults(el, state);
+  assert.doesNotMatch(html, /Alpha/, 'nothing resolved yet: no team name in the initial paint');
+
+  state.weeks.push({
+    week: 1, played: true, degenerate: false,
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+    teams: {
+      1: { raw: 10, adjusted: 10, penalties: [] },
+      2: { raw: 20, adjusted: 20, penalties: [] },
+    },
+  });
+
+  await repaint();
+  assert.match(html, /Alpha/, 'the newly-played week is visible after repaint, without remounting');
+  assert.match(html, /10\.00/);
 });

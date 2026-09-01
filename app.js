@@ -12,6 +12,11 @@ const state = {
   livePayloads: {}, seasonStart: null, rosterPositions: [],
 };
 
+// Set once mountResults resolves. Lets paint() push a redraw into an
+// already-mounted Results tab when refreshLive() changes state under it,
+// instead of only fixing the next click.
+let resultsRepaint = null;
+
 const $ = (id) => document.getElementById(id);
 
 async function json(url) {
@@ -69,6 +74,9 @@ function paint() {
   $('freshness').className = state.live ? 'freshness live' : 'freshness';
   $('freshness').hidden = !state.live;
   paintBanner();
+  // Delegates to the mounted view's own repaint rather than touching
+  // $('results') directly, which would wipe whatever it is showing.
+  resultsRepaint?.();
 }
 
 async function loadSnapshot() {
@@ -185,10 +193,12 @@ function wireNav() {
       // roster-players.json.
       if (btn.dataset.view === 'results' && !resultsMounted) {
         resultsMounted = true;
-        mountResults($('results'), state).catch((e) => {
-          console.error(e);
-          $('results').innerHTML = '<p class="empty">Could not load the results.</p>';
-        });
+        mountResults($('results'), state)
+          .then(({ repaint }) => { resultsRepaint = repaint; })
+          .catch((e) => {
+            console.error(e);
+            $('results').innerHTML = '<p class="empty">Could not load the results.</p>';
+          });
       }
     });
   }

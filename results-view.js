@@ -388,20 +388,37 @@ async function defaultJson(url) {
 /**
  * Mount the Results tab into `el`.
  *
- * Holds three pieces of state: the selected week, the selected matchup
- * within it, and a lazy cache of raw week payloads. Everything else is
- * recomputed from the arguments on every paint, the same way
- * mountLeaderboard works.
+ * Takes the live `state` object itself, not a snapshot of its fields.
+ * `weeks`, `teams`, `ghostRosterId`, `rosterPositions` and `livePayloads`
+ * are all read fresh from `state` inside `paint()`, because — unlike
+ * mountLeaderboard's `teams`, written once and never reassigned —
+ * `refreshLive()` in app.js replaces `state.weeks` wholesale and keeps
+ * mutating `state.livePayloads` for as long as the page is open. Capturing
+ * any of those by value at mount time would freeze the tab against
+ * whatever `state` looked like at the moment someone first clicked it,
+ * which on game day is exactly the moment least likely to have the
+ * current week's data yet.
  *
- * `livePayloads` is the current week's payload that refreshLive already
- * fetched, so opening the live week's detail costs no request.
+ * `seasonStart` and `json`/`now` are the exceptions: `seasonStart` is
+ * written once by `loadSnapshot` before the tab can be clicked and never
+ * changes again, and `json`/`now` are injection points for tests, not
+ * live data.
+ *
+ * Returns `{ repaint }` so the caller can force a redraw when `state`
+ * changes underneath an already-mounted tab (a background refresh landing
+ * while someone is looking at the tab) rather than only fixing the *next*
+ * click. `view.week` and `view.matchup` live in this closure, not in
+ * `state`, so a repaint redraws whatever the visitor was already looking
+ * at instead of resetting them to the default week.
  */
-export async function mountResults(el, {
-  teams = {}, weeks = [], ghostRosterId = null, seasonStart = null,
-  rosterPositions = [], livePayloads = {}, json = defaultJson, now = () => new Date(),
-} = {}) {
-  const byWeek = new Map((weeks || []).map((w) => [w.week, w]));
-  const cache = { ...livePayloads };
+export async function mountResults(el, state = {}) {
+  const { seasonStart = null, json = defaultJson, now = () => new Date() } = state;
+
+  // The module's own cache for weeks refreshLive never touched — distinct
+  // from state.livePayloads, which is read fresh on every call instead of
+  // copied in here, so a payload that arrives after mount is still picked
+  // up the next time payloadFor asks for it.
+  const cache = {};
   let pairings = null;
   let players = null;
 
@@ -414,6 +431,8 @@ export async function mountResults(el, {
   }
 
   async function payloadFor(week) {
+    const live = state.livePayloads || {};
+    if (live[week] !== undefined) return live[week];
     if (cache[week] !== undefined) return cache[week];
     try {
       cache[week] = await json(`data/raw/wk${week}.json`);
@@ -434,7 +453,7 @@ export async function mountResults(el, {
   }
 
   function picker() {
-    const btns = weekOptions(weeks)
+    const btns = weekOptions(state.weeks)
       .map(
         ({ week, played }) =>
           `<button type="button" data-week="${week}" aria-pressed="${week === view.week}"` +
@@ -449,6 +468,11 @@ export async function mountResults(el, {
   }
 
   async function paint() {
+    const byWeek = new Map((state.weeks || []).map((w) => [w.week, w]));
+    const teams = state.teams || {};
+    const ghostRosterId = state.ghostRosterId ?? null;
+    const rosterPositions = state.rosterPositions || [];
+
     const resolved = byWeek.get(view.week);
     const payload = resolved?.played ? await payloadFor(view.week) : null;
 
@@ -498,4 +522,5 @@ export async function mountResults(el, {
   }
 
   await paint();
+  return { repaint: paint };
 }
