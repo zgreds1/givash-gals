@@ -234,3 +234,68 @@ test('matchups are not clickable when the week has no archived payload', () => {
   assert.doesNotMatch(off, /data-matchup=/);
   assert.match(off, /no player detail/i, 'and it says why rather than going quiet');
 });
+
+test('a played week escapes a hostile team name and a hostile penalty player name', () => {
+  // Regression guard for the esc() calls inside teamBlock/penaltyList, which
+  // moved into this file in task 7. Reproduces the deleted
+  // render.test.js coverage for the same call sites.
+  const hostileTeams = { ...TEAMS, 1: '<script>alert(1)</script>' };
+  const hostileWeek = {
+    ...PLAYED,
+    teams: {
+      ...PLAYED.teams,
+      1: {
+        ...PLAYED.teams[1],
+        penalties: [{ ...PLAYED.teams[1].penalties[0], name: '<img src=x onerror=alert(1)>' }],
+      },
+    },
+  };
+
+  const html = renderWeek({ week: 3, resolved: hostileWeek, teams: hostileTeams, detailAvailable: true });
+
+  assert.doesNotMatch(html, /<script>/);
+  assert.doesNotMatch(html, /<img /);
+  assert.match(html, /&lt;script&gt;/);
+  assert.match(html, /&lt;img /);
+});
+
+test('an upcoming week escapes a hostile team name in a fixture', () => {
+  // Regression guard for esc(name(a)) in the upcoming-fixtures branch,
+  // which is new in task 7 and had no prior coverage of any kind.
+  const hostileTeams = { ...TEAMS, 1: '<script>alert(1)</script>' };
+  const html = renderWeek({
+    week: 1, resolved: undefined, pairs: [[1, 3], [2, 4], [5, 6]],
+    ghostRosterId: 6, teams: hostileTeams,
+  });
+
+  assert.doesNotMatch(html, /<script>/);
+  assert.match(html, /&lt;script&gt;/);
+});
+
+test('a week marked not-played renders the upcoming fixtures even when it carries stale scores', () => {
+  // Matches the live shape of data/weeks.json for week 1: played: false but
+  // with populated teams (adjusted: 360 for every side, since all 18
+  // non-DEF starters have scored 0). If the played?.true guard ever
+  // regressed to a truthiness check on `resolved`, this would render five
+  // identical 360s as though they were real results.
+  const html = renderWeek({
+    week: 1,
+    resolved: {
+      week: 1, played: false, matchups: [],
+      teams: {
+        1: { raw: 360, adjusted: 360, penalties: [] },
+        2: { raw: 360, adjusted: 360, penalties: [] },
+        3: { raw: 360, adjusted: 360, penalties: [] },
+        4: { raw: 360, adjusted: 360, penalties: [] },
+        5: { raw: 360, adjusted: 360, penalties: [] },
+      },
+    },
+    pairs: [[1, 3], [2, 4], [5, 6]],
+    ghostRosterId: 6,
+    teams: TEAMS,
+  });
+
+  assert.match(html, /Alpha/);
+  assert.match(html, /League median/);
+  assert.doesNotMatch(html, /360/);
+});
