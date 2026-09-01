@@ -379,12 +379,17 @@ async function main() {
     }
 
     // The whole season's pairings, not just the played weeks: this is what
-    // lets the Results tab show an upcoming schedule. 18 calls per Action
-    // run, zero per page load. The client's single-flight cache makes the
-    // weeks already fetched above free.
+    // lets the Results tab show an upcoming schedule. At most 18 calls per
+    // Action run, zero per page load.
+    //
+    // The played weeks are reused from the loop above rather than refetched.
+    // Not because the client would cache them — it would not: sleeper.js
+    // gates its cache on `now() - hit.at < minIntervalMs`, and the snapshot
+    // constructs its client with minIntervalMs: 0, so that cache never hits.
+    // The payload is already in hand, so ask for the unplayed weeks only.
     const schedulePayloads = {};
     for (let w = 1; w <= LAST_WEEK; w++) {
-      schedulePayloads[w] = await client.matchups(w).catch(() => []);
+      schedulePayloads[w] = weekPayloads[w] ?? (await client.matchups(w).catch(() => []));
     }
     pairings = buildPairings(schedulePayloads);
 
