@@ -287,16 +287,23 @@ function playerCell(row, penalised, align) {
 }
 
 function lineupTable(left, right, leftPen, rightPen) {
-  return left
-    .map((row, i) => {
-      const other = right ? right[i] : null;
-      return `<div class="lineup-row">
-        ${playerCell(row, leftPen.has(row.id), 'left')}
-        <span class="lineup-slot">${esc(row.slot || '—')}</span>
+  // left and right can differ in length: bench length tracks
+  // entry.players.length per roster, which diverges the moment one side has
+  // dropped a player and the other has not. Mapping over left alone would
+  // silently drop any right-side row past left.length.
+  const rowCount = Math.max(left.length, right ? right.length : 0);
+  const rows = [];
+  for (let i = 0; i < rowCount; i++) {
+    const row = left[i] || null;
+    const other = right ? right[i] : null;
+    const slot = (row || other)?.slot || '—';
+    rows.push(`<div class="lineup-row">
+        ${row ? playerCell(row, leftPen.has(row.id), 'left') : '<span></span>'}
+        <span class="lineup-slot">${esc(slot)}</span>
         ${other ? playerCell(other, rightPen.has(other.id), 'right') : '<span></span>'}
-      </div>`;
-    })
-    .join('');
+      </div>`);
+  }
+  return rows.join('');
 }
 
 /**

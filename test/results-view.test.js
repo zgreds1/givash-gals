@@ -318,6 +318,25 @@ const DETAIL_PAYLOAD = [
     players: ['a', '8205'], players_points: { a: 9.2, 8205: 12.5 } },
 ];
 
+// Bench length tracks entry.players.length per roster, which diverges the
+// moment one team has dropped a player and the other has not — an ordinary
+// mid-season state, not an edge case. Left carries 1 bench player, right
+// carries 3, to catch lineupTable dropping any row past the shorter side.
+const ROW_DROP_PLAYERS = {
+  ...DETAIL_PLAYERS,
+  lb1: { name: 'Lonnie Bench', pos: 'WR', team: 'MIN' },
+  rb1: { name: 'Reed Bench One', pos: 'WR', team: 'MIN' },
+  rb2: { name: 'Reed Bench Two', pos: 'WR', team: 'MIN' },
+  rb3: { name: 'Reed Bench Three', pos: 'WR', team: 'MIN' },
+};
+const ROW_DROP_PAYLOAD = [
+  { roster_id: 1, matchup_id: 1, starters: ['a', '8205'], starters_points: [10, 5],
+    players: ['a', '8205', 'lb1'], players_points: { a: 10, 8205: 5, lb1: 3 } },
+  { roster_id: 2, matchup_id: 1, starters: ['a', '8205'], starters_points: [7, 6],
+    players: ['a', '8205', 'rb1', 'rb2', 'rb3'],
+    players_points: { a: 7, 8205: 6, rb1: 1, rb2: 2, rb3: 4 } },
+];
+
 test('a head-to-head detail lists both lineups with the bench', () => {
   const html = renderMatchupDetail({
     week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
@@ -363,6 +382,12 @@ test('the detail escapes team and player names', () => {
   });
   assert.match(html, /&lt;script&gt;/);
   assert.match(html, /&lt;img /);
+  // Matching the escaped form alone would still pass if the raw markup were
+  // also present unescaped elsewhere in the output — evidence that escaping
+  // happened somewhere, not that the raw string is absent (task 7's Critical
+  // finding, reproduced here so it can't regress unnoticed).
+  assert.doesNotMatch(html, /<script>/);
+  assert.doesNotMatch(html, /<img /);
 });
 
 test('a missing payload entry does not throw', () => {
@@ -372,4 +397,20 @@ test('a missing payload entry does not throw', () => {
     rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
   });
   assert.match(html, /Ann QB/);
+});
+
+test('bench players beyond the shorter side are not dropped', () => {
+  // lineupTable mapped over the left side and indexed the right side at the
+  // same position, so any right-side row at an index >= left.length was
+  // never visited: no error, no notice, the player just disappeared. Left
+  // here carries 1 bench player, right carries 3.
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    resolved: PLAYED, payload: ROW_DROP_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: ROW_DROP_PLAYERS,
+  });
+  assert.match(html, /Lonnie Bench/, 'the shorter (left) bench is shown');
+  assert.match(html, /Reed Bench One/);
+  assert.match(html, /Reed Bench Two/, 'a row past the shorter side length is not dropped');
+  assert.match(html, /Reed Bench Three/, 'a row past the shorter side length is not dropped');
 });
