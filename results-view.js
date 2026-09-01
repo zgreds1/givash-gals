@@ -399,10 +399,13 @@ async function defaultJson(url) {
  * which on game day is exactly the moment least likely to have the
  * current week's data yet.
  *
- * `seasonStart` and `json`/`now` are the exceptions: `seasonStart` is
- * written once by `loadSnapshot` before the tab can be clicked and never
- * changes again, and `json`/`now` are injection points for tests, not
- * live data.
+ * `json`/`now` are the exception: injection points for tests, never
+ * reassigned once mounted. `seasonStart` looks static — `loadSnapshot`
+ * writes it once and never again — but it can still arrive AFTER mount,
+ * since the tab is clickable before `loadSnapshot` resolves. Until the
+ * visitor picks a week themselves, the default week is recomputed from
+ * `state.seasonStart` on every paint, so it corrects itself the moment
+ * the snapshot lands instead of staying wrong (week 1) for the session.
  *
  * Returns `{ repaint }` so the caller can force a redraw when `state`
  * changes underneath an already-mounted tab (a background refresh landing
@@ -412,7 +415,13 @@ async function defaultJson(url) {
  * at instead of resetting them to the default week.
  */
 export async function mountResults(el, state = {}) {
-  const { seasonStart = null, json = defaultJson, now = () => new Date() } = state;
+  const { json = defaultJson, now = () => new Date() } = state;
+
+  // Set once a [data-week]/[data-step] click happens, below. Before that,
+  // paint() keeps recomputing the default week from state.seasonStart, so
+  // a mount that races loadSnapshot (seasonStart still null) self-corrects
+  // once the snapshot lands instead of sticking on week 1 for the session.
+  let weekChosen = false;
 
   // The module's own cache for weeks refreshLive never touched — distinct
   // from state.livePayloads, which is read fresh on every call instead of
@@ -422,7 +431,7 @@ export async function mountResults(el, state = {}) {
   let pairings = null;
   let players = null;
 
-  const view = { week: displayWeek(now(), seasonStart), matchup: null };
+  const view = { week: displayWeek(now(), state.seasonStart ?? null), matchup: null };
 
   try {
     pairings = (await json('data/pairings.json')).pairings || {};
@@ -468,6 +477,7 @@ export async function mountResults(el, state = {}) {
   }
 
   async function paint() {
+    if (!weekChosen) view.week = displayWeek(now(), state.seasonStart ?? null);
     const byWeek = new Map((state.weeks || []).map((w) => [w.week, w]));
     const teams = state.teams || {};
     const ghostRosterId = state.ghostRosterId ?? null;
@@ -497,10 +507,11 @@ export async function mountResults(el, state = {}) {
 
   function wire() {
     for (const b of el.querySelectorAll('[data-week]')) {
-      b.onclick = () => { view.week = Number(b.dataset.week); view.matchup = null; paint(); };
+      b.onclick = () => { weekChosen = true; view.week = Number(b.dataset.week); view.matchup = null; paint(); };
     }
     for (const b of el.querySelectorAll('[data-step]')) {
       b.onclick = () => {
+        weekChosen = true;
         const next = view.week + Number(b.dataset.step);
         view.week = Math.min(LAST_WEEK, Math.max(1, next));
         view.matchup = null;

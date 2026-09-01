@@ -467,3 +467,86 @@ test('a mounted view reads state fresh, so a repaint reflects changes made after
   assert.match(html, /Alpha/, 'the newly-played week is visible after repaint, without remounting');
   assert.match(html, /10\.00/);
 });
+
+/**
+ * A DOM-free stand-in for `el` that is just capable enough to drive
+ * mountResults' own wiring: it scrapes `data-week`/`data-step` buttons out
+ * of whatever HTML string was assigned, hands wire() fake elements with a
+ * `dataset` and a settable `onclick`, and lets a test fire that `onclick`
+ * itself to simulate a real click without a browser.
+ */
+function makeStubEl() {
+  let html = '';
+  const weekButtons = [];
+  const stepButtons = [];
+  return {
+    get innerHTML() { return html; },
+    set innerHTML(v) {
+      html = v;
+      weekButtons.length = 0;
+      const weekRe = /data-week="(\d+)"/g;
+      let m;
+      while ((m = weekRe.exec(v))) weekButtons.push({ dataset: { week: m[1] }, onclick: null });
+      stepButtons.length = 0;
+      for (const step of ['-1', '1']) {
+        if (v.includes(`data-step="${step}"`)) stepButtons.push({ dataset: { step }, onclick: null });
+      }
+    },
+    querySelectorAll(sel) {
+      if (sel === '[data-week]') return weekButtons;
+      if (sel === '[data-step]') return stepButtons;
+      return [];
+    },
+    querySelector: () => null,
+  };
+}
+
+test('the default week keeps recomputing from state.seasonStart until it arrives, not frozen at mount', async () => {
+  // Mirrors loadSnapshot resolving after the tab was already clicked:
+  // seasonStart is still null at mount (displayWeek degrades to week 1),
+  // then arrives and a repaint lands, same as resultsRepaint firing at the
+  // end of app.js's paint(). The picker must move to week 9, not stay on 1.
+  const el = makeStubEl();
+  const state = {
+    weeks: [], teams: {}, ghostRosterId: 6, seasonStart: null, rosterPositions: [],
+    livePayloads: {},
+    json: async (url) => {
+      if (url === 'data/pairings.json') return { pairings: {} };
+      throw new Error(`unexpected fetch: ${url}`);
+    },
+    now: () => local(2026, 11, 4), // week 9, once seasonStart is known
+  };
+
+  const { repaint } = await mountResults(el, state);
+  assert.match(el.innerHTML, /data-week="1" aria-pressed="true"/, 'seasonStart unknown: degrades to week 1');
+
+  state.seasonStart = START;
+  await repaint();
+  assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/, 'seasonStart landed: the picker corrects to the real current week');
+});
+
+test('a week the visitor already chose survives a repaint, even if seasonStart changes underneath it', async () => {
+  const el = makeStubEl();
+  const state = {
+    weeks: [], teams: {}, ghostRosterId: 6, seasonStart: START, rosterPositions: [],
+    livePayloads: {},
+    json: async (url) => {
+      if (url === 'data/pairings.json') return { pairings: {} };
+      throw new Error(`unexpected fetch: ${url}`);
+    },
+    now: () => local(2026, 11, 4), // week 9
+  };
+
+  const { repaint } = await mountResults(el, state);
+  assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/);
+
+  const week12 = el.querySelectorAll('[data-week]').find((b) => b.dataset.week === '12');
+  week12.onclick(); // a real click: sets weekChosen and repaints internally
+  await new Promise((r) => setTimeout(r, 0)); // let that internal paint() settle
+  assert.match(el.innerHTML, /data-week="12" aria-pressed="true"/);
+
+  // If the guard were missing, this would snap the default back to week 1.
+  state.seasonStart = null;
+  await repaint();
+  assert.match(el.innerHTML, /data-week="12" aria-pressed="true"/, 'the chosen week is not overwritten by a later repaint');
+});
