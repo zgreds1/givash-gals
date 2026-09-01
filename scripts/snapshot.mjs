@@ -49,7 +49,10 @@ export function slimPlayers(raw) {
 }
 
 /** Pure: everything the site needs, computed from already-fetched data. */
-export function buildSnapshot({ rosters, users, schedule, players, weekPayloads, opportunities = {} }) {
+export function buildSnapshot({
+  rosters, users, schedule, players, weekPayloads,
+  opportunities = {}, state = null, rosterPositions = [],
+}) {
   // Every unowned slot is stripped from the engine; the lowest one is still
   // reported as the ghost because that is what the page labels and explains.
   const ghostRosterId = findGhostRosterId(rosters);
@@ -78,7 +81,19 @@ export function buildSnapshot({ rosters, users, schedule, players, weekPayloads,
       ),
     );
 
-  return { standings: standings(weeks), weeks, meta: { ghostRosterId, teams } };
+  return {
+    standings: standings(weeks),
+    weeks,
+    meta: {
+      ghostRosterId,
+      teams,
+      // The page's default week comes from here, so it can pick a week
+      // before making any API call. Null on --replay when raw/state.json
+      // predates this change.
+      seasonStart: state?.season_start_date ?? null,
+      rosterPositions,
+    },
+  };
 }
 
 /**
@@ -191,6 +206,7 @@ async function main() {
   let users;
   let schedule;
   let league;
+  let state;
   let weekPayloads;
   let opportunities = {};
   let slimWeeks = {};
@@ -201,6 +217,17 @@ async function main() {
     rosters = JSON.parse(await readFile(path.join(RAW, 'rosters.json'), 'utf8'));
     users = JSON.parse(await readFile(path.join(RAW, 'users.json'), 'utf8'));
     schedule = JSON.parse(await readFile(path.join(RAW, 'schedule.json'), 'utf8'));
+
+    const statePath = path.join(RAW, 'state.json');
+    state = existsSync(statePath)
+      ? JSON.parse(await readFile(statePath, 'utf8'))
+      : null;
+
+    const leaguePath = path.join(RAW, 'league.json');
+    league = existsSync(leaguePath)
+      ? JSON.parse(await readFile(leaguePath, 'utf8'))
+      : null;
+
     players = JSON.parse(await readFile(path.join(DATA, 'players-slim.json'), 'utf8'));
 
     const allPath = path.join(DATA, 'players-all.json');
@@ -219,7 +246,7 @@ async function main() {
     slimWeeks = await readSlimWeeks();
     opportunities = await readOpps();
   } else {
-    const state = await client.state();
+    state = await client.state();
     // 0 during the preseason: /state/nfl counts preseason weeks in the same
     // field, and archiving those would publish a season of zeros.
     const current = currentWeek(state);
@@ -251,12 +278,17 @@ async function main() {
     await writeFile(path.join(RAW, 'rosters.json'), JSON.stringify(rosters));
     await writeFile(path.join(RAW, 'users.json'), JSON.stringify(users));
     await writeFile(path.join(RAW, 'schedule.json'), JSON.stringify(schedule));
-    // Only the scoring map. The full league object carries last_message_id and
-    // friends, which change whenever anyone posts in the league chat, and the
-    // Action's blanket `git add data/` would commit that churn for no reader.
+    await writeFile(path.join(RAW, 'state.json'), JSON.stringify(state));
+    // Only the scoring map and the roster layout. The full league object
+    // carries last_message_id and friends, which change whenever anyone
+    // posts in the league chat, and the Action's blanket `git add data/`
+    // would commit that churn for no reader.
     await writeFile(
       path.join(RAW, 'league.json'),
-      JSON.stringify({ scoring_settings: league.scoring_settings }),
+      JSON.stringify({
+        scoring_settings: league.scoring_settings,
+        roster_positions: league.roster_positions,
+      }),
     );
 
     weekPayloads = {};
@@ -295,7 +327,11 @@ async function main() {
     }
   }
 
-  const snap = buildSnapshot({ rosters, users, schedule, players, weekPayloads, opportunities });
+  const snap = buildSnapshot({
+    rosters, users, schedule, players, weekPayloads, opportunities,
+    state,
+    rosterPositions: league?.roster_positions || [],
+  });
   const now = new Date().toISOString();
 
   const s = await writeStamped(

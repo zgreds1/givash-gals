@@ -329,3 +329,31 @@ test('a player cut mid-season keeps his row, because the board is built from pla
   assert.equal(row.truePen, 1); // played, scored 0, had no chance
   assert.equal(row.total, 20);
 });
+
+test('buildSnapshot carries the season start and roster layout to the page', () => {
+  // The page computes its default week from seasonStart before any API call,
+  // and labels lineup slots from rosterPositions. Both have to ride along in
+  // standings.json, which is the only file the page reads on first paint.
+  const snap = buildSnapshot({
+    rosters: [{ roster_id: 1, owner_id: 'u1', players: [] }, { roster_id: 2, players: [] }],
+    users: [{ user_id: 'u1', display_name: 'Alpha' }],
+    schedule: [],
+    players: {},
+    weekPayloads: {},
+    state: { season_start_date: '2026-09-09' },
+    rosterPositions: ['QB', 'RB', 'BN'],
+  });
+
+  assert.equal(snap.meta.seasonStart, '2026-09-09');
+  assert.deepEqual(snap.meta.rosterPositions, ['QB', 'RB', 'BN']);
+});
+
+test('buildSnapshot tolerates a missing state, so --replay still works', () => {
+  const snap = buildSnapshot({
+    rosters: [{ roster_id: 1, owner_id: 'u1', players: [] }],
+    users: [{ user_id: 'u1', display_name: 'Alpha' }],
+    schedule: [], players: {}, weekPayloads: {},
+  });
+  assert.equal(snap.meta.seasonStart, null);
+  assert.deepEqual(snap.meta.rosterPositions, []);
+});
