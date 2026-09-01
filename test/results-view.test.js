@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { displayWeek } from '../results-view.js';
+import { displayWeek, pairsFromPayload, medianRosterId } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -44,4 +44,50 @@ test('the day count is rounded, so a lost hour cannot shift the week', () => {
   // discriminates only where DST is observed; CI runs UTC, where it passes
   // either way. It is a regression guard for Math.round, not a coverage claim.
   assert.equal(displayWeek(local(2027, 4, 28), '2027-03-03'), 9);
+});
+
+// Real week 1, probed from Sleeper on 2026-09-01. Every future week carries
+// matchup_id with points 0, which is what makes an upcoming schedule
+// possible at all.
+const WEEK1 = [
+  { roster_id: 1, matchup_id: 1, points: 0 },
+  { roster_id: 2, matchup_id: 2, points: 0 },
+  { roster_id: 3, matchup_id: 1, points: 0 },
+  { roster_id: 4, matchup_id: 2, points: 0 },
+  { roster_id: 5, matchup_id: 3, points: 0 },
+  { roster_id: 6, matchup_id: 3, points: 0 },
+];
+
+test('pairs come out sorted, so an unchanged schedule is a byte-identical file', () => {
+  assert.deepEqual(pairsFromPayload(WEEK1), [[1, 3], [2, 4], [5, 6]]);
+
+  // Same week, entries shuffled and each pair reversed. The Action commits
+  // whenever data/ differs, so an unsorted result would commit noise on
+  // every run.
+  const shuffled = [WEEK1[4], WEEK1[3], WEEK1[0], WEEK1[5], WEEK1[1], WEEK1[2]];
+  assert.deepEqual(pairsFromPayload(shuffled), [[1, 3], [2, 4], [5, 6]]);
+});
+
+test('entries with no matchup_id are skipped, not paired', () => {
+  const partial = [...WEEK1.slice(0, 4), { roster_id: 5, matchup_id: null, points: 0 }];
+  assert.deepEqual(pairsFromPayload(partial), [[1, 3], [2, 4]]);
+});
+
+test('pairsFromPayload survives an empty or missing payload', () => {
+  assert.deepEqual(pairsFromPayload([]), []);
+  assert.deepEqual(pairsFromPayload(undefined), []);
+});
+
+test('the team paired with the ghost roster draws the median', () => {
+  // Probed weeks, spec 2.1. Roster 6 is unowned.
+  assert.equal(medianRosterId([[1, 3], [2, 4], [5, 6]], 6), 5, 'week 1');
+  assert.equal(medianRosterId([[1, 2], [3, 6], [4, 5]], 6), 3, 'week 2');
+  assert.equal(medianRosterId([[1, 4], [3, 5], [2, 6]], 6), 2, 'week 5');
+  assert.equal(medianRosterId([[1, 6], [2, 5], [3, 4]], 6), 1, 'week 18');
+});
+
+test('there is no median team when every roster slot is owned', () => {
+  // The standings page already warns about this shape: six owned rosters is
+  // three straight head-to-head games and no median at all.
+  assert.equal(medianRosterId([[1, 2], [3, 4], [5, 6]], null), null);
 });
