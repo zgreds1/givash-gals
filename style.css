@@ -831,10 +831,8 @@ table.leaderboard td.owner.fa {
   color: var(--accent);
   font-weight: 600;
 }
-table.leaderboard td.pen b {
-  color: var(--pen);
-  font-weight: 700;
-}
+/* Adj Total and PPG are what the board exists to show. Red is reserved for
+ * an actual +20 badge in Results; a count of them is data, not a warning. */
 table.leaderboard td.metric {
   color: var(--ink-display);
   font-weight: 700;

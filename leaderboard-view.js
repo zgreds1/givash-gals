@@ -22,7 +22,7 @@ const COLUMNS = [
   ['raw', 'Raw', true, true],
   ['pen', '+20s', true, true],
   ['truePen', 'True +20s', true, true, 'Zeros in games actually played'],
-  ['total', 'Total', true, true],
+  ['total', 'Adj Total', true, true],
   ['ppg', 'PPG', true, true],
 ];
 
@@ -147,9 +147,10 @@ export function renderLeaderboard(rows, view = {}) {
     ownerOf = null, labels = new Map(), ownershipKnown = true,
   } = view;
 
-  // Highlight whichever column the board is actually ranked by, which is
-  // Total until a header is clicked. Pinning the highlight to Total would
-  // point at the wrong column the moment someone sorts by PPG.
+  // Which column the board is ranked by, for the caption. The body no longer
+  // marks it: the sorted header already carries the arrow, aria-sort and the
+  // bold, so a second signal in every row was redundant. Adj Total and PPG
+  // are emphasised unconditionally instead, as the two columns being read.
   const rankedBy = sortKey || DEFAULT_SORT;
 
   // A sortable header is a real <button> so it is reachable and operable by
@@ -187,10 +188,10 @@ export function renderLeaderboard(rows, view = {}) {
         <td class="owner${isFa ? ' fa' : ''}">${esc(owner)}</td>
         <td class="num">${r.gp}</td>
         <td class="num">${money(r.raw)}</td>
-        <td class="num pen">${cnt(r.pen)}</td>
-        <td class="num pen">${cnt(r.truePen)}</td>
-        <td class="num${rankedBy === 'total' ? ' metric' : ''}">${money(r.total)}</td>
-        <td class="num${rankedBy === 'ppg' ? ' metric' : ''}">${money(r.ppg)}</td>
+        <td class="num">${cnt(r.pen)}</td>
+        <td class="num">${cnt(r.truePen)}</td>
+        <td class="num metric">${money(r.total)}</td>
+        <td class="num metric">${money(r.ppg)}</td>
       </tr>`;
     })
     .join('');
