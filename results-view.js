@@ -31,7 +31,8 @@ export function displayWeek(now, seasonStart, lastWeek = LAST_WEEK) {
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
   // Rounded, not floored: a daylight-saving boundary between the two dates
-  // makes the difference 23 or 25 hours short of a whole number of days.
+  // makes the difference fall short of or overshoot a whole number of days.
+  // Rounding snaps it back.
   const days = Math.round((today - start) / 86400000);
   return Math.min(lastWeek, Math.max(1, Math.floor(days / 7) + 1));
 }

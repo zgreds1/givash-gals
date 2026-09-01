@@ -32,10 +32,16 @@ test('a missing or malformed season start falls back to week 1', () => {
   assert.equal(displayWeek(local(2026, 11, 4), 'not-a-date'), 1);
 });
 
-test('the rollover survives a daylight-saving shift', () => {
-  // US DST ends 2026-11-01. Nov 4 is 56 days after Sep 9, but 56 * 86400000
-  // ms apart it is not — the extra hour makes the raw division 55.96 days,
-  // which floors to week 8 instead of 9 unless the day count is rounded.
-  assert.equal(displayWeek(local(2026, 11, 4), START), 9);
-  assert.equal(displayWeek(local(2026, 11, 3), START), 8);
+test('the day count is rounded, so a lost hour cannot shift the week', () => {
+  // A spring-forward transition makes a day 23 hours long, so the raw
+  // difference falls an hour short of a whole number of days and floors to
+  // the previous week. 2027-03-03 -> 2027-04-28 is exactly 56 days apart by
+  // the calendar, but 55.9583 by arithmetic across the 2027-03-14 shift:
+  // week 8 without rounding, week 9 with it.
+  //
+  // Out of season deliberately — the only transition inside a Sep-Jan season
+  // is the November fall-back, which overshoots instead and cannot fail. This
+  // discriminates only where DST is observed; CI runs UTC, where it passes
+  // either way. It is a regression guard for Math.round, not a coverage claim.
+  assert.equal(displayWeek(local(2027, 4, 28), '2027-03-03'), 9);
 });
