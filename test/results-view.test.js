@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits } from '../results-view.js';
+import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -168,4 +168,69 @@ test('the real 19/5 league shape round-trips', () => {
   assert.equal(bench.length, 5, '5 bench');
   assert.equal(starters.at(-1).slot, 'DEF');
   assert.equal(starters.at(-2).slot, 'K');
+});
+
+const TEAMS = { 1: 'Alpha', 2: 'Bravo', 3: 'Delta', 4: 'Echo', 5: 'Foxtrot' };
+
+const PLAYED = {
+  week: 3, played: true, median: 107.9, medianPool: [142.6, 118.3, 97.5, 88.1],
+  teams: {
+    1: { raw: 122.6, adjusted: 142.6, penalties: [{ playerId: '8205', name: 'Bijan Robinson', reason: 'zeroed' }] },
+    2: { raw: 88.1, adjusted: 88.1, penalties: [] },
+    5: { raw: 101.2, adjusted: 101.2, penalties: [] },
+  },
+  matchups: [
+    { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    { type: 'median', rosterId: 5, line: 107.9, result: 'W' },
+  ],
+};
+
+test('a played week shows both scores, the penalty and the winner', () => {
+  const html = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
+  assert.match(html, /Bijan Robinson/);
+  assert.match(html, /\+20/);
+  assert.match(html, /122\.60/);
+  assert.match(html, /142\.60/);
+  assert.match(html, /class="[^"]*winner/);
+});
+
+test('the median card shows the line and the pool it came from', () => {
+  const html = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
+  assert.match(html, /107\.90/);
+  assert.match(html, /118\.30/);
+  assert.match(html, /97\.50/);
+});
+
+test('an upcoming week shows the real pairings and who draws the median', () => {
+  // No resolved week exists before kickoff; the pairings file is the source.
+  const html = renderWeek({
+    week: 1, resolved: undefined, pairs: [[1, 3], [2, 4], [5, 6]],
+    ghostRosterId: 6, teams: TEAMS,
+  });
+  assert.match(html, /Alpha/);
+  assert.match(html, /Delta/);
+  assert.match(html, /League median/);
+  assert.match(html, /Foxtrot/, 'roster 5 is paired with the ghost');
+  assert.doesNotMatch(html, /winner/, 'nothing has been won yet');
+  assert.doesNotMatch(html, /Roster 6/, 'the ghost roster is never named as an opponent');
+});
+
+test('a week with neither results nor pairings says so', () => {
+  const html = renderWeek({ week: 7, resolved: undefined, pairs: [], teams: TEAMS });
+  assert.match(html, /not published/i);
+});
+
+test('a degenerate week explains itself instead of rendering an empty shell', () => {
+  const html = renderWeek({
+    week: 3, resolved: { ...PLAYED, degenerate: true, matchups: [] }, teams: TEAMS,
+  });
+  assert.match(html, /do not fit the league format/i);
+});
+
+test('matchups are not clickable when the week has no archived payload', () => {
+  const on = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
+  const off = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: false });
+  assert.match(on, /data-matchup="0"/);
+  assert.doesNotMatch(off, /data-matchup=/);
+  assert.match(off, /no player detail/i, 'and it says why rather than going quiet');
 });

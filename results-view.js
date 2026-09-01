@@ -5,6 +5,7 @@
 // part that touches document.
 
 import { LAST_WEEK } from './config.js';
+import { esc } from './render.js';
 
 /**
  * Which week the Results tab opens on.
@@ -141,4 +142,130 @@ export function lineupRows(entry, rosterPositions, players = {}) {
     .map((id) => row(id, players[id]?.pos || 'BN', playerPts[id]));
 
   return { starters, bench };
+}
+
+const REASON = {
+  zeroed: 'scored 0',
+  'empty-slot': 'empty slot',
+  'bye-def': 'DEF on bye',
+};
+
+const money = (n) => n.toFixed(2);
+
+function penaltyList(penalties) {
+  if (!penalties.length) return '';
+  const items = penalties
+    .map(
+      (p) =>
+        `<li><span class="pen">+20</span><span class="who">${esc(p.name)}</span>` +
+        `<em>${esc(REASON[p.reason] || p.reason)}</em></li>`,
+    )
+    .join('');
+  return `<ul class="penalties">${items}</ul>`;
+}
+
+/* A check mark drawn as SVG rather than a glyph or an emoji: it inherits the
+ * winner colour and font size, and the visually-hidden word carries the
+ * meaning for screen readers (colour alone never does). */
+const WIN_MARK =
+  '<svg class="win-mark" viewBox="0 0 20 20" fill="none" stroke="currentColor" ' +
+  'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+  '<path d="M4 10.5l4 4 8-9"/></svg><span class="sr-only">Winner</span>';
+
+function teamBlock(rosterId, team, teams, isWinner) {
+  const name = teams[String(rosterId)] || `Roster ${rosterId}`;
+  return `<div class="side ${isWinner ? 'winner' : ''}">
+    <div class="name">${isWinner ? WIN_MARK : ''}${esc(name)}</div>
+    <div class="adj">${money(team.adjusted)}</div>
+    <div class="raw">raw ${money(team.raw)}</div>
+    ${penaltyList(team.penalties)}
+  </div>`;
+}
+
+/**
+ * One week of the Results tab.
+ *
+ * Three shapes, in this order of precedence: a resolved week the engine
+ * scored; a week Sleeper has pairings for but nobody has played; and a week
+ * we know nothing about, which says so rather than rendering blank.
+ *
+ * `detailAvailable` is false for weeks with no archived payload — the 2025
+ * archive was slimmed to a points map and cannot reconstruct a lineup. Those
+ * matchups lose their click rather than 404 on it.
+ */
+export function renderWeek({
+  week, resolved, pairs = [], ghostRosterId = null, teams = {}, detailAvailable = false,
+}) {
+  const name = (id) => teams[String(id)] || `Roster ${id}`;
+
+  if (resolved?.degenerate) {
+    return `<p class="empty">Sleeper's pairings do not fit the league format this
+      week, so nothing could be scored. The week is excluded from the standings.</p>`;
+  }
+
+  if (resolved?.played) {
+    const cards = resolved.matchups
+      .map((m, i) => playedCard(m, i, resolved, teams, detailAvailable))
+      .join('');
+    const note = detailAvailable
+      ? ''
+      : '<p class="note">This week was archived before player detail was kept, so there is no player detail to open.</p>';
+    return note + cards;
+  }
+
+  if (!pairs.length) {
+    return `<p class="empty">Week ${week} is not published by Sleeper yet.</p>`;
+  }
+
+  const medianId = medianRosterId(pairs, ghostRosterId);
+  const rows = pairs
+    .filter((pair) => !pair.includes(ghostRosterId))
+    .map(
+      ([a, b]) => `<li class="fixture">
+        <span class="side-name">${esc(name(a))}</span>
+        <span class="vs">vs</span>
+        <span class="side-name">${esc(name(b))}</span>
+      </li>`,
+    );
+
+  if (medianId !== null) {
+    rows.push(`<li class="fixture median">
+      <span class="side-name">${esc(name(medianId))}</span>
+      <span class="vs">vs</span>
+      <span class="side-name">League median</span>
+    </li>`);
+  }
+
+  return `<p class="upcoming-label">Upcoming</p><ul class="fixtures">${rows.join('')}</ul>`;
+}
+
+function playedCard(m, index, wk, teams, detailAvailable) {
+  const hook = detailAvailable
+    ? ` data-matchup="${index}" role="button" tabindex="0"`
+    : '';
+  const cls = detailAvailable ? 'card clickable' : 'card';
+
+  if (m.type === 'h2h') {
+    const [a, b] = m.rosterIds;
+    return `<div class="${cls} h2h"${hook}>
+      ${teamBlock(a, wk.teams[a], teams, m.winner === a)}
+      <div class="vs">${m.winner === null ? 'TIE' : 'vs'}</div>
+      ${teamBlock(b, wk.teams[b], teams, m.winner === b)}
+    </div>`;
+  }
+
+  const pool = (wk.medianPool || [])
+    .map((s, i) => `<span class="${i === 1 || i === 2 ? 'used' : ''}">${money(s)}</span>`)
+    .join('');
+
+  return `<div class="${cls} median"${hook}>
+    ${teamBlock(m.rosterId, wk.teams[m.rosterId], teams, m.result === 'W')}
+    <div class="vs">${m.result === 'T' ? 'TIE' : 'vs median'}</div>
+    <div class="side line ${m.result === 'L' ? 'winner' : ''}">
+      <div class="name">${m.result === 'L' ? WIN_MARK : ''}League median</div>
+      <div class="adj">${m.line === null ? '—' : money(m.line)}</div>
+      <div class="raw">avg of 2nd &amp; 3rd</div>
+      <div class="pool">${pool}</div>
+    </div>
+  </div>`;
 }

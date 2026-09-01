@@ -3,7 +3,7 @@
 
 import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from './sleeper.js';
 import { byeTeams, resolveWeek, standings, opportunitySet } from './rules.js';
-import { renderStandings, renderResults, renderRules } from './render.js';
+import { renderStandings, renderRules } from './render.js';
 import { mountLeaderboard } from './leaderboard-view.js';
 
 const state = { weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false };
@@ -52,10 +52,8 @@ function paint() {
   const owned = Object.keys(state.teams).length;
   if (showTables(owned)) {
     $('standings').innerHTML = renderStandings(standings(state.weeks), state.teams);
-    $('results').innerHTML = renderResults(state.weeks, state.teams);
   } else {
     $('standings').innerHTML = '';
-    $('results').innerHTML = '';
   }
   $('rules').innerHTML = renderRules();
   // Only the live badge earns header space. The snapshot's timestamp used to
