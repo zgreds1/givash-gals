@@ -83,6 +83,9 @@ export function medianRosterId(pairs, ghostRosterId) {
 /** Sleeper writes this into a starting slot nobody filled. Not a player id. */
 const EMPTY_SLOT = '0';
 
+/** Sleeper's own name for a bench slot, and what roster_positions calls it. */
+const BENCH_SLOT = 'BN';
+
 const FLEX_POSITIONS = new Set(['RB', 'WR', 'TE']);
 
 /**
@@ -135,11 +138,19 @@ export function lineupRows(entry, rosterPositions, players = {}) {
 
   const starters = starterIds.map((id, i) => row(id, slots[i] || '', starterPts[i]));
 
+  // A bench row is labelled BN, not with the player's own position. The
+  // detail table prints ONE slot label per row for both sides, which is
+  // right for starters — they genuinely share a lineup slot — but the two
+  // benches are independent, unordered lists of different lengths. Labelling
+  // a bench row with a position would print the left player's position over
+  // the right player's row: the same "a WR shown in an RB row" failure spec
+  // 6.1 legislated against, arriving by a different route. Each row still
+  // carries its own `pos` for any caller that wants it.
   const started = new Set(starterIds.map(String));
   const bench = (entry?.players || [])
     .map(String)
     .filter((id) => id !== EMPTY_SLOT && !started.has(id))
-    .map((id) => row(id, players[id]?.pos || 'BN', playerPts[id]));
+    .map((id) => ({ ...row(id, '', playerPts[id]), slot: BENCH_SLOT }));
 
   return { starters, bench };
 }
@@ -171,6 +182,21 @@ const WIN_MARK =
   '<svg class="win-mark" viewBox="0 0 20 20" fill="none" stroke="currentColor" ' +
   'stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
   '<path d="M4 10.5l4 4 8-9"/></svg><span class="sr-only">Winner</span>';
+
+/**
+ * The four adjusted scores the median line was drawn from, with the two that
+ * were averaged marked.
+ *
+ * Indices 1 and 2 because rules.js sorts the pool descending and averages
+ * the 2nd and 3rd — the league's median rule. Written once here rather than
+ * once in the summary card and again in the drill-down, where the two copies
+ * could drift apart.
+ */
+function poolHtml(medianPool) {
+  return (medianPool || [])
+    .map((s, i) => `<span class="${i === 1 || i === 2 ? 'used' : ''}">${money(s)}</span>`)
+    .join('');
+}
 
 function teamBlock(rosterId, team, teams, isWinner) {
   const name = teams[String(rosterId)] || `Roster ${rosterId}`;
@@ -254,9 +280,7 @@ function playedCard(m, index, wk, teams, detailAvailable) {
     </div>`;
   }
 
-  const pool = (wk.medianPool || [])
-    .map((s, i) => `<span class="${i === 1 || i === 2 ? 'used' : ''}">${money(s)}</span>`)
-    .join('');
+  const pool = poolHtml(wk.medianPool);
 
   return `<div class="${cls} median"${hook}>
     ${teamBlock(m.rosterId, wk.teams[m.rosterId], teams, m.result === 'W')}
@@ -273,11 +297,33 @@ function playedCard(m, index, wk, teams, detailAvailable) {
 const entryFor = (payload, rosterId) =>
   (payload || []).find((e) => e.roster_id === rosterId) || null;
 
-const penaltyIds = (resolved, rosterId) =>
-  new Set((resolved?.teams?.[rosterId]?.penalties || []).map((p) => String(p.playerId)));
+/**
+ * Tag each row of a lineup with whether it earned a +20.
+ *
+ * A `zeroed` or `bye-def` penalty names the player's own id, so those match
+ * by id. An empty slot has no id to name: rules.js records it as
+ * `playerId: null`, and the row Sleeper produces for it carries the '0'
+ * sentinel. Matching those by id marked nothing at all — String(null) is the
+ * literal "null", which no row id equals — so the drill-down silently left
+ * 20 points unexplained in the one view built to explain them.
+ *
+ * They are paired off positionally instead: the i-th empty starting slot
+ * takes the i-th empty-slot penalty. A lineup can hold several empty slots
+ * and every one of them earns its own +20, so this consumes one penalty per
+ * empty row rather than marking only the first.
+ */
+function markPenalties(lineup, penalties = []) {
+  const ids = new Set(
+    penalties.filter((p) => p.playerId !== null && p.playerId !== undefined)
+      .map((p) => String(p.playerId)),
+  );
+  let emptySlots = penalties.filter((p) => p.playerId === null || p.playerId === undefined).length;
+  const mark = (r) => ({ ...r, pen: r.empty ? emptySlots-- > 0 : ids.has(r.id) });
+  return { starters: lineup.starters.map(mark), bench: lineup.bench.map(mark) };
+}
 
-function playerCell(row, penalised, align) {
-  const pen = penalised ? '<span class="pen">+20</span>' : '';
+function playerCell(row, align) {
+  const pen = row.pen ? '<span class="pen">+20</span>' : '';
   const nameCls = row.empty ? 'lineup-name empty' : 'lineup-name';
   return `<div class="lineup-side ${align}">
     <span class="${nameCls}">${esc(row.name)}</span>
@@ -286,7 +332,7 @@ function playerCell(row, penalised, align) {
   </div>`;
 }
 
-function lineupTable(left, right, leftPen, rightPen) {
+function lineupTable(left, right) {
   // left and right can differ in length: bench length tracks
   // entry.players.length per roster, which diverges the moment one side has
   // dropped a player and the other has not. Mapping over left alone would
@@ -298,9 +344,9 @@ function lineupTable(left, right, leftPen, rightPen) {
     const other = right ? right[i] : null;
     const slot = (row || other)?.slot || '—';
     rows.push(`<div class="lineup-row">
-        ${row ? playerCell(row, leftPen.has(row.id), 'left') : '<span></span>'}
+        ${row ? playerCell(row, 'left') : '<span></span>'}
         <span class="lineup-slot">${esc(slot)}</span>
-        ${other ? playerCell(other, rightPen.has(other.id), 'right') : '<span></span>'}
+        ${other ? playerCell(other, 'right') : '<span></span>'}
       </div>`);
   }
   return rows.join('');
@@ -321,21 +367,27 @@ export function renderMatchupDetail({
   const leftId = isMedian ? matchup.rosterId : matchup.rosterIds[0];
   const rightId = isMedian ? null : matchup.rosterIds[1];
 
-  const left = lineupRows(entryFor(payload, leftId), rosterPositions, players);
-  const right = rightId === null
-    ? null
-    : lineupRows(entryFor(payload, rightId), rosterPositions, players);
-
-  const leftPen = penaltyIds(resolved, leftId);
-  const rightPen = rightId === null ? new Set() : penaltyIds(resolved, rightId);
-
   const leftTeam = resolved?.teams?.[leftId];
   const rightTeam = rightId === null ? null : resolved?.teams?.[rightId];
-  const leftWon = isMedian ? matchup.result === 'W' : matchup.winner === leftId;
 
-  const pool = (resolved?.medianPool || [])
-    .map((s, i) => `<span class="${i === 1 || i === 2 ? 'used' : ''}">${money(s)}</span>`)
-    .join('');
+  const left = markPenalties(
+    lineupRows(entryFor(payload, leftId), rosterPositions, players),
+    leftTeam?.penalties || [],
+  );
+  const right = rightId === null
+    ? null
+    : markPenalties(
+      lineupRows(entryFor(payload, rightId), rosterPositions, players),
+      rightTeam?.penalties || [],
+    );
+
+  const leftWon = isMedian ? matchup.result === 'W' : matchup.winner === leftId;
+  // Not `!leftWon`: a tie against the median is a tie, not a loss. The
+  // summary card and the head-to-head branch both already mark neither side
+  // on a draw; this is the branch that used to call it a median win.
+  const medianWon = matchup.result === 'L';
+
+  const pool = poolHtml(resolved?.medianPool);
 
   const header = isMedian
     ? `<div class="detail-head">
@@ -343,8 +395,8 @@ export function renderMatchupDetail({
            <div class="name">${leftWon ? WIN_MARK : ''}${esc(name(leftId))}</div>
            <div class="adj">${leftTeam ? money(leftTeam.adjusted) : '—'}</div>
          </div>
-         <div class="side line ${leftWon ? '' : 'winner'}">
-           <div class="name">League median</div>
+         <div class="side line ${medianWon ? 'winner' : ''}">
+           <div class="name">${medianWon ? WIN_MARK : ''}League median</div>
            <div class="adj">${matchup.line === null ? '—' : money(matchup.line)}</div>
            <div class="raw">avg of 2nd &amp; 3rd</div>
            <div class="pool">${pool}</div>
@@ -365,9 +417,9 @@ export function renderMatchupDetail({
     <button type="button" class="back" data-back>&larr; Week ${week}</button>
     ${header}
     <h3 class="lineup-head">Starters</h3>
-    <div class="lineup">${lineupTable(left.starters, right?.starters ?? null, leftPen, rightPen)}</div>
+    <div class="lineup">${lineupTable(left.starters, right?.starters ?? null)}</div>
     <h3 class="lineup-head">Bench</h3>
-    <div class="lineup">${lineupTable(left.bench, right?.bench ?? null, leftPen, rightPen)}</div>
+    <div class="lineup">${lineupTable(left.bench, right?.bench ?? null)}</div>
   </div>`;
 }
 
@@ -433,6 +485,11 @@ export async function mountResults(el, state = {}) {
 
   const view = { week: displayWeek(now(), state.seasonStart ?? null), matchup: null };
 
+  // Bumped by every paint(). A paint compares its own ticket against this
+  // after its awaits and drops out if a newer paint has started — two clicks
+  // in flight at once must not race to write the DOM.
+  let generation = 0;
+
   try {
     pairings = (await json('data/pairings.json')).pairings || {};
   } catch {
@@ -461,43 +518,78 @@ export async function mountResults(el, state = {}) {
     return players;
   }
 
-  function picker() {
+  // Takes the week rather than reading view.week, so the picker cannot
+  // disagree with the results drawn beside it in the same paint.
+  function picker(current) {
     const btns = weekOptions(state.weeks)
       .map(
         ({ week, played }) =>
-          `<button type="button" data-week="${week}" aria-pressed="${week === view.week}"` +
-          ` class="${week === view.week ? 'on' : ''}${played ? ' played' : ''}">${week}</button>`,
+          `<button type="button" data-week="${week}" aria-pressed="${week === current}"` +
+          ` class="${week === current ? 'on' : ''}${played ? ' played' : ''}">${week}</button>`,
       )
       .join('');
     return `<div class="controls">
-      <button type="button" data-step="-1" aria-label="Previous week"${view.week <= 1 ? ' disabled' : ''}>&larr;</button>
+      <button type="button" data-step="-1" aria-label="Previous week"${current <= 1 ? ' disabled' : ''}>&larr;</button>
       <div class="tabs weeks" role="group" aria-label="Week">${btns}</div>
-      <button type="button" data-step="1" aria-label="Next week"${view.week >= LAST_WEEK ? ' disabled' : ''}>&rarr;</button>
+      <button type="button" data-step="1" aria-label="Next week"${current >= LAST_WEEK ? ' disabled' : ''}>&rarr;</button>
     </div>`;
   }
 
   async function paint() {
-    if (!weekChosen) view.week = displayWeek(now(), state.seasonStart ?? null);
+    // Every paint takes a ticket. payloadFor can await a fetch that takes as
+    // long as the network wants, and nothing stops a second click starting a
+    // second paint while the first is still suspended — so whichever fetch
+    // happens to resolve LAST used to win the innerHTML, which on a
+    // first-visit-to-each-week click-through drew week 5's scores under a
+    // picker highlighting week 7. Silently: no error, just the wrong week.
+    // A paint that is no longer the newest one writes nothing.
+    const ticket = ++generation;
+
+    if (!weekChosen) {
+      const auto = displayWeek(now(), state.seasonStart ?? null);
+      // view.matchup is an index into THIS week's matchups. Moving the week
+      // underneath it (seasonStart landing late, or the clock rolling over
+      // while a drill-down is open) would index into a different week's
+      // array — a different matchup, or nothing at all.
+      if (auto !== view.week) view.matchup = null;
+      view.week = auto;
+    }
+
+    // Read once, up front: everything below renders the week and matchup as
+    // they were when this paint started, never a later paint's.
+    const week = view.week;
+    const matchupIndex = view.matchup;
+
     const byWeek = new Map((state.weeks || []).map((w) => [w.week, w]));
     const teams = state.teams || {};
     const ghostRosterId = state.ghostRosterId ?? null;
     const rosterPositions = state.rosterPositions || [];
 
-    const resolved = byWeek.get(view.week);
-    const payload = resolved?.played ? await payloadFor(view.week) : null;
+    const resolved = byWeek.get(week);
+    const payload = resolved?.played ? await payloadFor(week) : null;
+    // `?.[]`, because refreshLive can replace state.weeks under an open
+    // drill-down with a week that has fewer matchups than the index.
+    const matchup = matchupIndex === null || !resolved?.played
+      ? null
+      : resolved.matchups?.[matchupIndex] ?? null;
+    const isDetail = Boolean(matchup && payload);
+    const playerNames = isDetail ? await playerMap() : null;
 
-    if (view.matchup !== null && resolved?.played && payload) {
+    // Both awaits are behind us; this is the last moment before the DOM is
+    // written, so it is the only place the check needs to be.
+    if (ticket !== generation) return;
+
+    if (isDetail) {
       el.innerHTML = renderMatchupDetail({
-        week: view.week,
-        matchup: resolved.matchups[view.matchup],
+        week, matchup,
         resolved, payload, teams, rosterPositions,
-        players: await playerMap(),
+        players: playerNames,
       });
     } else {
-      el.innerHTML = picker() + renderWeek({
-        week: view.week,
+      el.innerHTML = picker(week) + renderWeek({
+        week,
         resolved,
-        pairs: pairings[String(view.week)] || [],
+        pairs: pairings[String(week)] || [],
         ghostRosterId, teams,
         detailAvailable: Boolean(payload),
       });

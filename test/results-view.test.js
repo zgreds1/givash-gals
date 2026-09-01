@@ -211,7 +211,10 @@ test('an upcoming week shows the real pairings and who draws the median', () => 
   assert.match(html, /Delta/);
   assert.match(html, /League median/);
   assert.match(html, /Foxtrot/, 'roster 5 is paired with the ghost');
-  assert.doesNotMatch(html, /winner/, 'nothing has been won yet');
+  // A /winner/ assertion used to sit here. The upcoming branch has no code
+  // path that can emit that string, so it could not fail; the played-week
+  // guard below ("renders the upcoming fixtures even when it carries stale
+  // scores") is what actually holds this branch to fixtures only.
   assert.doesNotMatch(html, /Roster 6/, 'the ghost roster is never named as an opponent');
 });
 
@@ -344,9 +347,15 @@ test('a head-to-head detail lists both lineups with the bench', () => {
     rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
   });
   assert.match(html, /Ann QB/);
-  assert.match(html, /Zed WR/, 'the bench is shown too');
-  assert.match(html, /Bench/i);
   assert.match(html, /17\.40/);
+
+  // Split on the heading rather than asserting it exists: the <h3>Bench</h3>
+  // is emitted unconditionally, so matching /Bench/i could never fail. What
+  // is worth asserting is that the bench player is rendered UNDER it and not
+  // among the starters, which a lineupRows regression could genuinely break.
+  const [starters, bench] = html.split('<h3 class="lineup-head">Bench</h3>');
+  assert.match(bench, /Zed WR/, 'the bench player sits under the Bench heading');
+  assert.doesNotMatch(starters, /Zed WR/, 'and is not also listed as a starter');
 });
 
 test('a zeroed starter is marked with the penalty that made him one', () => {
@@ -470,36 +479,59 @@ test('a mounted view reads state fresh, so a repaint reflects changes made after
 
 /**
  * A DOM-free stand-in for `el` that is just capable enough to drive
- * mountResults' own wiring: it scrapes `data-week`/`data-step` buttons out
- * of whatever HTML string was assigned, hands wire() fake elements with a
- * `dataset` and a settable `onclick`, and lets a test fire that `onclick`
- * itself to simulate a real click without a browser.
+ * mountResults' own wiring: it scrapes `data-week`/`data-step` buttons and
+ * `data-matchup` cards out of whatever HTML string was assigned, hands
+ * wire() fake elements with a `dataset` and a settable `onclick`, and lets a
+ * test fire that `onclick` itself to simulate a real click without a
+ * browser.
+ *
+ * The matchup cards and the back button are scraped too, because until they
+ * were the click -> detail -> back path had no coverage through
+ * mountResults at all: `[data-matchup]` returned [], so no test could reach
+ * paint()'s detail branch, which is where the concurrent-paint race and the
+ * stale matchup index both lived.
  */
 function makeStubEl() {
   let html = '';
   const weekButtons = [];
   const stepButtons = [];
+  const matchupCards = [];
+  let backButton = null;
+  const scrape = (v, re, make, into) => {
+    into.length = 0;
+    let m;
+    while ((m = re.exec(v))) into.push(make(m));
+  };
   return {
     get innerHTML() { return html; },
     set innerHTML(v) {
       html = v;
-      weekButtons.length = 0;
-      const weekRe = /data-week="(\d+)"/g;
-      let m;
-      while ((m = weekRe.exec(v))) weekButtons.push({ dataset: { week: m[1] }, onclick: null });
+      scrape(v, /data-week="(\d+)"/g, (m) => ({ dataset: { week: m[1] }, onclick: null }), weekButtons);
+      scrape(
+        v, /data-matchup="(\d+)"/g,
+        (m) => ({ dataset: { matchup: m[1] }, onclick: null, onkeydown: null }),
+        matchupCards,
+      );
       stepButtons.length = 0;
       for (const step of ['-1', '1']) {
         if (v.includes(`data-step="${step}"`)) stepButtons.push({ dataset: { step }, onclick: null });
       }
+      backButton = v.includes('data-back') ? { onclick: null } : null;
     },
     querySelectorAll(sel) {
       if (sel === '[data-week]') return weekButtons;
       if (sel === '[data-step]') return stepButtons;
+      if (sel === '[data-matchup]') return matchupCards;
       return [];
     },
-    querySelector: () => null,
+    querySelector(sel) {
+      return sel === '[data-back]' ? backButton : null;
+    },
   };
 }
+
+/** Let an internal, un-awaited paint() run to its next suspension point. */
+const settle = () => new Promise((r) => setTimeout(r, 0));
 
 test('the default week keeps recomputing from state.seasonStart until it arrives, not frozen at mount', async () => {
   // Mirrors loadSnapshot resolving after the tab was already clicked:
@@ -549,4 +581,240 @@ test('a week the visitor already chose survives a repaint, even if seasonStart c
   state.seasonStart = null;
   await repaint();
   assert.match(el.innerHTML, /data-week="12" aria-pressed="true"/, 'the chosen week is not overwritten by a later repaint');
+});
+
+// The two benches are independent, unordered lists: verified against the
+// real archived week-1 payload, rosters 1 and 3, whose benches run
+// RB|QB|RB|QB|TE and QB|QB|WR|WR|WR. The detail table prints one slot label
+// per row for both sides, so labelling a bench row with a position printed
+// the LEFT player's position over the right player in 4 of these 5 rows.
+const BENCH_PLAYERS = {
+  a: { name: 'Ann QB', pos: 'QB', team: 'CIN' },
+  8205: { name: 'Bo RB', pos: 'RB', team: 'ATL' },
+  l1: { name: 'Left One', pos: 'RB', team: 'MIN' },
+  l2: { name: 'Left Two', pos: 'QB', team: 'MIN' },
+  l3: { name: 'Left Three', pos: 'RB', team: 'MIN' },
+  l4: { name: 'Left Four', pos: 'QB', team: 'MIN' },
+  l5: { name: 'Left Five', pos: 'TE', team: 'MIN' },
+  r1: { name: 'Right One', pos: 'QB', team: 'BUF' },
+  r2: { name: 'Right Two', pos: 'QB', team: 'BUF' },
+  r3: { name: 'Right Three', pos: 'WR', team: 'BUF' },
+  r4: { name: 'Right Four', pos: 'WR', team: 'BUF' },
+  r5: { name: 'Right Five', pos: 'WR', team: 'BUF' },
+};
+const BENCH_PAYLOAD = [
+  { roster_id: 1, matchup_id: 1, starters: ['a', '8205'], starters_points: [10, 5],
+    players: ['a', '8205', 'l1', 'l2', 'l3', 'l4', 'l5'],
+    players_points: { a: 10, 8205: 5, l1: 1, l2: 2, l3: 3, l4: 4, l5: 5 } },
+  { roster_id: 2, matchup_id: 1, starters: ['a', '8205'], starters_points: [7, 6],
+    players: ['a', '8205', 'r1', 'r2', 'r3', 'r4', 'r5'],
+    players_points: { a: 7, 8205: 6, r1: 1, r2: 2, r3: 3, r4: 4, r5: 5 } },
+];
+
+const slotLabels = (section) =>
+  [...section.matchAll(/class="lineup-slot">([^<]*)</g)].map((m) => m[1]);
+
+test('bench rows are labelled BN, never with one side position printed over the other', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    resolved: PLAYED, payload: BENCH_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: BENCH_PLAYERS,
+  });
+  const [starters, bench] = html.split('<h3 class="lineup-head">Bench</h3>');
+
+  assert.deepEqual(
+    slotLabels(bench), ['BN', 'BN', 'BN', 'BN', 'BN'],
+    'a bench row names the slot, not a position belonging to only one of its two players',
+  );
+  // The starter path is untouched: those rows genuinely share a lineup slot.
+  assert.deepEqual(slotLabels(starters), ['QB', 'RB']);
+  assert.match(bench, /Left One/);
+  assert.match(bench, /Right One/);
+});
+
+test('a tie against the median is drawn as a tie, not as a median win', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'median', rosterId: 5, line: 101.2, result: 'T' },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.match(html, /League median/);
+  assert.doesNotMatch(html, /winner/i, 'neither side wins a draw - as in playedCard and the h2h detail');
+});
+
+test('a loss to the median still marks the median as the winner', () => {
+  // The other half of the tie fix: it must not have flattened result L too.
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'median', rosterId: 5, line: 107.9, result: 'L' },
+    resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.match(html, /class="side line winner"/);
+});
+
+// Two unfilled starting slots and one zeroed starter: three separate +20s.
+// rules.js records an empty slot as playerId: null, so it cannot be matched
+// by id, and a lineup can hold more than one of them.
+const EMPTY_POSITIONS = ['QB', 'RB', 'WR', 'TE', 'BN'];
+const EMPTY_PAYLOAD = [
+  { roster_id: 1, matchup_id: 1, starters: ['0', '0', '8205', 'a'], starters_points: [0, 0, 0, 17.4],
+    players: ['8205', 'a', 'z'], players_points: { 8205: 0, a: 17.4, z: 8.1 } },
+  { roster_id: 2, matchup_id: 1, starters: ['a'], starters_points: [9.2],
+    players: ['a'], players_points: { a: 9.2 } },
+];
+const EMPTY_RESOLVED = {
+  ...PLAYED,
+  teams: {
+    ...PLAYED.teams,
+    1: {
+      raw: 17.4, adjusted: 77.4,
+      penalties: [
+        { playerId: null, name: 'Empty slot', reason: 'empty-slot' },
+        { playerId: null, name: 'Empty slot', reason: 'empty-slot' },
+        { playerId: '8205', name: 'Bo RB', reason: 'zeroed' },
+      ],
+    },
+  },
+};
+
+test('every empty starting slot carries its own +20 in the drill-down', () => {
+  const html = renderMatchupDetail({
+    week: 3, matchup: { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    resolved: EMPTY_RESOLVED, payload: EMPTY_PAYLOAD, teams: TEAMS,
+    rosterPositions: EMPTY_POSITIONS, players: DETAIL_PLAYERS,
+  });
+  assert.equal(
+    (html.match(/class="pen">\+20/g) || []).length, 3,
+    'two empty slots and one zeroed starter are three penalties, and the drill-down must account for all of them',
+  );
+  // And the marks land on the empty rows, not on whoever happens to be first.
+  const rows = html.split('<div class="lineup-row">').slice(1);
+  const marked = rows.filter((r) => r.includes('class="pen"'));
+  assert.equal(marked.length, 3);
+  assert.equal(marked.filter((r) => r.includes('Empty slot')).length, 2);
+  assert.match(marked.find((r) => !r.includes('Empty slot')), /Bo RB/);
+});
+
+// Two played weeks with unmistakably different scores, so a paint that
+// renders the wrong one cannot be mistaken for the right one.
+const RACE_WEEKS = [
+  {
+    week: 5, played: true, degenerate: false,
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+    teams: { 1: { raw: 55, adjusted: 55, penalties: [] }, 2: { raw: 65, adjusted: 65, penalties: [] } },
+  },
+  {
+    week: 7, played: true, degenerate: false,
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 2 }],
+    teams: { 1: { raw: 77, adjusted: 77, penalties: [] }, 2: { raw: 87, adjusted: 87, penalties: [] } },
+  },
+];
+
+test('a slow fetch that lands last cannot overwrite the week clicked after it', async () => {
+  // Click a played week whose wk{N}.json is not cached yet, click a second
+  // played week before the first fetch lands, then let the FIRST fetch
+  // resolve last. Both paints were in flight with nothing ordering them, so
+  // the stale one wrote week 5's scores under a picker highlighting week 7.
+  const el = makeStubEl();
+  const pending = new Map();
+  const state = {
+    weeks: RACE_WEEKS,
+    teams: TEAMS,
+    ghostRosterId: 6,
+    seasonStart: START,
+    rosterPositions: DETAIL_POSITIONS,
+    livePayloads: {},
+    json: async (url) => {
+      if (url === 'data/pairings.json') return { pairings: {} };
+      if (url === 'data/roster-players.json') return { players: DETAIL_PLAYERS };
+      const m = /^data\/raw\/wk(\d+)\.json$/.exec(url);
+      if (m) return new Promise((resolve) => pending.set(Number(m[1]), () => resolve(DETAIL_PAYLOAD)));
+      throw new Error(`unexpected fetch: ${url}`);
+    },
+    now: () => local(2026, 9, 9), // week 1: neither of the two racing weeks
+  };
+
+  await mountResults(el, state);
+  const weekBtn = (n) => el.querySelectorAll('[data-week]').find((b) => b.dataset.week === String(n));
+
+  weekBtn(5).onclick();
+  await settle();
+  weekBtn(7).onclick();
+  await settle();
+  assert.deepEqual([...pending.keys()], [5, 7], 'both weeks are in flight at once');
+
+  pending.get(7)();   // the newer click's fetch lands first
+  await settle();
+  pending.get(5)();   // and the older one lands last
+  await settle();
+
+  assert.match(el.innerHTML, /data-week="7" aria-pressed="true"/, 'the picker shows the week clicked last');
+  assert.match(el.innerHTML, /77\.00/, 'and so do the scores beside it');
+  assert.doesNotMatch(el.innerHTML, /55\.00/, "week 5's scores must not appear under week 7's picker");
+});
+
+// Week 1 and week 9, each with two matchups, so a stale index into the
+// wrong week's array still finds a matchup there - it just finds the wrong
+// one, which is exactly the silent failure being guarded against.
+const DRIFT_WEEKS = [
+  {
+    week: 1, played: true, degenerate: false,
+    matchups: [
+      { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+      { type: 'h2h', rosterIds: [3, 4], winner: 3 },
+    ],
+    teams: {
+      1: { raw: 10, adjusted: 10, penalties: [] }, 2: { raw: 20, adjusted: 20, penalties: [] },
+      3: { raw: 30, adjusted: 30, penalties: [] }, 4: { raw: 40, adjusted: 40, penalties: [] },
+    },
+  },
+  {
+    week: 9, played: true, degenerate: false,
+    matchups: [
+      { type: 'h2h', rosterIds: [1, 3], winner: 1 },
+      { type: 'h2h', rosterIds: [2, 4], winner: 4 },
+    ],
+    teams: {
+      1: { raw: 11, adjusted: 11, penalties: [] }, 2: { raw: 22, adjusted: 22, penalties: [] },
+      3: { raw: 33, adjusted: 33, penalties: [] }, 4: { raw: 44, adjusted: 44, penalties: [] },
+    },
+  },
+];
+
+test('a drill-down is not re-pointed at another week when the default week moves under it', async () => {
+  // view.matchup is an index into the week that was on screen when the card
+  // was clicked. Opening a card does not set weekChosen, so the next paint
+  // still recomputes the default week from seasonStart - and used to carry
+  // the old index into the new week's matchups.
+  const el = makeStubEl();
+  let clock = local(2026, 9, 9); // week 1
+  const state = {
+    weeks: DRIFT_WEEKS,
+    teams: TEAMS,
+    ghostRosterId: 6,
+    seasonStart: START,
+    rosterPositions: DETAIL_POSITIONS,
+    livePayloads: {},
+    json: async (url) => {
+      if (url === 'data/pairings.json') return { pairings: {} };
+      if (url === 'data/roster-players.json') return { players: DETAIL_PLAYERS };
+      if (/^data\/raw\/wk\d+\.json$/.test(url)) return DETAIL_PAYLOAD;
+      throw new Error(`unexpected fetch: ${url}`);
+    },
+    now: () => clock,
+  };
+
+  const { repaint } = await mountResults(el, state);
+  assert.match(el.innerHTML, /data-week="1" aria-pressed="true"/);
+
+  el.querySelectorAll('[data-matchup]')[1].onclick(); // week 1's second matchup
+  await settle();
+  assert.match(el.innerHTML, /data-back/, 'the drill-down is open');
+  assert.match(el.innerHTML, /Delta/, "and it is week 1's second matchup, rosters 3 and 4");
+
+  clock = local(2026, 11, 4); // the clock rolls on to week 9 under the open detail
+  await repaint();
+
+  assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/, 'the week moves on');
+  assert.doesNotMatch(el.innerHTML, /data-back/, "and the index into week 1's matchups goes with it");
 });
