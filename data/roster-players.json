@@ -1,11 +1,6 @@
 {
-  "generatedAt": "2026-09-01T17:13:20.049Z",
+  "generatedAt": "2026-09-06T18:57:12.448Z",
   "players": {
-    "19": {
-      "name": "Joe Flacco",
-      "pos": "QB",
-      "team": "CIN"
-    },
     "96": {
       "name": "Aaron Rodgers",
       "pos": "QB",
@@ -424,7 +419,7 @@
     "11199": {
       "name": "Emari Demercado",
       "pos": "RB",
-      "team": "—"
+      "team": "DAL"
     },
     "11237": {
       "name": "Jacob Saylors",
@@ -444,7 +439,7 @@
     "11520": {
       "name": "Lucky Jackson",
       "pos": "WR",
-      "team": "—"
+      "team": "DET"
     },
     "11533": {
       "name": "Brandon Aubrey",
@@ -576,6 +571,11 @@
       "pos": "RB",
       "team": "GB"
     },
+    "12508": {
+      "name": "Jaxson Dart",
+      "pos": "QB",
+      "team": "NYG"
+    },
     "12522": {
       "name": "Cam Ward",
       "pos": "QB",
@@ -587,9 +587,9 @@
       "team": "CLE"
     },
     "12530": {
-      "name": "Travis Hunter",
-      "pos": "WR",
-      "team": "JAX"
+      "name": "12530",
+      "pos": "",
+      "team": ""
     },
     "12535": {
       "name": "Isaac TeSlaa",

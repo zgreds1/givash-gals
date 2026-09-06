@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-01T17:13:20.049Z",
+  "generatedAt": "2026-09-06T18:57:12.448Z",
   "weeks": [
     {
       "week": 1,
@@ -59,7 +59,7 @@
             },
             {
               "playerId": "12530",
-              "name": "Travis Hunter",
+              "name": "Unknown (12530)",
               "reason": "zeroed"
             },
             {
@@ -316,8 +316,8 @@
               "reason": "zeroed"
             },
             {
-              "playerId": "19",
-              "name": "Joe Flacco",
+              "playerId": "12508",
+              "name": "Jaxson Dart",
               "reason": "zeroed"
             },
             {
@@ -326,8 +326,8 @@
               "reason": "zeroed"
             },
             {
-              "playerId": "4035",
-              "name": "Alvin Kamara",
+              "playerId": "12455",
+              "name": "Brashard Smith",
               "reason": "zeroed"
             },
             {
@@ -336,8 +336,8 @@
               "reason": "zeroed"
             },
             {
-              "playerId": "8205",
-              "name": "Isiah Pacheco",
+              "playerId": "4035",
+              "name": "Alvin Kamara",
               "reason": "zeroed"
             },
             {
@@ -371,8 +371,8 @@
               "reason": "zeroed"
             },
             {
-              "playerId": "12455",
-              "name": "Brashard Smith",
+              "playerId": "11626",
+              "name": "Xavier Legette",
               "reason": "zeroed"
             },
             {
