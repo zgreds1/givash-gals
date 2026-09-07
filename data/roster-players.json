@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-06T18:57:12.448Z",
+  "generatedAt": "2026-09-07T08:57:44.687Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -136,6 +136,11 @@
       "pos": "TE",
       "team": "BAL"
     },
+    "5848": {
+      "name": "Marquise Brown",
+      "pos": "WR",
+      "team": "PHI"
+    },
     "5859": {
       "name": "A.J. Brown",
       "pos": "WR",
@@ -170,11 +175,6 @@
       "name": "Joe Burrow",
       "pos": "QB",
       "team": "CIN"
-    },
-    "6783": {
-      "name": "Jerry Jeudy",
-      "pos": "WR",
-      "team": "CLE"
     },
     "6786": {
       "name": "CeeDee Lamb",
@@ -251,11 +251,6 @@
       "pos": "WR",
       "team": "ATL"
     },
-    "8126": {
-      "name": "Wan'Dale Robinson",
-      "pos": "WR",
-      "team": "TEN"
-    },
     "8127": {
       "name": "Charlie Kolar",
       "pos": "TE",
@@ -325,6 +320,11 @@
       "name": "Chig Okonkwo",
       "pos": "TE",
       "team": "WAS"
+    },
+    "8917": {
+      "name": "KaVontae Turpin",
+      "pos": "WR",
+      "team": "DAL"
     },
     "9221": {
       "name": "Jahmyr Gibbs",
@@ -400,11 +400,6 @@
       "name": "C.J. Stroud",
       "pos": "QB",
       "team": "HOU"
-    },
-    "10213": {
-      "name": "Tre Tucker",
-      "pos": "WR",
-      "team": "LV"
     },
     "10231": {
       "name": "Elijah Higgins",
@@ -526,11 +521,6 @@
       "pos": "WR",
       "team": "LV"
     },
-    "12492": {
-      "name": "Pat Bryant",
-      "pos": "WR",
-      "team": "DEN"
-    },
     "12494": {
       "name": "Kyle McCord",
       "pos": "QB",
@@ -606,6 +596,11 @@
       "pos": "WR",
       "team": "NYJ"
     },
+    "12540": {
+      "name": "Chimere Dike",
+      "pos": "WR",
+      "team": "TEN"
+    },
     "12544": {
       "name": "LeQuint Allen",
       "pos": "RB",
@@ -630,6 +625,11 @@
       "name": "Max Klare",
       "pos": "TE",
       "team": "LAR"
+    },
+    "13285": {
+      "name": "Malachi Fields",
+      "pos": "WR",
+      "team": "NYG"
     },
     "13298": {
       "name": "KC Concepcion",
