@@ -355,10 +355,29 @@ payload is ~27 KB.
 
 Per §3.6, add to `.github/workflows/snapshot.yml`:
 
-    - cron: '0 5 * * 2'    # Tue 05:00 UTC — after the MNF whistle, before the gate
+    - cron: '0 6 * * 2'    # Tue 06:00 UTC — after the MNF whistle, before the gate
 
-MNF ends around 03:35 UTC Tuesday; the Israel gate opens at 07:00 UTC. The
-existing Tue 09:00 ET run is kept for stat corrections.
+The existing Tue 09:00 ET run is kept for stat corrections.
+
+**Corrected after the whole-branch review; the original value was 05:00 UTC.**
+That figure was EDT arithmetic. §6.2's DST table analyses *Israel's* change and
+never considered the United States': US DST ends Sunday 1 November 2026, inside
+week 8, so from week 8 through week 18 Monday Night Football kicks at 20:15 EST
+and ends nearer 04:25–04:40 UTC. Against a 05:00 UTC run that leaves about
+twenty-five minutes — before Sleeper has to flip `status` to `complete`, and
+less than nothing if the game goes to overtime.
+
+The two windows the run has to fit between therefore each move by an hour, in
+opposite halves of the season:
+
+| | Weeks 1–7 | Weeks 8–18 |
+|---|---|---|
+| MNF ends (approx) | 03:35 UTC (EDT) | 04:25–04:40 UTC (EST) |
+| Israel gate opens | 07:00 UTC (IDT) | 08:00 UTC (IST, after 25 Oct) |
+| Run at 06:00 UTC | +2h25m after, 1h before | +1h20m after, 2h before |
+
+06:00 UTC clears the whistle by at least 1h20m and beats the gate by at least
+an hour in every week of the season. 05:00 UTC does neither for eleven of them.
 
 ### 7.3 `snapshot.mjs`
 
