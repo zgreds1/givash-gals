@@ -90,6 +90,26 @@ export function renderRules() {
     <p>Negative scores are kept as-is. A kicker at &minus;1 stays at &minus;1;
        that is a reward, not something to punish.</p>
 
+    <h2>When the +${PENALTY} lands</h2>
+    <p>A +${PENALTY} only counts once <strong>that player's own NFL game is
+       complete</strong>. A starter sitting on 0 at half-time has not cost you
+       anything yet; he costs ${PENALTY} when his game ends still on 0.</p>
+    <p>Some cases settle straight away, because no game is going to change
+       them: an <strong>empty slot</strong>; a starter with no NFL game to
+       wait for, whether his team is on bye or he has no team at all; and a
+       game that is <strong>cancelled</strong>.</p>
+    <p>So a team's score moves during the week, and Results shows three
+       readings of it. <strong>adjusted</strong> is the official score, counting
+       finished games only &mdash; it is the one the standings use.
+       <strong>in play</strong> adds the games happening right now, so it is
+       where you would land if everything ended this second.
+       <strong>raw</strong> is the points alone, with no +${PENALTY} of any
+       kind. A starter whose game has not kicked off counts toward neither of
+       the first two.</p>
+    <p>The standings themselves do not move mid-week: a week joins them on
+       <strong>Tuesday at 10:00 Israel time</strong>, once its games are done
+       and its adjusted scores have stopped changing.</p>
+
     <h2>The median matchup</h2>
     <p>Five managers occupy six roster slots. Each week the team Sleeper pairs
        against the empty roster plays the <strong>league median</strong>: the

@@ -1,6 +1,6 @@
 # givash-gals
 
-Standings and results for a Sleeper fantasy league whose format Sleeper
+Results and standings for a Sleeper fantasy league whose format Sleeper
 cannot represent: **lowest score wins**, starters who score exactly 0 add
 +20, and because there are 5 managers, one team each week plays the league
 median instead of an opponent.
@@ -44,10 +44,14 @@ in the file header: the accent, win and penalty colours are darkened, because
 the generated values are *fill* colours and this site uses them as small text
 on near-white, where they fail the 4.5:1 contrast floor.
 
-Two colour meanings are load-bearing and never carried by colour alone:
-green marks the *lower* score (the winner in this league) and is always
-accompanied by a check mark and a visually-hidden "Winner"; red marks a +20
-penalty and always sits next to the literal text `+20`.
+Two colour meanings are load-bearing and never carried by colour alone. Green
+marks the *lower* score — the winner in this league — and always arrives with
+a shape and a word: a solid check mark and a visually-hidden "Winner" once the
+week has finished, a hollow ring and a visible "leading" while its games are
+still being played. Red marks a +20, solid once the penalty has landed and a
+dashed outline while that player's game is still on, and both sit beside the
+literal text `+20`; a zero whose game has not kicked off is neither, and says
+"not started" in grey instead of showing a number.
 
 The empty `.nojekyll` file at the root is load-bearing. GitHub Pages runs
 Jekyll over the whole repository by default, and Jekyll's Liquid parser

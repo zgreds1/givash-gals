@@ -41,12 +41,25 @@ A penalty is only counted once **that player's own NFL game is complete**. A
 starter sitting on 0 at half-time has not yet cost anything; he costs 20 when
 his game ends still on 0.
 
-Three cases settle immediately, because no game is going to change them:
+These settle immediately, because no game is going to change them:
 
 - an **empty starter slot**, which no result can rescue;
-- a player whose **NFL team is on bye**, or whose game was **cancelled** — both
-  are absence, which is exactly what this rule punishes;
-- a player **not in the league's player map**, who is inactive.
+- a player whose **NFL team is on bye** — absence, which is exactly what this
+  rule punishes;
+- a player with **no NFL team at all**, which is two distinct cases that reach
+  the same answer: an id **not in the league's player map** (inactive), and an
+  id that *is* in the map carrying `team: null`. The second is much the larger
+  group — 2357 of the 3231 entries in `data/players-slim.json`, every free
+  agent and every retired player — and it is the only thing producing a settled
+  penalty anywhere in the committed archive so far (Taysom Hill and Tyler
+  Lockett, week 1);
+- a player whose **game was cancelled**: the game is not happening, so the +20
+  lands as if it had finished. Note this is *not* the same as a bye, because
+  the DEF exemption above is decided by `byeTeams`, which reads the week's
+  fixtures and never `status`. A DEF whose game was cancelled therefore counts
+  as "not on bye" and stays exempt, while every skill-position starter beside
+  him on 0 pays the 20. The asymmetry is in the code, not a slip in this
+  document.
 
 This makes a team's score a moving number during the week, so the site shows
 three readings of it:

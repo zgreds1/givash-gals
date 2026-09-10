@@ -166,8 +166,9 @@ export function opportunitySet(weekStats) {
  * lineups, not good ones.
  *
  * A penalty is only counted once that player's own NFL game is complete.
- * Three cases settle immediately: empty slots, players on bye, and
- * unrecognised ids (inactive players). The `states` parameter reads
+ * Several cases settle immediately: empty slots, a player whose NFL team is on
+ * bye, a player with no NFL team at all (an unrecognised id, or an id carrying
+ * `team: null`), and a cancelled game. The `states` parameter reads
  * that week's schedule and maps each team to its game status ('final',
  * 'live', 'upcoming'). With no `states` (the default `null`), penalties
  * are treated as already final — this preserves the old behaviour and
@@ -194,9 +195,11 @@ export function adjustedScore(
   // archive and every existing caller keep their answers with no edit.
   //
   // A team present in the week's schedule takes its game's phase. A team ABSENT
-  // is on bye, and a bye is settled from kickoff: it is the purest form of the
-  // absence this penalty exists to punish, so it must never sit pending
-  // forever waiting for a game that is not being played.
+  // from it has no game to wait for — on bye, or no NFL team at all, which is
+  // what `team: null` carries for the free agents and retired players that make
+  // up most of the slim player map. Either way it settles from kickoff: it is
+  // the purest form of the absence this penalty exists to punish, so it must
+  // never sit pending forever waiting for a game that is not being played.
   const phaseOf = (team) => (states === null ? 'final' : states.get(team) ?? 'final');
 
   for (let i = 0; i < starters.length; i++) {

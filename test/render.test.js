@@ -1,6 +1,24 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { renderStandings, renderRules } from '../render.js';
+import { PENALTY } from '../config.js';
+
+/**
+ * One `<h2>` section of the rules page, heading excluded.
+ *
+ * The page repeats phrases like "on bye" and "empty slot" across sections, so
+ * a match against the whole render would be satisfied by copy that was already
+ * there before the section under test existed.
+ */
+const section = (html, heading) => {
+  const start = html.indexOf(heading);
+  assert.notEqual(start, -1, `the rules page has no "${heading}" heading`);
+  const rest = html.slice(start + heading.length);
+  const end = rest.indexOf('<h2>');
+  return end === -1 ? rest : rest.slice(0, end);
+};
+
+const LANDS = `When the +${PENALTY} lands</h2>`;
 
 // Shared by the meta/gate-note tests below, which don't care about the row
 // shape itself — only about what renderStandings does around it.
@@ -53,6 +71,34 @@ test('the rules page says a target and a pass attempt do NOT exempt', () => {
   assert.match(html, /completed action, not an intention/i);
   assert.match(html, /targeted eight times/i);
   assert.match(html, /0-for-5/);
+});
+
+test('the rules page states when a +20 actually lands', () => {
+  // The one surface in the product whose job is stating the rules still said
+  // "each starter that scores exactly 0 adds 20" while Results was tagging
+  // zeros "not started". A visitor clicking through found neither concept.
+  const lands = section(renderRules(), LANDS);
+  assert.match(lands, /own NFL game is\s+complete/i);
+  assert.match(lands, /half-time/i);
+  assert.match(lands, /empty slot/i);
+  assert.match(lands, /on bye/i);
+  assert.match(lands, /cancelled/i);
+});
+
+test('the rules page names the three readings, in that order', () => {
+  const lands = section(renderRules(), LANDS);
+  assert.match(
+    lands,
+    /<strong>adjusted<\/strong>[\s\S]*<strong>in play<\/strong>[\s\S]*<strong>raw<\/strong>/,
+    'adjusted, in play, raw — the labels and the order the Results tab uses',
+  );
+  assert.match(lands, /not kicked off counts toward neither/i);
+});
+
+test('the rules page says the standings absorb a week on the Tuesday gate', () => {
+  const lands = section(renderRules(), LANDS);
+  assert.match(lands, /standings themselves do not move mid-week/i);
+  assert.match(lands, /Tuesday at 10:00 Israel time/);
 });
 
 test('the standings caption says which week it is through', () => {
