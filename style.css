@@ -504,6 +504,40 @@ table.standings {
 }
 .win-mark { flex: none; width: 1em; height: 1em; color: var(--win); }
 
+/* The pill, unchanged: the upcoming-fixtures list below still draws it, and
+ * that view is not what this task redrew. */
+.vs {
+  align-self: center;
+  font: 500 var(--t-3xs) / 1 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-align: center;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: var(--space-sm) var(--space-lg);
+  white-space: nowrap;
+}
+
+/* On a hairline slip the divider between two names is a label, not a chrome
+ * element — so the card strips the pill back off. Scoped to .teams rather
+ * than folded into the rule above, which would change a view this task never
+ * touched. align-self returns to baseline so the label sits on the same line
+ * as the names, which is what .teams' own align-items asks for. */
+.teams .vs {
+  align-self: baseline;
+  font: 500 var(--t-3xs) / 1 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
 .lrow { padding: var(--space-sm) 0; }
 .lrow + .lrow { border-top: 1px solid var(--line); }
 .lrow .n {
@@ -629,6 +663,14 @@ table.standings {
 .fixture .side-name { font-weight: 600; min-width: 0; }
 .fixture .side-name:last-child { text-align: right; }
 .fixture.median .side-name:last-child { color: var(--muted); font-weight: 500; }
+
+/* Carried over from the old shared `.vs { justify-self: start }`, which lived
+ * in a 40rem block written for the three-column card and was deleted with it.
+ * The card no longer wants it; this list always did — without it the pill
+ * stretches the full row width once .fixture collapses to one column below. */
+@media (max-width: 40rem) {
+  .fixture .vs { justify-self: start; }
+}
 
 @media (max-width: 34rem) {
   .fixture { grid-template-columns: 1fr; gap: var(--space-sm); text-align: left; }
@@ -919,16 +961,6 @@ table.leaderboard th .dir {
   /* Not sticky here: the wrapper above is the scroll container now. */
   table.leaderboard th {
     position: static;
-  }
-}
-
-@media (max-width: 40rem) {
-  .card {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-  }
-  .vs {
-    justify-self: start;
   }
 }
 
