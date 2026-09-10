@@ -272,7 +272,11 @@ the three scores is explained per player:
 |-----|---------|
 | solid `+20` | `final` — locked, counts in `adjusted` |
 | dashed `+20` | `live` — pending, counts in `in play` only, can still evaporate |
-| dotted day name | `upcoming` — counts in neither |
+| dotted `not started` | `upcoming` — counts in neither |
+
+The third tag deliberately does not name the kickoff day. The day would have to
+be plumbed from the schedule into every lineup row, and "not started" already
+says the only thing that matters: this zero is in neither total yet.
 
 An exempt DEF gets no tag, unchanged.
 
