@@ -436,7 +436,7 @@ table.standings {
   background: var(--card);
   border: 0;
   border-top: 1px solid var(--rule);
-  padding: var(--space-lg) var(--space-3xl) var(--space-lg) var(--space-lg);
+  padding: var(--space-lg);
   transition: background 200ms ease;
 }
 .card:last-of-type { border-bottom: 1px solid var(--rule); }
@@ -445,7 +445,9 @@ table.standings {
 .card.live { border-top-style: dashed; }
 .card.live:last-of-type { border-bottom-style: dashed; }
 
-.card.clickable { cursor: pointer; }
+/* The chevron gutter belongs to the cards that draw a chevron. An archived
+ * week emits none, and used to pay for one by sitting off-centre anyway. */
+.card.clickable { cursor: pointer; padding-right: var(--space-3xl); }
 .card.clickable:hover { background: #fbfdff; }
 .card.clickable:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
 
@@ -558,6 +560,15 @@ table.standings {
 .lrow.decides .lbl { color: var(--ink); font-weight: 600; }
 
 .pool-row { grid-column: 1 / -1; text-align: center; padding-top: var(--space-sm); }
+
+/* The chips average to the ADJUSTED line, which while games are running is not
+ * the emphasised row directly above them. Juxtaposition would assert the wrong
+ * provenance, so the row says in words which reading it belongs to. */
+.pool-row .pool-cap { display: block; font-size: var(--t-3xs); color: var(--muted); }
+
+/* .pool is a flex container, so it lays its chips from flex-start and the
+ * parent's text-align never reaches them. */
+.pool-row .pool { justify-content: center; }
 
 /* The key: on the page, open by default. Not a tooltip — hover does not exist
  * on the phone this is read on during games. */

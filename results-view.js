@@ -271,9 +271,13 @@ function weekStatus(week, settled) {
  * A <details> and not a title attribute or a hover card: this site is read on a
  * phone during games, where hover does not exist. Open by default, collapsible,
  * and keyboard- and screen-reader-native with no JavaScript.
+ *
+ * `open` is a parameter and not a hardcoded attribute because paint() replaces
+ * innerHTML wholesale: hardcoding it forced the panel back open on every week
+ * click, stepper, drill-down and back, which is every interaction the tab has.
  */
-function scoreKey() {
-  return `<details class="score-key" open>
+function scoreKey(open) {
+  return `<details class="score-key"${open ? ' open' : ''}>
     <summary>What these three numbers mean</summary>
     <dl>
       <div><dt>adjusted</dt><dd>+20 for each starter on 0 whose game has
@@ -301,10 +305,14 @@ function scoreKey() {
  * `settled` says whether the week's GAMES are over, which is what decides
  * which of the three readings the card leans on. mountResults works it out;
  * it is not derivable from `resolved` alone.
+ *
+ * `keyOpen` is the visitor's own disclosure state for the score key, held by
+ * the caller across repaints. Defaulted true so the key is open on a first
+ * visit, which is when it is worth reading.
  */
 export function renderWeek({
   week, resolved, pairs = [], ghostRosterId = null, teams = {}, detailAvailable = false,
-  settled = false,
+  settled = false, keyOpen = true,
 }) {
   const name = (id) => teams[String(id)] || `Roster ${id}`;
 
@@ -320,7 +328,7 @@ export function renderWeek({
     const note = detailAvailable
       ? ''
       : '<p class="note">This week was archived before player detail was kept, so there is no player detail to open.</p>';
-    return weekStatus(week, settled) + scoreKey() + note + cards;
+    return weekStatus(week, settled) + scoreKey(keyOpen) + note + cards;
   }
 
   if (!pairs.length) {
@@ -381,7 +389,10 @@ function playedCard(m, index, wk, teams, detailAvailable, settled) {
       ${sideHead('League median', 'r', leader === 'line', settled)}
     </div>
     <div class="ladder">${ladder(wk.teams[m.rosterId], line, decides)}
-      <div class="pool-row"><span class="pool">${poolHtml(wk.medianPool)}</span></div>
+      <div class="pool-row">
+        <span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted</span>
+        <span class="pool">${poolHtml(wk.medianPool)}</span>
+      </div>
     </div>
   </div>`;
 }
@@ -567,6 +578,11 @@ export async function mountResults(el, state = {}) {
   // once the snapshot lands instead of sticking on week 1 for the session.
   let weekChosen = false;
 
+  // The score key is a <details>, and paint() replaces innerHTML wholesale, so
+  // its disclosure state cannot live in the DOM. Sticky like weekChosen above:
+  // once the visitor has closed the key, no later paint may reopen it.
+  let keyOpen = true;
+
   // The module's own cache for weeks refreshLive never touched — distinct
   // from state.livePayloads, which is read fresh on every call instead of
   // copied in here, so a payload that arrives after mount is still picked
@@ -710,7 +726,7 @@ export async function mountResults(el, state = {}) {
         pairs: pairings[String(week)] || [],
         ghostRosterId, teams,
         detailAvailable: Boolean(payload),
-        settled,
+        settled, keyOpen,
       });
     }
     wire();
@@ -739,6 +755,11 @@ export async function mountResults(el, state = {}) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       };
     }
+    // Records the toggle, deliberately without repainting: a repaint would
+    // rebuild the very element the visitor just clicked.
+    const key = el.querySelector('.score-key');
+    if (key) key.ontoggle = () => { keyOpen = key.open; };
+
     const back = el.querySelector('[data-back]');
     if (back) back.onclick = () => { view.matchup = null; paint(); };
   }

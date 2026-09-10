@@ -520,6 +520,7 @@ function makeStubEl() {
   const stepButtons = [];
   const matchupCards = [];
   let backButton = null;
+  let scoreKeyEl = null;
   const scrape = (v, re, make, into) => {
     into.length = 0;
     let m;
@@ -540,6 +541,11 @@ function makeStubEl() {
         if (v.includes(`data-step="${step}"`)) stepButtons.push({ dataset: { step }, onclick: null });
       }
       backButton = v.includes('data-back') ? { onclick: null } : null;
+      // Rebuilt on every write, like the real element paint() throws away, so
+      // a test can only see the key stay closed if the CLOSURE remembered it.
+      scoreKeyEl = v.includes('class="score-key"')
+        ? { open: v.includes('<details class="score-key" open>'), ontoggle: null }
+        : null;
     },
     querySelectorAll(sel) {
       if (sel === '[data-week]') return weekButtons;
@@ -548,6 +554,7 @@ function makeStubEl() {
       return [];
     },
     querySelector(sel) {
+      if (sel === '.score-key') return scoreKeyEl;
       return sel === '[data-back]' ? backButton : null;
     },
   };
@@ -914,20 +921,30 @@ test('the card prints all three scores in every state', () => {
     const html = renderWeek({
       week: 3, resolved: LIVE_WEEK, teams: NAMES, detailAvailable: true, settled,
     });
-    assert.match(html, /adjusted/, `settled=${settled}`);
-    assert.match(html, /in play/, `settled=${settled}`);
-    assert.match(html, /raw/, `settled=${settled}`);
-    assert.match(html, /98\.40/);
-    assert.match(html, /118\.40/);
-    assert.match(html, /78\.40/);
+    // Pinned to the ladder's own markup. A bare /adjusted/ is satisfied by
+    // scoreKey()'s <dt>adjusted</dt> and would pass with no ladder rendered at
+    // all; only the ladder pairs a label with its caption.
+    assert.match(html, /<span class="lbl">adjusted<span class="cap">finished games</, `settled=${settled}`);
+    assert.match(html, /<span class="lbl">in play<span class="cap">\+ in progress</, `settled=${settled}`);
+    assert.match(html, /<span class="lbl">raw<span class="cap">no \+20s</, `settled=${settled}`);
+    // And pinned to their cells: 98.40 is also one of the four median-pool
+    // chips, so a bare /98\.40/ passes off the pool alone.
+    assert.match(html, /<span class="n l">98\.40<\/span>/, `settled=${settled}`);
+    assert.match(html, /<span class="n l">118\.40<\/span>/, `settled=${settled}`);
+    assert.match(html, /<span class="n l">78\.40<\/span>/, `settled=${settled}`);
   }
 });
 
 test('emphasis moves between the two states without anything disappearing', () => {
   const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
   const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
-  assert.match(open, /class="lrow decides"[\s\S]*?in play/);
-  assert.match(done, /class="lrow decides"[\s\S]*?adjusted/);
+  // [\s\S]*? was lazy but unanchored, so it ran straight past the row's own
+  // </div> into the NEXT row's label: the settled render matched both
+  // /decides…adjusted/ and /decides…in play/, and the test passed whichever
+  // row carried `decides`. Pinned to the decides row's own left-hand number so
+  // the match cannot leave the row it is asserting about.
+  assert.match(open, /class="lrow decides">\s*<span class="n l">118\.40<\/span>\s*<span class="lbl">in play/);
+  assert.match(done, /class="lrow decides">\s*<span class="n l">98\.40<\/span>\s*<span class="lbl">adjusted/);
   assert.equal(
     (open.match(/class="lrow/g) || []).length,
     (done.match(/class="lrow/g) || []).length,
@@ -964,6 +981,10 @@ test('no player name ever reaches the card', () => {
   const html = renderWeek({
     week: 3, resolved: withPenalties, teams: NAMES, detailAvailable: true, settled: true,
   });
+  // Anchored first: three doesNotMatch assertions would all hold on an empty
+  // string, so the test says out loud that it looked at a real rendered card.
+  assert.match(html, /class="card settled/);
+  assert.match(html, /<span class="n l">98\.40<\/span>/, 'the penalised team is on the card');
   assert.doesNotMatch(html, /Joe Burrow/, 'names live behind the click now');
   assert.doesNotMatch(html, /class="penalties"/);
 });
@@ -985,4 +1006,153 @@ test('the key explains all three numbers on the page, not in a tooltip', () => {
   const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
   assert.match(html, /<details class="score-key" open>/);
   assert.doesNotMatch(html, /title="/, 'no tooltip: hover does nothing on a phone');
+});
+
+// --- Task 7 fixes: the pool's provenance, the key's memory, and `settled` ---
+
+test('the median pool names the reading it was averaged from', () => {
+  // The chips average to the ADJUSTED line. While games are running the row
+  // emphasised directly above them is IN PLAY (124.80 here, against an
+  // adjusted line of 94.80), so juxtaposition alone asserts the wrong
+  // provenance. The caption is what stops it.
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /class="lrow decides">\s*<span class="n l">114\.30<\/span>\s*<span class="lbl">in play/);
+  assert.match(html, /<span class="n r">124\.80<\/span>/, 'the emphasised line is the in-play one');
+  assert.match(html, /<span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted<\/span>/);
+  assert.match(html, /class="pool-cap"[\s\S]*?class="pool"/, 'the caption is read before the chips');
+});
+
+test('the score key can be rendered closed', () => {
+  const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, keyOpen: true });
+  const shut = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, keyOpen: false });
+  assert.match(open, /<details class="score-key" open>/);
+  assert.match(shut, /<details class="score-key">/);
+  assert.doesNotMatch(shut, / open>/);
+  const dflt = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES });
+  assert.match(dflt, /<details class="score-key" open>/, 'open on a first visit, which is when it is worth reading');
+});
+
+// Week 3 of a season starting 2026-09-09 runs Wed 23 Sep to Tue 29 Sep, and
+// its standings gate is Tue 29 Sep 10:00. Two clocks are used below: the 24th,
+// inside the week with the gate still ahead, and the 29th at noon, with the
+// gate already behind. Both display week 3, so neither needs a click.
+const GATE_AHEAD = local(2026, 9, 24);
+const GATE_PASSED = local(2026, 9, 29);
+
+const MOUNT_WEEK = {
+  week: 3, played: true, degenerate: false,
+  matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+  teams: {
+    1: { raw: 78.4, adjusted: 98.4, inPlay: 118.4, penalties: [] },
+    2: { raw: 93.6, adjusted: 113.6, inPlay: 133.6, penalties: [] },
+  },
+};
+
+/** `schedule: null` means the fetch fails, which is the no-schedule case. */
+const mountState = (schedule, when) => ({
+  weeks: [MOUNT_WEEK], teams: TEAMS, ghostRosterId: 6, seasonStart: START,
+  rosterPositions: [], livePayloads: {},
+  json: async (url) => {
+    if (url === 'data/pairings.json') return { pairings: {} };
+    if (url === 'data/raw/schedule.json') {
+      if (schedule === null) throw new Error('no schedule archived');
+      return schedule;
+    }
+    throw new Error(`unexpected fetch: ${url}`);
+  },
+  now: () => when,
+});
+
+const ALL_DONE = [
+  { week: 3, home: 'KC', away: 'BUF', status: 'complete' },
+  { week: 3, home: 'SF', away: 'DAL', status: 'complete' },
+];
+const ONE_RUNNING = [
+  { week: 3, home: 'KC', away: 'BUF', status: 'complete' },
+  { week: 3, home: 'SF', away: 'DAL', status: 'in_game' },
+];
+
+test('a week whose games are all complete mounts settled, gate or no gate', async () => {
+  // The clock is INSIDE week 3, so the Tuesday gate has not opened. The card
+  // still reads final, because the card answers "can these numbers still
+  // change?" and the schedule says they cannot.
+  const el = makeStubEl();
+  await mountResults(el, mountState(ALL_DONE, GATE_AHEAD));
+  assert.match(el.innerHTML, /class="card settled/);
+  assert.match(el.innerHTML, /<\/span>final</);
+  assert.match(el.innerHTML, /class="lrow decides">\s*<span class="n l">98\.40<\/span>\s*<span class="lbl">adjusted/);
+  assert.match(el.innerHTML, /win-mark/);
+  assert.match(el.innerHTML, /Week 3 final/);
+});
+
+test('one game still running holds the week open even after its gate has passed', async () => {
+  // The postponed game: the calendar says the week is over and the field says
+  // it is not. This is the entire reason `settled` is not simply isWeekFinal,
+  // and it had no coverage at all through the mount path.
+  const el = makeStubEl();
+  await mountResults(el, mountState(ONE_RUNNING, GATE_PASSED));
+  assert.match(el.innerHTML, /class="card live/);
+  assert.match(el.innerHTML, /<\/span>in progress</);
+  assert.match(el.innerHTML, /class="lrow decides">\s*<span class="n l">118\.40<\/span>\s*<span class="lbl">in play/);
+  assert.match(el.innerHTML, /class="lead">leading</);
+  assert.doesNotMatch(el.innerHTML, /win-mark/);
+  assert.match(el.innerHTML, /Week 3 in progress/);
+});
+
+test('with no schedule at all the week falls back to the standings gate', async () => {
+  // Both directions, because a one-sided fallback test would pass against a
+  // hardcoded true or a hardcoded false.
+  const after = makeStubEl();
+  await mountResults(after, mountState(null, GATE_PASSED));
+  assert.match(after.innerHTML, /class="card settled/, 'gate behind us: settled');
+
+  const before = makeStubEl();
+  await mountResults(before, mountState(null, GATE_AHEAD));
+  assert.match(before.innerHTML, /class="card live/, 'gate still ahead: open');
+});
+
+test('the live schedule on state beats the committed file', async () => {
+  // refreshLive stashes the fetched schedule on state; scheduleFor must prefer
+  // it, or a week that just went final would keep saying "in progress" until
+  // the committed copy caught up.
+  const el = makeStubEl();
+  const state = mountState(ONE_RUNNING, GATE_AHEAD);
+  state.schedule = ALL_DONE;
+  await mountResults(el, state);
+  assert.match(el.innerHTML, /class="card settled/);
+});
+
+test('a key the visitor closed stays closed across every repaint', async () => {
+  // paint() replaces innerHTML wholesale, so the <details> is destroyed and
+  // rebuilt on every week click, stepper, drill-down and back. Before the fix
+  // the panel reopened on all four.
+  const el = makeStubEl();
+  // Weeks 3, 4 and 5 all played: the key only exists on a played week, so an
+  // unplayed one would make the assertions below pass for the wrong reason.
+  const state = mountState(ALL_DONE, GATE_AHEAD);
+  state.weeks = [3, 4, 5].map((week) => ({ ...MOUNT_WEEK, week }));
+  const { repaint } = await mountResults(el, state);
+  assert.match(el.innerHTML, /<details class="score-key" open>/, 'open on arrival');
+
+  const key = el.querySelector('.score-key');
+  key.open = false;
+  key.ontoggle();                       // the visitor collapses it
+
+  await repaint();
+  assert.match(el.innerHTML, /<details class="score-key">/, 'a repaint does not reopen it');
+
+  el.querySelectorAll('[data-week]').find((b) => b.dataset.week === '5').onclick();
+  await settle();
+  assert.match(el.innerHTML, /<details class="score-key">/, 'nor does picking another week');
+
+  el.querySelectorAll('[data-step]')[0].onclick();   // week 5 -> week 4
+  await settle();
+  assert.match(el.innerHTML, /<details class="score-key">/, 'nor does the stepper');
+
+  // And reopening it is remembered too, not a one-way latch.
+  const reopened = el.querySelector('.score-key');
+  reopened.open = true;
+  reopened.ontoggle();
+  await repaint();
+  assert.match(el.innerHTML, /<details class="score-key" open>/);
 });
