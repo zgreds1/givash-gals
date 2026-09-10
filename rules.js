@@ -32,6 +32,84 @@ export function byeTeams(schedule, week) {
   return byes;
 }
 
+/** How settled each phase is. Lower is less settled, and less settled wins. */
+const PHASE_RANK = { upcoming: 0, live: 1, final: 2 };
+
+/**
+ * Per-NFL-team game state for one week, read off Sleeper's schedule payload.
+ *
+ * The mapping is deliberately NOT exhaustive. `complete` and `canceled` are
+ * settled and `pre_game` has not started; every other value — a `halftime` we
+ * have never observed, a future rename — falls through to 'live'. Guessing
+ * 'live' withholds a penalty that arrives a few minutes late. Guessing 'final'
+ * invents 20 points out of a string we did not recognise, which is the one
+ * error this format cannot recover from.
+ *
+ * A team appearing in no game that week is on bye and gets no entry, which is
+ * how the caller tells "on bye" apart from "not kicked off yet".
+ *
+ * A team appearing TWICE in one week takes its least-settled row; see the
+ * comment on the merge below for the fixture that makes that necessary.
+ *
+ * @param {Array<{week:number, home:string, away:string, status:string}>} schedule
+ * @param {number} week
+ * @returns {Map<string, 'final'|'live'|'upcoming'>}
+ */
+export function gameStates(schedule, week) {
+  const out = new Map();
+  for (const g of schedule || []) {
+    if (g.week !== week) continue;
+    // A game with NO status field is not a game with an unrecognised status —
+    // it is a schedule that predates status entirely, so there is no live
+    // information to act on. Skipping it leaves the team absent from the map,
+    // which adjustedScore reads as settled, and a rescore keeps every penalty
+    // it always had. The catch-all below stays permissive on purpose: it is
+    // there for an unrecognised live status, which is a different thing.
+    if (!g.status) continue;
+    const phase =
+      g.status === 'complete' || g.status === 'canceled' ? 'final'
+        : g.status === 'pre_game' ? 'upcoming'
+          : 'live';
+    // Least-settled wins, because a team can appear twice in the same week.
+    // Week 6 of the committed schedule is the real case: DAL v SEA on
+    // 2026-10-15 is `canceled`, and BOTH teams were re-placed into replacement
+    // fixtures — SEA at DEN on that same 2026-10-15, DAL at GB on the 18th. A
+    // cancelled fixture that was replaced rather than abandoned means the team
+    // still plays, and with two rows carrying the same date their order in
+    // Sleeper's array is arbitrary. Taking whichever row was scanned last would
+    // hand DAL and SEA 'final' the moment that order flipped, and every zeroed
+    // starter on those teams would take a +20 from Wednesday of week 6 — days
+    // before they kick off. Ranking the phases makes the answer identical in
+    // either array order.
+    //
+    // 'upcoming' outranks 'live' between themselves: a team with one game in
+    // progress and another not yet started still has football left to play, and
+    // 'upcoming' is the only phase that counts toward neither `adjusted` nor
+    // `in play`. It withholds both readings; 'live' would already be adding 20
+    // to the in-play number for a player who may yet score in the later game.
+    for (const team of [g.home, g.away]) {
+      const seen = out.get(team);
+      if (seen === undefined || PHASE_RANK[phase] < PHASE_RANK[seen]) {
+        out.set(team, phase);
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * True when nothing in this week's schedule can still move a score.
+ *
+ * An empty or missing map returns false, not true: that means the schedule is
+ * unavailable, not that the week is over, and the caller must fall back to the
+ * calendar gate rather than declare a week finished on no evidence.
+ */
+export function allGamesFinal(states) {
+  if (!states || states.size === 0) return false;
+  for (const phase of states.values()) if (phase !== 'final') return false;
+  return true;
+}
+
 /**
  * Raw stat keys that mean "this player actually did something".
  *
@@ -87,15 +165,42 @@ export function opportunitySet(weekStats) {
  * negative is a reward, and this penalty exists to punish absent
  * lineups, not good ones.
  *
+ * A penalty is only counted once that player's own NFL game is complete.
+ * Several cases settle immediately: empty slots, a player whose NFL team is on
+ * bye, a player with no NFL team at all (an unrecognised id, or an id carrying
+ * `team: null`), and a cancelled game. The `states` parameter reads
+ * that week's schedule and maps each team to its game status ('final',
+ * 'live', 'upcoming'). With no `states` (the default `null`), penalties
+ * are treated as already final — this preserves the old behaviour and
+ * keeps existing callers with no change.
+ *
  * @param {{starters:string[], starters_points:number[]}} entry
  * @param {Set<string>} byes - NFL teams on bye this week
  * @param {Object<string,{pos:string,team:string,name:string}>} players
+ * @param {Set<string>} opportunities - player ids who had a scoring opportunity
+ * @param {Map<string, 'final'|'live'|'upcoming'>|null} states - game phases by team
+ * @returns {{raw: number, adjusted: number, inPlay: number, penalties: Array}}
  */
-export function adjustedScore(entry, byes, players, opportunities = new Set()) {
+export function adjustedScore(
+  entry, byes, players, opportunities = new Set(), states = null,
+) {
   const starters = entry.starters || [];
   const points = entry.starters_points || [];
   const penalties = [];
   let raw = 0;
+
+  // `states === null` means "no game information", which scores the week as if
+  // every game had already finished — exactly the behaviour before phases
+  // existed. That default is the compatibility hinge: --replay, the 2025
+  // archive and every existing caller keep their answers with no edit.
+  //
+  // A team present in the week's schedule takes its game's phase. A team ABSENT
+  // from it has no game to wait for — on bye, or no NFL team at all, which is
+  // what `team: null` carries for the free agents and retired players that make
+  // up most of the slim player map. Either way it settles from kickoff: it is
+  // the purest form of the absence this penalty exists to punish, so it must
+  // never sit pending forever waiting for a game that is not being played.
+  const phaseOf = (team) => (states === null ? 'final' : states.get(team) ?? 'final');
 
   for (let i = 0; i < starters.length; i++) {
     const id = starters[i];
@@ -105,14 +210,18 @@ export function adjustedScore(entry, byes, players, opportunities = new Set()) {
     if (Math.abs(pts) >= EPS) continue; // scored something, no penalty
 
     if (!id || id === '0') {
-      penalties.push({ playerId: null, name: 'Empty slot', reason: 'empty-slot' });
+      penalties.push({
+        playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final',
+      });
       continue;
     }
 
     const meta = players[id];
     if (meta && meta.pos === 'DEF') {
       if (byes.has(meta.team)) {
-        penalties.push({ playerId: id, name: meta.name, reason: 'bye-def' });
+        penalties.push({
+          playerId: id, name: meta.name, reason: 'bye-def', phase: 'final',
+        });
       }
       continue; // DEF not on bye: exempt
     }
@@ -124,14 +233,40 @@ export function adjustedScore(entry, byes, players, opportunities = new Set()) {
       playerId: id,
       name: meta ? meta.name : `Unknown (${id})`,
       reason: 'zeroed',
+      // No metadata means no team to look up. An id absent from the slim map
+      // is an inactive player, which is absence, so it settles immediately.
+      phase: meta ? phaseOf(meta.team) : 'final',
     });
   }
 
+  const settled = penalties.filter((p) => p.phase === 'final').length;
+  const started = penalties.filter((p) => p.phase !== 'upcoming').length;
+
   return {
     raw: round2(raw),
-    adjusted: round2(raw + penalties.length * PENALTY),
+    adjusted: round2(raw + settled * PENALTY),
+    inPlay: round2(raw + started * PENALTY),
     penalties,
   };
+}
+
+/**
+ * The league median line: the average of the 2nd and 3rd highest scores among
+ * the four teams playing head-to-head.
+ *
+ * This is the single place the engine computes the median value. The view marks
+ * which two scores were averaged with a separate, independent implementation
+ * (hardcoded index logic for a CSS class, versus this function's numeric return).
+ * Any change to the median rule must touch both places. This extraction exists so
+ * that the in-play line can compute the provisional median consistently, rather
+ * than becoming another copy of the rule.
+ *
+ * @param {number[]} values - exactly four adjusted scores, any order
+ * @returns {number|null} null unless there are exactly four
+ */
+export function medianLine(values) {
+  const pool = (values || []).slice().sort((a, b) => b - a);
+  return pool.length === 4 ? round2((pool[1] + pool[2]) / 2) : null;
 }
 
 /**
@@ -157,6 +292,7 @@ export function adjustedScore(entry, byes, players, opportunities = new Set()) {
  * @param {Set<number>} excludedRosterIds - every roster with no owner
  * @param {Set<string>} byes
  * @param {Object} players
+ * @param {Map<string, 'final'|'live'|'upcoming'>|null} states - game phases by team; null treats every game as final, preserving existing caller behavior and the snapshot archive
  */
 export function resolveWeek(
   week,
@@ -165,20 +301,23 @@ export function resolveWeek(
   byes,
   players,
   opportunities = new Set(),
+  states = null,
 ) {
   const excluded = excludedRosterIds ?? new Set();
 
   const scored = matchups.map((m) => ({
     rosterId: m.roster_id,
     matchupId: m.matchup_id ?? null,
-    ...adjustedScore(m, byes, players, opportunities),
+    ...adjustedScore(m, byes, players, opportunities, states),
   }));
 
   const real = scored.filter((s) => !excluded.has(s.rosterId));
 
   const teams = {};
   for (const s of real) {
-    teams[s.rosterId] = { raw: s.raw, adjusted: s.adjusted, penalties: s.penalties };
+    teams[s.rosterId] = {
+      raw: s.raw, adjusted: s.adjusted, inPlay: s.inPlay, penalties: s.penalties,
+    };
   }
 
   // Group by Sleeper's matchup_id, then strip excluded rosters from each group.
@@ -226,7 +365,7 @@ export function resolveWeek(
     .map((s) => s.adjusted)
     .sort((a, b) => b - a);
 
-  const median = medianPool.length === 4 ? round2((medianPool[1] + medianPool[2]) / 2) : null;
+  const median = medianLine(medianPool);
 
   const out = [];
   if (!degenerate) {

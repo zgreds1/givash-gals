@@ -4,7 +4,23 @@ on:
   schedule:
     - cron: '0 17-23 * * 0'   # Sun 1pm-7pm ET, during games
     - cron: '0 0-4 * * 1'     # Sun evening -> Mon midnight ET
-    - cron: '0 13 * * 2'      # Tue 9am ET, sweep after Monday night
+    - cron: '0 6 * * 2'       # Tue 06:00 UTC — the run that carries MNF into
+                              # the standings, sized against BOTH DST regimes
+                              # rather than one UTC figure. MNF kicks at 20:15
+                              # US Eastern: 00:15 UTC on EDT (weeks 1-7),
+                              # 01:15 UTC on EST (weeks 8-18 — US DST ends
+                              # Sun 1 Nov 2026, inside week 8), so the final
+                              # whistle lands between ~03:35 and ~04:40 UTC and
+                              # Sleeper still has to flip status to complete
+                              # after it. 06:00 clears the later end by ~1h20m,
+                              # enough for overtime or a Monday doubleheader.
+                              # It stays ahead of the standings gate at Tue
+                              # 10:00 Israel — 07:00 UTC on IDT, 08:00 UTC once
+                              # Israel's own change lands on 25 Oct — by an
+                              # hour either way. Without this run the last one
+                              # before the gate is Monday midnight ET, and the
+                              # week joins the standings missing MNF entirely.
+    - cron: '0 13 * * 2'      # Tue 9am ET, sweep for stat corrections
   workflow_dispatch:
 
 permissions:

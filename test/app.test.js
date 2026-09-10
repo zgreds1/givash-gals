@@ -38,3 +38,22 @@ test('tables render for the normal shape and for a fully owned league', () => {
 test('tables are not suppressed when nothing loaded — that path owns its own error', () => {
   assert.equal(showTables(0), true);
 });
+
+import { readFileSync } from 'node:fs';
+
+test('Results is the landing tab and the first panel', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+
+  const tabs = [...html.matchAll(/data-view="(\w+)"/g)].map((m) => m[1]);
+  assert.deepEqual(tabs, ['results', 'standings', 'players', 'rules']);
+
+  const panels = [...html.matchAll(/<section id="(\w+)" class="view"/g)].map((m) => m[1]);
+  assert.deepEqual(panels, tabs, 'DOM order must match tab order');
+
+  assert.match(html, /id="tab-results"[^>]*aria-selected="true"/);
+  assert.match(html, /id="tab-standings"[^>]*aria-selected="false"/);
+
+  // The landing panel is the one that is NOT hidden.
+  assert.match(html, /<section id="results" class="view"[^>]*tabindex="0"><\/section>/);
+  assert.match(html, /<section id="standings" class="view"[^>]*hidden>/);
+});

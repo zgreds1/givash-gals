@@ -1,6 +1,32 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { renderStandings, renderRules } from '../render.js';
+import { PENALTY } from '../config.js';
+
+/**
+ * One `<h2>` section of the rules page, heading excluded.
+ *
+ * The page repeats phrases like "on bye" and "empty slot" across sections, so
+ * a match against the whole render would be satisfied by copy that was already
+ * there before the section under test existed.
+ */
+const section = (html, heading) => {
+  const start = html.indexOf(heading);
+  assert.notEqual(start, -1, `the rules page has no "${heading}" heading`);
+  const rest = html.slice(start + heading.length);
+  const end = rest.indexOf('<h2>');
+  return end === -1 ? rest : rest.slice(0, end);
+};
+
+const LANDS = `When the +${PENALTY} lands</h2>`;
+
+// Shared by the meta/gate-note tests below, which don't care about the row
+// shape itself — only about what renderStandings does around it.
+const ROWS = [{
+  rosterId: 1, w: 2, l: 1, t: 0, gp: 3, winPct: 2 / 3,
+  adjPF: 300, rawPF: 300, median: { w: 0, l: 0, t: 0 }, unresolvedTie: false,
+}];
+const TEAMS = { 1: 'Alpha' };
 
 test('team names are escaped', () => {
   const html = renderStandings(
@@ -45,4 +71,77 @@ test('the rules page says a target and a pass attempt do NOT exempt', () => {
   assert.match(html, /completed action, not an intention/i);
   assert.match(html, /targeted eight times/i);
   assert.match(html, /0-for-5/);
+});
+
+test('the rules page states when a +20 actually lands', () => {
+  // The one surface in the product whose job is stating the rules still said
+  // "each starter that scores exactly 0 adds 20" while Results was tagging
+  // zeros "not started". A visitor clicking through found neither concept.
+  const lands = section(renderRules(), LANDS);
+  assert.match(lands, /own NFL game is\s+complete/i);
+  assert.match(lands, /half-time/i);
+  assert.match(lands, /empty slot/i);
+  assert.match(lands, /on bye/i);
+  assert.match(lands, /cancelled/i);
+});
+
+test('the rules page names the three readings, in that order', () => {
+  const lands = section(renderRules(), LANDS);
+  assert.match(
+    lands,
+    /<strong>adjusted<\/strong>[\s\S]*<strong>in play<\/strong>[\s\S]*<strong>raw<\/strong>/,
+    'adjusted, in play, raw — the labels and the order the Results tab uses',
+  );
+  assert.match(lands, /not kicked off counts toward neither/i);
+});
+
+test('the rules page says the standings absorb a week on the Tuesday gate', () => {
+  const lands = section(renderRules(), LANDS);
+  assert.match(lands, /standings themselves do not move mid-week/i);
+  assert.match(lands, /Tuesday at 10:00 Israel time/);
+});
+
+test('the standings caption says which week it is through', () => {
+  const html = renderStandings(ROWS, TEAMS, { through: 4 });
+  assert.match(html, /through week 4/);
+});
+
+test('the caption omits the clause when nothing has settled', () => {
+  const html = renderStandings(ROWS, TEAMS, {});
+  assert.match(html, /lowest adjusted points wins<\/caption>/);
+  assert.doesNotMatch(html, /through week/);
+});
+
+test('a pending week names when it joins', () => {
+  const html = renderStandings(ROWS, TEAMS, {
+    through: 1, nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00',
+  });
+  assert.match(html, /Week 2 joins Tuesday 22 September, 10:00\./);
+});
+
+test('the empty table still names the first gate', () => {
+  // Before week 1 settles there are no rows, and "no games played yet" alone
+  // reads as broken during a week that has visibly been played.
+  const html = renderStandings([], TEAMS, {
+    nextWeek: 1, nextGate: 'Tuesday 15 September, 10:00',
+  });
+  assert.match(html, /Week 1 joins Tuesday 15 September, 10:00\./);
+});
+
+test('a nextWeek with no nextGate renders no note', () => {
+  // Happens in production: with no seasonStart, gateLabel returns null while
+  // nextWeek is still 1 (truthy). The note must stay suppressed on an
+  // explicit null check, not just on the && short-circuit it replaced.
+  const html = renderStandings(ROWS, TEAMS, { nextWeek: 1, nextGate: null });
+  // Anchor first: two doesNotMatch calls alone would also pass on an empty
+  // string, which is the one failure this test would never notice.
+  assert.match(html, /<table class="standings">/);
+  assert.doesNotMatch(html, /<p class="gate-note">/);
+  assert.doesNotMatch(html, /joins/);
+});
+
+test('an explicit through: null omits the through-week clause', () => {
+  const html = renderStandings(ROWS, TEAMS, { through: null });
+  assert.match(html, /lowest adjusted points wins<\/caption>/);
+  assert.doesNotMatch(html, /through week/);
 });

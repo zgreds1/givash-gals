@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveWeek, byeTeams, standings } from '../rules.js';
-import { mkEntry, PLAYERS, SCHEDULE } from './helpers.js';
+import { resolveWeek, byeTeams, standings, medianLine, gameStates } from '../rules.js';
+import { mkEntry, PLAYERS, SCHEDULE, SCHEDULE_LIVE } from './helpers.js';
 
 const WK3 = byeTeams(SCHEDULE, 3);
 const EXCLUDED = new Set([6]);
@@ -277,4 +277,86 @@ test('the still-degenerate shapes stay degenerate after the six-owned fix', () =
   );
   // four pairs
   assert.equal(deg(sixOwnedWeek().concat([solo(7, 4, 105), solo(8, 4, 99)])), true);
+});
+
+test('medianLine averages the 2nd and 3rd highest', () => {
+  assert.equal(medianLine([142.6, 118.3, 97.5, 88.1]), 107.9);
+});
+
+test('medianLine does not care about input order', () => {
+  assert.equal(medianLine([88.1, 142.6, 97.5, 118.3]), 107.9);
+});
+
+test('medianLine refuses a pool that is not exactly four', () => {
+  assert.equal(medianLine([1, 2, 3]), null);
+  assert.equal(medianLine([1, 2, 3, 4, 5]), null);
+  assert.equal(medianLine([]), null);
+  assert.equal(medianLine(null), null);
+});
+
+test('resolveWeek carries inPlay for every real team', () => {
+  const wk = resolveWeek(
+    3,
+    [
+      mkEntry(1, 1, [['6804', 0]]),   // CIN, finished -> settles
+      mkEntry(2, 1, [['4199', 0]]),   // MIN, live -> pending only
+      mkEntry(3, 2, [['1466', 10]]),
+      mkEntry(4, 2, [['1466', 20]]),
+      mkEntry(5, 3, [['1466', 30]]),
+      mkEntry(6, 3, [['1466', 0]]),
+    ],
+    new Set([6]),
+    byeTeams(SCHEDULE, 3),
+    PLAYERS,
+    new Set(),
+    gameStates(SCHEDULE_LIVE, 3),
+  );
+  assert.equal(wk.teams[1].adjusted, 20);
+  assert.equal(wk.teams[1].inPlay, 20);
+  assert.equal(wk.teams[2].adjusted, 0, 'game still on');
+  assert.equal(wk.teams[2].inPlay, 20);
+});
+
+test('resolveWeek still decides winners on adjusted, never inPlay', () => {
+  // Roster 2 is ahead on adjusted (0 vs 20) but level on nothing else. The
+  // official result must not move just because a game is still running.
+  const wk = resolveWeek(
+    3,
+    [
+      mkEntry(1, 1, [['6804', 0]]),
+      mkEntry(2, 1, [['4199', 0]]),
+      mkEntry(3, 2, [['1466', 10]]),
+      mkEntry(4, 2, [['1466', 20]]),
+      mkEntry(5, 3, [['1466', 30]]),
+      mkEntry(6, 3, [['1466', 0]]),
+    ],
+    new Set([6]),
+    byeTeams(SCHEDULE, 3),
+    PLAYERS,
+    new Set(),
+    gameStates(SCHEDULE_LIVE, 3),
+  );
+  const h2h = wk.matchups.find((m) => m.type === 'h2h' && m.rosterIds.includes(1));
+  assert.equal(h2h.winner, 2, 'lower ADJUSTED wins; 0 beats 20');
+});
+
+test('omitting states reproduces the pre-phase week exactly', () => {
+  const args = [
+    3,
+    [
+      mkEntry(1, 1, [['6804', 0]]),
+      mkEntry(2, 1, [['4199', 0]]),
+      mkEntry(3, 2, [['1466', 10]]),
+      mkEntry(4, 2, [['1466', 20]]),
+      mkEntry(5, 3, [['1466', 30]]),
+      mkEntry(6, 3, [['1466', 0]]),
+    ],
+    new Set([6]),
+    byeTeams(SCHEDULE, 3),
+    PLAYERS,
+  ];
+  const wk = resolveWeek(...args);
+  assert.equal(wk.teams[1].adjusted, 20);
+  assert.equal(wk.teams[2].adjusted, 20, 'every game treated as final');
+  assert.equal(wk.teams[2].inPlay, 20);
 });
