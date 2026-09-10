@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail, weekOptions, mountResults, leaderOf, inPlayLine } from '../results-view.js';
+import { PLAYERS } from './helpers.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -99,7 +100,10 @@ const POSITIONS = [
   'BN', 'BN', 'BN', 'BN', 'BN',
 ];
 
-const PLAYERS = {
+// Renamed from PLAYERS (task 8): the helpers.js fixture of the same name is
+// now imported below for the phase-tag tests, and a module cannot both import
+// and declare a top-level binding with the same identifier.
+const SLOT_PLAYERS = {
   a: { name: 'Ann QB', pos: 'QB', team: 'CIN' },
   b: { name: 'Bo RB', pos: 'RB', team: 'ATL' },
   c: { name: 'Cy WR', pos: 'WR', team: 'MIN' },
@@ -108,7 +112,7 @@ const PLAYERS = {
 test('slots come from roster_positions, in order, and BN is not a slot', () => {
   const entry = { starters: ['a', 'b'], starters_points: [17.4, 24.9], players: ['a', 'b', 'c'],
                   players_points: { a: 17.4, b: 24.9, c: 8.1 } };
-  const { starters, bench } = lineupRows(entry, POSITIONS, PLAYERS);
+  const { starters, bench } = lineupRows(entry, POSITIONS, SLOT_PLAYERS);
 
   assert.equal(starters.length, 2);
   assert.deepEqual(starters.map((r) => r.slot), ['QB', 'RB']);
@@ -126,7 +130,7 @@ test('a player who cannot fill his slot is labelled by his own position', () => 
   // place anyway, as protection if Sleeper ever changes that ordering: a WR
   // sitting in a QB row would otherwise be shown as a QB on no evidence.
   const entry = { starters: ['c'], starters_points: [8.1], players: ['c'], players_points: { c: 8.1 } };
-  const { starters } = lineupRows(entry, POSITIONS, PLAYERS);
+  const { starters } = lineupRows(entry, POSITIONS, SLOT_PLAYERS);
   assert.equal(starters[0].slot, 'WR', 'a WR in the first QB slot is labelled WR');
 });
 
@@ -149,7 +153,7 @@ test('an empty starting slot is marked, not named "0"', () => {
   // Sleeper writes '0' into an unfilled slot, and an empty slot is exactly
   // what earns the +20 — it must be legible, not rendered as a player id.
   const entry = { starters: ['0'], starters_points: [0], players: [], players_points: {} };
-  const { starters } = lineupRows(entry, POSITIONS, PLAYERS);
+  const { starters } = lineupRows(entry, POSITIONS, SLOT_PLAYERS);
   assert.equal(starters[0].empty, true);
   assert.equal(starters[0].slot, 'QB', 'the slot is still known even when unfilled');
   assert.notEqual(starters[0].name, '0');
@@ -157,7 +161,7 @@ test('an empty starting slot is marked, not named "0"', () => {
 
 test('an id missing from the player map renders as the id, not as blank', () => {
   const entry = { starters: ['zz'], starters_points: [3], players: ['zz'], players_points: { zz: 3 } };
-  const { starters } = lineupRows(entry, POSITIONS, PLAYERS);
+  const { starters } = lineupRows(entry, POSITIONS, SLOT_PLAYERS);
   assert.equal(starters[0].name, 'zz');
 });
 
@@ -674,17 +678,32 @@ test('a tie against the median is drawn as a tie, not as a median win', () => {
 
 test('a loss to the median still marks the median as the winner', () => {
   // The other half of the tie fix: it must not have flattened result L too.
+  // Reworked for task 8: the .side/.name/.adj markup this used to check is
+  // gone (task 7 already deleted its CSS; renderMatchupDetail no longer emits
+  // the HTML either), replaced by the same sideHead() the card itself uses.
+  // settled: true so the header trusts the engine's official result instead
+  // of judging the matchup live - the same distinction leaderOf's settled
+  // branch draws, and now a parameter renderMatchupDetail actually takes.
   const html = renderMatchupDetail({
     week: 3, matchup: { type: 'median', rosterId: 5, line: 107.9, result: 'L' },
     resolved: PLAYED, payload: DETAIL_PAYLOAD, teams: TEAMS,
-    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS,
+    rosterPositions: DETAIL_POSITIONS, players: DETAIL_PLAYERS, settled: true,
   });
-  assert.match(html, /class="side line winner"/);
+  // class="tname r win" is exactly what 'a played week shows all three scores
+  // and marks the winner' asserts for the card's own equivalent win, a few
+  // tests above - same function, same shape of result, same mark.
+  assert.match(html, /class="tname r win"/, 'the median (right side) is marked the leader');
+  assert.match(html, /win-mark/, 'settled, so it carries the solid check, not the hollow leading ring');
 });
 
 // Two unfilled starting slots and one zeroed starter: three separate +20s.
 // rules.js records an empty slot as playerId: null, so it cannot be matched
-// by id, and a lineup can hold more than one of them.
+// by id, and a lineup can hold more than one of them. All three penalties are
+// given phase: 'final' explicitly rather than left to markPenalties's own
+// default: an empty slot is always final in rules.js (there is no team, so
+// there is no game left to be pending on), and this fixture's zeroed starter
+// is put in the same state on purpose, so the test below can pin the exact
+// phase rather than lean on a fallback to make its point.
 const EMPTY_POSITIONS = ['QB', 'RB', 'WR', 'TE', 'BN'];
 const EMPTY_PAYLOAD = [
   { roster_id: 1, matchup_id: 1, starters: ['0', '0', '8205', 'a'], starters_points: [0, 0, 0, 17.4],
@@ -699,9 +718,9 @@ const EMPTY_RESOLVED = {
     1: {
       raw: 17.4, adjusted: 77.4,
       penalties: [
-        { playerId: null, name: 'Empty slot', reason: 'empty-slot' },
-        { playerId: null, name: 'Empty slot', reason: 'empty-slot' },
-        { playerId: '8205', name: 'Bo RB', reason: 'zeroed' },
+        { playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final' },
+        { playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final' },
+        { playerId: '8205', name: 'Bo RB', reason: 'zeroed', phase: 'final' },
       ],
     },
   },
@@ -713,13 +732,28 @@ test('every empty starting slot carries its own +20 in the drill-down', () => {
     resolved: EMPTY_RESOLVED, payload: EMPTY_PAYLOAD, teams: TEAMS,
     rosterPositions: EMPTY_POSITIONS, players: DETAIL_PLAYERS,
   });
+  // Reworked for task 8: the single class `class="pen"` this used to count no
+  // longer exists anywhere - PHASE_TAG now emits `pen locked` / `pen pending`
+  // / `pen waiting`, three shapes standing in for what used to be one flat
+  // badge, per "colour is never the sole carrier of meaning". Pinned to `pen
+  // locked` specifically here rather than a loose `class="pen` prefix: every
+  // penalty in this fixture is phase: 'final' (see the fixture comment
+  // above), so this is stronger than the test it replaces, not just patched
+  // to match - it now also asserts these are genuinely LOCKED penalties, not
+  // merely *some* penalty of unspecified phase.
   assert.equal(
-    (html.match(/class="pen">\+20/g) || []).length, 3,
-    'two empty slots and one zeroed starter are three penalties, and the drill-down must account for all of them',
+    (html.match(/class="pen locked">\+20/g) || []).length, 3,
+    'two empty slots and one zeroed starter are three locked penalties, and the drill-down must account for all of them',
   );
-  // And the marks land on the empty rows, not on whoever happens to be first.
+  // And the marks land on the empty rows, not on whoever happens to be
+  // first - the bug this test exists to catch. That half is about POSITION,
+  // not phase, so it is matched on the space-terminated `class="pen ` prefix
+  // shared by all three phase classes (which pen-reason's hyphen cannot
+  // satisfy) rather than repeating `locked`: it keeps discriminating a
+  // marked row from an unmarked one even if a row's own phase were not
+  // final, where the assertion above would no longer apply.
   const rows = html.split('<div class="lineup-row">').slice(1);
-  const marked = rows.filter((r) => r.includes('class="pen"'));
+  const marked = rows.filter((r) => r.includes('class="pen '));
   assert.equal(marked.length, 3);
   assert.equal(marked.filter((r) => r.includes('Empty slot')).length, 2);
   assert.match(marked.find((r) => !r.includes('Empty slot')), /Bo RB/);
@@ -1155,4 +1189,188 @@ test('a key the visitor closed stays closed across every repaint', async () => {
   reopened.ontoggle();
   await repaint();
   assert.match(el.innerHTML, /<details class="score-key" open>/);
+});
+
+// --- Task 8: phase tags and penalty reasons in the drill-down --------
+
+test('each starter penalty is tagged with the phase that explains it', () => {
+  const resolved = {
+    teams: {
+      1: {
+        raw: 0, adjusted: 20, inPlay: 40,
+        penalties: [
+          { playerId: '6804', name: 'Joe Burrow', reason: 'zeroed', phase: 'final' },
+          { playerId: '4199', name: 'Justin Jefferson', reason: 'zeroed', phase: 'live' },
+          { playerId: '8205', name: 'Bijan Robinson', reason: 'zeroed', phase: 'upcoming' },
+        ],
+      },
+    },
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+    medianPool: [],
+  };
+  const payload = [{
+    roster_id: 1,
+    starters: ['6804', '4199', '8205'],
+    starters_points: [0, 0, 0],
+    players: ['6804', '4199', '8205'],
+    players_points: {},
+  }];
+  const html = renderMatchupDetail({
+    week: 3,
+    matchup: resolved.matchups[0],
+    resolved,
+    payload,
+    teams: { 1: 'LilDaveIII', 2: 'Nsaker' },
+    rosterPositions: ['QB', 'WR', 'RB'],
+    players: PLAYERS,
+  });
+  assert.match(html, /class="pen locked">\+20</);
+  assert.match(html, /class="pen pending">\+20</);
+  assert.match(html, /class="pen waiting">not started</);
+});
+
+test('an empty slot keeps its own phase when several are penalised', () => {
+  const resolved = {
+    teams: {
+      1: {
+        raw: 0, adjusted: 40, inPlay: 40,
+        penalties: [
+          { playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final' },
+          { playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final' },
+        ],
+      },
+    },
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+    medianPool: [],
+  };
+  const payload = [{
+    roster_id: 1, starters: ['0', '0'], starters_points: [0, 0],
+    players: [], players_points: {},
+  }];
+  const html = renderMatchupDetail({
+    week: 3, matchup: resolved.matchups[0], resolved, payload,
+    teams: { 1: 'A', 2: 'B' }, rosterPositions: ['QB', 'WR'], players: PLAYERS,
+  });
+  assert.equal((html.match(/class="pen locked"/g) || []).length, 2,
+    'every empty slot earns its own +20, not just the first');
+});
+
+test('the detail header carries the same three-score ladder as the card', () => {
+  const html = renderMatchupDetail({
+    week: 3,
+    matchup: LIVE_WEEK.matchups[0],
+    resolved: LIVE_WEEK,
+    payload: [{ roster_id: 1, starters: [], starters_points: [], players: [], players_points: {} }],
+    teams: NAMES, rosterPositions: [], players: PLAYERS,
+  });
+  assert.match(html, /adjusted/);
+  assert.match(html, /in play/);
+  assert.match(html, /raw/);
+});
+
+test('an open drill-down marks the in-play leader, not the settled engine result', () => {
+  // The same disagreement leaderOf's own 'an open week can disagree with the
+  // settled result' test manufactures: officially a win (result: 'W'), but so
+  // far ahead on inPlay that an open card has to show the median leading
+  // instead. Before this task, renderMatchupDetail could not represent this
+  // at all - it read matchup.winner/matchup.result directly, with no notion
+  // of settled - so a live week's drill-down could disagree with the very
+  // card the visitor clicked to open it.
+  const behind = {
+    ...LIVE_WEEK,
+    teams: { ...LIVE_WEEK.teams, 5: { raw: 74.3, adjusted: 94.3, inPlay: 199.9 } },
+  };
+  const payload = [{ roster_id: 5, starters: [], starters_points: [], players: [], players_points: {} }];
+  const base = {
+    week: 3, matchup: behind.matchups[2], resolved: behind, payload,
+    teams: NAMES, rosterPositions: [], players: PLAYERS,
+  };
+
+  const open = renderMatchupDetail({ ...base, settled: false });
+  assert.match(
+    open,
+    /class="lrow decides">\s*<span class="n l">199\.90<\/span>\s*<span class="lbl">in play/,
+    'an open week decides on in play, like the card',
+  );
+  assert.match(open, /class="tname r win"/, 'in play the line is ahead of 199.90, so the median leads');
+  assert.doesNotMatch(open, /class="tname l win"/, 'roster 5 is not marked, even though it officially won');
+
+  const settled = renderMatchupDetail({ ...base, settled: true });
+  assert.match(
+    settled,
+    /class="lrow decides">\s*<span class="n l">94\.30<\/span>\s*<span class="lbl">adjusted/,
+    'a settled week decides on adjusted',
+  );
+  assert.match(settled, /class="tname l win"/, 'settled trusts the engine result: roster 5 officially won');
+});
+
+test('a penalised row explains itself with the reason the penalty carries', () => {
+  // The three reasons rules.js actually produces (rules.js adjustedScore):
+  // zeroed, empty-slot and bye-def. A DEF on bye and a zeroed starter both
+  // cost +20 and both look like a 0 in the box score - the caption is the
+  // only thing on the page that tells them apart.
+  const resolved = {
+    teams: {
+      1: {
+        raw: 0, adjusted: 60, inPlay: 60,
+        penalties: [
+          { playerId: '6804', name: 'Joe Burrow', reason: 'zeroed', phase: 'final' },
+          { playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final' },
+          { playerId: 'HOU', name: 'Houston Texans', reason: 'bye-def', phase: 'final' },
+        ],
+      },
+      2: { raw: 10, adjusted: 10, inPlay: 10, penalties: [] },
+    },
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+    medianPool: [],
+  };
+  const payload = [
+    { roster_id: 1, starters: ['6804', '0', 'HOU'], starters_points: [0, 0, 0],
+      players: ['6804', 'HOU'], players_points: {} },
+    { roster_id: 2, starters: ['4199'], starters_points: [10], players: ['4199'], players_points: { 4199: 10 } },
+  ];
+  const html = renderMatchupDetail({
+    week: 3, matchup: resolved.matchups[0], resolved, payload,
+    teams: { 1: 'A', 2: 'B' }, rosterPositions: ['QB', 'RB', 'DEF'], players: PLAYERS,
+  });
+
+  // Isolate each row before reading it, the same way the empty-slot test
+  // above does - a regex run over the whole html could match a caption that
+  // actually belongs to a different row.
+  const rows = html.split('<div class="lineup-row">').slice(1);
+  const rowFor = (needle) => rows.find((r) => r.includes(needle));
+  const burrow = rowFor('Joe Burrow');
+  const emptySlot = rowFor('Empty slot');
+  const def = rowFor('Houston Texans');
+  assert.ok(burrow && emptySlot && def, 'all three penalised rows are present to begin with');
+
+  assert.match(burrow, /class="pen-reason">scored 0<\/span>/, 'a zeroed starter is captioned "scored 0"');
+  assert.match(emptySlot, /class="pen-reason">empty slot<\/span>/, 'an empty slot is captioned "empty slot"');
+  assert.match(def, /class="pen-reason">DEF on bye<\/span>/, 'a bye DEF is captioned "DEF on bye"');
+});
+
+test('an unpenalised row carries no reason caption', () => {
+  const resolved = {
+    teams: {
+      1: { raw: 20, adjusted: 20, inPlay: 20, penalties: [] },
+      2: { raw: 10, adjusted: 10, inPlay: 10, penalties: [] },
+    },
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 2 }],
+    medianPool: [],
+  };
+  const payload = [
+    { roster_id: 1, starters: ['6804'], starters_points: [20], players: ['6804'], players_points: {} },
+    { roster_id: 2, starters: ['4199'], starters_points: [10], players: ['4199'], players_points: { 4199: 10 } },
+  ];
+  const html = renderMatchupDetail({
+    week: 3, matchup: resolved.matchups[0], resolved, payload,
+    teams: { 1: 'A', 2: 'B' }, rosterPositions: ['QB'], players: PLAYERS,
+  });
+
+  // Anchored first: the two doesNotMatch calls below would both hold on an
+  // empty render too, which is exactly the shape of assertion task 7's
+  // review flagged as unable to fail.
+  assert.match(html, /Joe Burrow/, 'the row itself really rendered');
+  assert.doesNotMatch(html, /class="pen-reason"/, 'nobody scored 0, so nothing is captioned');
+  assert.doesNotMatch(html, /class="pen /, 'and no phase tag either, since nobody was penalised');
 });

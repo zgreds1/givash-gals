@@ -401,37 +401,86 @@ const entryFor = (payload, rosterId) =>
   (payload || []).find((e) => e.roster_id === rosterId) || null;
 
 /**
- * Tag each row of a lineup with whether it earned a +20.
+ * Tag each lineup row with the penalty phase that explains it.
  *
- * A `zeroed` or `bye-def` penalty names the player's own id, so those match
- * by id. An empty slot has no id to name: rules.js records it as
- * `playerId: null`, and the row Sleeper produces for it carries the '0'
- * sentinel. Matching those by id marked nothing at all — String(null) is the
- * literal "null", which no row id equals — so the drill-down silently left
- * 20 points unexplained in the one view built to explain them.
+ * A `zeroed` or `bye-def` penalty names the player's own id, so those match by
+ * id. An empty slot has no id to name — rules.js records it as playerId: null,
+ * and the row Sleeper produces carries the '0' sentinel — so empties are paired
+ * off positionally: the i-th empty starting slot takes the i-th empty-slot
+ * penalty. A lineup can hold several, and every one earns its own +20, so this
+ * consumes one penalty per empty row rather than marking only the first.
  *
- * They are paired off positionally instead: the i-th empty starting slot
- * takes the i-th empty-slot penalty. A lineup can hold several empty slots
- * and every one of them earns its own +20, so this consumes one penalty per
- * empty row rather than marking only the first.
+ * Bench rows never carry the '0' sentinel (lineupRows filters it), so the
+ * shared counter is only ever consumed by starters, which is the order the
+ * penalties were recorded in.
+ *
+ * Keeps the whole penalty object, not just its phase, so playerCell can also
+ * caption WHY the row was hit. The drill-down is the one view whose job is
+ * explaining that, and a phase alone cannot tell a DEF on bye from a starter
+ * who actually took the field and scored nothing — both are a naked 0 in the
+ * box score.
  */
 function markPenalties(lineup, penalties = []) {
-  const ids = new Set(
-    penalties.filter((p) => p.playerId !== null && p.playerId !== undefined)
-      .map((p) => String(p.playerId)),
+  const byId = new Map(
+    penalties
+      .filter((p) => p.playerId !== null && p.playerId !== undefined)
+      .map((p) => [String(p.playerId), p]),
   );
-  let emptySlots = penalties.filter((p) => p.playerId === null || p.playerId === undefined).length;
-  const mark = (r) => ({ ...r, pen: r.empty ? emptySlots-- > 0 : ids.has(r.id) });
+  const empties = penalties.filter((p) => p.playerId === null || p.playerId === undefined);
+
+  let next = 0;
+  const mark = (r) => {
+    const p = r.empty
+      ? (next < empties.length ? empties[next++] : null)
+      : (byId.get(r.id) ?? null);
+    const phase = p ? (p.phase || 'final') : null;
+    return { ...r, pen: phase !== null, phase, reason: p ? p.reason : null };
+  };
   return { starters: lineup.starters.map(mark), bench: lineup.bench.map(mark) };
 }
 
+/**
+ * The three phases, as three visually distinct tags.
+ *
+ * This is the only view that says WHICH zero belongs to which of the three
+ * scores, so the distinction has to survive without colour: solid fill, dashed
+ * outline and dotted outline are three shapes, not three hues.
+ */
+const PHASE_TAG = {
+  final: '<span class="pen locked">+20</span>',
+  live: '<span class="pen pending">+20</span>' +
+        '<span class="sr-only">pending: this game is still being played</span>',
+  upcoming: '<span class="pen waiting">not started</span>',
+};
+
+/**
+ * What each penalty reason means, in plain words.
+ *
+ * Task 7 deleted the old REASON map along with the card's penalty list, and
+ * with it the only place `reason` ever reached the page. Without this, a DEF
+ * on bye and a starter who actually played and scored 0 render identically —
+ * both are just a name, a 0.00 and a +20 — and "why did this cost me 20"
+ * becomes unanswerable in the one view whose job is answering it.
+ */
+const REASON = {
+  zeroed: 'scored 0',
+  'empty-slot': 'empty slot',
+  'bye-def': 'DEF on bye',
+};
+
 function playerCell(row, align) {
-  const pen = row.pen ? '<span class="pen">+20</span>' : '';
+  const pen = row.phase ? PHASE_TAG[row.phase] || '' : '';
+  // Subordinate to the +20 tag by construction: it reads after the tag, in
+  // the smallest type size the file has (the same one .lrow .lbl .cap and
+  // .pool-row .pool-cap already use for a quiet caption), not a new one.
+  const reason = row.pen && REASON[row.reason]
+    ? `<span class="pen-reason">${esc(REASON[row.reason])}</span>`
+    : '';
   const nameCls = row.empty ? 'lineup-name empty' : 'lineup-name';
   return `<div class="lineup-side ${align}">
     <span class="${nameCls}">${esc(row.name)}</span>
     <span class="lineup-pts">${money(row.points)}</span>
-    ${pen}
+    ${pen}${reason}
   </div>`;
 }
 
@@ -464,6 +513,7 @@ function lineupTable(left, right) {
  */
 export function renderMatchupDetail({
   week, matchup, resolved, payload, teams = {}, rosterPositions = [], players = {},
+  settled = false,
 }) {
   const name = (id) => teams[String(id)] || `Roster ${id}`;
   const isMedian = matchup.type === 'median';
@@ -484,37 +534,30 @@ export function renderMatchupDetail({
       rightTeam?.penalties || [],
     );
 
-  const leftWon = isMedian ? matchup.result === 'W' : matchup.winner === leftId;
-  // Not `!leftWon`: a tie against the median is a tie, not a loss. The
-  // summary card and the head-to-head branch both already mark neither side
-  // on a draw; this is the branch that used to call it a median win.
-  const medianWon = matchup.result === 'L';
+  // Same shared ladder the card draws, judged the same way: `settled` is
+  // taken from the caller (mountResults already computes it for the card)
+  // rather than assumed, so a click into a live week cannot show a different
+  // leader than the card the visitor just clicked to get here.
+  const rightSide = isMedian
+    ? { adjusted: matchup.line, inPlay: inPlayLine(resolved), raw: null }
+    : rightTeam;
+  const rightName = isMedian ? 'League median' : name(rightId);
+  const decides = settled ? 'adjusted' : 'inPlay';
+  const leader = leaderOf(matchup, resolved, settled);
 
-  const pool = poolHtml(resolved?.medianPool);
-
-  const header = isMedian
-    ? `<div class="detail-head">
-         <div class="side ${leftWon ? 'winner' : ''}">
-           <div class="name">${leftWon ? WIN_MARK : ''}${esc(name(leftId))}</div>
-           <div class="adj">${leftTeam ? money(leftTeam.adjusted) : '—'}</div>
-         </div>
-         <div class="side line ${medianWon ? 'winner' : ''}">
-           <div class="name">${medianWon ? WIN_MARK : ''}League median</div>
-           <div class="adj">${matchup.line === null ? '—' : money(matchup.line)}</div>
-           <div class="raw">avg of 2nd &amp; 3rd</div>
-           <div class="pool">${pool}</div>
-         </div>
-       </div>`
-    : `<div class="detail-head">
-         <div class="side ${leftWon ? 'winner' : ''}">
-           <div class="name">${leftWon ? WIN_MARK : ''}${esc(name(leftId))}</div>
-           <div class="adj">${leftTeam ? money(leftTeam.adjusted) : '—'}</div>
-         </div>
-         <div class="side ${!leftWon && matchup.winner !== null ? 'winner' : ''}">
-           <div class="name">${!leftWon && matchup.winner !== null ? WIN_MARK : ''}${esc(name(rightId))}</div>
-           <div class="adj">${rightTeam ? money(rightTeam.adjusted) : '—'}</div>
-         </div>
-       </div>`;
+  const header = `<div class="detail-head">
+    <div class="teams">
+      ${sideHead(name(leftId), 'l', leader === leftId, settled)}
+      <div class="vs">${isMedian ? 'vs median' : 'vs'}</div>
+      ${sideHead(rightName, 'r', leader === (isMedian ? 'line' : rightId), settled)}
+    </div>
+    <div class="ladder">${ladder(leftTeam, rightSide, decides)}
+      ${isMedian ? `<div class="pool-row">
+        <span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted</span>
+        <span class="pool">${poolHtml(resolved?.medianPool)}</span>
+      </div>` : ''}
+    </div>
+  </div>`;
 
   return `<div class="detail">
     <button type="button" class="back" data-back>&larr; Week ${week}</button>
@@ -717,7 +760,7 @@ export async function mountResults(el, state = {}) {
       el.innerHTML = renderMatchupDetail({
         week, matchup,
         resolved, payload, teams, rosterPositions,
-        players: playerNames,
+        players: playerNames, settled,
       });
     } else {
       el.innerHTML = picker(week) + renderWeek({

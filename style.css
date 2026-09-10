@@ -608,17 +608,25 @@ table.standings {
   .score-key dl > div { grid-template-columns: 1fr; gap: var(--space-xs); }
 }
 
+/*
+ * The three penalty phases, as three shapes rather than three colours: solid
+ * fill, dashed outline, dotted outline. Colour is never the sole carrier of
+ * meaning here - someone who cannot tell red from grey must still be able to
+ * tell a locked penalty from a pending or a not-yet-started one by outline
+ * alone. Replaces the single flat "red badge" .pen this task 8 superseded:
+ * that one rule could not represent three states without colour doing all
+ * the work.
+ */
 .pen {
-  flex: none;
-  font-family: var(--font-data);
-  font-size: var(--t-3xs);
-  font-weight: 700;
-  color: var(--pen);
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  font: 500 var(--t-3xs) / 1.4 var(--font-data);
+  padding: 0.04em 0.3em;
   border-radius: 3px;
-  padding: 0 var(--space-sm);
+  white-space: nowrap;
+  flex: none;
 }
+.pen.locked { background: var(--pen); color: var(--card); }
+.pen.pending { border: 1px dashed var(--pen); color: var(--pen); }
+.pen.waiting { border: 1px dotted var(--line-strong); color: var(--muted); }
 
 .pool {
   display: flex;
@@ -1167,6 +1175,19 @@ table.leaderboard th .dir {
   font-variant-numeric: tabular-nums;
   font-size: var(--t-xs);
   font-weight: 600;
+  flex: none;
+}
+
+/*
+ * Why a penalised row was hit, named in words. Same quiet-caption idiom as
+ * .lrow .lbl .cap and .pool-row .pool-cap: the smallest type size the file
+ * has, not a new one, and the muted colour instead of the pen tag's - it
+ * reads after the +20/not started tag, subordinate to it rather than
+ * competing with it.
+ */
+.pen-reason {
+  font-size: var(--t-3xs);
+  color: var(--muted);
   flex: none;
 }
 
