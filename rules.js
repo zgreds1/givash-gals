@@ -131,15 +131,39 @@ export function opportunitySet(weekStats) {
  * negative is a reward, and this penalty exists to punish absent
  * lineups, not good ones.
  *
+ * A penalty is only counted once that player's own NFL game is complete.
+ * Three cases settle immediately: empty slots, players on bye, and
+ * unrecognised ids (inactive players). The `states` parameter reads
+ * that week's schedule and maps each team to its game status ('final',
+ * 'live', 'upcoming'). With no `states` (the default `null`), penalties
+ * are treated as already final — this preserves the old behaviour and
+ * keeps existing callers with no change.
+ *
  * @param {{starters:string[], starters_points:number[]}} entry
  * @param {Set<string>} byes - NFL teams on bye this week
  * @param {Object<string,{pos:string,team:string,name:string}>} players
+ * @param {Set<string>} opportunities - player ids who had a scoring opportunity
+ * @param {Map<string, 'final'|'live'|'upcoming'>|null} states - game phases by team
+ * @returns {{raw: number, adjusted: number, inPlay: number, penalties: Array}}
  */
-export function adjustedScore(entry, byes, players, opportunities = new Set()) {
+export function adjustedScore(
+  entry, byes, players, opportunities = new Set(), states = null,
+) {
   const starters = entry.starters || [];
   const points = entry.starters_points || [];
   const penalties = [];
   let raw = 0;
+
+  // `states === null` means "no game information", which scores the week as if
+  // every game had already finished — exactly the behaviour before phases
+  // existed. That default is the compatibility hinge: --replay, the 2025
+  // archive and every existing caller keep their answers with no edit.
+  //
+  // A team present in the week's schedule takes its game's phase. A team ABSENT
+  // is on bye, and a bye is settled from kickoff: it is the purest form of the
+  // absence this penalty exists to punish, so it must never sit pending
+  // forever waiting for a game that is not being played.
+  const phaseOf = (team) => (states === null ? 'final' : states.get(team) ?? 'final');
 
   for (let i = 0; i < starters.length; i++) {
     const id = starters[i];
@@ -149,14 +173,18 @@ export function adjustedScore(entry, byes, players, opportunities = new Set()) {
     if (Math.abs(pts) >= EPS) continue; // scored something, no penalty
 
     if (!id || id === '0') {
-      penalties.push({ playerId: null, name: 'Empty slot', reason: 'empty-slot' });
+      penalties.push({
+        playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final',
+      });
       continue;
     }
 
     const meta = players[id];
     if (meta && meta.pos === 'DEF') {
       if (byes.has(meta.team)) {
-        penalties.push({ playerId: id, name: meta.name, reason: 'bye-def' });
+        penalties.push({
+          playerId: id, name: meta.name, reason: 'bye-def', phase: 'final',
+        });
       }
       continue; // DEF not on bye: exempt
     }
@@ -168,12 +196,19 @@ export function adjustedScore(entry, byes, players, opportunities = new Set()) {
       playerId: id,
       name: meta ? meta.name : `Unknown (${id})`,
       reason: 'zeroed',
+      // No metadata means no team to look up. An id absent from the slim map
+      // is an inactive player, which is absence, so it settles immediately.
+      phase: meta ? phaseOf(meta.team) : 'final',
     });
   }
 
+  const settled = penalties.filter((p) => p.phase === 'final').length;
+  const started = penalties.filter((p) => p.phase !== 'upcoming').length;
+
   return {
     raw: round2(raw),
-    adjusted: round2(raw + penalties.length * PENALTY),
+    adjusted: round2(raw + settled * PENALTY),
+    inPlay: round2(raw + started * PENALTY),
     penalties,
   };
 }

@@ -35,6 +35,35 @@ a legitimate outcome under this league's settings (`pts_allow_21_27` is 0.0),
 so it is not punished. A DEF whose NFL team *is* on bye is penalised like
 anyone else.
 
+### When the +20 lands
+
+A penalty is only counted once **that player's own NFL game is complete**. A
+starter sitting on 0 at half-time has not yet cost anything; he costs 20 when
+his game ends still on 0.
+
+Three cases settle immediately, because no game is going to change them:
+
+- an **empty starter slot**, which no result can rescue;
+- a player whose **NFL team is on bye**, or whose game was **cancelled** — both
+  are absence, which is exactly what this rule punishes;
+- a player **not in the league's player map**, who is inactive.
+
+This makes a team's score a moving number during the week, so the site shows
+three readings of it:
+
+| Reading | Rule |
+|---------|------|
+| `adjusted` | +20 for each zeroed starter whose game has **finished**. The official score; the standings use this one. |
+| `in play` | `adjusted` plus +20 for each zeroed starter whose game is **in progress**. Where the team lands if everything ended now. |
+| `raw` | The points alone, with no +20 of any kind. |
+
+A starter whose game has **not kicked off** counts toward neither `adjusted` nor
+`in play`, even while showing 0.
+
+Because penalties are only ever added as games finish, `raw <= adjusted <= in
+play` always holds, and once every game is complete `adjusted` and `in play` are
+the same number.
+
 Deliberate consequences:
 
 - **Negative scores are kept.** A kicker at -1 for a missed field goal stays

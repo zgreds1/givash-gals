@@ -60,7 +60,7 @@ test('penalties stack per starter', () => {
 test('penalties name the player responsible', () => {
   const r = adjustedScore(mkEntry(1, 1, [['8205', 0]]), WK3, PLAYERS);
   assert.deepEqual(r.penalties, [
-    { playerId: '8205', name: 'Bijan Robinson', reason: 'zeroed' },
+    { playerId: '8205', name: 'Bijan Robinson', reason: 'zeroed', phase: 'final' },
   ]);
 });
 
