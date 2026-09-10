@@ -448,10 +448,39 @@ table.standings {
  * week emits none, and used to pay for one by sitting off-centre anyway. */
 .card.clickable { cursor: pointer; padding-right: var(--space-3xl); }
 .card.clickable:hover { background: #fbfdff; }
-.card.clickable:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+
+/* The stretched link.
+ *
+ * The card used to BE the button (div[role="button"] tabindex="0"), which made
+ * every score inside it un-interactive: nothing may nest inside an interactive
+ * element. Moving the click onto a link laid over the card frees the scores to
+ * be real buttons, and hands back middle-click, right-click and open-in-new-tab
+ * that the div never had.
+ *
+ * inset:0 resolves against the card's PADDING box, so the outline sits just
+ * inside the card's own rules — the whole card visibly takes focus, as it did
+ * when it was the button. */
+.card-open {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.card-open:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+
+/* A tooltip must escape its own card. Cards are all position:relative with no
+ * z-index, so the next card in the DOM paints over this one's overflow; raise
+ * whichever card is currently showing a tooltip. :hover covers mouse, and it
+ * also fires on a tap in every mobile browser this is read on. */
+.card:hover,
+.card:focus-within { z-index: 2; }
+.card:has(.score.open) { z-index: 2; }
 
 .chev {
   position: absolute;
+  /* Decoration sitting on top of the stretched link. Without this a click on
+   * the chevron itself — the one part of the card that LOOKS like the
+   * control — would land on the glyph and do nothing. */
+  pointer-events: none;
   right: var(--space-md);
   top: 50%;
   transform: translateY(-50%);
@@ -569,29 +598,106 @@ table.standings {
  * parent's text-align never reaches them. */
 .pool-row .pool { justify-content: center; }
 
-/* The key: on the page, open by default. Not a tooltip — hover does not exist
- * on the phone this is read on during games. */
-.score-key {
-  border: 1px solid var(--line);
-  background: var(--card);
-  border-radius: var(--radius);
-  margin-bottom: var(--space-lg);
-  font-size: var(--t-2xs);
+/* --- One score line per team ----------------------------------------
+ *
+ * The same three-column track as .teams above, so each score sits under the
+ * name it belongs to. The middle column stays empty: it is the gutter the
+ * "vs" occupies one row up. */
+.scores {
+  display: grid;
+  grid-template-columns: 1fr minmax(5.5rem, auto) 1fr;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--line);
 }
-.score-key > summary {
-  cursor: pointer;
+.score-cell { position: relative; min-width: 0; }
+.score-cell.l { grid-column: 1; text-align: right; }
+.score-cell.r { grid-column: 3; text-align: left; }
+
+/* A button, because it answers to hover, to focus AND to a tap — and on the
+ * phone this is read on during games, only the last of those exists.
+ * The dotted underline is the affordance: something is behind this number. */
+.score {
+  position: relative;   /* above .card-open, so the tap lands here */
+  z-index: 1;
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 1px dotted var(--line-strong);
+  padding: var(--space-sm) var(--space-xs);
+  font: 600 var(--t-lg) / 1.2 var(--font-data);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  cursor: help;
+  text-align: inherit;
+}
+.score:hover { border-bottom-color: var(--primary); }
+
+/* The parenthesised adjusted score. Recessive on purpose: it is context for
+ * the live number, not a competitor to it. Its mere PRESENCE is the fourth
+ * non-colour signal that the week can still move. */
+.score .alt {
+  font-size: var(--t-xs);
+  font-weight: 400;
+  color: var(--muted);
+}
+
+/* In the DOM at all times so aria-describedby resolves to real text; CSS is
+ * the only thing hiding it. Anchored to its own side rather than centred, so
+ * neither edge of a phone screen clips it. */
+.score-tip {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + var(--space-sm));
+  width: max-content;
+  max-width: min(15rem, 68vw);
+  display: grid;
+  gap: var(--space-sm);
   padding: var(--space-md) var(--space-lg);
-  min-height: 44px;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
+  background: var(--card);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgb(15 23 42 / 0.14);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 150ms ease;
+}
+.score-cell.l .score-tip { left: 0; }
+.score-cell.r .score-tip { right: 0; }
+
+.score:hover + .score-tip,
+.score:focus-visible + .score-tip,
+.score.open + .score-tip { opacity: 1; visibility: visible; }
+
+.tip-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 var(--space-lg);
+  align-items: baseline;
+}
+.tip-row + .tip-row { border-top: 1px solid var(--line); padding-top: var(--space-sm); }
+.tip-row b {
+  font: 600 var(--t-3xs) / 1.5 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: var(--ink);
 }
-.score-key > summary:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
-.score-key dl { margin: 0; padding: 0 var(--space-lg) var(--space-md); display: grid; gap: var(--space-md); }
-.score-key dl > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--space-md); }
-.score-key dt { font: 600 var(--t-2xs) / 1.5 var(--font-data); color: var(--ink); }
-.score-key dd { margin: 0; color: var(--muted); }
+.tip-row .tip-v {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-xs);
+  color: var(--ink);
+  text-align: right;
+}
+.tip-row em {
+  grid-column: 1 / -1;
+  font-style: normal;
+  font-size: var(--t-3xs);
+  line-height: 1.4;
+  color: var(--muted);
+}
 
 .week-status {
   font-size: var(--t-2xs);
@@ -603,8 +709,8 @@ table.standings {
 .week-status b { color: var(--ink); font-weight: 600; }
 
 @media (max-width: 34rem) {
-  .teams, .lrow { grid-template-columns: 1fr minmax(4.6rem, auto) 1fr; }
-  .score-key dl > div { grid-template-columns: 1fr; gap: var(--space-xs); }
+  .teams, .lrow, .scores { grid-template-columns: 1fr minmax(4.6rem, auto) 1fr; }
+  .score { font-size: var(--t-base); }
 }
 
 /*
@@ -697,16 +803,32 @@ table.standings {
 
 /* --- Results week picker -------------------------------------------- */
 
-.controls .weeks button {
+.controls .weeks a {
   min-width: 2.25rem;
   padding: var(--space-md) var(--space-sm);
   font-family: var(--font-data);
   font-variant-numeric: tabular-nums;
+  text-align: center;
 }
 
 /* A week with results reads differently from one that has not happened. */
-.controls .weeks button.played { color: var(--ink); border-color: var(--line-strong); }
-.controls .weeks button.on { color: var(--card); background: var(--primary); border-color: var(--primary); }
+.controls .weeks a.played { color: var(--ink); border-color: var(--line-strong); }
+.controls .weeks a.on { color: var(--card); background: var(--primary); border-color: var(--primary); }
+
+/* An arrow with nowhere to go is a span, not a disabled link: a link that
+ * navigates nowhere is worse than no link. It keeps the same footprint so the
+ * picker does not shift as the week moves. */
+.controls .step.off {
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-lg);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  font: 400 var(--t-xs) / 1 var(--font-body);
+  opacity: 0.4;
+}
 
 /* --- Players tab --------------------------------------------------- */
 
@@ -730,9 +852,11 @@ table.standings {
 }
 
 .controls button,
+.controls a,
 .controls select,
 .controls input {
   font: 400 var(--t-xs) / 1 var(--font-body);
+  text-decoration: none;
   color: var(--muted);
   background: var(--card);
   border: 1px solid var(--rule);
@@ -744,9 +868,17 @@ table.standings {
 }
 
 .controls button:hover:not(:disabled),
+.controls a:hover,
 .controls select:hover {
   color: var(--ink);
   border-color: var(--line-strong);
+}
+
+/* Links have no padding box of their own until they are told to have one. */
+.controls a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .controls button.on {
@@ -1108,19 +1240,24 @@ table.leaderboard th .dir {
     break-inside: avoid;
     box-shadow: none;
   }
+  /* On paper there is no hover, so the explanation would never appear —
+   * print the numbers alone rather than an empty gap where a tooltip went. */
+  .score-tip,
+  .chev {
+    display: none;
+  }
+  .score { border-bottom: 0; }
 }
 
 /* --- Matchup detail ------------------------------------------------ */
 
 .back {
-  appearance: none;
-  background: none;
-  border: 0;
+  display: inline-block;
   padding: var(--space-md) 0;
   margin-bottom: var(--space-lg);
   font: 500 var(--t-sm) / 1 var(--font-body);
   color: var(--primary);
-  cursor: pointer;
+  text-decoration: none;
 }
 .back:hover { text-decoration: underline; }
 

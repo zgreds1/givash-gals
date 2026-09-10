@@ -96,14 +96,49 @@ write `data/leaderboard-{season}.json`; `leaderboard-view.js` holds the
 filtering, sorting and rendering that turns those rows into the table, plus
 the DOM controller that mounts it.
 
+### Every view has a URL
+
+`router.js` maps the address bar onto the view, so the browser's back button
+works:
+
+    #/results                        the default week
+    #/results/week/3                 an explicit week
+    #/results/week/3/matchup/1       a drill-down
+    #/standings  #/players  #/rules  the other tabs
+
+Hash URLs, not paths: the site is static on GitHub Pages, where a request for
+`/results/week/3` 404s unless a redirect shim is committed alongside. Anything
+unparseable, out of range or unknown falls back to `#/results` — a hand-edited
+URL never blanks the page.
+
+The URL is the only place the view lives. A click *writes* the hash and stops;
+the `hashchange` it fires is what repaints, so a click and the back button take
+exactly the same path and the address bar cannot disagree with the screen.
+Render never writes the hash back, which is what keeps that cycle from closing.
+Navigation is addressable; filters (the Players tab's search, season and
+minimum-games controls) are not, because a search box that writes history makes
+Back useless.
+
 ### Three scores, and when they move
 
 A +20 only counts once that player's own NFL game is complete, so a team's score
-is a moving number during the week. Results shows three readings of it —
-`adjusted` (finished games only, the official score), `in play` (adjusted plus
-games in progress) and `raw` (no +20 at all). `RULES.md` states the rule; the
-Results tab explains it in a key that sits on the page rather than in a tooltip,
-because the site is mostly read on a phone during games.
+is a moving number during the week. There are three readings of it — `adjusted`
+(finished games only, the official score), `in play` (adjusted plus games in
+progress) and `raw` (no +20 at all). `RULES.md` states the rule.
+
+A Results card shows one line per team, `in play (adjusted)`, and drops the
+bracket once the week is settled — where the two are equal by construction and
+`118.40 (118.40)` would be noise. That absence is itself a signal: a card with
+brackets is still moving, alongside the dashed rule, the hollow ring and the
+word "leading". All three readings, `raw` included, live in the explanation
+behind each score, which answers to hover, to keyboard focus **and** to a tap —
+the last of those being the only one that exists on the phone this is mostly
+read on during games. The drill-down keeps all three in plain sight.
+
+Because a drill-down is a URL, the card is a link stretched over it rather than
+a `div[role="button"]`. That is what makes the hover possible at all: an
+interactive element cannot nest inside another one, so while the card *was* the
+button, a score could not be its own hover target.
 
 The standings do not move mid-week. A week joins at **Tuesday 10:00 Israel
 time**, which `season.js` computes by comparing wall-clock parts from

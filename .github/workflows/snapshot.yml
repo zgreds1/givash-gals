@@ -21,6 +21,21 @@ on:
                               # before the gate is Monday midnight ET, and the
                               # week joins the standings missing MNF entirely.
     - cron: '0 13 * * 2'      # Tue 9am ET, sweep for stat corrections
+    - cron: '0 6 * * 3,4,5,6'  # Wed-Sat 06:00 UTC — the morning after TNF and
+                              # any midweek game. Nothing ran Wed-Sat before,
+                              # and Thursday Night Football happens in 17 of
+                              # the 18 weeks, so its results sat invisible in
+                              # the archive until Sunday afternoon. Results
+                              # never noticed (it re-fetches the live week);
+                              # the Players leaderboard did, because it is
+                              # aggregated by this Action and never in the
+                              # browser. TNF kicks at 20:15 ET — 00:15 UTC
+                              # Friday on EDT, 01:15 on EST — and ends around
+                              # 03:35-04:40 UTC, so 06:00 clears it either way.
+                              # The ladder was built around when the STANDINGS
+                              # need to be right, and they only care about
+                              # completed weeks; the leaderboard wants every
+                              # game, not every week.
   workflow_dispatch:
 
 permissions:

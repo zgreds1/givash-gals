@@ -5,6 +5,7 @@ import { LAST_WEEK } from './config.js';
 import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from './sleeper.js';
 import { byeTeams, resolveWeek, standings, opportunitySet, gameStates } from './rules.js';
 import { finalWeeks, gateLabel } from './season.js';
+import { parseHash, formatHash } from './router.js';
 import { renderStandings, renderRules } from './render.js';
 import { mountLeaderboard } from './leaderboard-view.js';
 import { mountResults } from './results-view.js';
@@ -12,12 +13,50 @@ import { mountResults } from './results-view.js';
 const state = {
   weeks: [], teams: {}, ghostRosterId: null, generatedAt: null, live: false,
   livePayloads: {}, seasonStart: null, rosterPositions: [], schedule: null,
+  route: { tab: 'results', week: null, matchup: null },
 };
 
 // Set once mountResults resolves. Lets paint() push a redraw into an
 // already-mounted Results tab when refreshLive() changes state under it,
 // instead of only fixing the next click.
 let resultsRepaint = null;
+
+// Mounted lazily like Results, and idempotent for the same reason: applyRoute
+// calls it on every route change, not just the first.
+let playersMounted = false;
+function mountPlayersTab() {
+  if (playersMounted) return Promise.resolve();
+  playersMounted = true;
+  return mountLeaderboard($('players'), { teams: state.teams }).catch((e) => {
+    console.error(e);
+    $('players').innerHTML = '<p class="empty">Could not load the leaderboard.</p>';
+  });
+}
+
+/**
+ * Show the view the URL names.
+ *
+ * The only thing that paints. Clicks never call this — they write the hash and
+ * let the hashchange it fires arrive here, which is what keeps the URL and the
+ * screen from ever disagreeing. Render must never write the hash back, or the
+ * cycle closes.
+ */
+function applyRoute(route) {
+  for (const b of document.querySelectorAll('nav button')) {
+    const on = b.dataset.view === route.tab;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-selected', String(on));
+  }
+  for (const v of document.querySelectorAll('.view')) v.hidden = v.id !== route.tab;
+
+  if (route.tab === 'players') return mountPlayersTab();
+  if (route.tab === 'results') {
+    // mountResultsTab is a no-op after the first call, so this is the repaint
+    // path on every subsequent route change.
+    return mountResultsTab().then(() => { resultsRepaint?.(); });
+  }
+  return Promise.resolve();
+}
 
 const $ = (id) => document.getElementById(id);
 
@@ -185,7 +224,6 @@ async function refreshLive() {
 }
 
 function wireNav() {
-  let playersMounted = false;
   const buttons = [...document.querySelectorAll('nav button')];
 
   // role="tablist" promises arrow-key movement between tabs. Every tab stays
@@ -206,32 +244,30 @@ function wireNav() {
 
   for (const btn of buttons) {
     btn.addEventListener('click', () => {
-      for (const b of document.querySelectorAll('nav button')) {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      }
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      for (const v of document.querySelectorAll('.view')) v.hidden = true;
-      $(btn.dataset.view).hidden = false;
-
-      // The leaderboard costs a roster call and two JSON fetches, so it is
-      // built the first time it is asked for and never again.
-      if (btn.dataset.view === 'players' && !playersMounted) {
-        playersMounted = true;
-        mountLeaderboard($('players'), { teams: state.teams }).catch((e) => {
-          console.error(e);
-          $('players').innerHTML = '<p class="empty">Could not load the leaderboard.</p>';
-        });
-      }
-
-      if (btn.dataset.view === 'results') mountResultsTab();
+      // Writes the URL and stops. The hashchange listener does the painting, so
+      // a click and the back button take exactly the same path.
+      location.hash = formatHash({ tab: btn.dataset.view });
     });
   }
 }
 
 if (typeof document !== 'undefined') {
   wireNav();
+
+  // Parsed before the snapshot so a cold load of a deep link knows where it is
+  // going, and applied after so it paints against loaded data rather than
+  // painting an empty state and correcting itself.
+  //
+  // Deliberately not written back on load: an empty hash already parses to the
+  // default view, and writing one would push a history entry before the visitor
+  // has navigated anywhere.
+  state.route = parseHash(location.hash);
+
+  window.addEventListener('hashchange', () => {
+    state.route = parseHash(location.hash);
+    applyRoute(state.route);
+  });
+
   let snapshotLoaded = true;
   loadSnapshot()
     .catch((e) => {
@@ -241,10 +277,7 @@ if (typeof document !== 'undefined') {
       $('freshness').textContent = 'Could not load the snapshot.';
     })
     .then(() => {
-      // After loadSnapshot, never before: mounting first would paint "not
-      // published by Sleeper yet" against an empty state.weeks and then repaint
-      // — a visible flash on the page's own front door.
-      if (snapshotLoaded) return mountResultsTab();
+      if (snapshotLoaded) return applyRoute(state.route);
     })
     .then(() => {
       if (snapshotLoaded) return refreshLive();

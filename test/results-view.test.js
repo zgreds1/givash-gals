@@ -253,8 +253,8 @@ test('a degenerate week explains itself instead of rendering an empty shell', ()
 test('matchups are not clickable when the week has no archived payload', () => {
   const on = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
   const off = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: false });
-  assert.match(on, /data-matchup="0"/);
-  assert.doesNotMatch(off, /data-matchup=/);
+  assert.match(on, /<a class="card-open" href="#\/results\/week\/3\/matchup\/0">/);
+  assert.doesNotMatch(off, /card-open/);
   assert.match(off, /no player detail/i, 'and it says why rather than going quiet');
 });
 
@@ -505,64 +505,54 @@ test('a mounted view reads state fresh, so a repaint reflects changes made after
 });
 
 /**
- * A DOM-free stand-in for `el` that is just capable enough to drive
- * mountResults' own wiring: it scrapes `data-week`/`data-step` buttons and
- * `data-matchup` cards out of whatever HTML string was assigned, hands
- * wire() fake elements with a `dataset` and a settable `onclick`, and lets a
- * test fire that `onclick` itself to simulate a real click without a
- * browser.
+ * Enough of an Element for mountResults.
  *
- * The matchup cards and the back button are scraped too, because until they
- * were the click -> detail -> back path had no coverage through
- * mountResults at all: `[data-matchup]` returned [], so no test could reach
- * paint()'s detail branch, which is where the concurrent-paint race and the
- * stale matchup index both lived.
+ * Weeks, matchups and Back are real links now, so there is nothing to scrape
+ * for them — following a link is the browser's job, and this file stands in
+ * for it with `goto` below. The one thing paint() still wires is the score
+ * buttons, so those are all this builds.
  */
 function makeStubEl() {
   let html = '';
-  const weekButtons = [];
-  const stepButtons = [];
-  const matchupCards = [];
-  let backButton = null;
-  let scoreKeyEl = null;
-  const scrape = (v, re, make, into) => {
-    into.length = 0;
-    let m;
-    while ((m = re.exec(v))) into.push(make(m));
-  };
+  const scores = [];
   return {
     get innerHTML() { return html; },
     set innerHTML(v) {
       html = v;
-      scrape(v, /data-week="(\d+)"/g, (m) => ({ dataset: { week: m[1] }, onclick: null }), weekButtons);
-      scrape(
-        v, /data-matchup="(\d+)"/g,
-        (m) => ({ dataset: { matchup: m[1] }, onclick: null, onkeydown: null }),
-        matchupCards,
-      );
-      stepButtons.length = 0;
-      for (const step of ['-1', '1']) {
-        if (v.includes(`data-step="${step}"`)) stepButtons.push({ dataset: { step }, onclick: null });
+      // Rebuilt on every write, like the real elements paint() throws away.
+      scores.length = 0;
+      for (const m of v.matchAll(/aria-describedby="(tip-[^"]+)"/g)) {
+        const on = new Set();
+        scores.push({
+          describes: m[1],
+          onclick: null,
+          classList: {
+            contains: (c) => on.has(c),
+            remove: (c) => on.delete(c),
+            toggle: (c, want) => (want ? on.add(c) : on.delete(c)),
+          },
+        });
       }
-      backButton = v.includes('data-back') ? { onclick: null } : null;
-      // Rebuilt on every write, like the real element paint() throws away, so
-      // a test can only see the key stay closed if the CLOSURE remembered it.
-      scoreKeyEl = v.includes('class="score-key"')
-        ? { open: v.includes('<details class="score-key" open>'), ontoggle: null }
-        : null;
     },
     querySelectorAll(sel) {
-      if (sel === '[data-week]') return weekButtons;
-      if (sel === '[data-step]') return stepButtons;
-      if (sel === '[data-matchup]') return matchupCards;
+      if (sel === '.score') return scores;
+      if (sel === '.score.open') return scores.filter((b) => b.classList.contains('open'));
       return [];
     },
-    querySelector(sel) {
-      if (sel === '.score-key') return scoreKeyEl;
-      return sel === '[data-back]' ? backButton : null;
-    },
+    querySelector() { return null; },
   };
 }
+
+/**
+ * What following one of the tab's links does.
+ *
+ * The browser writes the hash, app.js parses it onto `state.route` and calls
+ * repaint. This module has no click handler of its own to call any more, so a
+ * test drives it exactly the way the address bar does.
+ */
+const goto = (state, route) => {
+  state.route = { tab: 'results', week: null, matchup: null, ...route };
+};
 
 /** Let an internal, un-awaited paint() run to its next suspension point. */
 const settle = () => new Promise((r) => setTimeout(r, 0));
@@ -584,14 +574,14 @@ test('the default week keeps recomputing from state.seasonStart until it arrives
   };
 
   const { repaint } = await mountResults(el, state);
-  assert.match(el.innerHTML, /data-week="1" aria-pressed="true"/, 'seasonStart unknown: degrades to week 1');
+  assert.match(el.innerHTML, /href="#\/results\/week\/1"[^>]*aria-current="page"/, 'seasonStart unknown: degrades to week 1');
 
   state.seasonStart = START;
   await repaint();
-  assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/, 'seasonStart landed: the picker corrects to the real current week');
+  assert.match(el.innerHTML, /href="#\/results\/week\/9"[^>]*aria-current="page"/, 'seasonStart landed: the picker corrects to the real current week');
 });
 
-test('a week the visitor already chose survives a repaint, even if seasonStart changes underneath it', async () => {
+test('a week named in the URL beats the default, and no later repaint can move it', async () => {
   const el = makeStubEl();
   const state = {
     weeks: [], teams: {}, ghostRosterId: 6, seasonStart: START, rosterPositions: [],
@@ -604,17 +594,18 @@ test('a week the visitor already chose survives a repaint, even if seasonStart c
   };
 
   const { repaint } = await mountResults(el, state);
-  assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/);
+  assert.match(el.innerHTML, /href="#\/results\/week\/9"[^>]*aria-current="page"/);
 
-  const week12 = el.querySelectorAll('[data-week]').find((b) => b.dataset.week === '12');
-  week12.onclick(); // a real click: sets weekChosen and repaints internally
-  await new Promise((r) => setTimeout(r, 0)); // let that internal paint() settle
-  assert.match(el.innerHTML, /data-week="12" aria-pressed="true"/);
+  goto(state, { week: 12 });   // the visitor follows week 12's link
+  await repaint();
+  assert.match(el.innerHTML, /href="#\/results\/week\/12"[^>]*aria-current="page"/);
 
-  // If the guard were missing, this would snap the default back to week 1.
+  // The sticky `weekChosen` flag that used to protect this is gone: "the URL
+  // names a week" IS the state it stood for, so the two can no longer
+  // disagree. Without that, this would snap the default back to week 1.
   state.seasonStart = null;
   await repaint();
-  assert.match(el.innerHTML, /data-week="12" aria-pressed="true"/, 'the chosen week is not overwritten by a later repaint');
+  assert.match(el.innerHTML, /href="#\/results\/week\/12"[^>]*aria-current="page"/, 'the URL decides the week, not the clock');
 });
 
 // The two benches are independent, unordered lists: verified against the
@@ -798,12 +789,13 @@ test('a slow fetch that lands last cannot overwrite the week clicked after it', 
     now: () => local(2026, 9, 9), // week 1: neither of the two racing weeks
   };
 
-  await mountResults(el, state);
-  const weekBtn = (n) => el.querySelectorAll('[data-week]').find((b) => b.dataset.week === String(n));
+  const { repaint } = await mountResults(el, state);
 
-  weekBtn(5).onclick();
+  goto(state, { week: 5 });
+  repaint();            // deliberately un-awaited: it suspends on the fetch
   await settle();
-  weekBtn(7).onclick();
+  goto(state, { week: 7 });
+  repaint();
   await settle();
   assert.deepEqual([...pending.keys()], [5, 7], 'both weeks are in flight at once');
 
@@ -812,7 +804,7 @@ test('a slow fetch that lands last cannot overwrite the week clicked after it', 
   pending.get(5)();   // and the older one lands last
   await settle();
 
-  assert.match(el.innerHTML, /data-week="7" aria-pressed="true"/, 'the picker shows the week clicked last');
+  assert.match(el.innerHTML, /href="#\/results\/week\/7"[^>]*aria-current="page"/, 'the picker shows the week clicked last');
   assert.match(el.innerHTML, /77\.00/, 'and so do the scores beside it');
   assert.doesNotMatch(el.innerHTML, /55\.00/, "week 5's scores must not appear under week 7's picker");
 });
@@ -845,11 +837,12 @@ const DRIFT_WEEKS = [
   },
 ];
 
-test('a drill-down is not re-pointed at another week when the default week moves under it', async () => {
-  // view.matchup is an index into the week that was on screen when the card
-  // was clicked. Opening a card does not set weekChosen, so the next paint
-  // still recomputes the default week from seasonStart - and used to carry
-  // the old index into the new week's matchups.
+test('the URL pins the week under an open drill-down, so the clock cannot re-point it', async () => {
+  // A matchup index only means anything against ONE week's matchups. It used
+  // to live in a closure beside a week that a later paint could recompute
+  // from the clock, which carried the index into a different week's array -
+  // silently, because both weeks have a matchup at that index. The URL now
+  // names the pair together, so they cannot come apart.
   const el = makeStubEl();
   let clock = local(2026, 9, 9); // week 1
   const state = {
@@ -869,18 +862,19 @@ test('a drill-down is not re-pointed at another week when the default week moves
   };
 
   const { repaint } = await mountResults(el, state);
-  assert.match(el.innerHTML, /data-week="1" aria-pressed="true"/);
+  assert.match(el.innerHTML, /href="#\/results\/week\/1"[^>]*aria-current="page"/);
 
-  el.querySelectorAll('[data-matchup]')[1].onclick(); // week 1's second matchup
-  await settle();
-  assert.match(el.innerHTML, /data-back/, 'the drill-down is open');
+  goto(state, { week: 1, matchup: 1 });   // week 1's second matchup
+  await repaint();
+  assert.match(el.innerHTML, /<a class="back" href="#\/results\/week\/1">/, 'the drill-down is open');
   assert.match(el.innerHTML, /Delta/, "and it is week 1's second matchup, rosters 3 and 4");
 
   clock = local(2026, 11, 4); // the clock rolls on to week 9 under the open detail
   await repaint();
 
-  assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/, 'the week moves on');
-  assert.doesNotMatch(el.innerHTML, /data-back/, "and the index into week 1's matchups goes with it");
+  assert.match(el.innerHTML, /<a class="back" href="#\/results\/week\/1">/, 'still week 1, because the URL says week 1');
+  assert.match(el.innerHTML, /Delta/);
+  assert.doesNotMatch(el.innerHTML, /Bravo/, "never week 9's matchup 1, which is rosters 2 and 4");
 });
 
 // --- Task 7: the three-score card ------------------------------------
@@ -950,39 +944,38 @@ test('an equal in-play pair leads nobody', () => {
   assert.equal(leaderOf(LIVE_WEEK.matchups[0], tied, false), null);
 });
 
-test('the card prints all three scores in every state', () => {
+test('all three readings survive the collapse, in the tooltip behind the line', () => {
   for (const settled of [true, false]) {
     const html = renderWeek({
       week: 3, resolved: LIVE_WEEK, teams: NAMES, detailAvailable: true, settled,
     });
-    // Pinned to the ladder's own markup. A bare /adjusted/ is satisfied by
-    // scoreKey()'s <dt>adjusted</dt> and would pass with no ladder rendered at
-    // all; only the ladder pairs a label with its caption.
-    assert.match(html, /<span class="lbl">adjusted<span class="cap">finished games</, `settled=${settled}`);
-    assert.match(html, /<span class="lbl">in play<span class="cap">\+ in progress</, `settled=${settled}`);
-    assert.match(html, /<span class="lbl">raw<span class="cap">no \+20s</, `settled=${settled}`);
-    // And pinned to their cells: 98.40 is also one of the four median-pool
-    // chips, so a bare /98\.40/ passes off the pool alone.
-    assert.match(html, /<span class="n l">98\.40<\/span>/, `settled=${settled}`);
-    assert.match(html, /<span class="n l">118\.40<\/span>/, `settled=${settled}`);
-    assert.match(html, /<span class="n l">78\.40<\/span>/, `settled=${settled}`);
+    // Pinned to a tip row's whole shape. A bare /adjusted/ would be satisfied
+    // by any stray label anywhere on the page, and 98.40 is also one of the
+    // four median-pool chips, so a bare /98\.40/ passes off the pool alone.
+    assert.match(html, /<b>adjusted<\/b><span class="tip-v">98\.40<\/span><em>finished games only<\/em>/, `settled=${settled}`);
+    assert.match(html, /<b>raw<\/b><span class="tip-v">78\.40<\/span><em>no \+20s at all<\/em>/, `settled=${settled}`);
   }
-});
 
-test('emphasis moves between the two states without anything disappearing', () => {
   const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
   const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
-  // [\s\S]*? was lazy but unanchored, so it ran straight past the row's own
-  // </div> into the NEXT row's label: the settled render matched both
-  // /decides…adjusted/ and /decides…in play/, and the test passed whichever
-  // row carried `decides`. Pinned to the decides row's own left-hand number so
-  // the match cannot leave the row it is asserting about.
-  assert.match(open, /class="lrow decides">\s*<span class="n l">118\.40<\/span>\s*<span class="lbl">in play/);
-  assert.match(done, /class="lrow decides">\s*<span class="n l">98\.40<\/span>\s*<span class="lbl">adjusted/);
+  assert.match(open, /<b>in play<\/b><span class="tip-v">118\.40<\/span><em>if it ended now<\/em>/);
+  assert.match(done, /<b>adjusted<\/b>/, 'a settled week still explains the other two');
+  assert.doesNotMatch(done, /<b>in play<\/b>/, 'but has no separate live reading left to explain');
+});
+
+test('the card shows one line per team: in play, with adjusted in brackets', () => {
+  const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
+  assert.match(open, /class="score" aria-describedby="tip-w3m0l">118\.40 <span class="alt">\(98\.40\)<\/span><\/button>/);
+  // Settled, in play IS adjusted, so "98.40 (98.40)" would be noise — and the
+  // bracket's absence is itself a fourth non-colour carrier of the state,
+  // beside the solid rule, the check and the missing word "leading".
+  assert.match(done, /class="score" aria-describedby="tip-w3m0l">98\.40<\/button>/);
+  assert.doesNotMatch(done, /class="alt"/);
   assert.equal(
-    (open.match(/class="lrow/g) || []).length,
-    (done.match(/class="lrow/g) || []).length,
-    'the same number of rows in both states',
+    (open.match(/class="score"/g) || []).length,
+    (done.match(/class="score"/g) || []).length,
+    'the same number of score lines in both states',
   );
 });
 
@@ -1018,7 +1011,7 @@ test('no player name ever reaches the card', () => {
   // Anchored first: three doesNotMatch assertions would all hold on an empty
   // string, so the test says out loud that it looked at a real rendered card.
   assert.match(html, /class="card settled/);
-  assert.match(html, /<span class="n l">98\.40<\/span>/, 'the penalised team is on the card');
+  assert.match(html, /class="score" aria-describedby="tip-w3m0l">98\.40<\/button>/, 'the penalised team is on the card');
   assert.doesNotMatch(html, /Joe Burrow/, 'names live behind the click now');
   assert.doesNotMatch(html, /class="penalties"/);
 });
@@ -1036,10 +1029,18 @@ test('the week carries exactly one status region', () => {
   assert.match(html, /Week 3 in progress/);
 });
 
-test('the key explains all three numbers on the page, not in a tooltip', () => {
+test('every score resolves to a tooltip of its own, and no two share an id', () => {
   const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
-  assert.match(html, /<details class="score-key" open>/);
-  assert.doesNotMatch(html, /title="/, 'no tooltip: hover does nothing on a phone');
+  const ids = [...html.matchAll(/aria-describedby="([^"]+)"/g)].map((m) => m[1]);
+  assert.equal(ids.length, 6, 'three matchups, two sides each');
+  for (const id of ids) {
+    assert.match(html, new RegExp(`<span class="score-tip" id="${id}" role="tooltip">`),
+      `aria-describedby="${id}" resolves to a real element`);
+  }
+  assert.equal(new Set(ids).size, ids.length, 'and every id is unique');
+  // A title attribute is unreachable by keyboard and silent on touch, which
+  // is most of how this page is read.
+  assert.doesNotMatch(html, /title="/);
 });
 
 // --- Task 7 fixes: the pool's provenance, the key's memory, and `settled` ---
@@ -1050,20 +1051,24 @@ test('the median pool names the reading it was averaged from', () => {
   // adjusted line of 94.80), so juxtaposition alone asserts the wrong
   // provenance. The caption is what stops it.
   const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
-  assert.match(html, /class="lrow decides">\s*<span class="n l">114\.30<\/span>\s*<span class="lbl">in play/);
-  assert.match(html, /<span class="n r">124\.80<\/span>/, 'the emphasised line is the in-play one');
+  assert.match(html, /class="score" aria-describedby="tip-w3m2r">124\.80 <span class="alt">\(94\.80\)<\/span>/,
+    'the line printed above the chips is the in-play one, not the one they average to');
   assert.match(html, /<span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted<\/span>/);
   assert.match(html, /class="pool-cap"[\s\S]*?class="pool"/, 'the caption is read before the chips');
 });
 
-test('the score key can be rendered closed', () => {
-  const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, keyOpen: true });
-  const shut = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, keyOpen: false });
-  assert.match(open, /<details class="score-key" open>/);
-  assert.match(shut, /<details class="score-key">/);
-  assert.doesNotMatch(shut, / open>/);
-  const dflt = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES });
-  assert.match(dflt, /<details class="score-key" open>/, 'open on a first visit, which is when it is worth reading');
+test('the card is a link over a div, which is what lets the scores be buttons', () => {
+  const html = renderWeek({
+    week: 3, resolved: LIVE_WEEK, teams: NAMES, detailAvailable: true, settled: true,
+  });
+  assert.match(html, /<a class="card-open" href="#\/results\/week\/3\/matchup\/0">/);
+  assert.match(html, /<a class="card-open" href="#\/results\/week\/3\/matchup\/2">/, 'the median card too');
+  assert.match(html, /<span class="sr-only">Open matchup<\/span>/, 'and the link is named');
+  // The whole point of the switch: an interactive element may not nest inside
+  // another one, so while the CARD was the button the scores could not be.
+  assert.doesNotMatch(html, /role="button"/, 'the card is no longer the button');
+  assert.doesNotMatch(html, /tabindex=/);
+  assert.match(html, /<button type="button" class="score"/, 'and the scores are');
 });
 
 // Week 3 of a season starting 2026-09-09 runs Wed 23 Sep to Tue 29 Sep, and
@@ -1114,7 +1119,8 @@ test('a week whose games are all complete mounts settled, gate or no gate', asyn
   await mountResults(el, mountState(ALL_DONE, GATE_AHEAD));
   assert.match(el.innerHTML, /class="card settled/);
   assert.match(el.innerHTML, /<\/span>final</);
-  assert.match(el.innerHTML, /class="lrow decides">\s*<span class="n l">98\.40<\/span>\s*<span class="lbl">adjusted/);
+  assert.match(el.innerHTML, /class="score" aria-describedby="tip-w3m0l">98\.40<\/button>/,
+    'and the line is the adjusted one, with no bracket');
   assert.match(el.innerHTML, /win-mark/);
   assert.match(el.innerHTML, /Week 3 final/);
 });
@@ -1127,7 +1133,8 @@ test('one game still running holds the week open even after its gate has passed'
   await mountResults(el, mountState(ONE_RUNNING, GATE_PASSED));
   assert.match(el.innerHTML, /class="card live/);
   assert.match(el.innerHTML, /<\/span>in progress</);
-  assert.match(el.innerHTML, /class="lrow decides">\s*<span class="n l">118\.40<\/span>\s*<span class="lbl">in play/);
+  assert.match(el.innerHTML, /class="score" aria-describedby="tip-w3m0l">118\.40 <span class="alt">\(98\.40\)<\/span>/,
+    'and the line leads on in play, with adjusted bracketed behind it');
   assert.match(el.innerHTML, /class="lead">leading</);
   assert.doesNotMatch(el.innerHTML, /win-mark/);
   assert.match(el.innerHTML, /Week 3 in progress/);
@@ -1156,39 +1163,24 @@ test('the live schedule on state beats the committed file', async () => {
   assert.match(el.innerHTML, /class="card settled/);
 });
 
-test('a key the visitor closed stays closed across every repaint', async () => {
-  // paint() replaces innerHTML wholesale, so the <details> is destroyed and
-  // rebuilt on every week click, stepper, drill-down and back. Before the fix
-  // the panel reopened on all four.
+test('a tap opens one explanation and closes any other', async () => {
+  // The only handler this tab has left. Hover is CSS's job, and on the phone
+  // this is read on during games hover does not exist at all — so the same
+  // element has to answer to a tap, and two open tooltips must not overlap.
   const el = makeStubEl();
-  // Weeks 3, 4 and 5 all played: the key only exists on a played week, so an
-  // unplayed one would make the assertions below pass for the wrong reason.
-  const state = mountState(ALL_DONE, GATE_AHEAD);
-  state.weeks = [3, 4, 5].map((week) => ({ ...MOUNT_WEEK, week }));
-  const { repaint } = await mountResults(el, state);
-  assert.match(el.innerHTML, /<details class="score-key" open>/, 'open on arrival');
+  await mountResults(el, mountState(ALL_DONE, GATE_AHEAD));
+  const [left, right] = el.querySelectorAll('.score');
+  assert.ok(left && right, 'both sides of the matchup got a score button');
 
-  const key = el.querySelector('.score-key');
-  key.open = false;
-  key.ontoggle();                       // the visitor collapses it
+  left.onclick();
+  assert.ok(left.classList.contains('open'));
 
-  await repaint();
-  assert.match(el.innerHTML, /<details class="score-key">/, 'a repaint does not reopen it');
+  right.onclick();
+  assert.ok(right.classList.contains('open'));
+  assert.ok(!left.classList.contains('open'), 'only one is open at a time');
 
-  el.querySelectorAll('[data-week]').find((b) => b.dataset.week === '5').onclick();
-  await settle();
-  assert.match(el.innerHTML, /<details class="score-key">/, 'nor does picking another week');
-
-  el.querySelectorAll('[data-step]')[0].onclick();   // week 5 -> week 4
-  await settle();
-  assert.match(el.innerHTML, /<details class="score-key">/, 'nor does the stepper');
-
-  // And reopening it is remembered too, not a one-way latch.
-  const reopened = el.querySelector('.score-key');
-  reopened.open = true;
-  reopened.ontoggle();
-  await repaint();
-  assert.match(el.innerHTML, /<details class="score-key" open>/);
+  right.onclick();
+  assert.ok(!right.classList.contains('open'), 'and tapping it again closes it');
 });
 
 // --- Task 8: phase tags and penalty reasons in the drill-down --------

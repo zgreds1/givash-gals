@@ -8,6 +8,7 @@ import { LAST_WEEK } from './config.js';
 import { esc } from './render.js';
 import { medianLine, gameStates, allGamesFinal } from './rules.js';
 import { displayWeek, isWeekFinal } from './season.js';
+import { formatHash } from './router.js';
 
 // Re-exported from its new home in season.js so existing importers — and the
 // tests that pin its week boundaries — keep working unchanged.
@@ -252,6 +253,53 @@ function sideHead(name, side, isLeader, settled) {
 }
 
 /**
+ * One team's score, as the single line the card shows.
+ *
+ * `in play` leads because it is what decides the matchup while games are still
+ * running; `adjusted` follows in brackets because it is what will count. On a
+ * settled week the two are equal by construction, so the bracket is dropped —
+ * which means its PRESENCE tells you the week is still moving, a fourth carrier
+ * of live-vs-settled alongside the dashed rule, the ring and the word "leading".
+ *
+ * A button, not a span: it is the hover target, and it must answer to keyboard
+ * focus and to a tap on a phone, where hover does not exist at all.
+ */
+function scoreLine(side, settled, tipId) {
+  const lead = settled ? side?.adjusted : side?.inPlay;
+  const shown = typeof lead === 'number' ? money(lead) : '&mdash;';
+  const alt = !settled && typeof side?.adjusted === 'number'
+    ? ` <span class="alt">(${money(side.adjusted)})</span>`
+    : '';
+  return `<button type="button" class="score" aria-describedby="${tipId}">${shown}${alt}</button>`;
+}
+
+/**
+ * What the score means — the only place that says so now the key panel is gone.
+ *
+ * In the DOM at all times rather than injected on hover, so a screen reader
+ * following aria-describedby finds it whether or not a pointer ever touched the
+ * page. CSS is what hides it until it is wanted.
+ */
+function scoreTip(side, settled, tipId) {
+  const row = (label, key, note) =>
+    typeof side?.[key] === 'number'
+      ? `<span class="tip-row"><b>${label}</b><span class="tip-v">${money(side[key])}</span>`
+        + `<em>${esc(note)}</em></span>`
+      : '';
+  return `<span class="score-tip" id="${tipId}" role="tooltip">`
+    + (settled ? '' : row('in play', 'inPlay', 'if it ended now'))
+    + row('adjusted', 'adjusted', 'finished games only')
+    + row('raw', 'raw', 'no +20s at all')
+    + '</span>';
+}
+
+/** Both halves of one score cell. `key` makes the tooltip id unique per card. */
+function scoreCell(side, settled, key, align) {
+  const id = `tip-${key}`;
+  return `<span class="score-cell ${align}">${scoreLine(side, settled, id)}${scoreTip(side, settled, id)}</span>`;
+}
+
+/**
  * The one atomic status message for the week.
  *
  * Exactly one, deliberately. Six independently-announcing score elements on a
@@ -263,32 +311,6 @@ function weekStatus(week, settled) {
     ? `<b>Week ${week} final.</b> Counted in the standings.`
     : `<b>Week ${week} in progress.</b> Leader shown on in play. Standings update Tuesday 10:00.`;
   return `<p class="week-status" role="status" aria-atomic="true">${msg}</p>`;
-}
-
-/**
- * What the three numbers mean, on the page rather than in a tooltip.
- *
- * A <details> and not a title attribute or a hover card: this site is read on a
- * phone during games, where hover does not exist. Open by default, collapsible,
- * and keyboard- and screen-reader-native with no JavaScript.
- *
- * `open` is a parameter and not a hardcoded attribute because paint() replaces
- * innerHTML wholesale: hardcoding it forced the panel back open on every week
- * click, stepper, drill-down and back, which is every interaction the tab has.
- */
-function scoreKey(open) {
-  return `<details class="score-key"${open ? ' open' : ''}>
-    <summary>What these three numbers mean</summary>
-    <dl>
-      <div><dt>adjusted</dt><dd>+20 for each starter on 0 whose game has
-        <strong>finished</strong>. The official score &mdash; this is what the
-        standings use.</dd></div>
-      <div><dt>in play</dt><dd>Adjusted, plus +20 for each starter on 0 whose game
-        is <strong>happening right now</strong>. Where you would land if everything
-        ended this second. Starters who have not kicked off count in neither.</dd></div>
-      <div><dt>raw</dt><dd>The points alone, with no +20 of any kind.</dd></div>
-    </dl>
-  </details>`;
 }
 
 /**
@@ -306,13 +328,10 @@ function scoreKey(open) {
  * which of the three readings the card leans on. mountResults works it out;
  * it is not derivable from `resolved` alone.
  *
- * `keyOpen` is the visitor's own disclosure state for the score key, held by
- * the caller across repaints. Defaulted true so the key is open on a first
- * visit, which is when it is worth reading.
  */
 export function renderWeek({
   week, resolved, pairs = [], ghostRosterId = null, teams = {}, detailAvailable = false,
-  settled = false, keyOpen = true,
+  settled = false,
 }) {
   const name = (id) => teams[String(id)] || `Roster ${id}`;
 
@@ -323,12 +342,12 @@ export function renderWeek({
 
   if (resolved?.played) {
     const cards = resolved.matchups
-      .map((m, i) => playedCard(m, i, resolved, teams, detailAvailable, settled))
+      .map((m, i) => playedCard(m, i, resolved, teams, detailAvailable, settled, week))
       .join('');
     const note = detailAvailable
       ? ''
       : '<p class="note">This week was archived before player detail was kept, so there is no player detail to open.</p>';
-    return weekStatus(week, settled) + scoreKey(keyOpen) + note + cards;
+    return weekStatus(week, settled) + note + cards;
   }
 
   if (!pairs.length) {
@@ -357,42 +376,62 @@ export function renderWeek({
   return `<p class="upcoming-label">Upcoming</p><ul class="fixtures">${rows.join('')}</ul>`;
 }
 
-function playedCard(m, index, wk, teams, detailAvailable, settled) {
+/**
+ * One matchup, as a summary card.
+ *
+ * The card is a plain div holding a link stretched across it, not a
+ * div[role="button"] — see the note on `.card-open`. That switch is what lets
+ * each score be a real <button>: an interactive element may not nest inside
+ * another one, so while the whole card WAS the button, the scores could not be
+ * hover targets of their own.
+ */
+function playedCard(m, index, wk, teams, detailAvailable, settled, week) {
   const name = (id) => teams[String(id)] || `Roster ${id}`;
-  const hook = detailAvailable ? ` data-matchup="${index}" role="button" tabindex="0"` : '';
   const cls = `card ${settled ? 'settled' : 'live'}${detailAvailable ? ' clickable' : ''}`;
-  const decides = settled ? 'adjusted' : 'inPlay';
   const leader = leaderOf(m, wk, settled);
+  // Stretched over the card by CSS, so a click anywhere that is not a score
+  // opens the drill-down. Carries the accessible name; the chevron beside it
+  // is decoration and stays out of the link's text.
+  const open = detailAvailable
+    ? `<a class="card-open" href="${formatHash({ tab: 'results', week, matchup: index })}">` +
+      `<span class="sr-only">Open matchup</span></a>`
+    : '';
   // Persistent, not a hover state: on a touch device a hover-only affordance is
   // no affordance at all, and this click is now the only route to player detail.
   const chev = detailAvailable ? '<span class="chev" aria-hidden="true">&rsaquo;</span>' : '';
+  const id = (side) => `w${week}m${index}${side}`;
 
   if (m.type === 'h2h') {
     const [a, b] = m.rosterIds;
-    return `<div class="${cls}"${hook}>${chev}
+    return `<div class="${cls}">${open}${chev}
       <div class="card-state"><span class="pip"></span>${settled ? 'final' : 'in progress'}</div>
       <div class="teams">
         ${sideHead(name(a), 'l', leader === a, settled)}
         <div class="vs">${settled && m.winner === null ? 'TIE' : 'vs'}</div>
         ${sideHead(name(b), 'r', leader === b, settled)}
       </div>
-      <div class="ladder">${ladder(wk.teams[a], wk.teams[b], decides)}</div>
+      <div class="scores">
+        ${scoreCell(wk.teams[a], settled, id('l'), 'l')}
+        ${scoreCell(wk.teams[b], settled, id('r'), 'r')}
+      </div>
     </div>`;
   }
 
   const line = { adjusted: m.line, inPlay: inPlayLine(wk), raw: null };
-  return `<div class="${cls}"${hook}>${chev}
+  return `<div class="${cls}">${open}${chev}
     <div class="card-state"><span class="pip"></span>${settled ? 'final' : 'in progress'}</div>
     <div class="teams">
       ${sideHead(name(m.rosterId), 'l', leader === m.rosterId, settled)}
       <div class="vs">${settled && m.result === 'T' ? 'TIE' : 'vs median'}</div>
       ${sideHead('League median', 'r', leader === 'line', settled)}
     </div>
-    <div class="ladder">${ladder(wk.teams[m.rosterId], line, decides)}
-      <div class="pool-row">
-        <span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted</span>
-        <span class="pool">${poolHtml(wk.medianPool)}</span>
-      </div>
+    <div class="scores">
+      ${scoreCell(wk.teams[m.rosterId], settled, id('l'), 'l')}
+      ${scoreCell(line, settled, id('r'), 'r')}
+    </div>
+    <div class="pool-row">
+      <span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted</span>
+      <span class="pool">${poolHtml(wk.medianPool)}</span>
     </div>
   </div>`;
 }
@@ -560,7 +599,7 @@ export function renderMatchupDetail({
   </div>`;
 
   return `<div class="detail">
-    <button type="button" class="back" data-back>&larr; Week ${week}</button>
+    <a class="back" href="${formatHash({ tab: 'results', week })}">&larr; Week ${week}</a>
     ${header}
     <h3 class="lineup-head">Starters</h3>
     <div class="lineup">${lineupTable(left.starters, right?.starters ?? null)}</div>
@@ -600,31 +639,22 @@ async function defaultJson(url) {
  * `json`/`now` are the exception: injection points for tests, never
  * reassigned once mounted. `seasonStart` looks static — `loadSnapshot`
  * writes it once and never again — but it can still arrive AFTER mount,
- * since the tab is clickable before `loadSnapshot` resolves. Until the
- * visitor picks a week themselves, the default week is recomputed from
- * `state.seasonStart` on every paint, so it corrects itself the moment
- * the snapshot lands instead of staying wrong (week 1) for the session.
+ * since the tab is clickable before `loadSnapshot` resolves. While the URL
+ * names no week, the default is recomputed from `state.seasonStart` on
+ * every paint, so it corrects itself the moment the snapshot lands instead
+ * of staying wrong (week 1) for the session.
+ *
+ * Which week and which matchup are showing is NOT held here. It is read out
+ * of `state.route` — parsed from the URL by app.js — on every paint, so the
+ * address bar and the screen cannot disagree. Nothing in this module writes
+ * the hash except by rendering a link for the visitor to follow.
  *
  * Returns `{ repaint }` so the caller can force a redraw when `state`
- * changes underneath an already-mounted tab (a background refresh landing
- * while someone is looking at the tab) rather than only fixing the *next*
- * click. `view.week` and `view.matchup` live in this closure, not in
- * `state`, so a repaint redraws whatever the visitor was already looking
- * at instead of resetting them to the default week.
+ * changes underneath an already-mounted tab: a background refresh landing
+ * while someone is looking at it, or a route change.
  */
 export async function mountResults(el, state = {}) {
   const { json = defaultJson, now = () => new Date() } = state;
-
-  // Set once a [data-week]/[data-step] click happens, below. Before that,
-  // paint() keeps recomputing the default week from state.seasonStart, so
-  // a mount that races loadSnapshot (seasonStart still null) self-corrects
-  // once the snapshot lands instead of sticking on week 1 for the session.
-  let weekChosen = false;
-
-  // The score key is a <details>, and paint() replaces innerHTML wholesale, so
-  // its disclosure state cannot live in the DOM. Sticky like weekChosen above:
-  // once the visitor has closed the key, no later paint may reopen it.
-  let keyOpen = true;
 
   // The module's own cache for weeks refreshLive never touched — distinct
   // from state.livePayloads, which is read fresh on every call instead of
@@ -634,8 +664,6 @@ export async function mountResults(el, state = {}) {
   let pairings = null;
   let players = null;
   let schedule = null;
-
-  const view = { week: displayWeek(now(), state.seasonStart ?? null), matchup: null };
 
   // Bumped by every paint(). A paint compares its own ticket against this
   // after its awaits and drops out if a newer paint has started — two clicks
@@ -686,20 +714,40 @@ export async function mountResults(el, state = {}) {
     return players;
   }
 
-  // Takes the week rather than reading view.week, so the picker cannot
-  // disagree with the results drawn beside it in the same paint.
+  /**
+   * The week picker, as links.
+   *
+   * Takes the week rather than reading it back off the route, so the picker
+   * cannot disagree with the results drawn beside it in the same paint.
+   *
+   * Links and not buttons because a week is a URL now: this needs no click
+   * handler at all, and middle-click, right-click and Back all work.
+   * `aria-current` replaces `aria-pressed`, which is a button's state and has
+   * no meaning on a link. An out-of-range arrow degrades to a plain span —
+   * a link with nowhere to go is worse than no link.
+   */
   function picker(current) {
-    const btns = weekOptions(state.weeks)
-      .map(
-        ({ week, played }) =>
-          `<button type="button" data-week="${week}" aria-pressed="${week === current}"` +
-          ` class="${week === current ? 'on' : ''}${played ? ' played' : ''}">${week}</button>`,
-      )
+    const href = (w) => formatHash({ tab: 'results', week: w });
+
+    const weeks = weekOptions(state.weeks)
+      .map(({ week, played }) => {
+        const cls = [week === current ? 'on' : '', played ? 'played' : ''].filter(Boolean);
+        const cur = week === current ? ' aria-current="page"' : '';
+        return `<a href="${href(week)}"${cls.length ? ` class="${cls.join(' ')}"` : ''}${cur}>${week}</a>`;
+      })
       .join('');
+
+    const step = (delta, glyph, label) => {
+      const to = current + delta;
+      return to < 1 || to > LAST_WEEK
+        ? `<span class="step off" aria-hidden="true">${glyph}</span>`
+        : `<a class="step" href="${href(to)}" aria-label="${label}">${glyph}</a>`;
+    };
+
     return `<div class="controls">
-      <button type="button" data-step="-1" aria-label="Previous week"${current <= 1 ? ' disabled' : ''}>&larr;</button>
-      <div class="tabs weeks" role="group" aria-label="Week">${btns}</div>
-      <button type="button" data-step="1" aria-label="Next week"${current >= LAST_WEEK ? ' disabled' : ''}>&rarr;</button>
+      ${step(-1, '&larr;', 'Previous week')}
+      <div class="tabs weeks" role="group" aria-label="Week">${weeks}</div>
+      ${step(1, '&rarr;', 'Next week')}
     </div>`;
   }
 
@@ -713,20 +761,13 @@ export async function mountResults(el, state = {}) {
     // A paint that is no longer the newest one writes nothing.
     const ticket = ++generation;
 
-    if (!weekChosen) {
-      const auto = displayWeek(now(), state.seasonStart ?? null);
-      // view.matchup is an index into THIS week's matchups. Moving the week
-      // underneath it (seasonStart landing late, or the clock rolling over
-      // while a drill-down is open) would index into a different week's
-      // array — a different matchup, or nothing at all.
-      if (auto !== view.week) view.matchup = null;
-      view.week = auto;
-    }
-
-    // Read once, up front: everything below renders the week and matchup as
-    // they were when this paint started, never a later paint's.
-    const week = view.week;
-    const matchupIndex = view.matchup;
+    // Read once, up front: everything below renders the week and matchup the
+    // URL named when this paint started, never a later paint's. A route with
+    // no week is the default-week case — the sticky flag that used to stand
+    // in for it is gone, because the URL's own shape now says it.
+    const route = state.route || {};
+    const week = route.week ?? displayWeek(now(), state.seasonStart ?? null);
+    const matchupIndex = route.matchup ?? null;
 
     const byWeek = new Map((state.weeks || []).map((w) => [w.week, w]));
     const teams = state.teams || {};
@@ -769,42 +810,28 @@ export async function mountResults(el, state = {}) {
         pairs: pairings[String(week)] || [],
         ghostRosterId, teams,
         detailAvailable: Boolean(payload),
-        settled, keyOpen,
+        settled,
       });
     }
     wire();
   }
 
+  /**
+   * The only handler left on this tab.
+   *
+   * Weeks, matchups and Back are links, so they need none — the browser
+   * navigates and `hashchange` repaints. What CSS cannot do alone is touch:
+   * `:hover` never fires on a phone, and this site is read on a phone during
+   * games. A tap toggles one tooltip open and closes any other.
+   */
   function wire() {
-    for (const b of el.querySelectorAll('[data-week]')) {
-      b.onclick = () => { weekChosen = true; view.week = Number(b.dataset.week); view.matchup = null; paint(); };
-    }
-    for (const b of el.querySelectorAll('[data-step]')) {
+    for (const b of el.querySelectorAll('.score')) {
       b.onclick = () => {
-        weekChosen = true;
-        const next = view.week + Number(b.dataset.step);
-        view.week = Math.min(LAST_WEEK, Math.max(1, next));
-        view.matchup = null;
-        paint();
+        const wasOpen = b.classList.contains('open');
+        for (const o of el.querySelectorAll('.score.open')) o.classList.remove('open');
+        b.classList.toggle('open', !wasOpen);
       };
     }
-    for (const c of el.querySelectorAll('[data-matchup]')) {
-      const open = () => { view.matchup = Number(c.dataset.matchup); paint(); };
-      c.onclick = open;
-      // The card is a div with role="button", so Enter and Space are ours
-      // to implement — a real button cannot wrap this grid without
-      // flattening it.
-      c.onkeydown = (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-      };
-    }
-    // Records the toggle, deliberately without repainting: a repaint would
-    // rebuild the very element the visitor just clicked.
-    const key = el.querySelector('.score-key');
-    if (key) key.ontoggle = () => { keyOpen = key.open; };
-
-    const back = el.querySelector('[data-back]');
-    if (back) back.onclick = () => { view.matchup = null; paint(); };
   }
 
   await paint();

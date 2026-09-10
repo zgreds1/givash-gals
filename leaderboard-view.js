@@ -239,7 +239,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
   const idx = ownershipIndex(rosters, teams);
 
   const view = {
-    season: seasons[0],
+    season: await firstSeasonWithRows(),
     tab: 'All',
     minGp: 1,
     q: '',
@@ -251,6 +251,27 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     // Both roster sources failed: the Owner column says "—", not "FA".
     ownershipKnown: rosterSource !== 'none',
   };
+
+  /**
+   * The newest season whose board has rows, falling back through the list.
+   *
+   * `seasons[0]` alone lands on "No games played yet in 2026" for the first
+   * days of a season, with last year's several hundred players one unobvious
+   * click away. Hoisted above its call site deliberately — a `function`
+   * declaration, not a `const`, so `view` can call it while being built.
+   *
+   * Costs one extra fetch, and only while the newest season is empty; every
+   * result is cached, so the board that wins is not re-fetched when it draws.
+   * A season that fails to load is skipped rather than treated as empty —
+   * a network blip should not pin the visitor to last year.
+   */
+  async function firstSeasonWithRows() {
+    for (const s of seasons) {
+      const rows = await rowsFor(s);
+      if (rows && rows.length) return s;
+    }
+    return seasons[0];
+  }
 
   async function rowsFor(season) {
     if (cache[season] === undefined) {
