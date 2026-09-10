@@ -17,6 +17,21 @@ const state = {
 // instead of only fixing the next click.
 let resultsRepaint = null;
 
+// Results is the landing tab, so it is mounted at startup rather than on first
+// click. Idempotent, because wireNav still calls it: if the snapshot fetch
+// failed, startup skips the mount and the first click is what recovers it.
+let resultsMounted = false;
+function mountResultsTab() {
+  if (resultsMounted) return Promise.resolve();
+  resultsMounted = true;
+  return mountResults($('results'), state)
+    .then(({ repaint }) => { resultsRepaint = repaint; })
+    .catch((e) => {
+      console.error(e);
+      $('results').innerHTML = '<p class="empty">Could not load the results.</p>';
+    });
+}
+
 const $ = (id) => document.getElementById(id);
 
 async function json(url) {
@@ -148,7 +163,6 @@ async function refreshLive() {
 
 function wireNav() {
   let playersMounted = false;
-  let resultsMounted = false;
   const buttons = [...document.querySelectorAll('nav button')];
 
   // role="tablist" promises arrow-key movement between tabs. Every tab stays
@@ -188,18 +202,7 @@ function wireNav() {
         });
       }
 
-      // Mounted lazily, like the leaderboard above: a visitor who never
-      // opens Results downloads neither pairings.json nor
-      // roster-players.json.
-      if (btn.dataset.view === 'results' && !resultsMounted) {
-        resultsMounted = true;
-        mountResults($('results'), state)
-          .then(({ repaint }) => { resultsRepaint = repaint; })
-          .catch((e) => {
-            console.error(e);
-            $('results').innerHTML = '<p class="empty">Could not load the results.</p>';
-          });
-      }
+      if (btn.dataset.view === 'results') mountResultsTab();
     });
   }
 }
@@ -213,6 +216,12 @@ if (typeof document !== 'undefined') {
       console.error(e);
       $('freshness').hidden = false;
       $('freshness').textContent = 'Could not load the snapshot.';
+    })
+    .then(() => {
+      // After loadSnapshot, never before: mounting first would paint "not
+      // published by Sleeper yet" against an empty state.weeks and then repaint
+      // — a visible flash on the page's own front door.
+      if (snapshotLoaded) return mountResultsTab();
     })
     .then(() => {
       if (snapshotLoaded) return refreshLive();

@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light" />
     <meta
       name="description"
-      content="Standings, results and player leaderboards for the Givash Gals fantasy league, where the lowest score wins."
+      content="Results, standings and player leaderboards for the Givash Gals fantasy league, where the lowest score wins."
     />
     <title>Givash Gals — lowest score wins</title>
 
@@ -32,10 +32,10 @@
 
       <nav class="tabs-nav" aria-label="Sections">
         <div class="tabs-nav-inner" role="tablist">
-          <button role="tab" id="tab-standings" aria-controls="standings" aria-selected="true"
-                  data-view="standings" class="active" type="button">Standings</button>
-          <button role="tab" id="tab-results" aria-controls="results" aria-selected="false"
-                  data-view="results" type="button">Results</button>
+          <button role="tab" id="tab-results" aria-controls="results" aria-selected="true"
+                  data-view="results" class="active" type="button">Results</button>
+          <button role="tab" id="tab-standings" aria-controls="standings" aria-selected="false"
+                  data-view="standings" type="button">Standings</button>
           <button role="tab" id="tab-players" aria-controls="players" aria-selected="false"
                   data-view="players" type="button">Players</button>
           <button role="tab" id="tab-rules" aria-controls="rules" aria-selected="false"
@@ -47,8 +47,8 @@
     <main id="main" tabindex="-1">
       <div id="banner" class="banner" role="status" hidden></div>
 
-      <section id="standings" class="view" role="tabpanel" aria-labelledby="tab-standings" tabindex="0"></section>
-      <section id="results" class="view" role="tabpanel" aria-labelledby="tab-results" tabindex="0" hidden></section>
+      <section id="results" class="view" role="tabpanel" aria-labelledby="tab-results" tabindex="0"></section>
+      <section id="standings" class="view" role="tabpanel" aria-labelledby="tab-standings" tabindex="0" hidden></section>
       <section id="players" class="view" role="tabpanel" aria-labelledby="tab-players" tabindex="0" hidden></section>
       <section id="rules" class="view" role="tabpanel" aria-labelledby="tab-rules" tabindex="0" hidden></section>
     </main>
