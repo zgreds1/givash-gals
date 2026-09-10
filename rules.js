@@ -214,6 +214,22 @@ export function adjustedScore(
 }
 
 /**
+ * The league median line: the average of the 2nd and 3rd highest scores among
+ * the four teams playing head-to-head.
+ *
+ * Extracted rather than invented. The engine computed it inline and the view
+ * re-derived the same "indices 1 and 2" rule to mark the pool; the in-play line
+ * would have been a third copy. One implementation now serves all three.
+ *
+ * @param {number[]} values - exactly four adjusted scores, any order
+ * @returns {number|null} null unless there are exactly four
+ */
+export function medianLine(values) {
+  const pool = (values || []).slice().sort((a, b) => b - a);
+  return pool.length === 4 ? round2((pool[1] + pool[2]) / 2) : null;
+}
+
+/**
  * Resolve one week into matchup outcomes.
  *
  * The league runs 6 roster slots for 5 managers, so Sleeper schedules
@@ -244,20 +260,23 @@ export function resolveWeek(
   byes,
   players,
   opportunities = new Set(),
+  states = null,
 ) {
   const excluded = excludedRosterIds ?? new Set();
 
   const scored = matchups.map((m) => ({
     rosterId: m.roster_id,
     matchupId: m.matchup_id ?? null,
-    ...adjustedScore(m, byes, players, opportunities),
+    ...adjustedScore(m, byes, players, opportunities, states),
   }));
 
   const real = scored.filter((s) => !excluded.has(s.rosterId));
 
   const teams = {};
   for (const s of real) {
-    teams[s.rosterId] = { raw: s.raw, adjusted: s.adjusted, penalties: s.penalties };
+    teams[s.rosterId] = {
+      raw: s.raw, adjusted: s.adjusted, inPlay: s.inPlay, penalties: s.penalties,
+    };
   }
 
   // Group by Sleeper's matchup_id, then strip excluded rosters from each group.
@@ -305,7 +324,7 @@ export function resolveWeek(
     .map((s) => s.adjusted)
     .sort((a, b) => b - a);
 
-  const median = medianPool.length === 4 ? round2((medianPool[1] + medianPool[2]) / 2) : null;
+  const median = medianLine(medianPool);
 
   const out = [];
   if (!degenerate) {
