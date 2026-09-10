@@ -286,10 +286,15 @@ function scoreTip(side, settled, tipId) {
       ? `<span class="tip-row"><b>${label}</b><span class="tip-v">${money(side[key])}</span>`
         + `<em>${esc(note)}</em></span>`
       : '';
+  // The heading, because the captions alone invited exactly the wrong reading:
+  // "finished games only" parses as "only counts points from finished games".
+  // Every point every starter has scored is in all three numbers, mid-game
+  // players included — the readings differ ONLY in how many +20s they charge.
   return `<span class="score-tip" id="${tipId}" role="tooltip">`
-    + (settled ? '' : row('in play', 'inPlay', 'if it ended now'))
-    + row('adjusted', 'adjusted', 'finished games only')
-    + row('raw', 'raw', 'no +20s at all')
+    + '<span class="tip-head">Same points in all three &mdash; only the +20s differ.</span>'
+    + (settled ? '' : row('in play', 'inPlay', 'live games\u2019 +20s too'))
+    + row('adjusted', 'adjusted', '+20s from finished games \u2014 official')
+    + row('raw', 'raw', 'points only, no +20s')
     + '</span>';
 }
 

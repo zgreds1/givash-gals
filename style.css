@@ -611,9 +611,12 @@ table.standings {
   padding-top: var(--space-md);
   border-top: 1px solid var(--line);
 }
+/* Shrink-wrapped to the button by justify-self, NOT stretched across the
+ * column. Stretched, the tooltip below anchored to the column's outer edge and
+ * opened half a card away from the number it explains. */
 .score-cell { position: relative; min-width: 0; }
-.score-cell.l { grid-column: 1; text-align: right; }
-.score-cell.r { grid-column: 3; text-align: left; }
+.score-cell.l { grid-column: 1; justify-self: end; text-align: right; }
+.score-cell.r { grid-column: 3; justify-self: start; text-align: left; }
 
 /* A button, because it answers to hover, to focus AND to a tap — and on the
  * phone this is read on during games, only the last of those exists.
@@ -664,8 +667,21 @@ table.standings {
   visibility: hidden;
   transition: opacity 150ms ease;
 }
-.score-cell.l .score-tip { left: 0; }
-.score-cell.r .score-tip { right: 0; }
+/* Each one opens toward the middle of the card, from the edge of its own
+ * number: the left score's tooltip is right-aligned to it, the right score's
+ * left-aligned. Both stay inside the card at any width above the breakpoint. */
+.score-cell.l .score-tip { right: 0; }
+.score-cell.r .score-tip { left: 0; }
+
+/* Reads before the rows, and is the answer to the question the captions kept
+ * provoking: the three numbers share their points and differ only in +20s. */
+.score-tip .tip-head {
+  font-size: var(--t-3xs);
+  line-height: 1.4;
+  color: var(--muted);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--line);
+}
 
 .score:hover + .score-tip,
 .score:focus-visible + .score-tip,
@@ -711,6 +727,12 @@ table.standings {
 @media (max-width: 34rem) {
   .teams, .lrow, .scores { grid-template-columns: 1fr minmax(4.6rem, auto) 1fr; }
   .score { font-size: var(--t-base); }
+  /* Half a phone screen is not enough room for a tooltip to hang under its own
+   * number without running off the side, so each one anchors to the card edge
+   * nearest it and grows inward instead. */
+  .score-cell.l, .score-cell.r { justify-self: stretch; }
+  .score-cell.l .score-tip { left: 0; right: auto; }
+  .score-cell.r .score-tip { right: 0; left: auto; }
 }
 
 /*

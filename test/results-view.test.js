@@ -952,13 +952,16 @@ test('all three readings survive the collapse, in the tooltip behind the line', 
     // Pinned to a tip row's whole shape. A bare /adjusted/ would be satisfied
     // by any stray label anywhere on the page, and 98.40 is also one of the
     // four median-pool chips, so a bare /98\.40/ passes off the pool alone.
-    assert.match(html, /<b>adjusted<\/b><span class="tip-v">98\.40<\/span><em>finished games only<\/em>/, `settled=${settled}`);
-    assert.match(html, /<b>raw<\/b><span class="tip-v">78\.40<\/span><em>no \+20s at all<\/em>/, `settled=${settled}`);
+    assert.match(html, /<b>adjusted<\/b><span class="tip-v">98\.40<\/span><em>\+20s from finished games — official<\/em>/, `settled=${settled}`);
+    assert.match(html, /<b>raw<\/b><span class="tip-v">78\.40<\/span><em>points only, no \+20s<\/em>/, `settled=${settled}`);
+    // The heading is what stops "finished games" being read as "only counts
+    // points from finished games", which is how it was read in review.
+    assert.match(html, /<span class="tip-head">Same points in all three &mdash; only the \+20s differ\.<\/span>/, `settled=${settled}`);
   }
 
   const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
   const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
-  assert.match(open, /<b>in play<\/b><span class="tip-v">118\.40<\/span><em>if it ended now<\/em>/);
+  assert.match(open, /<b>in play<\/b><span class="tip-v">118\.40<\/span><em>live games’ \+20s too<\/em>/);
   assert.match(done, /<b>adjusted<\/b>/, 'a settled week still explains the other two');
   assert.doesNotMatch(done, /<b>in play<\/b>/, 'but has no separate live reading left to explain');
 });

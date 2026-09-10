@@ -99,13 +99,17 @@ export function renderRules() {
        wait for, whether his team is on bye or he has no team at all; and a
        game that is <strong>cancelled</strong>.</p>
     <p>So a team's score moves during the week, and Results shows three
-       readings of it. <strong>adjusted</strong> is the official score, counting
-       finished games only &mdash; it is the one the standings use.
-       <strong>in play</strong> adds the games happening right now, so it is
-       where you would land if everything ended this second.
-       <strong>raw</strong> is the points alone, with no +${PENALTY} of any
-       kind. A starter whose game has not kicked off counts toward neither of
-       the first two.</p>
+       readings of it. All three count <em>every point every starter has
+       scored so far</em>, players in the middle of a game included &mdash;
+       what differs between them is only how many +${PENALTY}s they add.</p>
+    <p><strong>adjusted</strong> adds a +${PENALTY} only for a zeroed starter
+       whose game has <strong>finished</strong>. It is the official score, and
+       the one the standings use. <strong>in play</strong> adds those, plus a
+       +${PENALTY} for each zeroed starter whose game is
+       <strong>happening right now</strong> &mdash; where you would land if
+       everything ended this second. <strong>raw</strong> is the points alone,
+       with no +${PENALTY} of any kind. A starter whose game has not kicked
+       off is charged by neither of the first two.</p>
     <p>The standings themselves do not move mid-week: a week joins them on
        <strong>Tuesday at 10:00 Israel time</strong>, once its games are done
        and its adjusted scores have stopped changing.</p>

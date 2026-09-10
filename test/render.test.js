@@ -92,7 +92,11 @@ test('the rules page names the three readings, in that order', () => {
     /<strong>adjusted<\/strong>[\s\S]*<strong>in play<\/strong>[\s\S]*<strong>raw<\/strong>/,
     'adjusted, in play, raw — the labels and the order the Results tab uses',
   );
-  assert.match(lands, /not kicked off counts toward neither/i);
+  assert.match(lands, /not kicked\s+off is charged by neither/i);
+  // The distinction the three captions kept losing: the readings share their
+  // POINTS and differ only in how many +20s they charge.
+  assert.match(lands, /every point every starter has\s+scored so far/i);
+  assert.match(lands, /only how many \+20s they add/i);
 });
 
 test('the rules page says the standings absorb a week on the Tuesday gate', () => {
