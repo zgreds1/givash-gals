@@ -20,7 +20,7 @@ export function renderStandings(rows, teams, meta = {}) {
 
   // Named, not left implicit: a table that has visibly stopped moving mid-week
   // reads as broken unless it says why.
-  const note = nextWeek && nextGate
+  const note = nextWeek != null && nextGate != null
     ? `<p class="gate-note">Week ${nextWeek} joins ${esc(nextGate)}.</p>`
     : '';
 
@@ -48,7 +48,7 @@ export function renderStandings(rows, teams, meta = {}) {
     .join('');
 
   const caption = `Standings &mdash; lowest adjusted points wins${
-    through ? `, through week ${through}` : ''
+    through != null ? `, through week ${through}` : ''
   }`;
 
   return `<div class="table-wrap"><table class="standings">

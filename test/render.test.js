@@ -81,3 +81,18 @@ test('the empty table still names the first gate', () => {
   });
   assert.match(html, /Week 1 joins Tuesday 15 September, 10:00\./);
 });
+
+test('a nextWeek with no nextGate renders no note', () => {
+  // Happens in production: with no seasonStart, gateLabel returns null while
+  // nextWeek is still 1 (truthy). The note must stay suppressed on an
+  // explicit null check, not just on the && short-circuit it replaced.
+  const html = renderStandings(ROWS, TEAMS, { nextWeek: 1, nextGate: null });
+  assert.doesNotMatch(html, /<p class="gate-note">/);
+  assert.doesNotMatch(html, /joins/);
+});
+
+test('an explicit through: null omits the through-week clause', () => {
+  const html = renderStandings(ROWS, TEAMS, { through: null });
+  assert.match(html, /lowest adjusted points wins<\/caption>/);
+  assert.doesNotMatch(html, /through week/);
+});
