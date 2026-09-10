@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "style.css"
+        ],
+        "createdAt": "2026-09-10T12:29:29.454Z",
+        "reason": "Agent: both hits are amber admonitions (.banner, .note), not card accents. This design's cards are hairline-ruled slips with no fill and no accent; the left rule thickens an already-amber edge on an amber tint and is the non-colour carrier for degraded-state messaging. Docs-callout idiom, not the SaaS-card tell. Pre-dates the url-routing branch."
+      }
+    ]
+  }
+}
