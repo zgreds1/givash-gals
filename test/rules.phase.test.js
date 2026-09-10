@@ -95,3 +95,15 @@ test('states = null reproduces the pre-phase numbers exactly', () => {
   assert.equal(r.inPlay, 52);
   assert.ok(r.penalties.every((p) => p.phase === 'final'));
 });
+
+test('a canceled game is settled like a finished one', () => {
+  // CIN plays DAL in week 3, but the game was canceled. Burrow (CIN QB) scores 0.
+  const schedule = [
+    { week: 3, home: 'CIN', away: 'DAL', status: 'canceled' },
+  ];
+  const canceled = gameStates(schedule, 3);
+  const r = adjustedScore(mkEntry(1, 1, [['6804', 0]]), WK3, PLAYERS, new Set(), canceled);
+  assert.equal(r.adjusted, 20, 'a canceled game is final: penalty landed');
+  assert.equal(r.inPlay, 20);
+  assert.equal(r.penalties[0].phase, 'final');
+});

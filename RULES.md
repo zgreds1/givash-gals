@@ -115,8 +115,10 @@ Non-bye adjusted scores: 142.6, 118.3, 97.5, 88.1.
 2nd is 118.3, 3rd is 97.5, so the line is (118.3 + 97.5) / 2 = **107.9**.
 A median team at 101.2 is below the line and **wins**.
 
-Penalties are applied *before* the median is computed. Every score in the
-system is an adjusted score — there is only one kind.
+Penalties are applied *before* the median is computed. The median line is
+always computed from **adjusted scores** — the official score the league uses
+for all rankings and matchup outcomes. (The *raw* and *in play* readings exist
+for reference during the week.)
 
 ## Standings
 
