@@ -53,6 +53,13 @@ export function gameStates(schedule, week) {
   const out = new Map();
   for (const g of schedule || []) {
     if (g.week !== week) continue;
+    // A game with NO status field is not a game with an unrecognised status —
+    // it is a schedule that predates status entirely, so there is no live
+    // information to act on. Skipping it leaves the team absent from the map,
+    // which adjustedScore reads as settled, and a rescore keeps every penalty
+    // it always had. The catch-all below stays permissive on purpose: it is
+    // there for an unrecognised live status, which is a different thing.
+    if (!g.status) continue;
     const phase =
       g.status === 'complete' || g.status === 'canceled' ? 'final'
         : g.status === 'pre_game' ? 'upcoming'

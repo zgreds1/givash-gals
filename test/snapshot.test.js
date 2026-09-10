@@ -15,7 +15,7 @@ import {
 } from '../scripts/snapshot.mjs';
 import { opportunitySet } from '../rules.js';
 import { slimForLeaderboard, slimWeek } from '../leaderboard.js';
-import { mkEntry, SCHEDULE } from './helpers.js';
+import { mkEntry, PLAYERS, SCHEDULE } from './helpers.js';
 
 test('slimPlayers keeps only active skill players and three fields', () => {
   const raw = {
@@ -417,4 +417,54 @@ test('names come from the slim map shape the snapshot actually passes', () => {
     {},
   );
   assert.deepEqual(out['4034'], { name: 'Christian McCaffrey', pos: 'RB', team: 'CAR' });
+});
+
+// Five owned slots plus the ghost, the shape buildSnapshot's other tests use.
+const LEAGUE = {
+  rosters: [1, 2, 3, 4, 5].map((i) => ({ roster_id: i, owner_id: `u${i}` }))
+    .concat([{ roster_id: 6, owner_id: null }]),
+  users: [1, 2, 3, 4, 5].map((i) => ({ user_id: `u${i}`, display_name: `Team ${i}` })),
+  players: PLAYERS,
+  rosterPositions: [],
+};
+
+const WEEK3 = [
+  mkEntry(1, 1, [['6804', 0]]),   // Burrow, CIN
+  mkEntry(2, 1, [['4199', 0]]),   // Jefferson, MIN
+  mkEntry(3, 2, [['1466', 10]]),
+  mkEntry(4, 2, [['1466', 20]]),
+  mkEntry(5, 3, [['1466', 30]]),
+  mkEntry(6, 3, [['1466', 0]]),   // ghost, excluded
+];
+
+test('buildSnapshot scores each week against that week\'s game status', () => {
+  const snap = buildSnapshot({
+    ...LEAGUE,
+    schedule: [
+      { week: 3, home: 'HOU', away: 'CIN', status: 'complete' },
+      { week: 3, home: 'KC', away: 'MIN', status: 'in_game' },
+    ],
+    weekPayloads: { 3: WEEK3 },
+  });
+  const wk = snap.weeks.find((w) => w.week === 3);
+  assert.equal(wk.teams[1].adjusted, 20, 'CIN finished: the +20 has landed');
+  assert.equal(wk.teams[1].inPlay, 20);
+  assert.equal(wk.teams[2].adjusted, 0, 'MIN still playing');
+  assert.equal(wk.teams[2].inPlay, 20);
+});
+
+test('a schedule carrying no status at all scores as fully settled', () => {
+  // helpers.js's SCHEDULE has no status field, and every existing buildSnapshot
+  // test passes it. Without the guard in Step 3 the catch-all maps all four
+  // teams to 'live', every penalty becomes pending, and `adjusted` silently
+  // loses 20 points per zeroed starter across the whole archive.
+  const snap = buildSnapshot({
+    ...LEAGUE,
+    schedule: SCHEDULE,
+    weekPayloads: { 3: WEEK3 },
+  });
+  const wk = snap.weeks.find((w) => w.week === 3);
+  assert.equal(wk.teams[1].adjusted, 20, 'a status-less schedule keeps its penalties');
+  assert.equal(wk.teams[2].adjusted, 20);
+  assert.equal(wk.teams[1].inPlay, 20, 'and nothing is left pending');
 });

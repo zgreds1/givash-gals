@@ -54,3 +54,15 @@ test('allGamesFinal is false on an empty or missing map', () => {
   assert.equal(allGamesFinal(new Map()), false);
   assert.equal(allGamesFinal(null), false);
 });
+
+test('a game with no status field is left out of the map entirely', () => {
+  // Absent from the map reads as "settled" downstream, which is the right
+  // answer for a schedule that carries no live information at all.
+  const s = gameStates([{ week: 1, home: 'HOU', away: 'CIN' }], 1);
+  assert.equal(s.size, 0);
+  // But an unrecognised status is still live — the two must not be conflated.
+  assert.equal(
+    gameStates([{ week: 1, home: 'HOU', away: 'CIN', status: 'halftime' }], 1).get('HOU'),
+    'live',
+  );
+});

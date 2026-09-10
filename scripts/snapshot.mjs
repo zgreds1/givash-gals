@@ -20,7 +20,7 @@ import {
   findGhostRosterId,
   unownedRosterIds,
 } from '../sleeper.js';
-import { byeTeams, opportunitySet, resolveWeek, standings } from '../rules.js';
+import { byeTeams, gameStates, opportunitySet, resolveWeek, standings } from '../rules.js';
 import { buildLeaderboard, slimForLeaderboard, slimWeek } from '../leaderboard.js';
 import { pairsFromPayload } from '../results-view.js';
 
@@ -79,6 +79,7 @@ export function buildSnapshot({
         byeTeams(schedule, w),
         players,
         new Set(opportunities[w] || []),
+        gameStates(schedule, w),
       ),
     );
 

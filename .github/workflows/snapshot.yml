@@ -4,7 +4,12 @@ on:
   schedule:
     - cron: '0 17-23 * * 0'   # Sun 1pm-7pm ET, during games
     - cron: '0 0-4 * * 1'     # Sun evening -> Mon midnight ET
-    - cron: '0 13 * * 2'      # Tue 9am ET, sweep after Monday night
+    - cron: '0 5 * * 2'       # Tue 1am ET — after the MNF whistle (~03:35 UTC)
+                              # and before the standings gate opens at 07:00 UTC
+                              # (Tue 10:00 Israel). Without this the last run
+                              # before the gate is Monday midnight ET, and the
+                              # week joins the standings missing MNF entirely.
+    - cron: '0 13 * * 2'      # Tue 9am ET, sweep for stat corrections
   workflow_dispatch:
 
 permissions:
