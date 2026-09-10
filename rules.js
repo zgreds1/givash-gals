@@ -217,9 +217,12 @@ export function adjustedScore(
  * The league median line: the average of the 2nd and 3rd highest scores among
  * the four teams playing head-to-head.
  *
- * Extracted rather than invented. The engine computed it inline and the view
- * re-derived the same "indices 1 and 2" rule to mark the pool; the in-play line
- * would have been a third copy. One implementation now serves all three.
+ * This is the single place the engine computes the median value. The view marks
+ * which two scores were averaged with a separate, independent implementation
+ * (hardcoded index logic for a CSS class, versus this function's numeric return).
+ * Any change to the median rule must touch both places. This extraction exists so
+ * that the in-play line can compute the provisional median consistently, rather
+ * than becoming another copy of the rule.
  *
  * @param {number[]} values - exactly four adjusted scores, any order
  * @returns {number|null} null unless there are exactly four
@@ -252,6 +255,7 @@ export function medianLine(values) {
  * @param {Set<number>} excludedRosterIds - every roster with no owner
  * @param {Set<string>} byes
  * @param {Object} players
+ * @param {Map<string, 'final'|'live'|'upcoming'>|null} states - game phases by team; null treats every game as final, preserving existing caller behavior and the snapshot archive
  */
 export function resolveWeek(
   week,
