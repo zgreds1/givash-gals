@@ -2,6 +2,14 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { renderStandings, renderRules } from '../render.js';
 
+// Shared by the meta/gate-note tests below, which don't care about the row
+// shape itself — only about what renderStandings does around it.
+const ROWS = [{
+  rosterId: 1, w: 2, l: 1, t: 0, gp: 3, winPct: 2 / 3,
+  adjPF: 300, rawPF: 300, median: { w: 0, l: 0, t: 0 }, unresolvedTie: false,
+}];
+const TEAMS = { 1: 'Alpha' };
+
 test('team names are escaped', () => {
   const html = renderStandings(
     [{ rosterId: 1, w: 1, l: 0, t: 0, gp: 1, winPct: 1, adjPF: 100, rawPF: 100, median: { w: 0, l: 0, t: 0 }, unresolvedTie: false }],
@@ -45,4 +53,31 @@ test('the rules page says a target and a pass attempt do NOT exempt', () => {
   assert.match(html, /completed action, not an intention/i);
   assert.match(html, /targeted eight times/i);
   assert.match(html, /0-for-5/);
+});
+
+test('the standings caption says which week it is through', () => {
+  const html = renderStandings(ROWS, TEAMS, { through: 4 });
+  assert.match(html, /through week 4/);
+});
+
+test('the caption omits the clause when nothing has settled', () => {
+  const html = renderStandings(ROWS, TEAMS, {});
+  assert.match(html, /lowest adjusted points wins<\/caption>/);
+  assert.doesNotMatch(html, /through week/);
+});
+
+test('a pending week names when it joins', () => {
+  const html = renderStandings(ROWS, TEAMS, {
+    through: 1, nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00',
+  });
+  assert.match(html, /Week 2 joins Tuesday 22 September, 10:00\./);
+});
+
+test('the empty table still names the first gate', () => {
+  // Before week 1 settles there are no rows, and "no games played yet" alone
+  // reads as broken during a week that has visibly been played.
+  const html = renderStandings([], TEAMS, {
+    nextWeek: 1, nextGate: 'Tuesday 15 September, 10:00',
+  });
+  assert.match(html, /Week 1 joins Tuesday 15 September, 10:00\./);
 });

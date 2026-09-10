@@ -395,6 +395,12 @@ table.standings {
   color: var(--ink-display);
 }
 
+.gate-note {
+  font-size: var(--t-2xs);
+  color: var(--muted);
+  margin: var(--space-md) 0 0;
+}
+
 .hint {
   display: block;
   font-family: var(--font-body);

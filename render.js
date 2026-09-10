@@ -7,9 +7,25 @@ export const esc = (s) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c],
   );
 
-export function renderStandings(rows, teams) {
+/**
+ * @param {Array} rows - standings rows, already sorted
+ * @param {Object} teams - rosterId -> team name
+ * @param {{through?:number|null, nextWeek?:number|null, nextGate?:string|null}} meta
+ *   `through` is the last week that has passed its Tuesday gate; `nextWeek` and
+ *   `nextGate` describe the one waiting. Both halves are optional: a snapshot
+ *   with no seasonStart supplies neither.
+ */
+export function renderStandings(rows, teams, meta = {}) {
+  const { through = null, nextWeek = null, nextGate = null } = meta;
+
+  // Named, not left implicit: a table that has visibly stopped moving mid-week
+  // reads as broken unless it says why.
+  const note = nextWeek && nextGate
+    ? `<p class="gate-note">Week ${nextWeek} joins ${esc(nextGate)}.</p>`
+    : '';
+
   if (!rows.length) {
-    return '<p class="empty">No games played yet. Standings appear after week 1.</p>';
+    return '<p class="empty">No games played yet. Standings appear after week 1.</p>' + note;
   }
 
   const body = rows
@@ -31,8 +47,12 @@ export function renderStandings(rows, teams) {
     })
     .join('');
 
+  const caption = `Standings &mdash; lowest adjusted points wins${
+    through ? `, through week ${through}` : ''
+  }`;
+
   return `<div class="table-wrap"><table class="standings">
-    <caption>Standings &mdash; lowest adjusted points wins</caption>
+    <caption>${caption}</caption>
     <thead><tr>
       <th scope="col"><span class="sr-only">Rank</span></th>
       <th scope="col">Team</th>
@@ -43,7 +63,7 @@ export function renderStandings(rows, teams) {
       <th class="num" scope="col">vs Median</th>
     </tr></thead>
     <tbody>${body}</tbody>
-  </table></div>`;
+  </table></div>${note}`;
 }
 
 export function renderRules() {
