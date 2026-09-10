@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-09-10T11:12:20.375Z",
+  "generatedAt": "2026-09-10T11:59:18.948Z",
   "weeks": [
     {
       "week": 1,
-      "played": false,
+      "played": true,
       "degenerate": false,
-      "median": 0,
+      "median": 3.35,
       "medianPool": [
-        20,
-        0,
+        7.1,
+        6.7,
         0,
         0
       ],
@@ -37,8 +37,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13345",
-              "name": "Jonah Coleman",
+              "playerId": "11643",
+              "name": "Jaylen Wright",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -97,8 +97,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "11643",
-              "name": "Jaylen Wright",
+              "playerId": "13345",
+              "name": "Jonah Coleman",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -129,9 +129,9 @@
           ]
         },
         "2": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 6.7,
+          "adjusted": 6.7,
+          "inPlay": 6.7,
           "penalties": [
             {
               "playerId": "8183",
@@ -176,8 +176,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13298",
-              "name": "KC Concepcion",
+              "playerId": "12483",
+              "name": "Jack Bech",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -224,14 +224,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12483",
-              "name": "Jack Bech",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "13421",
-              "name": "Eli Raridon",
+              "playerId": "8127",
+              "name": "Charlie Kolar",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -244,9 +238,9 @@
           ]
         },
         "3": {
-          "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "raw": 7.1,
+          "adjusted": 7.1,
+          "inPlay": 7.1,
           "penalties": [
             {
               "playerId": "12545",
@@ -279,8 +273,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "11581",
-              "name": "MarShawn Lloyd",
+              "playerId": "11370",
+              "name": "Chris Brooks",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -289,12 +283,6 @@
               "name": "Kaelon Black",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "6149",
-              "name": "Darius Slayton",
-              "reason": "zeroed",
-              "phase": "final"
             },
             {
               "playerId": "7090",
@@ -370,14 +358,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "1373",
-              "name": "Geno Smith",
+              "playerId": "5870",
+              "name": "Daniel Jones",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "12508",
-              "name": "Jaxson Dart",
+              "playerId": "1373",
+              "name": "Geno Smith",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -430,8 +418,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "11603",
-              "name": "AJ Barner",
+              "playerId": "5906",
+              "name": "Dawson Knox",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -474,9 +462,9 @@
           ]
         },
         "5": {
-          "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "raw": 9.3,
+          "adjusted": 9.3,
+          "inPlay": 9.3,
           "penalties": [
             {
               "playerId": "12522",
@@ -509,28 +497,16 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "11435",
-              "name": "Emanuel Wilson",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "8208",
               "name": "Tyler Badie",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "12501",
-              "name": "Matthew Golden",
+              "playerId": "12503",
+              "name": "Isaiah Bond",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "2374",
-              "name": "Tyler Lockett",
-              "reason": "zeroed",
-              "phase": "final"
             },
             {
               "playerId": "9494",
@@ -539,20 +515,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4039",
-              "name": "Cooper Kupp",
+              "playerId": "10231",
+              "name": "Elijah Higgins",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "5012",
-              "name": "Mark Andrews",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "8210",
-              "name": "Chig Okonkwo",
+              "playerId": "8145",
+              "name": "Jeremy Ruckert",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -563,8 +533,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "8145",
-              "name": "Jeremy Ruckert",
+              "playerId": "8210",
+              "name": "Chig Okonkwo",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -604,12 +574,12 @@
             2,
             4
           ],
-          "winner": null
+          "winner": 4
         },
         {
           "type": "median",
           "rosterId": 5,
-          "line": 0,
+          "line": 3.35,
           "result": "L"
         }
       ]

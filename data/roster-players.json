@@ -1,10 +1,15 @@
 {
-  "generatedAt": "2026-09-08T17:07:18.231Z",
+  "generatedAt": "2026-09-10T11:59:18.948Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
       "pos": "QB",
       "team": "PIT"
+    },
+    "421": {
+      "name": "Matthew Stafford",
+      "pos": "QB",
+      "team": "LAR"
     },
     "650": {
       "name": "Nick Folk",
@@ -30,11 +35,6 @@
       "name": "Jameis Winston",
       "pos": "QB",
       "team": "NYG"
-    },
-    "2374": {
-      "name": "Tyler Lockett",
-      "pos": "WR",
-      "team": "—"
     },
     "2505": {
       "name": "Darren Waller",
@@ -145,6 +145,11 @@
       "name": "A.J. Brown",
       "pos": "WR",
       "team": "NE"
+    },
+    "5870": {
+      "name": "Daniel Jones",
+      "pos": "QB",
+      "team": "IND"
     },
     "5906": {
       "name": "Dawson Knox",
@@ -306,11 +311,6 @@
       "pos": "WR",
       "team": "KC"
     },
-    "8205": {
-      "name": "Isiah Pacheco",
-      "pos": "RB",
-      "team": "DET"
-    },
     "8208": {
       "name": "Tyler Badie",
       "pos": "RB",
@@ -431,11 +431,6 @@
       "pos": "RB",
       "team": "SEA"
     },
-    "11520": {
-      "name": "Lucky Jackson",
-      "pos": "WR",
-      "team": "DET"
-    },
     "11533": {
       "name": "Brandon Aubrey",
       "pos": "K",
@@ -521,6 +516,11 @@
       "pos": "WR",
       "team": "LV"
     },
+    "12491": {
+      "name": "Corey Kiner",
+      "pos": "RB",
+      "team": "NE"
+    },
     "12494": {
       "name": "Kyle McCord",
       "pos": "QB",
@@ -560,11 +560,6 @@
       "name": "Kaleb Johnson",
       "pos": "RB",
       "team": "GB"
-    },
-    "12508": {
-      "name": "Jaxson Dart",
-      "pos": "QB",
-      "team": "NYG"
     },
     "12522": {
       "name": "Cam Ward",
@@ -645,6 +640,11 @@
       "name": "Chris Bell",
       "pos": "WR",
       "team": "MIA"
+    },
+    "13317": {
+      "name": "Ted Hurst",
+      "pos": "WR",
+      "team": "TB"
     },
     "13337": {
       "name": "Emmett Johnson",

@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-01T08:54:09.374Z",
+  "generatedAt": "2026-09-10T11:59:18.948Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
-    "2": "aisrael615",
+    "2": "Kirko chains",
     "3": "Nsaker",
     "4": "Ben-Gvir's balagan",
     "5": "Nsanders10"
@@ -35,5 +35,86 @@
     "BN",
     "BN"
   ],
-  "standings": []
+  "standings": [
+    {
+      "rosterId": 1,
+      "w": 1,
+      "l": 0,
+      "t": 0,
+      "gp": 1,
+      "adjPF": 0,
+      "rawPF": 0,
+      "median": {
+        "w": 0,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": true,
+      "winPct": 1
+    },
+    {
+      "rosterId": 4,
+      "w": 1,
+      "l": 0,
+      "t": 0,
+      "gp": 1,
+      "adjPF": 0,
+      "rawPF": 0,
+      "median": {
+        "w": 0,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": true,
+      "winPct": 1
+    },
+    {
+      "rosterId": 2,
+      "w": 0,
+      "l": 1,
+      "t": 0,
+      "gp": 1,
+      "adjPF": 6.7,
+      "rawPF": 6.7,
+      "median": {
+        "w": 0,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": false,
+      "winPct": 0
+    },
+    {
+      "rosterId": 3,
+      "w": 0,
+      "l": 1,
+      "t": 0,
+      "gp": 1,
+      "adjPF": 7.1,
+      "rawPF": 7.1,
+      "median": {
+        "w": 0,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": false,
+      "winPct": 0
+    },
+    {
+      "rosterId": 5,
+      "w": 0,
+      "l": 1,
+      "t": 0,
+      "gp": 1,
+      "adjPF": 9.3,
+      "rawPF": 9.3,
+      "median": {
+        "w": 0,
+        "l": 1,
+        "t": 0
+      },
+      "unresolvedTie": false,
+      "winPct": 0
+    }
+  ]
 }
