@@ -33,6 +33,50 @@ export function byeTeams(schedule, week) {
 }
 
 /**
+ * Per-NFL-team game state for one week, read off Sleeper's schedule payload.
+ *
+ * The mapping is deliberately NOT exhaustive. `complete` and `canceled` are
+ * settled and `pre_game` has not started; every other value — a `halftime` we
+ * have never observed, a future rename — falls through to 'live'. Guessing
+ * 'live' withholds a penalty that arrives a few minutes late. Guessing 'final'
+ * invents 20 points out of a string we did not recognise, which is the one
+ * error this format cannot recover from.
+ *
+ * A team appearing in no game that week is on bye and gets no entry, which is
+ * how the caller tells "on bye" apart from "not kicked off yet".
+ *
+ * @param {Array<{week:number, home:string, away:string, status:string}>} schedule
+ * @param {number} week
+ * @returns {Map<string, 'final'|'live'|'upcoming'>}
+ */
+export function gameStates(schedule, week) {
+  const out = new Map();
+  for (const g of schedule || []) {
+    if (g.week !== week) continue;
+    const phase =
+      g.status === 'complete' || g.status === 'canceled' ? 'final'
+        : g.status === 'pre_game' ? 'upcoming'
+          : 'live';
+    out.set(g.home, phase);
+    out.set(g.away, phase);
+  }
+  return out;
+}
+
+/**
+ * True when nothing in this week's schedule can still move a score.
+ *
+ * An empty or missing map returns false, not true: that means the schedule is
+ * unavailable, not that the week is over, and the caller must fall back to the
+ * calendar gate rather than declare a week finished on no evidence.
+ */
+export function allGamesFinal(states) {
+  if (!states || states.size === 0) return false;
+  for (const phase of states.values()) if (phase !== 'final') return false;
+  return true;
+}
+
+/**
  * Raw stat keys that mean "this player actually did something".
  *
  * The bar is a completed action, not an intention. A target and a pass

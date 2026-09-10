@@ -37,3 +37,15 @@ export const SCHEDULE = [
   { week: 5, home: 'HOU', away: 'CIN' },
   { week: 8, home: 'KC', away: 'MIN' },
 ];
+
+/**
+ * The same 4-team weeks as SCHEDULE, with per-game status.
+ * Week 3: HOU/CIN done, KC/MIN still playing. Week 5: not started.
+ * Week 8: KC/MIN carries an unrecognised status on purpose.
+ */
+export const SCHEDULE_LIVE = [
+  { week: 3, home: 'HOU', away: 'CIN', status: 'complete' },
+  { week: 3, home: 'KC', away: 'MIN', status: 'in_game' },
+  { week: 5, home: 'HOU', away: 'CIN', status: 'pre_game' },
+  { week: 8, home: 'KC', away: 'MIN', status: 'halftime' },
+];
