@@ -428,114 +428,139 @@ table.standings {
   border-bottom: 1px solid var(--rule);
 }
 
+/* Hairline-separated slips, not boxes: the rule that divides them is also what
+ * carries the week's state, so no extra chrome is spent saying it. */
 .card {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: var(--space-xl);
-  align-items: start;
+  position: relative;
+  display: block;
   background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-md);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow 200ms ease, border-color 200ms ease;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  padding: var(--space-lg) var(--space-3xl) var(--space-lg) var(--space-lg);
+  transition: background 200ms ease;
+}
+.card:last-of-type { border-bottom: 1px solid var(--rule); }
+
+/* Dashed while the week can still move, solid once every game is final. */
+.card.live { border-top-style: dashed; }
+.card.live:last-of-type { border-bottom-style: dashed; }
+
+.card.clickable { cursor: pointer; }
+.card.clickable:hover { background: #fbfdff; }
+.card.clickable:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+
+.chev {
+  position: absolute;
+  right: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--line-strong);
+  font-size: var(--t-xl);
+  line-height: 1;
 }
 
-.card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--line-strong);
-}
-
-.side {
-  min-width: 0;
-}
-
-.side .name {
-  font-weight: 600;
-  font-size: var(--t-sm);
-  margin-bottom: var(--space-sm);
+.card-state {
+  font: 400 var(--t-3xs) / 1 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
+.card-state .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.card.live .card-state .pip { background: transparent; border: 1px solid var(--muted); }
 
-.side .adj {
-  font-family: var(--font-data);
-  font-size: var(--t-xl);
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--muted);
-}
-
-.side .raw {
-  font-family: var(--font-data);
-  font-size: var(--t-2xs);
-  color: var(--muted);
-  margin-top: var(--space-xs);
-}
-
-/* The winner is the LOW score — make that unmissable. */
-.side.winner .adj {
-  color: var(--win);
-  font-weight: 700;
-}
-.side.winner .name {
-  color: var(--win);
-}
-
-/* SVG check, not an emoji or a bare glyph, so it scales with the type
- * and carries its own accessible name. */
-.win-mark {
-  flex: none;
-  width: 1em;
-  height: 1em;
-  color: var(--win);
-}
-
-.vs {
-  align-self: center;
-  font: 500 var(--t-3xs) / 1 var(--font-data);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  text-align: center;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: var(--space-sm) var(--space-lg);
-  white-space: nowrap;
-}
-
-.penalties {
-  list-style: none;
-  margin: var(--space-lg) 0 0;
-  padding: var(--space-md) 0 0;
-  border-top: 1px dashed var(--line);
-  font-size: var(--t-2xs);
-}
-
-.penalties li {
-  color: var(--ink);
-  margin-bottom: var(--space-xs);
-  display: flex;
+.teams,
+.lrow {
+  display: grid;
+  grid-template-columns: 1fr minmax(5.5rem, auto) 1fr;
   align-items: baseline;
-  gap: var(--space-md);
+  gap: var(--space-sm) var(--space-md);
+}
+.teams { margin-bottom: var(--space-md); }
+
+.tname { font-weight: 600; font-size: var(--t-sm); min-width: 0; overflow-wrap: anywhere; }
+.tname.l { text-align: right; }
+.tname.r { text-align: left; }
+.tname.win { color: var(--win); }
+.tname .lead {
+  display: block;
+  font: 400 var(--t-3xs) / 1.4 var(--font-data);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--win);
 }
 
-.penalties .who {
-  font-weight: 500;
+/* Hollow ring, so the live state is carried by SHAPE and not only by colour. */
+.lead-ring {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  border: 1.6px solid var(--win);
+  border-radius: 50%;
+  vertical-align: 0.02em;
 }
+.win-mark { flex: none; width: 1em; height: 1em; color: var(--win); }
 
-.penalties em {
-  font-style: normal;
+.lrow { padding: var(--space-sm) 0; }
+.lrow + .lrow { border-top: 1px solid var(--line); }
+.lrow .n {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--t-base);
   color: var(--muted);
-  margin-left: auto;
+}
+.lrow .n.l { text-align: right; }
+.lrow .n.r { text-align: left; }
+.lrow .lbl { font-size: var(--t-2xs); text-align: center; color: var(--muted); white-space: nowrap; }
+.lrow .lbl .cap { display: block; font-size: var(--t-3xs); color: var(--muted); }
+
+/* The deciding row takes ink and weight, never a larger size: low wins here, so
+ * a bigger number must never read as a better one. */
+.lrow.decides { background: #fcfdff; }
+.lrow.decides .n { color: var(--ink); font-weight: 600; }
+.lrow.decides .lbl { color: var(--ink); font-weight: 600; }
+
+.pool-row { grid-column: 1 / -1; text-align: center; padding-top: var(--space-sm); }
+
+/* The key: on the page, open by default. Not a tooltip — hover does not exist
+ * on the phone this is read on during games. */
+.score-key {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-lg);
+  font-size: var(--t-2xs);
+}
+.score-key > summary {
+  cursor: pointer;
+  padding: var(--space-md) var(--space-lg);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--ink);
+}
+.score-key > summary:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
+.score-key dl { margin: 0; padding: 0 var(--space-lg) var(--space-md); display: grid; gap: var(--space-md); }
+.score-key dl > div { display: grid; grid-template-columns: 5.5rem 1fr; gap: var(--space-md); }
+.score-key dt { font: 600 var(--t-2xs) / 1.5 var(--font-data); color: var(--ink); }
+.score-key dd { margin: 0; color: var(--muted); }
+
+.week-status {
+  font-size: var(--t-2xs);
+  color: var(--muted);
+  border-left: 2px solid var(--line-strong);
   padding-left: var(--space-md);
-  text-align: right;
-  white-space: nowrap;
+  margin: 0 0 var(--space-lg);
+}
+.week-status b { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 34rem) {
+  .teams, .lrow { grid-template-columns: 1fr minmax(4.6rem, auto) 1fr; }
+  .score-key dl > div { grid-template-columns: 1fr; gap: var(--space-xs); }
 }
 
 .pen {
@@ -604,10 +629,6 @@ table.standings {
 .fixture .side-name { font-weight: 600; min-width: 0; }
 .fixture .side-name:last-child { text-align: right; }
 .fixture.median .side-name:last-child { color: var(--muted); font-weight: 500; }
-
-.card.clickable { cursor: pointer; }
-.card.clickable:hover { border-color: var(--secondary); }
-.card.clickable:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
 @media (max-width: 34rem) {
   .fixture { grid-template-columns: 1fr; gap: var(--space-sm); text-align: left; }

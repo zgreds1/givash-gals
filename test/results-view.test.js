@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail, weekOptions, mountResults } from '../results-view.js';
+import { displayWeek, pairsFromPayload, medianRosterId, lineupRows, slotFits, renderWeek, renderMatchupDetail, weekOptions, mountResults, leaderOf, inPlayLine } from '../results-view.js';
 
 // Sleeper reports season_start_date 2026-09-09, which is a Wednesday. Every
 // boundary below is therefore a Tue -> Wed rollover, which is the rule the
@@ -185,13 +185,29 @@ const PLAYED = {
   ],
 };
 
-test('a played week shows both scores, the penalty and the winner', () => {
-  const html = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
-  assert.match(html, /Bijan Robinson/);
-  assert.match(html, /\+20/);
-  assert.match(html, /122\.60/);
-  assert.match(html, /142\.60/);
-  assert.match(html, /class="[^"]*winner/);
+test('a played week shows all three scores and marks the winner', () => {
+  // Was "shows both scores, the penalty and the winner". Task 7 moved the
+  // penalty — and every player name with it — behind the click, and gave the
+  // card a third reading, so what is left for this card to guard is that all
+  // three numbers print and that the engine's winner is the side marked. The
+  // penalty's own coverage lives in the drill-down tests further down.
+  //
+  // settled: true because PLAYED predates `inPlay`. An open card is judged on
+  // a reading this fixture does not carry, so it correctly marks nobody —
+  // asserted below rather than left as a silent gap.
+  const html = renderWeek({
+    week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true, settled: true,
+  });
+  assert.match(html, /122\.60/, 'raw');
+  assert.match(html, /142\.60/, 'adjusted');
+  assert.match(html, /class="tname r win"/, 'roster 2 is the engine winner');
+  assert.match(html, /win-mark/);
+
+  const open = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
+  assert.doesNotMatch(
+    open, /class="lead">leading</,
+    'with no in-play score to judge on, an open card marks nobody rather than guessing',
+  );
 });
 
 test('the median card shows the line and the pool it came from', () => {
@@ -238,10 +254,15 @@ test('matchups are not clickable when the week has no archived payload', () => {
   assert.match(off, /no player detail/i, 'and it says why rather than going quiet');
 });
 
-test('a played week escapes a hostile team name and a hostile penalty player name', () => {
-  // Regression guard for the esc() calls inside teamBlock/penaltyList, which
-  // moved into this file in task 7. Reproduces the deleted
-  // render.test.js coverage for the same call sites.
+test('a played week escapes a hostile team name and prints no player name at all', () => {
+  // Regression guard for the esc() call on the team name, which still renders
+  // on the card. The player-name half changed sense in task 7: it used to
+  // assert the hostile penalty name arrived ESCAPED, because penaltyList put
+  // it on the card. The card no longer carries penalties at all, so the name
+  // cannot arrive in any form — and absence is the stronger guarantee, so
+  // those assertions flip from "escaped and present" to "not present, escaped
+  // or otherwise". The hostile penalty stays in the fixture on purpose: the
+  // point is that hostile data is present and still reaches nothing.
   const hostileTeams = { ...TEAMS, 1: '<script>alert(1)</script>' };
   const hostileWeek = {
     ...PLAYED,
@@ -257,9 +278,11 @@ test('a played week escapes a hostile team name and a hostile penalty player nam
   const html = renderWeek({ week: 3, resolved: hostileWeek, teams: hostileTeams, detailAvailable: true });
 
   assert.doesNotMatch(html, /<script>/);
-  assert.doesNotMatch(html, /<img /);
   assert.match(html, /&lt;script&gt;/);
-  assert.match(html, /&lt;img /);
+
+  assert.doesNotMatch(html, /<img /, 'the raw tag never reaches the card');
+  assert.doesNotMatch(html, /&lt;img /, 'and neither does the escaped form: the name is not there at all');
+  assert.doesNotMatch(html, /onerror=alert\(1\)/, 'nor any surviving fragment of it');
 });
 
 test('an upcoming week escapes a hostile team name in a fixture', () => {
@@ -817,4 +840,149 @@ test('a drill-down is not re-pointed at another week when the default week moves
 
   assert.match(el.innerHTML, /data-week="9" aria-pressed="true"/, 'the week moves on');
   assert.doesNotMatch(el.innerHTML, /data-back/, "and the index into week 1's matchups goes with it");
+});
+
+// --- Task 7: the three-score card ------------------------------------
+
+const LIVE_WEEK = {
+  week: 3, played: true, degenerate: false,
+  median: 94.8, medianPool: [113.6, 98.4, 91.2, 84.8],
+  teams: {
+    1: { raw: 78.4, adjusted: 98.4, inPlay: 118.4, penalties: [] },
+    2: { raw: 93.6, adjusted: 113.6, inPlay: 133.6, penalties: [] },
+    3: { raw: 71.2, adjusted: 91.2, inPlay: 131.2, penalties: [] },
+    4: { raw: 84.8, adjusted: 84.8, inPlay: 104.8, penalties: [] },
+    5: { raw: 74.3, adjusted: 94.3, inPlay: 114.3, penalties: [] },
+  },
+  matchups: [
+    { type: 'h2h', rosterIds: [1, 2], winner: 1 },
+    { type: 'h2h', rosterIds: [3, 4], winner: 4 },
+    // Internally consistent on purpose: adjusted 94.3 is below the adjusted
+    // line of 94.8, so the engine's own result for this matchup is a win.
+    { type: 'median', rosterId: 5, line: 94.8, result: 'W' },
+  ],
+};
+const NAMES = { 1: 'LilDaveIII', 2: 'Nsaker', 3: 'aisrael615', 4: 'Balagan', 5: 'Nsanders10' };
+
+test('the in-play line is drawn from the four in-play scores', () => {
+  // 133.6, 131.2, 118.4, 104.8 -> (131.2 + 118.4) / 2
+  assert.equal(inPlayLine(LIVE_WEEK), 124.8);
+  assert.notEqual(inPlayLine(LIVE_WEEK), LIVE_WEEK.median,
+    'the in-play line is its own number, not the adjusted one');
+});
+
+test('an open week picks its leader on in play', () => {
+  assert.equal(leaderOf(LIVE_WEEK.matchups[0], LIVE_WEEK, false), 1);
+  assert.equal(leaderOf(LIVE_WEEK.matchups[1], LIVE_WEEK, false), 4);
+});
+
+test('an open median matchup is judged against the in-play line', () => {
+  // 114.3 against the in-play line of 124.8, NOT 94.3 against 94.8.
+  assert.equal(leaderOf(LIVE_WEEK.matchups[2], LIVE_WEEK, false), 5);
+});
+
+test('a settled week defers to the engine result, never recomputes', () => {
+  assert.equal(leaderOf(LIVE_WEEK.matchups[0], LIVE_WEEK, true), 1);
+  assert.equal(leaderOf(LIVE_WEEK.matchups[2], LIVE_WEEK, true), 5, 'result W');
+});
+
+test('a settled median loss marks the line, not the team', () => {
+  const lost = { ...LIVE_WEEK.matchups[2], result: 'L' };
+  assert.equal(leaderOf(lost, LIVE_WEEK, true), 'line');
+  assert.equal(leaderOf({ ...lost, result: 'T' }, LIVE_WEEK, true), null);
+});
+
+test('an open week can disagree with the settled result, and should', () => {
+  // The whole reason leaderOf takes `settled`: a team can be behind on the
+  // official adjusted line while ahead on in play, or the reverse. The live
+  // view must not silently show the official answer.
+  const behind = {
+    ...LIVE_WEEK,
+    teams: { ...LIVE_WEEK.teams, 5: { raw: 74.3, adjusted: 94.3, inPlay: 199.9 } },
+  };
+  assert.equal(leaderOf(LIVE_WEEK.matchups[2], behind, true), 5, 'official: a win');
+  assert.equal(leaderOf(LIVE_WEEK.matchups[2], behind, false), 'line', 'live: behind');
+});
+
+test('an equal in-play pair leads nobody', () => {
+  const tied = { ...LIVE_WEEK, teams: { ...LIVE_WEEK.teams, 2: { inPlay: 118.4 } } };
+  assert.equal(leaderOf(LIVE_WEEK.matchups[0], tied, false), null);
+});
+
+test('the card prints all three scores in every state', () => {
+  for (const settled of [true, false]) {
+    const html = renderWeek({
+      week: 3, resolved: LIVE_WEEK, teams: NAMES, detailAvailable: true, settled,
+    });
+    assert.match(html, /adjusted/, `settled=${settled}`);
+    assert.match(html, /in play/, `settled=${settled}`);
+    assert.match(html, /raw/, `settled=${settled}`);
+    assert.match(html, /98\.40/);
+    assert.match(html, /118\.40/);
+    assert.match(html, /78\.40/);
+  }
+});
+
+test('emphasis moves between the two states without anything disappearing', () => {
+  const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
+  assert.match(open, /class="lrow decides"[\s\S]*?in play/);
+  assert.match(done, /class="lrow decides"[\s\S]*?adjusted/);
+  assert.equal(
+    (open.match(/class="lrow/g) || []).length,
+    (done.match(/class="lrow/g) || []).length,
+    'the same number of rows in both states',
+  );
+});
+
+test('an open card carries the dashed rule and a hollow mark', () => {
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /class="card live/);
+  assert.match(html, /class="lead">leading</);
+  assert.doesNotMatch(html, /win-mark/, 'no solid check until it is settled');
+});
+
+test('a settled card carries the solid check and its hidden name', () => {
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
+  assert.match(html, /class="card settled/);
+  assert.match(html, /win-mark/);
+  assert.match(html, /<span class="sr-only">Winner<\/span>/);
+  assert.doesNotMatch(html, />leading</);
+});
+
+test('no player name ever reaches the card', () => {
+  const withPenalties = {
+    ...LIVE_WEEK,
+    teams: {
+      ...LIVE_WEEK.teams,
+      1: {
+        raw: 78.4, adjusted: 98.4, inPlay: 118.4,
+        penalties: [{ playerId: '6804', name: 'Joe Burrow', reason: 'zeroed', phase: 'final' }],
+      },
+    },
+  };
+  const html = renderWeek({
+    week: 3, resolved: withPenalties, teams: NAMES, detailAvailable: true, settled: true,
+  });
+  assert.doesNotMatch(html, /Joe Burrow/, 'names live behind the click now');
+  assert.doesNotMatch(html, /class="penalties"/);
+});
+
+test('a clickable card carries a persistent chevron, not a hover-only hint', () => {
+  const on = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, detailAvailable: true });
+  const off = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, detailAvailable: false });
+  assert.match(on, /class="chev"/);
+  assert.doesNotMatch(off, /class="chev"/);
+});
+
+test('the week carries exactly one status region', () => {
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  assert.equal((html.match(/role="status"/g) || []).length, 1);
+  assert.match(html, /Week 3 in progress/);
+});
+
+test('the key explains all three numbers on the page, not in a tooltip', () => {
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /<details class="score-key" open>/);
+  assert.doesNotMatch(html, /title="/, 'no tooltip: hover does nothing on a phone');
 });

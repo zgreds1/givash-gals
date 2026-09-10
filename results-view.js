@@ -6,7 +6,8 @@
 
 import { LAST_WEEK } from './config.js';
 import { esc } from './render.js';
-import { displayWeek } from './season.js';
+import { medianLine, gameStates, allGamesFinal } from './rules.js';
+import { displayWeek, isWeekFinal } from './season.js';
 
 // Re-exported from its new home in season.js so existing importers — and the
 // tests that pin its week boundaries — keep working unchanged.
@@ -129,25 +130,7 @@ export function lineupRows(entry, rosterPositions, players = {}) {
   return { starters, bench };
 }
 
-const REASON = {
-  zeroed: 'scored 0',
-  'empty-slot': 'empty slot',
-  'bye-def': 'DEF on bye',
-};
-
 const money = (n) => n.toFixed(2);
-
-function penaltyList(penalties) {
-  if (!penalties.length) return '';
-  const items = penalties
-    .map(
-      (p) =>
-        `<li><span class="pen">+20</span><span class="who">${esc(p.name)}</span>` +
-        `<em>${esc(REASON[p.reason] || p.reason)}</em></li>`,
-    )
-    .join('');
-  return `<ul class="penalties">${items}</ul>`;
-}
 
 /* A check mark drawn as SVG rather than a glyph or an emoji: it inherits the
  * winner colour and font size, and the visually-hidden word carries the
@@ -172,14 +155,136 @@ function poolHtml(medianPool) {
     .join('');
 }
 
-function teamBlock(rosterId, team, teams, isWinner) {
-  const name = teams[String(rosterId)] || `Roster ${rosterId}`;
-  return `<div class="side ${isWinner ? 'winner' : ''}">
-    <div class="name">${isWinner ? WIN_MARK : ''}${esc(name)}</div>
-    <div class="adj">${money(team.adjusted)}</div>
-    <div class="raw">raw ${money(team.raw)}</div>
-    ${penaltyList(team.penalties)}
-  </div>`;
+/** The three readings, in the order the manager enumerated them. */
+const SCORE_ROWS = [
+  { key: 'adjusted', label: 'adjusted', cap: 'finished games' },
+  { key: 'inPlay', label: 'in play', cap: '+ in progress' },
+  { key: 'raw', label: 'raw', cap: 'no +20s' },
+];
+
+const cell = (side, key) =>
+  side && typeof side[key] === 'number' ? money(side[key]) : '&mdash;';
+
+/**
+ * The three-score ladder for one matchup: left value, shared label, right value.
+ *
+ * Reuses the left | label | right shape of the lineup table below, so each label
+ * prints once instead of once per side and both score columns stay tabular.
+ *
+ * `decides` takes ink and weight — never a larger size. In a league where the
+ * LOW score wins, making the deciding number bigger would teach the eye exactly
+ * the wrong thing.
+ */
+function ladder(left, right, decides) {
+  return SCORE_ROWS.map(({ key, label, cap }) => {
+    const cls = key === decides ? 'lrow decides' : 'lrow';
+    return `<div class="${cls}">
+      <span class="n l">${cell(left, key)}</span>
+      <span class="lbl">${label}<span class="cap">${esc(cap)}</span></span>
+      <span class="n r">${cell(right, key)}</span>
+    </div>`;
+  }).join('');
+}
+
+/**
+ * The median line recomputed from the four head-to-head teams' in-play scores.
+ *
+ * Derived here rather than stored on the week: weeks.json would otherwise carry
+ * a second line, a second pool and a second matchup array for every week, and
+ * writeStamped's change detection would churn a commit every run.
+ */
+export function inPlayLine(resolved) {
+  const ids = (resolved?.matchups || [])
+    .filter((m) => m.type === 'h2h')
+    .flatMap((m) => m.rosterIds);
+  const pool = ids
+    .map((id) => resolved?.teams?.[id]?.inPlay)
+    .filter((v) => typeof v === 'number');
+  return medianLine(pool);
+}
+
+/**
+ * Who is ahead, and on which reading.
+ *
+ * A settled week defers to the engine's official result and never recomputes
+ * it. An open week is judged on `inPlay` — the "if it ended now" number, which
+ * is the honest live answer. Once every game is final the two agree by
+ * construction, so the hollow mark never jumps sides as it turns solid.
+ *
+ * @returns {number|'line'|null} a rosterId, the literal 'line' when the median
+ *   beats its opponent, or null for a tie.
+ */
+export function leaderOf(matchup, resolved, settled) {
+  if (matchup.type === 'h2h') {
+    const [a, b] = matchup.rosterIds;
+    if (settled) return matchup.winner;
+    const ia = resolved?.teams?.[a]?.inPlay;
+    const ib = resolved?.teams?.[b]?.inPlay;
+    if (typeof ia !== 'number' || typeof ib !== 'number') return null;
+    if (ia < ib) return a;
+    if (ib < ia) return b;
+    return null;
+  }
+
+  if (settled) {
+    if (matchup.result === 'W') return matchup.rosterId;
+    if (matchup.result === 'L') return 'line';
+    return null;
+  }
+
+  const line = inPlayLine(resolved);
+  const me = resolved?.teams?.[matchup.rosterId]?.inPlay;
+  if (line === null || typeof me !== 'number') return null;
+  if (me < line) return matchup.rosterId;
+  if (me > line) return 'line';
+  return null;
+}
+
+/** Hollow while the week can still move; the existing solid check once it cannot. */
+const LEAD_MARK = '<span class="lead-ring" aria-hidden="true"></span>';
+
+function sideHead(name, side, isLeader, settled) {
+  const cls = `tname ${side}${isLeader ? ' win' : ''}`;
+  const mark = isLeader ? (settled ? WIN_MARK : LEAD_MARK) : '';
+  const lead = isLeader && !settled ? '<span class="lead">leading</span>' : '';
+  const body = side === 'l' ? `${esc(name)} ${mark}` : `${mark} ${esc(name)}`;
+  return `<div class="${cls}">${body}${lead}</div>`;
+}
+
+/**
+ * The one atomic status message for the week.
+ *
+ * Exactly one, deliberately. Six independently-announcing score elements on a
+ * page that repaints during games is unusable with a screen reader; a single
+ * aria-atomic sentence says the same thing once.
+ */
+function weekStatus(week, settled) {
+  const msg = settled
+    ? `<b>Week ${week} final.</b> Counted in the standings.`
+    : `<b>Week ${week} in progress.</b> Leader shown on in play. Standings update Tuesday 10:00.`;
+  return `<p class="week-status" role="status" aria-atomic="true">${msg}</p>`;
+}
+
+/**
+ * What the three numbers mean, on the page rather than in a tooltip.
+ *
+ * A <details> and not a title attribute or a hover card: this site is read on a
+ * phone during games, where hover does not exist. Open by default, collapsible,
+ * and keyboard- and screen-reader-native with no JavaScript.
+ */
+function scoreKey() {
+  return `<details class="score-key" open>
+    <summary>What these three numbers mean</summary>
+    <dl>
+      <div><dt>adjusted</dt><dd>+20 for each starter on 0 whose game has
+        <strong>finished</strong>. The official score &mdash; this is what the
+        standings use.</dd></div>
+      <div><dt>in play</dt><dd>Adjusted, plus +20 for each starter on 0 whose game
+        is <strong>happening right now</strong>. Where you would land if everything
+        ended this second. Starters who have not kicked off count in neither.</dd></div>
+      <div><dt>raw</dt><dd>The points alone, with no +20 of any kind.</dd></div>
+    </dl>
+  </details>`;
 }
 
 /**
@@ -192,9 +297,14 @@ function teamBlock(rosterId, team, teams, isWinner) {
  * `detailAvailable` is false for weeks with no archived payload — the 2025
  * archive was slimmed to a points map and cannot reconstruct a lineup. Those
  * matchups lose their click rather than 404 on it.
+ *
+ * `settled` says whether the week's GAMES are over, which is what decides
+ * which of the three readings the card leans on. mountResults works it out;
+ * it is not derivable from `resolved` alone.
  */
 export function renderWeek({
   week, resolved, pairs = [], ghostRosterId = null, teams = {}, detailAvailable = false,
+  settled = false,
 }) {
   const name = (id) => teams[String(id)] || `Roster ${id}`;
 
@@ -205,12 +315,12 @@ export function renderWeek({
 
   if (resolved?.played) {
     const cards = resolved.matchups
-      .map((m, i) => playedCard(m, i, resolved, teams, detailAvailable))
+      .map((m, i) => playedCard(m, i, resolved, teams, detailAvailable, settled))
       .join('');
     const note = detailAvailable
       ? ''
       : '<p class="note">This week was archived before player detail was kept, so there is no player detail to open.</p>';
-    return note + cards;
+    return weekStatus(week, settled) + scoreKey() + note + cards;
   }
 
   if (!pairs.length) {
@@ -239,31 +349,39 @@ export function renderWeek({
   return `<p class="upcoming-label">Upcoming</p><ul class="fixtures">${rows.join('')}</ul>`;
 }
 
-function playedCard(m, index, wk, teams, detailAvailable) {
-  const hook = detailAvailable
-    ? ` data-matchup="${index}" role="button" tabindex="0"`
-    : '';
-  const cls = detailAvailable ? 'card clickable' : 'card';
+function playedCard(m, index, wk, teams, detailAvailable, settled) {
+  const name = (id) => teams[String(id)] || `Roster ${id}`;
+  const hook = detailAvailable ? ` data-matchup="${index}" role="button" tabindex="0"` : '';
+  const cls = `card ${settled ? 'settled' : 'live'}${detailAvailable ? ' clickable' : ''}`;
+  const decides = settled ? 'adjusted' : 'inPlay';
+  const leader = leaderOf(m, wk, settled);
+  // Persistent, not a hover state: on a touch device a hover-only affordance is
+  // no affordance at all, and this click is now the only route to player detail.
+  const chev = detailAvailable ? '<span class="chev" aria-hidden="true">&rsaquo;</span>' : '';
 
   if (m.type === 'h2h') {
     const [a, b] = m.rosterIds;
-    return `<div class="${cls} h2h"${hook}>
-      ${teamBlock(a, wk.teams[a], teams, m.winner === a)}
-      <div class="vs">${m.winner === null ? 'TIE' : 'vs'}</div>
-      ${teamBlock(b, wk.teams[b], teams, m.winner === b)}
+    return `<div class="${cls}"${hook}>${chev}
+      <div class="card-state"><span class="pip"></span>${settled ? 'final' : 'in progress'}</div>
+      <div class="teams">
+        ${sideHead(name(a), 'l', leader === a, settled)}
+        <div class="vs">${settled && m.winner === null ? 'TIE' : 'vs'}</div>
+        ${sideHead(name(b), 'r', leader === b, settled)}
+      </div>
+      <div class="ladder">${ladder(wk.teams[a], wk.teams[b], decides)}</div>
     </div>`;
   }
 
-  const pool = poolHtml(wk.medianPool);
-
-  return `<div class="${cls} median"${hook}>
-    ${teamBlock(m.rosterId, wk.teams[m.rosterId], teams, m.result === 'W')}
-    <div class="vs">${m.result === 'T' ? 'TIE' : 'vs median'}</div>
-    <div class="side line ${m.result === 'L' ? 'winner' : ''}">
-      <div class="name">${m.result === 'L' ? WIN_MARK : ''}League median</div>
-      <div class="adj">${m.line === null ? '—' : money(m.line)}</div>
-      <div class="raw">avg of 2nd &amp; 3rd</div>
-      <div class="pool">${pool}</div>
+  const line = { adjusted: m.line, inPlay: inPlayLine(wk), raw: null };
+  return `<div class="${cls}"${hook}>${chev}
+    <div class="card-state"><span class="pip"></span>${settled ? 'final' : 'in progress'}</div>
+    <div class="teams">
+      ${sideHead(name(m.rosterId), 'l', leader === m.rosterId, settled)}
+      <div class="vs">${settled && m.result === 'T' ? 'TIE' : 'vs median'}</div>
+      ${sideHead('League median', 'r', leader === 'line', settled)}
+    </div>
+    <div class="ladder">${ladder(wk.teams[m.rosterId], line, decides)}
+      <div class="pool-row"><span class="pool">${poolHtml(wk.medianPool)}</span></div>
     </div>
   </div>`;
 }
@@ -456,6 +574,7 @@ export async function mountResults(el, state = {}) {
   const cache = {};
   let pairings = null;
   let players = null;
+  let schedule = null;
 
   const view = { week: displayWeek(now(), state.seasonStart ?? null), matchup: null };
 
@@ -480,6 +599,22 @@ export async function mountResults(el, state = {}) {
       cache[week] = null;   // never archived: the week loses its drill-down
     }
     return cache[week];
+  }
+
+  /**
+   * The season schedule, preferring the live copy refreshLive stored on state.
+   * The committed file is the fallback, and an empty array is the fallback to
+   * that — a missing schedule must not stop the tab rendering.
+   */
+  async function scheduleFor() {
+    if (state.schedule) return state.schedule;
+    if (schedule) return schedule;
+    try {
+      schedule = await json('data/raw/schedule.json');
+    } catch {
+      schedule = [];
+    }
+    return schedule;
   }
 
   async function playerMap() {
@@ -540,6 +675,15 @@ export async function mountResults(el, state = {}) {
     const rosterPositions = state.rosterPositions || [];
 
     const resolved = byWeek.get(week);
+    // A card is settled when the GAMES are over, not when the standings gate has
+    // opened. The card answers "can these numbers still change?"; the gate
+    // answers "does this count yet?". They normally coincide — a postponed game
+    // is exactly the case where they must not. With no schedule at all, fall
+    // back to the gate rather than show a finished week as forever in progress.
+    const states = gameStates(await scheduleFor(), week);
+    const settled = states.size
+      ? allGamesFinal(states)
+      : isWeekFinal(week, state.seasonStart ?? null, now());
     const payload = resolved?.played ? await payloadFor(week) : null;
     // `?.[]`, because refreshLive can replace state.weeks under an open
     // drill-down with a week that has fewer matchups than the index.
@@ -566,6 +710,7 @@ export async function mountResults(el, state = {}) {
         pairs: pairings[String(week)] || [],
         ghostRosterId, teams,
         detailAvailable: Boolean(payload),
+        settled,
       });
     }
     wire();
