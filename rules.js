@@ -32,6 +32,9 @@ export function byeTeams(schedule, week) {
   return byes;
 }
 
+/** How settled each phase is. Lower is less settled, and less settled wins. */
+const PHASE_RANK = { upcoming: 0, live: 1, final: 2 };
+
 /**
  * Per-NFL-team game state for one week, read off Sleeper's schedule payload.
  *
@@ -44,6 +47,9 @@ export function byeTeams(schedule, week) {
  *
  * A team appearing in no game that week is on bye and gets no entry, which is
  * how the caller tells "on bye" apart from "not kicked off yet".
+ *
+ * A team appearing TWICE in one week takes its least-settled row; see the
+ * comment on the merge below for the fixture that makes that necessary.
  *
  * @param {Array<{week:number, home:string, away:string, status:string}>} schedule
  * @param {number} week
@@ -64,8 +70,29 @@ export function gameStates(schedule, week) {
       g.status === 'complete' || g.status === 'canceled' ? 'final'
         : g.status === 'pre_game' ? 'upcoming'
           : 'live';
-    out.set(g.home, phase);
-    out.set(g.away, phase);
+    // Least-settled wins, because a team can appear twice in the same week.
+    // Week 6 of the committed schedule is the real case: DAL v SEA on
+    // 2026-10-15 is `canceled`, and BOTH teams were re-placed into replacement
+    // fixtures — SEA at DEN on that same 2026-10-15, DAL at GB on the 18th. A
+    // cancelled fixture that was replaced rather than abandoned means the team
+    // still plays, and with two rows carrying the same date their order in
+    // Sleeper's array is arbitrary. Taking whichever row was scanned last would
+    // hand DAL and SEA 'final' the moment that order flipped, and every zeroed
+    // starter on those teams would take a +20 from Wednesday of week 6 — days
+    // before they kick off. Ranking the phases makes the answer identical in
+    // either array order.
+    //
+    // 'upcoming' outranks 'live' between themselves: a team with one game in
+    // progress and another not yet started still has football left to play, and
+    // 'upcoming' is the only phase that counts toward neither `adjusted` nor
+    // `in play`. It withholds both readings; 'live' would already be adding 20
+    // to the in-play number for a player who may yet score in the later game.
+    for (const team of [g.home, g.away]) {
+      const seen = out.get(team);
+      if (seen === undefined || PHASE_RANK[phase] < PHASE_RANK[seen]) {
+        out.set(team, phase);
+      }
+    }
   }
   return out;
 }
