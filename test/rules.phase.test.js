@@ -7,12 +7,17 @@ const WK3 = byeTeams(SCHEDULE, 3);   // nobody on bye
 const WK8 = byeTeams(SCHEDULE, 8);   // HOU and CIN on bye
 const LIVE3 = gameStates(SCHEDULE_LIVE, 3); // HOU/CIN final, KC/MIN live
 
-// Burrow CIN (final), Robinson ATL (unknown to this week's schedule -> bye),
-// Jefferson MIN (live).
+// HOU's own game still being played. The cases below that must settle on the
+// spot — a bye DEF, an unknown id — pass this instead of LIVE3, where HOU is
+// already 'final' and any phase at all would look right.
+const HOU_LIVE = gameStates([{ week: 3, home: 'HOU', away: 'CIN', status: 'in_game' }], 3);
+
+// One zero whose game has finished, one whose game is still on, and one
+// starter who scored — enough to separate all three readings.
 const MIXED = [
   ['6804', 0.0],   // QB Burrow, CIN, game finished
   ['4199', 0.0],   // WR Jefferson, MIN, game in progress
-  ['1466', 12.0],  // K Bass, scored
+  ['1466', 12.0],  // K Bass, BUF, scored
 ];
 
 test('a zero in a finished game counts in both adjusted and in play', () => {
@@ -47,9 +52,12 @@ test('the three scores order as raw <= adjusted <= inPlay', () => {
 });
 
 test('an empty slot is settled the moment the week starts', () => {
+  // wk5 has not kicked off, so a slot taking its phase from anywhere but the
+  // literal would land on 'upcoming' and leave both readings at 0.
   const wk5 = gameStates(SCHEDULE_LIVE, 5);
   const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), wk5);
   assert.equal(r.adjusted, 20, 'no game can rescue an empty slot');
+  assert.equal(r.inPlay, 20);
   assert.equal(r.penalties[0].phase, 'final');
 });
 
@@ -61,7 +69,11 @@ test('a player whose team is on bye is settled, not pending', () => {
 });
 
 test('a DEF on bye is still penalised, and settled', () => {
-  const r = adjustedScore(mkEntry(1, 1, [['HOU', 0]]), WK8, PLAYERS, new Set(), LIVE3);
+  // The bye set and the states map disagree on purpose: HOU is on bye in week
+  // 8 and mid-game in HOU_LIVE. That is the only combination that tells the
+  // hardcoded 'final' apart from a schedule lookup — under LIVE3, HOU reads
+  // 'final' either way and the assertion could not fail.
+  const r = adjustedScore(mkEntry(1, 1, [['HOU', 0]]), WK8, PLAYERS, new Set(), HOU_LIVE);
   assert.equal(r.adjusted, 20);
   assert.equal(r.penalties[0].reason, 'bye-def');
   assert.equal(r.penalties[0].phase, 'final');
@@ -75,9 +87,12 @@ test('a DEF not on bye stays exempt whatever its game is doing', () => {
 });
 
 test('an unknown player id is settled immediately', () => {
-  // Absent from the slim map means inactive, which is absence.
-  const r = adjustedScore(mkEntry(1, 1, [['999999', 0]]), WK3, PLAYERS, new Set(), LIVE3);
+  // Absent from the slim map means inactive, which is absence. 999999 has no
+  // team to look up, so nothing but the literal can produce 'final' here —
+  // and adjusted drops to 0 the moment that literal becomes 'live'.
+  const r = adjustedScore(mkEntry(1, 1, [['999999', 0]]), WK3, PLAYERS, new Set(), HOU_LIVE);
   assert.equal(r.adjusted, 20);
+  assert.equal(r.inPlay, 20);
   assert.equal(r.penalties[0].phase, 'final');
 });
 

@@ -87,6 +87,9 @@ test('a nextWeek with no nextGate renders no note', () => {
   // nextWeek is still 1 (truthy). The note must stay suppressed on an
   // explicit null check, not just on the && short-circuit it replaced.
   const html = renderStandings(ROWS, TEAMS, { nextWeek: 1, nextGate: null });
+  // Anchor first: two doesNotMatch calls alone would also pass on an empty
+  // string, which is the one failure this test would never notice.
+  assert.match(html, /<table class="standings">/);
   assert.doesNotMatch(html, /<p class="gate-note">/);
   assert.doesNotMatch(html, /joins/);
 });
