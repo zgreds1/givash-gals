@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-09-10T11:59:18.948Z",
+  "generatedAt": "2026-09-11T10:35:04.587Z",
   "weeks": [
     {
       "week": 1,
       "played": true,
       "degenerate": false,
-      "median": 3.35,
+      "median": 17.3,
       "medianPool": [
-        7.1,
-        6.7,
-        0,
+        27.8,
+        20,
+        14.6,
         0
       ],
       "teams": {
@@ -129,16 +129,10 @@
           ]
         },
         "2": {
-          "raw": 6.7,
-          "adjusted": 6.7,
-          "inPlay": 6.7,
+          "raw": 27.8,
+          "adjusted": 27.8,
+          "inPlay": 27.8,
           "penalties": [
-            {
-              "playerId": "8183",
-              "name": "Brock Purdy",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "1166",
               "name": "Kirk Cousins",
@@ -238,9 +232,9 @@
           ]
         },
         "3": {
-          "raw": 7.1,
-          "adjusted": 7.1,
-          "inPlay": 7.1,
+          "raw": 14.6,
+          "adjusted": 14.6,
+          "inPlay": 14.6,
           "penalties": [
             {
               "playerId": "12545",
@@ -275,12 +269,6 @@
             {
               "playerId": "11370",
               "name": "Chris Brooks",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "13414",
-              "name": "Kaelon Black",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -348,8 +336,8 @@
         },
         "4": {
           "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "adjusted": 20,
+          "inPlay": 20,
           "penalties": [
             {
               "playerId": "7523",
@@ -427,7 +415,7 @@
               "playerId": "13278",
               "name": "Max Klare",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "11626",
@@ -463,8 +451,8 @@
         },
         "5": {
           "raw": 9.3,
-          "adjusted": 9.3,
-          "inPlay": 9.3,
+          "adjusted": 29.3,
+          "inPlay": 29.3,
           "penalties": [
             {
               "playerId": "12522",
@@ -482,7 +470,7 @@
               "playerId": "7527",
               "name": "Mac Jones",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "8154",
@@ -579,7 +567,7 @@
         {
           "type": "median",
           "rosterId": 5,
-          "line": 3.35,
+          "line": 17.3,
           "result": "L"
         }
       ]
