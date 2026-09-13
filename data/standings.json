@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T19:14:42.196Z",
+  "generatedAt": "2026-09-13T22:14:43.507Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -42,24 +42,8 @@
       "l": 0,
       "t": 0,
       "gp": 1,
-      "adjPF": 20.22,
-      "rawPF": 20.22,
-      "median": {
-        "w": 0,
-        "l": 0,
-        "t": 0
-      },
-      "unresolvedTie": false,
-      "winPct": 1
-    },
-    {
-      "rosterId": 2,
-      "w": 1,
-      "l": 0,
-      "t": 0,
-      "gp": 1,
-      "adjPF": 39.5,
-      "rawPF": 39.5,
+      "adjPF": 61.78,
+      "rawPF": 41.78,
       "median": {
         "w": 0,
         "l": 0,
@@ -74,10 +58,26 @@
       "l": 0,
       "t": 0,
       "gp": 1,
-      "adjPF": 46.32,
-      "rawPF": 26.32,
+      "adjPF": 113.74,
+      "rawPF": 53.74,
       "median": {
         "w": 1,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": false,
+      "winPct": 1
+    },
+    {
+      "rosterId": 2,
+      "w": 1,
+      "l": 0,
+      "t": 0,
+      "gp": 1,
+      "adjPF": 160.8,
+      "rawPF": 100.8,
+      "median": {
+        "w": 0,
         "l": 0,
         "t": 0
       },
@@ -90,8 +90,8 @@
       "l": 1,
       "t": 0,
       "gp": 1,
-      "adjPF": 63,
-      "rawPF": 63,
+      "adjPF": 153.42,
+      "rawPF": 133.42,
       "median": {
         "w": 0,
         "l": 0,
@@ -106,8 +106,8 @@
       "l": 1,
       "t": 0,
       "gp": 1,
-      "adjPF": 80.86,
-      "rawPF": 60.86,
+      "adjPF": 209.64,
+      "rawPF": 89.64,
       "median": {
         "w": 0,
         "l": 0,
