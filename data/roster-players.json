@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-10T11:59:18.948Z",
+  "generatedAt": "2026-09-13T19:14:42.196Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -105,6 +105,11 @@
       "name": "Kendrick Bourne",
       "pos": "WR",
       "team": "ARI"
+    },
+    "4574": {
+      "name": "Cooper Rush",
+      "pos": "QB",
+      "team": "ATL"
     },
     "4881": {
       "name": "Lamar Jackson",
@@ -240,11 +245,6 @@
       "name": "Rashod Bateman",
       "pos": "WR",
       "team": "BAL"
-    },
-    "7600": {
-      "name": "Pat Freiermuth",
-      "pos": "TE",
-      "team": "PIT"
     },
     "7922": {
       "name": "Riley Patterson",
