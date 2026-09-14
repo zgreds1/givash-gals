@@ -1523,58 +1523,67 @@ table.leaderboard th .dir {
 }
 
 /*
- * One player per line, not two.
+ * The lineup row stays two columns on a phone, because the two columns ARE the
+ * point: this is a head-to-head, and a manager reads it by comparing his QB to
+ * the other guy's QB on one line. An earlier pass stacked the two sides to buy
+ * width, which turned every row into a card holding two unrelated players and
+ * lost the comparison the screen exists for. Same shape as Sleeper's own
+ * scoreboard, and as this site's desktop layout: name and points either side of
+ * a slot label, points innermost so the two columns of numbers flank the middle.
  *
- * The three-column lineup row is a desktop shape: it asks a ~160px track to
- * hold a name, a score, a +20 tag AND a "scored 0" caption, so names
- * ellipsised to "Kim..." while the tag and caption spilled into the position
- * column and printed as "RBscored 0". Below 34rem each side takes its own
- * full-width row with the slot as a heading over the pair, which is the only
- * arrangement that gives a name room to be read.
+ * What actually made 390px unreadable was never the two columns - it was
+ * cramming FOUR things into each ~160px side: a name, a score, a +20 tag and a
+ * "scored 0" caption. Names ellipsised to "Kim..." and the tag spilled into the
+ * slot column as "RBscored 0". So the row keeps its shape and the side wraps
+ * instead: name and points on the first line, tag and caption on a second,
+ * which costs a line only on the rows that carry a penalty.
  */
 @media (max-width: 34rem) {
   .lineup-row {
-    grid-template-columns: 1fr;
-    gap: var(--space-xs);
-    padding: var(--space-lg) 0;
+    grid-template-columns: 1fr 2.1rem 1fr;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
   }
 
-  /* Back to source order: slot first as the row's heading, then both sides.
-   * Without this the slot sits between the two players and reads as though
-   * it belonged to the second one. */
-  .lineup-slot {
-    order: -1;
-    text-align: left;
-    color: var(--muted);
-  }
+  .lineup-slot { font-size: var(--t-3xs); }
 
-  /* row-reverse is what put the right-hand team's score before its name in
-   * the two-column layout. Stacked, both sides read left to right like every
-   * other line on the page. */
-  .lineup-side,
-  .lineup-side.right {
-    flex-direction: row;
+  .lineup-side {
     flex-wrap: wrap;
-    gap: var(--space-sm) var(--space-md);
+    gap: 0 var(--space-sm);
   }
 
-  /* Source order is name, points, tag, reason - which stacked would strand the
-   * points mid-line on penalised rows while the tags took the right edge, so
-   * the column of numbers only lined up on rows that happened to have no +20.
-   * Reordering puts the tag and its reason back beside the name they qualify
-   * and hands the right edge to the points on every row alike. */
+  /* An empty flex item 100% wide forces a line break exactly where it sits in
+   * the `order` sequence, which is how the tag and its caption get a line of
+   * their own without wrapping them in a container the markup does not have.
+   * It is zero-height, so a row with no penalty pays nothing for it. */
+  .lineup-side::after {
+    content: "";
+    flex-basis: 100%;
+    height: 0;
+    order: 3;
+  }
   .lineup-side .lineup-name { order: 1; }
-  .lineup-side .pen { order: 2; }
-  .lineup-side .pen-reason { order: 3; }
-  .lineup-side .lineup-pts { order: 4; margin-left: auto; }
+  .lineup-side .lineup-pts { order: 2; }
+  .lineup-side .pen { order: 4; }
+  .lineup-side .pen-reason { order: 5; }
 
-  /* Room to wrap instead of a name cut off mid-word. */
+  /* The name takes the slack so the points sit against the slot column, and
+   * wraps rather than ellipsising - two lines of a real name beat one line of
+   * "Washington Comm...". */
   .lineup-name {
+    /* flex-basis 0, not auto: on `auto` the basis is the name's own content
+     * width, so "Washington Commanders" claimed the whole line and shoved its
+     * score onto the next one while the opposing side kept both on the first.
+     * From 0 the name grows into whatever is left and wraps INSIDE its own
+     * box, which keeps every score on the row's first line. */
+    flex: 1 1 0;
+    min-width: 0;
     font-size: var(--t-2xs);
+    line-height: 1.35;
     white-space: normal;
     overflow: visible;
     text-overflow: clip;
-    min-width: 0;
   }
 
+  .lineup-pts { font-size: var(--t-2xs); }
 }

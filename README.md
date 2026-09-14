@@ -65,12 +65,25 @@ team-name track collapsed to about 40px and `overflow-wrap: anywhere` broke
 screen. It stacks at **40rem**, which hands `.tname` the full width back and
 means `anywhere` never fires.
 
-A lineup row takes one player per line below **34rem**. As three columns it
-asked a ~160px track to hold a name, a score, a +20 tag *and* a "scored 0"
-caption, so names ellipsised to `Kim...` and the tag collided with the position
-label as `RBscored 0`. Stacked, the tag and caption sit beside the name they
-qualify and the points take the right edge on every row, penalised or not, so
-the numbers still read as one column.
+A lineup row keeps its two columns at every width, because the two columns
+*are* the point: this is a head-to-head, and it is read by comparing your QB to
+the other guy's QB on one line. An earlier pass stacked the two sides to buy
+width and turned every row into a card holding two unrelated players, which
+lost the comparison the screen exists for. The shape matches Sleeper's own
+scoreboard — name and points either side of a slot label, points innermost so
+the two columns of numbers flank the middle.
+
+What actually made 390px unreadable was never the two columns. It was cramming
+four things into each ~160px side: a name, a score, a +20 tag *and* a "scored 0"
+caption — so names ellipsised to `Kim...` and the tag spilled into the slot
+column as `RBscored 0`. Below 34rem the row keeps its shape and each side wraps
+instead: name and points on the first line, tag and caption on a second, which
+costs a line only on the rows that carry a penalty. The break is forced by a
+zero-height `::after` with `flex-basis: 100%` sitting at the right point in the
+`order` sequence, since the markup has no container around the tag pair. The
+name flexes from `flex-basis: 0` rather than `auto`, or a long one
+("Washington Commanders") claims the whole line and shoves its own score onto
+the next while the opposing side keeps both on the first.
 
 The player leaderboard becomes cards below **40rem**. That number is arithmetic,
 not taste: the table's own `min-width` is 38rem (608px) and `main` spends 1rem
