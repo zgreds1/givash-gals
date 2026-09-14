@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-09-14T00:50:47.520Z",
+  "generatedAt": "2026-09-14T03:36:28.673Z",
   "weeks": [
     {
       "week": 1,
       "played": true,
       "degenerate": false,
-      "median": 183.16,
+      "median": 195.01,
       "medianPool": [
-        211.84,
+        209.24,
         207.28,
-        159.04,
-        122.68
+        182.74,
+        128.88
       ],
       "teams": {
         "1": {
-          "raw": 42.68,
-          "adjusted": 122.68,
-          "inPlay": 182.68,
+          "raw": 48.88,
+          "adjusted": 128.88,
+          "inPlay": 128.88,
           "penalties": [
             {
               "playerId": "11647",
@@ -31,28 +31,10 @@
               "phase": "final"
             },
             {
-              "playerId": "8917",
-              "name": "KaVontae Turpin",
-              "reason": "zeroed",
-              "phase": "live"
-            },
-            {
               "playerId": "5848",
               "name": "Marquise Brown",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "13285",
-              "name": "Malachi Fields",
-              "reason": "zeroed",
-              "phase": "live"
-            },
-            {
-              "playerId": "11597",
-              "name": "Theo Johnson",
-              "reason": "zeroed",
-              "phase": "live"
             },
             {
               "playerId": "13345",
@@ -112,27 +94,21 @@
           ]
         },
         "3": {
-          "raw": 139.04,
-          "adjusted": 159.04,
-          "inPlay": 199.04,
+          "raw": 142.74,
+          "adjusted": 182.74,
+          "inPlay": 182.74,
           "penalties": [
             {
               "playerId": "7528",
               "name": "Najee Harris",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "13337",
               "name": "Emmett Johnson",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "7090",
-              "name": "Darnell Mooney",
-              "reason": "zeroed",
-              "phase": "live"
             },
             {
               "playerId": "8188",
@@ -149,16 +125,10 @@
           ]
         },
         "4": {
-          "raw": 91.84,
-          "adjusted": 211.84,
-          "inPlay": 231.84,
+          "raw": 89.24,
+          "adjusted": 209.24,
+          "inPlay": 209.24,
           "penalties": [
-            {
-              "playerId": "11655",
-              "name": "Tyrone Tracy",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "12455",
               "name": "Brashard Smith",
@@ -279,7 +249,7 @@
         {
           "type": "median",
           "rosterId": 5,
-          "line": 183.16,
+          "line": 195.01,
           "result": "W"
         }
       ]
