@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T03:36:28.673Z",
+  "generatedAt": "2026-09-14T09:36:14.477Z",
   "season": "2026",
   "rows": [
     {
@@ -3110,6 +3110,19 @@
       "ppg": 10.54
     },
     {
+      "id": "8161",
+      "name": "Malik Willis",
+      "team": "MIA",
+      "pos": "QB",
+      "gp": 1,
+      "raw": 10.7,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 10.7,
+      "ppg": 10.7
+    },
+    {
       "id": "8146",
       "name": "Garrett Wilson",
       "team": "NYJ",
@@ -3251,19 +3264,6 @@
       "saved": 0,
       "total": 11.6,
       "ppg": 11.6
-    },
-    {
-      "id": "8161",
-      "name": "Malik Willis",
-      "team": "MIA",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 11.7,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 11.7,
-      "ppg": 11.7
     },
     {
       "id": "5854",
@@ -3604,19 +3604,6 @@
       "ppg": 14
     },
     {
-      "id": "LV",
-      "name": "Las Vegas Raiders",
-      "team": "LV",
-      "pos": "DEF",
-      "gp": 1,
-      "raw": 14,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 14,
-      "ppg": 14
-    },
-    {
       "id": "9486",
       "name": "Dontayvion Wicks",
       "team": "PHI",
@@ -3699,6 +3686,19 @@
       "name": "Chad Ryland",
       "team": "ARI",
       "pos": "K",
+      "gp": 1,
+      "raw": 15,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 15,
+      "ppg": 15
+    },
+    {
+      "id": "LV",
+      "name": "Las Vegas Raiders",
+      "team": "LV",
+      "pos": "DEF",
       "gp": 1,
       "raw": 15,
       "pen": 0,
@@ -3933,19 +3933,6 @@
       "name": "Odell Beckham",
       "team": "NYG",
       "pos": "WR",
-      "gp": 1,
-      "raw": 0,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 20,
-      "ppg": 20
-    },
-    {
-      "id": "2306",
-      "name": "Jameis Winston",
-      "team": "NYG",
-      "pos": "QB",
       "gp": 1,
       "raw": 0,
       "pen": 1,
@@ -4431,19 +4418,6 @@
       "raw": 20,
       "pen": 0,
       "truePen": 0,
-      "saved": 0,
-      "total": 20,
-      "ppg": 20
-    },
-    {
-      "id": "8162",
-      "name": "Sam Howell",
-      "team": "DAL",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 1,
-      "truePen": 1,
       "saved": 0,
       "total": 20,
       "ppg": 20
