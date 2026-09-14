@@ -203,9 +203,9 @@ test('unknown ownership renders an em dash, not a claim that everyone is free', 
   // the accent colour on every row would be a positive claim we cannot make.
   const html = renderLeaderboard([ROWS[0]], { ownershipKnown: false });
   assert.doesNotMatch(html, />FA</);
-  assert.match(html, /<td class="owner">—<\/td>/);
+  assert.match(html, /<td class="owner" data-label="Owner">—<\/td>/);
 
   // The default is unchanged: ownership known, nobody rostered, so FA.
   const known = renderLeaderboard([ROWS[0]], { ownerOf: new Map() });
-  assert.match(known, /<td class="owner fa">FA<\/td>/);
+  assert.match(known, /<td class="owner fa" data-label="Owner">FA<\/td>/);
 });

@@ -53,6 +53,35 @@ dashed outline while that player's game is still on, and both sit beside the
 literal text `+20`; a zero whose game has not kicked off is neither, and says
 "not started" in grey instead of showing a number.
 
+### On a phone
+
+Three layouts change shape below the fold-out widths, and each breakpoint is
+chosen for a reason rather than rounded to a convention.
+
+`.detail-head` was the worst of them. It held `1fr 1fr` at every width, and its
+left half contains `.teams` — itself a three-column grid — so at 390px the
+team-name track collapsed to about 40px and `overflow-wrap: anywhere` broke
+"LilDaveIII" into one fragment per line while the score ladder ran off the
+screen. It stacks at **40rem**, which hands `.tname` the full width back and
+means `anywhere` never fires.
+
+A lineup row takes one player per line below **34rem**. As three columns it
+asked a ~160px track to hold a name, a score, a +20 tag *and* a "scored 0"
+caption, so names ellipsised to `Kim...` and the tag collided with the position
+label as `RBscored 0`. Stacked, the tag and caption sit beside the name they
+qualify and the points take the right edge on every row, penalised or not, so
+the numbers still read as one column.
+
+The player leaderboard becomes cards below **40rem**. That number is arithmetic,
+not taste: the table's own `min-width` is 38rem (608px) and `main` spends 1rem
+of padding a side, so the table first fits at 640px. Set at 34rem — where the
+rest of the phone layout switches — the band from 545px to 639px got the table
+back before there was room for it, side-scrolling 608px of columns through
+513px of page. Hiding `<thead>` also hides the sort buttons, and side-scrolling
+to a header was previously the only way to sort on a phone, so the card layout
+brings its own sort `<select>` and direction toggle. They write the same
+`view.sortKey` / `view.sortDir` the headers do, so the two cannot disagree.
+
 The empty `.nojekyll` file at the root is load-bearing. GitHub Pages runs
 Jekyll over the whole repository by default, and Jekyll's Liquid parser
 treats `{{` as a variable opening — so a JSDoc line like
@@ -126,14 +155,29 @@ is a moving number during the week. There are three readings of it — `adjusted
 (finished games only, the official score), `in play` (adjusted plus games in
 progress) and `raw` (no +20 at all). `RULES.md` states the rule.
 
-A Results card shows one line per team, `in play (adjusted)`, and drops the
+A Results card shows one line per team, `adjusted (in play)`, and drops the
 bracket once the week is settled — where the two are equal by construction and
-`118.40 (118.40)` would be noise. That absence is itself a signal: a card with
+`98.40 (98.40)` would be noise. That absence is itself a signal: a card with
 brackets is still moving, alongside the dashed rule, the hollow ring and the
-word "leading". All three readings, `raw` included, live in the explanation
-behind each score, which answers to hover, to keyboard focus **and** to a tap —
-the last of those being the only one that exists on the phone this is mostly
-read on during games. The drill-down keeps all three in plain sight.
+word "leading".
+
+`adjusted` is the big number because it is the only one that has actually
+happened. A +20 is charged when a player's **whole game** ends with no stats to
+his name, so a starter sitting on 0.00 in a game still being played has not
+been charged and may never be; `in play` is the projection of what the score
+would be if every game stopped this instant. The green leader mark is read off
+`adjusted` for the same reason, which means it cannot change sides at the
+moment it turns from a hollow ring into a solid check — both states now read
+the same number.
+
+Under each score, a card also says how many of that team's starters have not
+kicked off (`2 to play`), which is what says how much of the bracketed gap can
+still move. It is silent at zero, and the League median never carries one: the
+line is four other teams averaged, not a lineup. All three readings, `raw`
+included, live in the explanation behind each score, which answers to hover, to
+keyboard focus **and** to a tap — the last of those being the only one that
+exists on the phone this is mostly read on during games. The drill-down keeps
+all three in plain sight.
 
 Because a drill-down is a URL, the card is a link stretched over it rather than
 a `div[role="button"]`. That is what makes the hover possible at all: an

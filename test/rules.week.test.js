@@ -360,3 +360,31 @@ test('omitting states reproduces the pre-phase week exactly', () => {
   assert.equal(wk.teams[2].adjusted, 20, 'every game treated as final');
   assert.equal(wk.teams[2].inPlay, 20);
 });
+
+test('resolveWeek carries yetToPlay for every real team', () => {
+  // KC has not kicked off; CIN has finished; MIN is mid-game. Roster 1 fields
+  // the KC defence and so has football left, roster 2 does not.
+  const states = gameStates([
+    { week: 3, home: 'KC', away: 'DAL', status: 'pre_game' },
+    { week: 3, home: 'CIN', away: 'BAL', status: 'complete' },
+    { week: 3, home: 'MIN', away: 'GB', status: 'in_game' },
+  ], 3);
+  const wk = resolveWeek(
+    3,
+    [
+      mkEntry(1, 1, [['KC', 0], ['6804', 10]]),  // KC yet to play
+      mkEntry(2, 1, [['6804', 12]]),             // CIN, done
+      mkEntry(3, 2, [['1466', 10]]),
+      mkEntry(4, 2, [['1466', 20]]),
+      mkEntry(5, 3, [['1466', 30]]),
+      mkEntry(6, 3, [['1466', 0]]),
+    ],
+    new Set([6]),
+    byeTeams(SCHEDULE, 3),
+    PLAYERS,
+    new Set(),
+    states,
+  );
+  assert.equal(wk.teams[1].yetToPlay, 1);
+  assert.equal(wk.teams[2].yetToPlay, 0);
+});

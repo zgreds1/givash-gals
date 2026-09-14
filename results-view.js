@@ -158,8 +158,8 @@ function poolHtml(medianPool) {
 
 /** The three readings, in the order the manager enumerated them. */
 const SCORE_ROWS = [
-  { key: 'adjusted', label: 'adjusted', cap: 'finished games' },
-  { key: 'inPlay', label: 'in play', cap: '+ in progress' },
+  { key: 'adjusted', label: 'adjusted', cap: 'official' },
+  { key: 'inPlay', label: 'in play', cap: 'if it ended now' },
   { key: 'raw', label: 'raw', cap: 'no +20s' },
 ];
 
@@ -208,9 +208,15 @@ export function inPlayLine(resolved) {
  * Who is ahead, and on which reading.
  *
  * A settled week defers to the engine's official result and never recomputes
- * it. An open week is judged on `inPlay` — the "if it ended now" number, which
- * is the honest live answer. Once every game is final the two agree by
- * construction, so the hollow mark never jumps sides as it turns solid.
+ * it. An open week recomputes the same comparison from `adjusted`, which is
+ * the real score: a +20 lands only once a player's whole game has ended with
+ * no stats to his name, so a zero in a game still being played has not been
+ * charged and may never be. `inPlay` is the projection — what the score WOULD
+ * be if every game stopped this instant — and the card shows it in brackets
+ * rather than marking a leader with it.
+ *
+ * Because both branches read `adjusted`, the two can no longer contradict each
+ * other: the hollow ring cannot jump sides at the moment it turns solid.
  *
  * @returns {number|'line'|null} a rosterId, the literal 'line' when the median
  *   beats its opponent, or null for a tie.
@@ -219,8 +225,8 @@ export function leaderOf(matchup, resolved, settled) {
   if (matchup.type === 'h2h') {
     const [a, b] = matchup.rosterIds;
     if (settled) return matchup.winner;
-    const ia = resolved?.teams?.[a]?.inPlay;
-    const ib = resolved?.teams?.[b]?.inPlay;
+    const ia = resolved?.teams?.[a]?.adjusted;
+    const ib = resolved?.teams?.[b]?.adjusted;
     if (typeof ia !== 'number' || typeof ib !== 'number') return null;
     if (ia < ib) return a;
     if (ib < ia) return b;
@@ -233,9 +239,13 @@ export function leaderOf(matchup, resolved, settled) {
     return null;
   }
 
-  const line = inPlayLine(resolved);
-  const me = resolved?.teams?.[matchup.rosterId]?.inPlay;
-  if (line === null || typeof me !== 'number') return null;
+  // matchup.line, not inPlayLine(): resolveWeek built that line out of the four
+  // ADJUSTED scores, so it is the only median on the same footing as the number
+  // being compared to it. Judging an adjusted score against an in-play median
+  // would mix the two readings and can name the wrong leader outright.
+  const line = matchup.line;
+  const me = resolved?.teams?.[matchup.rosterId]?.adjusted;
+  if (typeof line !== 'number' || typeof me !== 'number') return null;
   if (me < line) return matchup.rosterId;
   if (me > line) return 'line';
   return null;
@@ -255,20 +265,24 @@ function sideHead(name, side, isLeader, settled) {
 /**
  * One team's score, as the single line the card shows.
  *
- * `in play` leads because it is what decides the matchup while games are still
- * running; `adjusted` follows in brackets because it is what will count. On a
- * settled week the two are equal by construction, so the bracket is dropped —
- * which means its PRESENCE tells you the week is still moving, a fourth carrier
- * of live-vs-settled alongside the dashed rule, the ring and the word "leading".
+ * `adjusted` leads because it is the REAL score. A +20 is charged only once a
+ * player's whole game has ended with no stats to his name, so a starter sitting
+ * on zero in a game still being played has not been charged and may never be.
+ * `in play` follows in brackets as what the score WOULD be if every game
+ * stopped this instant — a projection, not a result, and so subordinate.
+ *
+ * On a settled week the two are equal by construction, so the bracket is
+ * dropped — which means its PRESENCE tells you the week is still moving, a
+ * fourth carrier of live-vs-settled alongside the dashed rule, the ring and
+ * the word "leading".
  *
  * A button, not a span: it is the hover target, and it must answer to keyboard
  * focus and to a tap on a phone, where hover does not exist at all.
  */
 function scoreLine(side, settled, tipId) {
-  const lead = settled ? side?.adjusted : side?.inPlay;
-  const shown = typeof lead === 'number' ? money(lead) : '&mdash;';
-  const alt = !settled && typeof side?.adjusted === 'number'
-    ? ` <span class="alt">(${money(side.adjusted)})</span>`
+  const shown = typeof side?.adjusted === 'number' ? money(side.adjusted) : '&mdash;';
+  const alt = !settled && typeof side?.inPlay === 'number'
+    ? ` <span class="alt">(${money(side.inPlay)})</span>`
     : '';
   return `<button type="button" class="score" aria-describedby="${tipId}">${shown}${alt}</button>`;
 }
@@ -292,16 +306,42 @@ function scoreTip(side, settled, tipId) {
   // players included — the readings differ ONLY in how many +20s they charge.
   return `<span class="score-tip" id="${tipId}" role="tooltip">`
     + '<span class="tip-head">Same points in all three &mdash; only the +20s differ.</span>'
-    + (settled ? '' : row('in play', 'inPlay', 'live games\u2019 +20s too'))
-    + row('adjusted', 'adjusted', '+20s from finished games \u2014 official')
+    + row('adjusted', 'adjusted', 'official — +20s only once a game ends statless')
+    + (settled ? '' : row('in play', 'inPlay', 'if every game ended now'))
     + row('raw', 'raw', 'points only, no +20s')
     + '</span>';
+}
+
+/**
+ * How many of this team's starters have not kicked off yet.
+ *
+ * The number that says how much of the bracketed gap can still move. A score
+ * with four players to come is a different object from the same score with
+ * none, and nothing else on the card distinguishes them.
+ *
+ * Silent at zero rather than printing "0 to play": the note exists to flag an
+ * unfinished score, and a zero would hang a number on every settled side.
+ *
+ * The League median carries no count and cannot — it is four other teams
+ * averaged, not a lineup, so `yetToPlay` is simply absent from the object the
+ * median card passes in, and the type check below drops it.
+ *
+ * Rendered AFTER the tooltip, never between it and the button: the tooltip is
+ * opened by `.score:hover + .score-tip`, an ADJACENT sibling selector, so
+ * anything inserted between the two would silently stop it opening at all.
+ */
+function toPlayNote(side, settled) {
+  const n = side?.yetToPlay;
+  if (settled || typeof n !== 'number' || n < 1) return '';
+  return `<span class="to-play">${n} to play`
+    + '<span class="sr-only"> — starters whose games have not started</span></span>';
 }
 
 /** Both halves of one score cell. `key` makes the tooltip id unique per card. */
 function scoreCell(side, settled, key, align) {
   const id = `tip-${key}`;
-  return `<span class="score-cell ${align}">${scoreLine(side, settled, id)}${scoreTip(side, settled, id)}</span>`;
+  return `<span class="score-cell ${align}">${scoreLine(side, settled, id)}`
+    + `${scoreTip(side, settled, id)}${toPlayNote(side, settled)}</span>`;
 }
 
 /**
@@ -314,7 +354,8 @@ function scoreCell(side, settled, key, align) {
 function weekStatus(week, settled) {
   const msg = settled
     ? `<b>Week ${week} final.</b> Counted in the standings.`
-    : `<b>Week ${week} in progress.</b> Leader shown on in play. Standings update Tuesday 10:00.`;
+    : `<b>Week ${week} in progress.</b> Leader shown on adjusted — a +20 lands `
+      + 'only when a game ends. Standings update Tuesday 10:00.';
   return `<p class="week-status" role="status" aria-atomic="true">${msg}</p>`;
 }
 
@@ -586,7 +627,10 @@ export function renderMatchupDetail({
     ? { adjusted: matchup.line, inPlay: inPlayLine(resolved), raw: null }
     : rightTeam;
   const rightName = isMedian ? 'League median' : name(rightId);
-  const decides = settled ? 'adjusted' : 'inPlay';
+  // Always adjusted, never inPlay: the row that takes the ink is the row the
+  // leader is read from, and that is now the same row whether or not the week
+  // has finished. See leaderOf.
+  const decides = 'adjusted';
   const leader = leaderOf(matchup, resolved, settled);
 
   const header = `<div class="detail-head">

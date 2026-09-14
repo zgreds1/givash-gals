@@ -179,7 +179,7 @@ export function opportunitySet(weekStats) {
  * @param {Object<string,{pos:string,team:string,name:string}>} players
  * @param {Set<string>} opportunities - player ids who had a scoring opportunity
  * @param {Map<string, 'final'|'live'|'upcoming'>|null} states - game phases by team
- * @returns {{raw: number, adjusted: number, inPlay: number, penalties: Array}}
+ * @returns {{raw: number, adjusted: number, inPlay: number, penalties: Array, yetToPlay: number}}
  */
 export function adjustedScore(
   entry, byes, players, opportunities = new Set(), states = null,
@@ -188,6 +188,7 @@ export function adjustedScore(
   const points = entry.starters_points || [];
   const penalties = [];
   let raw = 0;
+  let yetToPlay = 0;
 
   // `states === null` means "no game information", which scores the week as if
   // every game had already finished — exactly the behaviour before phases
@@ -206,6 +207,19 @@ export function adjustedScore(
     const id = starters[i];
     const pts = points[i] ?? 0;
     raw += pts;
+
+    // How much football is left, counted over EVERY starter rather than only
+    // the penalised ones. A penalty is recorded solely for a player who scored
+    // nothing; a starter who has not kicked off may still end the week on any
+    // number at all, and a DEF that has not kicked off is exempt from the +20
+    // entirely yet plainly still has a game to play. Both belong in this count.
+    //
+    // An empty slot and an id absent from the slim map are excluded by the
+    // same reasoning `phaseOf` uses below: neither has a game to wait for.
+    if (id && id !== '0' && players[id]
+        && phaseOf(players[id].team) === 'upcoming') {
+      yetToPlay++;
+    }
 
     if (Math.abs(pts) >= EPS) continue; // scored something, no penalty
 
@@ -247,6 +261,7 @@ export function adjustedScore(
     adjusted: round2(raw + settled * PENALTY),
     inPlay: round2(raw + started * PENALTY),
     penalties,
+    yetToPlay,
   };
 }
 
@@ -316,7 +331,11 @@ export function resolveWeek(
   const teams = {};
   for (const s of real) {
     teams[s.rosterId] = {
-      raw: s.raw, adjusted: s.adjusted, inPlay: s.inPlay, penalties: s.penalties,
+      raw: s.raw,
+      adjusted: s.adjusted,
+      inPlay: s.inPlay,
+      penalties: s.penalties,
+      yetToPlay: s.yetToPlay,
     };
   }
 

@@ -26,6 +26,14 @@ const COLUMNS = [
   ['ppg', 'PPG', true, true],
 ];
 
+/*
+ * Column key -> header label, so the phone layout's cell captions and the
+ * table's own <th> text are the same strings. Below 34rem the header row is
+ * gone and each cell captions itself from data-label; two hand-kept copies of
+ * "True +20s" would drift the moment either was edited.
+ */
+const LABEL = Object.fromEntries(COLUMNS.map(([k, label]) => [k, label]));
+
 /**
  * Who owns whom, and what the ownership dropdown should offer.
  *
@@ -183,15 +191,15 @@ export function renderLeaderboard(rows, view = {}) {
       return `<tr>
         <td class="rank">${i + 1}</td>
         <td class="name">${esc(r.name)}</td>
-        <td class="team">${esc(r.team)}</td>
-        <td class="pos">${esc(r.pos)}</td>
-        <td class="owner${isFa ? ' fa' : ''}">${esc(owner)}</td>
-        <td class="num">${r.gp}</td>
-        <td class="num">${money(r.raw)}</td>
-        <td class="num">${cnt(r.pen)}</td>
-        <td class="num">${cnt(r.truePen)}</td>
-        <td class="num metric">${money(r.total)}</td>
-        <td class="num metric">${money(r.ppg)}</td>
+        <td class="team" data-label="${LABEL.team}">${esc(r.team)}</td>
+        <td class="pos" data-label="${LABEL.pos}">${esc(r.pos)}</td>
+        <td class="owner${isFa ? ' fa' : ''}" data-label="${LABEL.owner}">${esc(owner)}</td>
+        <td class="num" data-label="${LABEL.gp}">${r.gp}</td>
+        <td class="num" data-label="${LABEL.raw}">${money(r.raw)}</td>
+        <td class="num" data-label="${LABEL.pen}">${cnt(r.pen)}</td>
+        <td class="num" data-label="${LABEL.truePen}">${cnt(r.truePen)}</td>
+        <td class="num metric" data-label="${LABEL.total}">${money(r.total)}</td>
+        <td class="num metric" data-label="${LABEL.ppg}">${money(r.ppg)}</td>
       </tr>`;
     })
     .join('');
@@ -332,6 +340,33 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
       .join('');
     const stepper = stepperHtml(view.minGp, maxGp);
 
+    /* Sorting, for a screen with no header row to tap.
+     *
+     * Below 34rem every row becomes a card and <thead> is hidden, which would
+     * otherwise take the sort buttons with it - and side-scrolling to a header
+     * was the ONLY way to sort on a phone before this. The select and its
+     * direction toggle are hidden above that width, where the real headers are
+     * back and are the better control.
+     *
+     * Reads and writes the same view.sortKey / view.sortDir the headers do, so
+     * the two cannot disagree: sort on a phone, rotate to a tablet, and the
+     * header arrow is already pointing the right way.
+     */
+    const sortable = COLUMNS.filter(([, , , can]) => can);
+    const current = view.sortKey || DEFAULT_SORT;
+    const sortOpts = sortable
+      .map(([k, label]) =>
+        `<option value="${k}"${k === current ? ' selected' : ''}>${esc(label)}</option>`)
+      .join('');
+    const asc = view.sortKey === null || view.sortDir === 1;
+    const sorter = `<div class="mobile-sort">
+      <label class="sr-only" for="lb-sort">Sort by</label>
+      <select id="lb-sort">${sortOpts}</select>
+      <button type="button" id="lb-dir" aria-label="${
+        asc ? 'Sorted lowest first. Switch to highest first.' : 'Sorted highest first. Switch to lowest first.'
+      }">${asc ? '↑ low' : '↓ high'}</button>
+    </div>`;
+
     return `<div class="controls">
       ${seasonBar()}
       <div class="tabs" role="group" aria-label="Position">${tabs}</div>
@@ -342,6 +377,7 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
       ${stepper}
       <input id="lb-q" type="search" aria-label="Search player or team"
              placeholder="Search player / team" value="${esc(view.q)}" />
+      ${sorter}
     </div>
     <div class="count" role="status">${rows ? `${rows.length} players` : ''}</div>`;
   }
@@ -399,6 +435,24 @@ export async function mountLeaderboard(el, { teams = {}, json = defaultJson, cli
     if (owner) {
       owner.onchange = () => {
         view.owner = owner.value;
+        paint();
+      };
+    }
+    const sort = el.querySelector('#lb-sort');
+    if (sort) {
+      sort.onchange = () => {
+        view.sortKey = sort.value;
+        paint();
+      };
+    }
+    const dir = el.querySelector('#lb-dir');
+    if (dir) {
+      dir.onclick = () => {
+        // sortDir is ignored while sortKey is null (sortedRows forces
+        // ascending for the default), so naming the default column is what
+        // makes the first tap of this button do anything at all.
+        if (view.sortKey === null) view.sortKey = DEFAULT_SORT;
+        view.sortDir = view.sortDir === 1 ? -1 : 1;
         paint();
       };
     }

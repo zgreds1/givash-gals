@@ -122,3 +122,73 @@ test('a canceled game is settled like a finished one', () => {
   assert.equal(r.inPlay, 20);
   assert.equal(r.penalties[0].phase, 'final');
 });
+
+/* --- How much football is left ---------------------------------------
+ *
+ * `yetToPlay` answers a question none of the three scores can: how much of
+ * this lineup is still unresolved. It counts STARTERS whose own game has not
+ * kicked off, which is deliberately a wider net than `penalties` casts — a
+ * penalty is only ever recorded for a player who scored nothing, while a
+ * starter who has not played yet may still end the week on any number at all.
+ */
+
+// KC has not kicked off; CIN has finished; MIN is mid-game. One week holding
+// all three phases, so a count can only be right by reading each starter's
+// own game rather than the week's.
+const THREE_PHASE = gameStates([
+  { week: 3, home: 'KC', away: 'DAL', status: 'pre_game' },
+  { week: 3, home: 'CIN', away: 'BAL', status: 'complete' },
+  { week: 3, home: 'MIN', away: 'GB', status: 'in_game' },
+], 3);
+
+test('a starter whose game has not kicked off is yet to play', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['1466', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  // Bass is BUF, which appears in no game above, so pick a KC player instead.
+  assert.equal(r.yetToPlay, 0, 'BUF is absent from the schedule: nothing to wait for');
+
+  const kc = adjustedScore(mkEntry(1, 1, [['KC', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  assert.equal(kc.yetToPlay, 1);
+});
+
+test('a starter whose game is in progress is not yet to play', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['4199', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  assert.equal(r.yetToPlay, 0, 'Jefferson is MIN: kicked off already');
+});
+
+test('a starter whose game is final is not yet to play', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['6804', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  assert.equal(r.yetToPlay, 0, 'Burrow is CIN: done');
+});
+
+test('a DEF not on bye is counted as yet to play despite its +20 exemption', () => {
+  // The discriminator between "every starter" and "every PENALISED starter":
+  // a DEF that has not kicked off records no penalty at all, yet it plainly
+  // still has a game left to play.
+  const r = adjustedScore(mkEntry(1, 1, [['KC', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  assert.deepEqual(r.penalties, [], 'DEF not on bye: no penalty to count');
+  assert.equal(r.yetToPlay, 1);
+});
+
+test('an empty slot is never yet to play', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  assert.equal(r.yetToPlay, 0, 'no player means no game to wait for');
+});
+
+test('an unknown player id is never yet to play', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['999999', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE);
+  assert.equal(r.yetToPlay, 0, 'absent from the slim map means inactive');
+});
+
+test('yetToPlay counts each unplayed starter, not each unplayed game', () => {
+  // Two KC starters share one kickoff. The number on the card says how many
+  // PLAYERS are still to come, so this is 2, not 1.
+  const r = adjustedScore(
+    mkEntry(1, 1, [['KC', 0], ['KC', 0], ['6804', 0]]), WK3, PLAYERS, new Set(), THREE_PHASE,
+  );
+  assert.equal(r.yetToPlay, 2);
+});
+
+test('with no game information nothing is yet to play', () => {
+  const r = adjustedScore(mkEntry(1, 1, MIXED), WK3, PLAYERS);
+  assert.equal(r.yetToPlay, 0, 'states = null scores as if every game had finished');
+});

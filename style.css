@@ -646,6 +646,23 @@ table.standings {
   color: var(--muted);
 }
 
+/* How many starters have not kicked off, under the number it qualifies.
+ *
+ * display:block rather than a flow inline, because .score-tip sits between
+ * this and the button in the DOM (see toPlayNote's comment on why it must)
+ * and is absolutely positioned, so normal flow would leave this hanging on
+ * the button's own line. Muted and two sizes down: it is a caveat about the
+ * score, never a second score.
+ */
+.to-play {
+  display: block;
+  font: 400 var(--t-3xs) / 1.4 var(--font-data);
+  color: var(--muted);
+  padding-top: var(--space-xs);
+}
+.score-cell.l .to-play { text-align: right; }
+.score-cell.r .to-play { text-align: left; }
+
 /* In the DOM at all times so aria-describedby resolves to real text; CSS is
  * the only thing hiding it. Anchored to its own side rather than centred, so
  * neither edge of a phone screen clips it. */
@@ -821,6 +838,33 @@ table.standings {
 @media (max-width: 34rem) {
   .fixture { grid-template-columns: 1fr; gap: var(--space-sm); text-align: left; }
   .fixture .side-name:last-child { text-align: left; }
+}
+
+/* Sorting for a screen with no header row to tap. Hidden wherever the real
+ * <th> buttons are on show, which are the better control: they say which
+ * column is sorted in place, rather than naming it somewhere else. */
+.mobile-sort { display: none; }
+
+@media (max-width: 40rem) {
+  .mobile-sort {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-md);
+    width: 100%;
+  }
+  .mobile-sort select { flex: 1; min-width: 0; }
+  .mobile-sort button {
+    flex: none;
+    min-height: 44px;
+    padding: 0 var(--space-lg);
+    background: var(--card);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--ink);
+    font: 500 var(--t-2xs) / 1 var(--font-data);
+    white-space: nowrap;
+    cursor: pointer;
+  }
 }
 
 /* --- Results week picker -------------------------------------------- */
@@ -1234,6 +1278,119 @@ table.leaderboard th .dir {
   }
 }
 
+/*
+ * The leaderboard becomes cards at 40rem, not at the 34rem the rest of the
+ * phone layout uses, because this breakpoint is arithmetic rather than taste:
+ * the table's own min-width is 38rem (608px) and `main` spends 1rem of padding
+ * a side above 34rem, so the table only fits from 640px = 40rem up. Set at
+ * 34rem the band from 545px to 639px got the table back before there was room
+ * for it - 608px of columns in 513px of page, side-scrolling and as cramped as
+ * the layout this replaced. Matching the breakpoint to the fit means the table
+ * appears exactly when it can be read.
+ *
+ * Eleven columns in a 390px scroll box put the +20 column off-screen
+ * entirely and wrapped every name to three lines. Cards instead - but not
+ * the Standings' one-labelled-row-per-field treatment, which suits five
+ * teams and would be five screens of scrolling for thirty-two players.
+ * Each card is a name, an identity line, and the six numbers as a 3-up
+ * grid of label-over-value cells: about five lines a player, not eleven.
+ */
+@media (max-width: 40rem) {
+  /* Every selector below carries `table.leaderboard` rather than the shorter
+   * `.leaderboard`: the desktop rules are written that way, and a selector one
+   * class lighter loses to them on specificity no matter which media query it
+   * sits in. Matching their shape lets source order decide, which is what a
+   * later override should be deciding on. */
+  table.leaderboard,
+  table.leaderboard tbody,
+  table.leaderboard tr,
+  table.leaderboard td {
+    display: block;
+    width: auto;
+  }
+
+  table.leaderboard thead,
+  table.leaderboard caption { display: none; }
+
+  /* The row rule is the card border now; a per-cell underline would draw a
+   * hairline under every field inside it. */
+  table.leaderboard td {
+    border-bottom: 0;
+    padding: 0;
+  }
+
+  /* Undoes the 52rem rule above: the NFL team is the cheapest column to drop
+   * while this is a table, but a card has room for it on the identity line. */
+  table.leaderboard td.team { display: block; }
+
+  /* min-width and the scroll container both go: there is nothing left to
+   * scroll sideways to. */
+  table.leaderboard { min-width: 0; }
+  .table-wrap { overflow-x: visible; }
+
+  table.leaderboard tbody tr {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md) var(--space-lg);
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-lg) var(--space-xl) var(--space-lg) 2.9rem;
+    margin-bottom: var(--space-md);
+  }
+
+  /* Out of the grid entirely and into the gutter the padding above reserves,
+   * so it reads as a rank badge beside the name rather than as a first field. */
+  table.leaderboard td.rank {
+    position: absolute;
+    left: var(--space-md);
+    top: var(--space-lg);
+    width: 2.1rem;
+    text-align: right;
+    font: 500 var(--t-2xs) / 1.5 var(--font-data);
+    color: var(--muted);
+  }
+
+  table.leaderboard td.name {
+    grid-column: 1 / -1;
+    font-size: var(--t-sm);
+    font-weight: 600;
+  }
+
+  /* The identity line: position, NFL team, owner, one per column. */
+  table.leaderboard td.pos,
+  table.leaderboard td.team,
+  table.leaderboard td.owner {
+    font: 400 var(--t-2xs) / 1.4 var(--font-data);
+    color: var(--muted);
+  }
+  table.leaderboard td.owner { text-align: right; }
+  table.leaderboard td.pos { text-align: left; }
+  table.leaderboard td.team { text-align: left; }
+
+  /* The six numbers auto-flow into two rows of three, each captioning itself
+   * from the same header string the <th> uses. */
+  table.leaderboard td.num {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    text-align: left;
+    padding: var(--space-sm) 0 0;
+    border-top: 1px solid var(--line);
+    font-size: var(--t-xs);
+  }
+  table.leaderboard td.num::before {
+    content: attr(data-label);
+    font: 500 var(--t-3xs) / 1.3 var(--font-data);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  table.leaderboard td.num.metric { color: var(--ink-display); font-weight: 700; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1349,7 +1506,75 @@ table.leaderboard th .dir {
   flex: none;
 }
 
+/* --- The drill-down on a phone --------------------------------------
+ *
+ * .detail-head's 1fr 1fr is the single worst rule in this file at 390px. The
+ * left half holds .teams, itself a three-column grid, so the name track
+ * collapsed to roughly 40px - and .tname carries overflow-wrap:anywhere, so
+ * "LilDaveIII" broke into one fragment per line while the ladder in the right
+ * half ran off the screen. Stacking the two halves is the whole fix: .tname
+ * gets the full width back and never reaches for `anywhere` at all.
+ */
+@media (max-width: 40rem) {
+  .detail-head {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+/*
+ * One player per line, not two.
+ *
+ * The three-column lineup row is a desktop shape: it asks a ~160px track to
+ * hold a name, a score, a +20 tag AND a "scored 0" caption, so names
+ * ellipsised to "Kim..." while the tag and caption spilled into the position
+ * column and printed as "RBscored 0". Below 34rem each side takes its own
+ * full-width row with the slot as a heading over the pair, which is the only
+ * arrangement that gives a name room to be read.
+ */
 @media (max-width: 34rem) {
-  .lineup-row { grid-template-columns: 1fr 3rem 1fr; gap: var(--space-sm); }
-  .lineup-name { font-size: var(--t-2xs); }
+  .lineup-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+    padding: var(--space-lg) 0;
+  }
+
+  /* Back to source order: slot first as the row's heading, then both sides.
+   * Without this the slot sits between the two players and reads as though
+   * it belonged to the second one. */
+  .lineup-slot {
+    order: -1;
+    text-align: left;
+    color: var(--muted);
+  }
+
+  /* row-reverse is what put the right-hand team's score before its name in
+   * the two-column layout. Stacked, both sides read left to right like every
+   * other line on the page. */
+  .lineup-side,
+  .lineup-side.right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+  }
+
+  /* Source order is name, points, tag, reason - which stacked would strand the
+   * points mid-line on penalised rows while the tags took the right edge, so
+   * the column of numbers only lined up on rows that happened to have no +20.
+   * Reordering puts the tag and its reason back beside the name they qualify
+   * and hands the right edge to the points on every row alike. */
+  .lineup-side .lineup-name { order: 1; }
+  .lineup-side .pen { order: 2; }
+  .lineup-side .pen-reason { order: 3; }
+  .lineup-side .lineup-pts { order: 4; margin-left: auto; }
+
+  /* Room to wrap instead of a name cut off mid-word. */
+  .lineup-name {
+    font-size: var(--t-2xs);
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    min-width: 0;
+  }
+
 }

@@ -196,9 +196,9 @@ test('a played week shows all three scores and marks the winner', () => {
   // three numbers print and that the engine's winner is the side marked. The
   // penalty's own coverage lives in the drill-down tests further down.
   //
-  // settled: true because PLAYED predates `inPlay`. An open card is judged on
-  // a reading this fixture does not carry, so it correctly marks nobody —
-  // asserted below rather than left as a silent gap.
+  // settled: true takes the engine's own winner. The open case below now has
+  // a reading to judge on - the leader moved onto `adjusted`, which this
+  // fixture carries - so it marks the same side rather than nobody.
   const html = renderWeek({
     week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true, settled: true,
   });
@@ -208,10 +208,23 @@ test('a played week shows all three scores and marks the winner', () => {
   assert.match(html, /win-mark/);
 
   const open = renderWeek({ week: 3, resolved: PLAYED, teams: TEAMS, detailAvailable: true });
-  assert.doesNotMatch(
-    open, /class="lead">leading</,
-    'with no in-play score to judge on, an open card marks nobody rather than guessing',
+  assert.match(open, /class="lead">leading</, 'an open card judges on adjusted');
+  assert.match(
+    open, /class="tname r win"/,
+    'and names the same side the settled card does: 88.10 is below 142.60',
   );
+});
+
+test('a card with no adjusted score marks nobody rather than guessing', () => {
+  // The one reading the leader is now read from is missing here, so there is
+  // nothing to compare. Marking a side anyway would be inventing a result.
+  const blank = {
+    ...PLAYED,
+    teams: { 1: { raw: 122.6, penalties: [] }, 2: { raw: 88.1, penalties: [] } },
+  };
+  const html = renderWeek({ week: 3, resolved: blank, teams: TEAMS, detailAvailable: true });
+  assert.doesNotMatch(html, /class="lead">leading</);
+  assert.doesNotMatch(html, /class="tname \w win"/);
 });
 
 test('the median card shows the line and the pool it came from', () => {
@@ -906,14 +919,46 @@ test('the in-play line is drawn from the four in-play scores', () => {
     'the in-play line is its own number, not the adjusted one');
 });
 
-test('an open week picks its leader on in play', () => {
-  assert.equal(leaderOf(LIVE_WEEK.matchups[0], LIVE_WEEK, false), 1);
-  assert.equal(leaderOf(LIVE_WEEK.matchups[1], LIVE_WEEK, false), 4);
+/*
+ * A week built so the two readings DISAGREE, which LIVE_WEEK cannot do: every
+ * roster there leads on adjusted and on in play alike, so it can never tell
+ * the two rules apart. inPlay is always >= adjusted by construction, so the
+ * way to split them is to hand the team that is ahead on adjusted the bigger
+ * pile of +20s still sitting in games that have not finished.
+ */
+const SPLIT_WEEK = {
+  week: 4, played: true, degenerate: false,
+  median: 100, medianPool: [120, 110, 90, 80],
+  teams: {
+    1: { raw: 90, adjusted: 110, inPlay: 150, penalties: [] },
+    2: { raw: 90, adjusted: 90, inPlay: 190, penalties: [] },
+    3: { raw: 100, adjusted: 120, inPlay: 130, penalties: [] },
+    4: { raw: 60, adjusted: 80, inPlay: 300, penalties: [] },
+    5: { raw: 85, adjusted: 105, inPlay: 160, penalties: [] },
+  },
+  matchups: [
+    { type: 'h2h', rosterIds: [1, 2], winner: 2 },
+    { type: 'h2h', rosterIds: [3, 4], winner: 4 },
+    // adjusted 105 is ABOVE the adjusted line of 100, so officially a loss -
+    // while 160 is BELOW the in-play line of 170, which the old rule read as
+    // a win. The one matchup that catches a leader still judged on in play.
+    { type: 'median', rosterId: 5, line: 100, result: 'L' },
+  ],
+};
+
+test('an open week picks its leader on adjusted, not on in play', () => {
+  // The +20 lands only once a player's whole game ends with no stats, so
+  // adjusted is the real score and in play is a projection. The mark follows
+  // the real one. Roster 2 leads on adjusted (90 v 110) and trails on in
+  // play (190 v 150), so a leader still read off inPlay would name 1 here.
+  assert.equal(leaderOf(SPLIT_WEEK.matchups[0], SPLIT_WEEK, false), 2);
+  assert.equal(leaderOf(SPLIT_WEEK.matchups[1], SPLIT_WEEK, false), 4);
 });
 
-test('an open median matchup is judged against the in-play line', () => {
-  // 114.3 against the in-play line of 124.8, NOT 94.3 against 94.8.
-  assert.equal(leaderOf(LIVE_WEEK.matchups[2], LIVE_WEEK, false), 5);
+test('an open median matchup is judged against the adjusted line', () => {
+  // 105 against matchup.line of 100, NOT 160 against the in-play line of 170.
+  assert.equal(inPlayLine(SPLIT_WEEK), 170, 'the in-play line would say otherwise');
+  assert.equal(leaderOf(SPLIT_WEEK.matchups[2], SPLIT_WEEK, false), 'line');
 });
 
 test('a settled week defers to the engine result, never recomputes', () => {
@@ -927,21 +972,29 @@ test('a settled median loss marks the line, not the team', () => {
   assert.equal(leaderOf({ ...lost, result: 'T' }, LIVE_WEEK, true), null);
 });
 
-test('an open week can disagree with the settled result, and should', () => {
-  // The whole reason leaderOf takes `settled`: a team can be behind on the
-  // official adjusted line while ahead on in play, or the reverse. The live
-  // view must not silently show the official answer.
-  const behind = {
-    ...LIVE_WEEK,
-    teams: { ...LIVE_WEEK.teams, 5: { raw: 74.3, adjusted: 94.3, inPlay: 199.9 } },
-  };
-  assert.equal(leaderOf(LIVE_WEEK.matchups[2], behind, true), 5, 'official: a win');
-  assert.equal(leaderOf(LIVE_WEEK.matchups[2], behind, false), 'line', 'live: behind');
+test('an open week and the settled result agree, because both read adjusted', () => {
+  // This inverts what the old rule guaranteed. While the leader was judged on
+  // in play, a live card could contradict the official result on the very
+  // same numbers; now both sides read adjusted, so the mark cannot jump when
+  // the last game goes final. `settled` still matters - it chooses between
+  // recomputing and deferring to the engine - but the two must now agree.
+  for (const m of SPLIT_WEEK.matchups) {
+    assert.equal(
+      leaderOf(m, SPLIT_WEEK, false),
+      leaderOf(m, SPLIT_WEEK, true),
+      'the hollow ring must not change sides as it turns solid',
+    );
+  }
 });
 
-test('an equal in-play pair leads nobody', () => {
-  const tied = { ...LIVE_WEEK, teams: { ...LIVE_WEEK.teams, 2: { inPlay: 118.4 } } };
-  assert.equal(leaderOf(LIVE_WEEK.matchups[0], tied, false), null);
+test('an equal adjusted pair leads nobody', () => {
+  // Level on adjusted but far apart on in play: the tie is the thing that
+  // decides, so neither side is marked.
+  const tied = {
+    ...SPLIT_WEEK,
+    teams: { ...SPLIT_WEEK.teams, 2: { raw: 90, adjusted: 110, inPlay: 190 } },
+  };
+  assert.equal(leaderOf(SPLIT_WEEK.matchups[0], tied, false), null);
 });
 
 test('all three readings survive the collapse, in the tooltip behind the line', () => {
@@ -952,7 +1005,7 @@ test('all three readings survive the collapse, in the tooltip behind the line', 
     // Pinned to a tip row's whole shape. A bare /adjusted/ would be satisfied
     // by any stray label anywhere on the page, and 98.40 is also one of the
     // four median-pool chips, so a bare /98\.40/ passes off the pool alone.
-    assert.match(html, /<b>adjusted<\/b><span class="tip-v">98\.40<\/span><em>\+20s from finished games — official<\/em>/, `settled=${settled}`);
+    assert.match(html, /<b>adjusted<\/b><span class="tip-v">98\.40<\/span><em>official — \+20s only once a game ends statless<\/em>/, `settled=${settled}`);
     assert.match(html, /<b>raw<\/b><span class="tip-v">78\.40<\/span><em>points only, no \+20s<\/em>/, `settled=${settled}`);
     // The heading is what stops "finished games" being read as "only counts
     // points from finished games", which is how it was read in review.
@@ -961,15 +1014,18 @@ test('all three readings survive the collapse, in the tooltip behind the line', 
 
   const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
   const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
-  assert.match(open, /<b>in play<\/b><span class="tip-v">118\.40<\/span><em>live games’ \+20s too<\/em>/);
+  assert.match(open, /<b>in play<\/b><span class="tip-v">118\.40<\/span><em>if every game ended now<\/em>/);
   assert.match(done, /<b>adjusted<\/b>/, 'a settled week still explains the other two');
   assert.doesNotMatch(done, /<b>in play<\/b>/, 'but has no separate live reading left to explain');
 });
 
-test('the card shows one line per team: in play, with adjusted in brackets', () => {
+test('the card shows one line per team: adjusted, with in play in brackets', () => {
   const open = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
   const done = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
-  assert.match(open, /class="score" aria-describedby="tip-w3m0l">118\.40 <span class="alt">\(98\.40\)<\/span><\/button>/);
+  // Adjusted leads because it is the REAL score: a +20 is charged only once a
+  // player's whole game has ended with no stats. 118.40 is the projection of
+  // what the score would be if everything stopped now, so it goes in brackets.
+  assert.match(open, /class="score" aria-describedby="tip-w3m0l">98\.40 <span class="alt">\(118\.40\)<\/span><\/button>/);
   // Settled, in play IS adjusted, so "98.40 (98.40)" would be noise — and the
   // bracket's absence is itself a fourth non-colour carrier of the state,
   // beside the solid rule, the check and the missing word "leading".
@@ -1049,13 +1105,13 @@ test('every score resolves to a tooltip of its own, and no two share an id', () 
 // --- Task 7 fixes: the pool's provenance, the key's memory, and `settled` ---
 
 test('the median pool names the reading it was averaged from', () => {
-  // The chips average to the ADJUSTED line. While games are running the row
-  // emphasised directly above them is IN PLAY (124.80 here, against an
-  // adjusted line of 94.80), so juxtaposition alone asserts the wrong
-  // provenance. The caption is what stops it.
+  // The chips average to the ADJUSTED line, which is now the big number above
+  // them (94.80) rather than the in-play one (124.80, bracketed). The caption
+  // stays even so: the chips are four team scores and the number above them is
+  // a median, so juxtaposition alone still does not say how one became the other.
   const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
-  assert.match(html, /class="score" aria-describedby="tip-w3m2r">124\.80 <span class="alt">\(94\.80\)<\/span>/,
-    'the line printed above the chips is the in-play one, not the one they average to');
+  assert.match(html, /class="score" aria-describedby="tip-w3m2r">94\.80 <span class="alt">\(124\.80\)<\/span>/,
+    'the line printed above the chips is the adjusted one they average to');
   assert.match(html, /<span class="pool-cap">avg of 2nd &amp; 3rd &mdash; adjusted<\/span>/);
   assert.match(html, /class="pool-cap"[\s\S]*?class="pool"/, 'the caption is read before the chips');
 });
@@ -1136,8 +1192,8 @@ test('one game still running holds the week open even after its gate has passed'
   await mountResults(el, mountState(ONE_RUNNING, GATE_PASSED));
   assert.match(el.innerHTML, /class="card live/);
   assert.match(el.innerHTML, /<\/span>in progress</);
-  assert.match(el.innerHTML, /class="score" aria-describedby="tip-w3m0l">118\.40 <span class="alt">\(98\.40\)<\/span>/,
-    'and the line leads on in play, with adjusted bracketed behind it');
+  assert.match(el.innerHTML, /class="score" aria-describedby="tip-w3m0l">98\.40 <span class="alt">\(118\.40\)<\/span>/,
+    'and the line leads on adjusted, with the in-play projection bracketed behind it');
   assert.match(el.innerHTML, /class="lead">leading</);
   assert.doesNotMatch(el.innerHTML, /win-mark/);
   assert.match(el.innerHTML, /Week 3 in progress/);
@@ -1263,40 +1319,31 @@ test('the detail header carries the same three-score ladder as the card', () => 
   assert.match(html, /raw/);
 });
 
-test('an open drill-down marks the in-play leader, not the settled engine result', () => {
-  // The same disagreement leaderOf's own 'an open week can disagree with the
-  // settled result' test manufactures: officially a win (result: 'W'), but so
-  // far ahead on inPlay that an open card has to show the median leading
-  // instead. Before this task, renderMatchupDetail could not represent this
-  // at all - it read matchup.winner/matchup.result directly, with no notion
-  // of settled - so a live week's drill-down could disagree with the very
-  // card the visitor clicked to open it.
-  const behind = {
-    ...LIVE_WEEK,
-    teams: { ...LIVE_WEEK.teams, 5: { raw: 74.3, adjusted: 94.3, inPlay: 199.9 } },
-  };
+test('a drill-down decides on adjusted whether or not the week is settled', () => {
+  // SPLIT_WEEK's median matchup is the discriminator: officially a loss
+  // (adjusted 105 against a line of 100) while still ahead on in play (160
+  // against an in-play line of 170). Both renderings must now name the line,
+  // because the card behind them does - the +20s that would drag roster 5
+  // over the line have not landed yet, and may never.
   const payload = [{ roster_id: 5, starters: [], starters_points: [], players: [], players_points: {} }];
   const base = {
-    week: 3, matchup: behind.matchups[2], resolved: behind, payload,
+    week: 4, matchup: SPLIT_WEEK.matchups[2], resolved: SPLIT_WEEK, payload,
     teams: NAMES, rosterPositions: [], players: PLAYERS,
   };
 
-  const open = renderMatchupDetail({ ...base, settled: false });
-  assert.match(
-    open,
-    /class="lrow decides">\s*<span class="n l">199\.90<\/span>\s*<span class="lbl">in play/,
-    'an open week decides on in play, like the card',
-  );
-  assert.match(open, /class="tname r win"/, 'in play the line is ahead of 199.90, so the median leads');
-  assert.doesNotMatch(open, /class="tname l win"/, 'roster 5 is not marked, even though it officially won');
-
-  const settled = renderMatchupDetail({ ...base, settled: true });
-  assert.match(
-    settled,
-    /class="lrow decides">\s*<span class="n l">94\.30<\/span>\s*<span class="lbl">adjusted/,
-    'a settled week decides on adjusted',
-  );
-  assert.match(settled, /class="tname l win"/, 'settled trusts the engine result: roster 5 officially won');
+  for (const settled of [false, true]) {
+    const html = renderMatchupDetail({ ...base, settled });
+    assert.match(
+      html,
+      /class="lrow decides">\s*<span class="n l">105\.00<\/span>\s*<span class="lbl">adjusted/,
+      `the adjusted row is the one that decides (settled: ${settled})`,
+    );
+    assert.match(html, /class="tname r win"/, `the median leads on adjusted (settled: ${settled})`);
+    assert.doesNotMatch(
+      html, /class="tname l win"/,
+      `roster 5 is behind on adjusted, however far ahead on in play (settled: ${settled})`,
+    );
+  }
 });
 
 test('a penalised row explains itself with the reason the penalty carries', () => {
@@ -1368,4 +1415,56 @@ test('an unpenalised row carries no reason caption', () => {
   assert.match(html, /Joe Burrow/, 'the row itself really rendered');
   assert.doesNotMatch(html, /class="pen-reason"/, 'nobody scored 0, so nothing is captioned');
   assert.doesNotMatch(html, /class="pen /, 'and no phase tag either, since nobody was penalised');
+});
+
+// --- How many players are still to come -------------------------------
+
+/* A live week where one side still has football left and the other does not.
+ * `yetToPlay` is the engine's count of starters whose own game has not kicked
+ * off, which is what makes a bracketed in-play number worth reading at all:
+ * it says how much of the gap between the two numbers can still move. */
+const TO_PLAY_WEEK = {
+  ...SPLIT_WEEK,
+  teams: {
+    ...SPLIT_WEEK.teams,
+    1: { ...SPLIT_WEEK.teams[1], yetToPlay: 3 },
+    2: { ...SPLIT_WEEK.teams[2], yetToPlay: 0 },
+    3: { ...SPLIT_WEEK.teams[3], yetToPlay: 1 },
+    5: { ...SPLIT_WEEK.teams[5], yetToPlay: 2 },
+  },
+};
+
+test('a live card says how many of a team’s players have not played yet', () => {
+  const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /<span class="to-play">3 to play/, 'roster 1 has three left');
+});
+
+test('a team with nobody left to play says nothing at all', () => {
+  // Silence, not "0 to play": the row exists to flag an unfinished score, and
+  // a zero would put a number on every card that has nothing left to say.
+  const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: false });
+  assert.doesNotMatch(html, /0 to play/);
+});
+
+test('one player left to play reads as a singular', () => {
+  const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /<span class="to-play">1 to play/, 'not "1 players"');
+});
+
+test('a settled week never says anything is left to play', () => {
+  const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: true });
+  assert.doesNotMatch(html, /to-play/, 'every game has finished by definition');
+});
+
+test('the league median side never carries a count', () => {
+  // The line is four other teams averaged, not a lineup: it has no starters
+  // of its own and so nothing that could be yet to play.
+  const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: false });
+  const medianCard = html.slice(html.indexOf('tip-w4m2l'));
+  assert.doesNotMatch(medianCard.slice(medianCard.indexOf('tip-w4m2r')), /to-play/);
+});
+
+test('the count is spelled out for a screen reader, not left as a bare number', () => {
+  const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /3 to play<span class="sr-only"> — starters whose games have not started<\/span>/);
 });
