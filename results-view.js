@@ -271,18 +271,30 @@ function sideHead(name, side, isLeader, settled) {
  * `in play` follows in brackets as what the score WOULD be if every game
  * stopped this instant — a projection, not a result, and so subordinate.
  *
- * On a settled week the two are equal by construction, so the bracket is
- * dropped — which means its PRESENCE tells you the week is still moving, a
- * fourth carrier of live-vs-settled alongside the dashed rule, the ring and
- * the word "leading".
+ * The bracket appears only when it has something to say — when the projection
+ * would print a DIFFERENT number from the score. On a settled week the two are
+ * equal by construction, and on a live week they are equal whenever no zeroed
+ * starter is sitting in a game still being played, which is most of any Sunday.
+ * Printing `128.88 (128.88)` in that case is the same number twice, and a
+ * reader who sees it twice learns nothing from the second one.
+ *
+ * That narrows what the bracket means, and sharpens it: it no longer says
+ * "this week is still moving" — the dashed rule, the hollow ring, the word
+ * "leading" and the card's own "in progress" all say that — it says "there are
+ * +20s pending in games still being played, and here is where they would land".
+ *
+ * The comparison is made on the FORMATTED values, not the raw ones: 98.401 and
+ * 98.404 are different numbers that both print "98.40", and the question being
+ * asked is whether the reader would see two identical strings.
  *
  * A button, not a span: it is the hover target, and it must answer to keyboard
  * focus and to a tap on a phone, where hover does not exist at all.
  */
 function scoreLine(side, settled, tipId) {
   const shown = typeof side?.adjusted === 'number' ? money(side.adjusted) : '&mdash;';
-  const alt = !settled && typeof side?.inPlay === 'number'
-    ? ` <span class="alt">(${money(side.inPlay)})</span>`
+  const live = !settled && typeof side?.inPlay === 'number' ? money(side.inPlay) : null;
+  const alt = live !== null && live !== shown
+    ? ` <span class="alt">(${live})</span>`
     : '';
   return `<button type="button" class="score" aria-describedby="${tipId}">${shown}${alt}</button>`;
 }

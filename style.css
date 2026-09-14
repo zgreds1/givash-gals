@@ -637,9 +637,10 @@ table.standings {
 }
 .score:hover { border-bottom-color: var(--primary); }
 
-/* The parenthesised adjusted score. Recessive on purpose: it is context for
- * the live number, not a competitor to it. Its mere PRESENCE is the fourth
- * non-colour signal that the week can still move. */
+/* The parenthesised IN-PLAY score - where this team would land if every game
+ * stopped now. Recessive on purpose: it is context for the real score beside
+ * it, not a competitor to it, and it is drawn at all only when it would print
+ * a different number (see scoreLine). */
 .score .alt {
   font-size: var(--t-xs);
   font-weight: 400;

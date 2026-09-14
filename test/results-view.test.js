@@ -1468,3 +1468,42 @@ test('the count is spelled out for a screen reader, not left as a bare number', 
   const html = renderWeek({ week: 4, resolved: TO_PLAY_WEEK, teams: NAMES, settled: false });
   assert.match(html, /3 to play<span class="sr-only"> — starters whose games have not started<\/span>/);
 });
+
+// --- The bracket earns its place, or it does not appear ----------------
+
+test('a live score with nothing pending prints no bracket at all', () => {
+  // The bracket exists to show that the projection DIFFERS from the score.
+  // With no zeroed starter in a game still being played the two readings are
+  // identical, and `128.88 (128.88)` is the same number twice.
+  const quiet = {
+    ...LIVE_WEEK,
+    teams: {
+      ...LIVE_WEEK.teams,
+      1: { raw: 78.4, adjusted: 98.4, inPlay: 98.4, penalties: [] },
+    },
+  };
+  const html = renderWeek({ week: 3, resolved: quiet, teams: NAMES, settled: false });
+  assert.match(html, /class="score" aria-describedby="tip-w3m0l">98\.40<\/button>/);
+});
+
+test('a live score with a pending +20 still brackets the projection', () => {
+  // The other half of the same rule: roster 2 has 20 points sitting in games
+  // that have not finished, so the bracket has something to say.
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /class="score" aria-describedby="tip-w3m0r">113\.60 <span class="alt">\(133\.60\)<\/span>/);
+});
+
+test('the bracket is decided on what prints, not on the raw numbers', () => {
+  // 98.401 and 98.404 are different numbers that both render "98.40". The
+  // question the card asks is whether the reader would see two identical
+  // strings, so the comparison is made on the formatted values.
+  const rounding = {
+    ...LIVE_WEEK,
+    teams: {
+      ...LIVE_WEEK.teams,
+      1: { raw: 78.4, adjusted: 98.401, inPlay: 98.404, penalties: [] },
+    },
+  };
+  const html = renderWeek({ week: 3, resolved: rounding, teams: NAMES, settled: false });
+  assert.doesNotMatch(html, /98\.40 <span class="alt">\(98\.40\)/);
+});

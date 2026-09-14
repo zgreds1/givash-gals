@@ -168,11 +168,20 @@ is a moving number during the week. There are three readings of it — `adjusted
 (finished games only, the official score), `in play` (adjusted plus games in
 progress) and `raw` (no +20 at all). `RULES.md` states the rule.
 
-A Results card shows one line per team, `adjusted (in play)`, and drops the
-bracket once the week is settled — where the two are equal by construction and
-`98.40 (98.40)` would be noise. That absence is itself a signal: a card with
-brackets is still moving, alongside the dashed rule, the hollow ring and the
-word "leading".
+A Results card shows one line per team, `adjusted (in play)`, and draws the
+bracket only when it would print a *different* number. The two readings are
+equal by construction once a week is settled, and equal on a live week whenever
+no zeroed starter is sitting in a game still being played — which is most of any
+Sunday — so `98.40 (98.40)` is the same number twice and the second one teaches
+nothing. The comparison is made on the formatted values, not the raw ones:
+98.401 and 98.404 both print `98.40`, and the question is whether the reader
+would see two identical strings.
+
+That leaves the bracket saying something narrower and sharper than it used to.
+It no longer means "this week can still move" — the dashed rule, the hollow
+ring, the word "leading" and the card's own "in progress" all say that. It means
+"there are +20s pending in games still being played, and this is where they
+would land".
 
 `adjusted` is the big number because it is the only one that has actually
 happened. A +20 is charged when a player's **whole game** ends with no stats to
