@@ -1,64 +1,58 @@
 {
-  "generatedAt": "2026-09-13T22:14:43.507Z",
+  "generatedAt": "2026-09-14T00:50:47.520Z",
   "weeks": [
     {
       "week": 1,
       "played": true,
       "degenerate": false,
-      "median": 157.11,
+      "median": 183.16,
       "medianPool": [
-        209.64,
-        160.8,
-        153.42,
-        61.78
+        211.84,
+        207.28,
+        159.04,
+        122.68
       ],
       "teams": {
         "1": {
-          "raw": 41.78,
-          "adjusted": 61.78,
-          "inPlay": 141.78,
+          "raw": 42.68,
+          "adjusted": 122.68,
+          "inPlay": 182.68,
           "penalties": [
-            {
-              "playerId": "11643",
-              "name": "Jaylen Wright",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "11647",
               "name": "Kimani Vidal",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "12504",
               "name": "Kaleb Johnson",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "8917",
               "name": "KaVontae Turpin",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "5848",
               "name": "Marquise Brown",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "13285",
               "name": "Malachi Fields",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "11597",
               "name": "Theo Johnson",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "13345",
@@ -81,9 +75,9 @@
           ]
         },
         "2": {
-          "raw": 100.8,
-          "adjusted": 160.8,
-          "inPlay": 200.8,
+          "raw": 107.28,
+          "adjusted": 207.28,
+          "inPlay": 207.28,
           "penalties": [
             {
               "playerId": "12469",
@@ -107,26 +101,26 @@
               "playerId": "13349",
               "name": "Eli Stowers",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "8127",
               "name": "Charlie Kolar",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             }
           ]
         },
         "3": {
-          "raw": 133.42,
-          "adjusted": 153.42,
-          "inPlay": 153.42,
+          "raw": 139.04,
+          "adjusted": 159.04,
+          "inPlay": 199.04,
           "penalties": [
             {
               "playerId": "7528",
               "name": "Najee Harris",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "13337",
@@ -138,7 +132,7 @@
               "playerId": "7090",
               "name": "Darnell Mooney",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "8188",
@@ -155,15 +149,15 @@
           ]
         },
         "4": {
-          "raw": 89.64,
-          "adjusted": 209.64,
-          "inPlay": 209.64,
+          "raw": 91.84,
+          "adjusted": 211.84,
+          "inPlay": 231.84,
           "penalties": [
             {
               "playerId": "11655",
               "name": "Tyrone Tracy",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "12455",
@@ -216,9 +210,9 @@
           ]
         },
         "5": {
-          "raw": 53.74,
-          "adjusted": 113.74,
-          "inPlay": 153.74,
+          "raw": 63.94,
+          "adjusted": 163.94,
+          "inPlay": 163.94,
           "penalties": [
             {
               "playerId": "7527",
@@ -248,13 +242,13 @@
               "playerId": "10231",
               "name": "Elijah Higgins",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "12495",
               "name": "Ollie Gordon",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "12544",
@@ -285,7 +279,7 @@
         {
           "type": "median",
           "rosterId": 5,
-          "line": 157.11,
+          "line": 183.16,
           "result": "W"
         }
       ]
