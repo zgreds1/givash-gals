@@ -111,6 +111,51 @@ export function allGamesFinal(states) {
 }
 
 /**
+ * Is there football to watch in `week` right now?
+ *
+ * This is what decides whether an open page keeps asking Sleeper, and it is
+ * pointedly NOT `!allGamesFinal(...)`. A week that has not kicked off yet is
+ * also "not final" — every game reads `pre_game` — so a not-final test polls
+ * every minute from Tuesday through Saturday for scores that cannot move.
+ *
+ * Two things justify a request:
+ *
+ * 1. A game actually in progress. Scores only move here.
+ * 2. A game scheduled TODAY that has not finished, so a page opened before
+ *    kickoff and left alone still notices the kickoff. Without this a poll
+ *    could never start, because nothing is live at the moment it would arm.
+ *
+ * "Today" is matched against both the local and the UTC date, because US
+ * evening kickoffs fall on the next UTC day and either spelling is the same
+ * real day to somebody. The cost of the looser test is at most one extra
+ * quiet day a week; the cost of the tighter one is missing a whole game.
+ *
+ * @param {Array<{week:number,status:string,date:string}>|null} schedule
+ * @param {number} week
+ * @param {Date} now
+ */
+export function weekIsPlaying(schedule, week, now = new Date()) {
+  if (!Array.isArray(schedule) || schedule.length === 0) return false;
+
+  for (const phase of gameStates(schedule, week).values()) {
+    if (phase === 'live') return true;
+  }
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const today = new Set([
+    now.toISOString().slice(0, 10),
+    `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`,
+  ]);
+
+  return schedule.some(
+    (g) => g.week === week
+      && g.status !== 'complete'
+      && g.status !== 'canceled'
+      && today.has(g.date),
+  );
+}
+
+/**
  * Raw stat keys that mean "this player actually did something".
  *
  * The bar is a completed action, not an intention. A target and a pass

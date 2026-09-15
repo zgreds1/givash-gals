@@ -59,3 +59,47 @@ test('displayWeek still works from its new home', () => {
   assert.equal(displayWeek(new Date(2026, 8, 15), START), 1, 'Tue, still week 1');
   assert.equal(displayWeek(new Date(2026, 8, 16), START), 2, 'Wed, week 2 opens');
 });
+
+/*
+ * The gate is a clock AND a scoreboard.
+ *
+ * It used to be the clock alone, so week 1 joined the standings at Tuesday
+ * 10:00 Israel whether or not its Monday night game had been played. On
+ * 2026-09-15 it did exactly that: DEN @ KC was still pre_game in the snapshot,
+ * and four of five teams' totals moved once it landed. The ranking survived by
+ * luck; nothing in the code made it survive.
+ *
+ * `gamesFinal(week)` answers true / false / unknown. Only an explicit false
+ * withholds a week. Unknown must admit it, for the same reason a missing
+ * seasonStart admits everything: refusing on absent metadata would blank the
+ * standings, which is worse than the staleness it guards against.
+ */
+const AFTER_WK1 = new Date('2026-09-16T12:00:00Z'); // wk1 gate long past
+
+test('a week whose games are not all final is held out, gate or no gate', () => {
+  const weeks = [{ week: 1 }, { week: 2 }];
+  const out = finalWeeks(weeks, START, AFTER_WK1, (w) => w !== 1);
+  assert.deepEqual(out.map((x) => x.week), [], 'week 2 has no gate yet, week 1 has no final score');
+});
+
+test('a week with every game final is admitted once its gate passes', () => {
+  const weeks = [{ week: 1 }];
+  assert.deepEqual(finalWeeks(weeks, START, AFTER_WK1, () => true).map((w) => w.week), [1]);
+});
+
+test('games being final does not let a week in before its gate', () => {
+  // The Tuesday gate is a league rule, not a proxy for "the games ended".
+  const early = new Date('2026-09-14T12:00:00Z'); // Monday, before wk1's gate
+  assert.deepEqual(finalWeeks([{ week: 1 }], START, early, () => true), []);
+});
+
+test('an unknown completeness admits the week, rather than blanking the table', () => {
+  for (const unknown of [null, undefined]) {
+    const out = finalWeeks([{ week: 1 }], START, AFTER_WK1, () => unknown);
+    assert.deepEqual(out.map((w) => w.week), [1], `gamesFinal returned ${unknown}`);
+  }
+});
+
+test('no predicate at all keeps the old calendar-only behaviour', () => {
+  assert.deepEqual(finalWeeks([{ week: 1 }], START, AFTER_WK1).map((w) => w.week), [1]);
+});

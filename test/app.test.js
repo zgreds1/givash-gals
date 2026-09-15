@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { leagueWarning, showTables } from '../app.js';
+import { leagueWarning, showTables, weeksToRefresh } from '../app.js';
 
 test('no warning when the league is the expected shape', () => {
   assert.equal(leagueWarning(5, 6), null);
@@ -56,4 +56,39 @@ test('Results is the landing tab and the first panel', () => {
   // The landing panel is the one that is NOT hidden.
   assert.match(html, /<section id="results" class="view"[^>]*tabindex="0"><\/section>/);
   assert.match(html, /<section id="standings" class="view"[^>]*hidden>/);
+});
+
+/*
+ * Which weeks the live refresh asks Sleeper about.
+ *
+ * This is the bug that stranded a Monday night game on the page for half a
+ * day. Sleeper rolls `week` to the NEXT week once the current one's games are
+ * done, so on a Tuesday it reads 2 while `display_week` still reads 1. The
+ * refresh followed `week` alone: it fetched week 2, found nothing played,
+ * returned early, and never touched week 1 — the week actually on screen. The
+ * moment week 1's last game ended was the moment week 1 stopped being
+ * refreshable, which is precisely backwards.
+ */
+const nfl = (over) => ({ season: '2026', season_type: 'regular', ...over });
+
+test('the Tuesday split refreshes the week shown AND the week coming', () => {
+  // The exact state observed on 2026-09-15, the morning the game went missing.
+  assert.deepEqual(weeksToRefresh(nfl({ week: 2, display_week: 1 })), [1, 2]);
+});
+
+test('mid-week, when both agree, it is one week and one fetch', () => {
+  assert.deepEqual(weeksToRefresh(nfl({ week: 3, display_week: 3 })), [3]);
+});
+
+test('a missing display_week falls back to week alone', () => {
+  assert.deepEqual(weeksToRefresh(nfl({ week: 4 })), [4]);
+});
+
+test('the preseason asks for nothing', () => {
+  assert.deepEqual(weeksToRefresh({ season_type: 'pre', week: 1, display_week: 1 }), []);
+  assert.deepEqual(weeksToRefresh(nfl({ week: 0, display_week: 0 })), []);
+});
+
+test('week 0 alongside a real display_week still refreshes the real one', () => {
+  assert.deepEqual(weeksToRefresh(nfl({ week: 0, display_week: 1 })), [1]);
 });

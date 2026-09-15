@@ -108,15 +108,20 @@ export function sortStandings(rows, teams = {}, sortKey = null, sortDir = 1) {
  */
 export function renderStandings(rows, teams, meta = {}) {
   const {
-    through = null, nextWeek = null, nextGate = null,
+    through = null, nextWeek = null, nextGate = null, waitingOnGames = false,
     sortKey = null, sortDir = 1,
   } = meta;
 
   // Named, not left implicit: a table that has visibly stopped moving mid-week
-  // reads as broken unless it says why.
-  const note = nextWeek != null && nextGate != null
-    ? `<p class="gate-note">Week ${nextWeek} joins ${esc(nextGate)}.</p>`
-    : '';
+  // reads as broken unless it says why. Two different reasons, two different
+  // sentences — and the games one takes precedence, because once the clock has
+  // passed, naming the gate time would point at a deadline already behind us
+  // and explain nothing about why the week is still out.
+  const note = nextWeek != null && waitingOnGames
+    ? `<p class="gate-note">Week ${nextWeek} joins once its last game is final.</p>`
+    : nextWeek != null && nextGate != null
+      ? `<p class="gate-note">Week ${nextWeek} joins ${esc(nextGate)}.</p>`
+      : '';
 
   if (!rows.length) {
     return '<p class="empty">No games played yet. Standings appear after week 1.</p>' + note;

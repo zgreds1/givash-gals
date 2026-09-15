@@ -3,8 +3,10 @@
 
 import { LAST_WEEK } from './config.js';
 import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from './sleeper.js';
-import { byeTeams, resolveWeek, standings, opportunitySet, gameStates } from './rules.js';
-import { finalWeeks, gateLabel } from './season.js';
+import {
+  byeTeams, resolveWeek, standings, opportunitySet, gameStates, allGamesFinal, weekIsPlaying,
+} from './rules.js';
+import { finalWeeks, gateLabel, isWeekFinal } from './season.js';
 import { parseHash, formatHash } from './router.js';
 import { renderStandings, renderRules, bestDirFor } from './render.js';
 import { mountLeaderboard } from './leaderboard-view.js';
@@ -15,6 +17,19 @@ const state = {
   livePayloads: {}, seasonStart: null, rosterPositions: [], schedule: null,
   route: { tab: 'results', week: null, matchup: null },
 };
+
+/** How often an open page re-asks Sleeper while games are still being played.
+ *  Above the client's own 30s cache floor, so a poll and a focus event landing
+ *  together cost one request rather than two. */
+const REFRESH_MS = 60000;
+
+/** Hoisted out of refreshLive so its 30s per-path cache survives between
+ *  polls. A client built fresh on every call cached nothing that outlived the
+ *  call, which made polling four uncached requests a minute. */
+let sleeperClient = null;
+const sleeper = () => (sleeperClient ??= createClient());
+
+let refreshTimer = null;
 
 // Set once mountResults resolves. Lets paint() push a redraw into an
 // already-mounted Results tab when refreshLive() changes state under it,
@@ -118,7 +133,10 @@ function paint() {
   if (showTables(owned)) {
     // Only settled weeks reach standings(). Results keeps showing live numbers
     // — separating the two is the whole point of the gate.
-    const settled = finalWeeks(state.weeks, state.seasonStart, new Date());
+    // Two conditions: the Tuesday gate AND every game actually final. The
+    // calendar alone let week 1 into the standings while its Monday night game
+    // was still pre_game in the data.
+    const settled = finalWeeks(state.weeks, state.seasonStart, new Date(), weekGamesFinal);
     const through = settled.length ? Math.max(...settled.map((w) => w.week)) : null;
     const nextWeek = through === null ? 1 : through + 1;
     $('standings').innerHTML = renderStandings(standings(settled), state.teams, {
@@ -127,6 +145,11 @@ function paint() {
       through,
       nextWeek: nextWeek <= LAST_WEEK ? nextWeek : null,
       nextGate: nextWeek <= LAST_WEEK ? gateLabel(nextWeek, state.seasonStart) : null,
+      // Past its gate but still being played: the note must say so, or a table
+      // that has visibly stopped moving on a Tuesday afternoon reads as broken.
+      waitingOnGames: nextWeek <= LAST_WEEK
+        && isWeekFinal(nextWeek, state.seasonStart, new Date())
+        && weekGamesFinal(nextWeek) === false,
     });
   } else {
     $('standings').innerHTML = '';
@@ -158,21 +181,86 @@ async function loadSnapshot() {
 }
 
 /**
- * Four Sleeper calls, and only four: /state/nfl, matchups/{week},
- * stats/{week}, and schedule/nfl/regular/{season}. The stats call is what
- * makes the opportunity rule live — without it the page would show a +20 for
- * a player who has already caught a pass this afternoon — and it degrades to
- * {} rather than failing the refresh. The schedule call is what makes the
- * phased +20 live at all; see the comment at its call site below for why it
- * is fetched now instead of read only from the committed copy, and what it
- * falls back to when it fails.
+ * Whether every NFL game in `week` has finished, as far as we can tell.
+ *
+ * true / false / null, where null means "no schedule loaded, no idea" — which
+ * is what the standings gate must be told rather than a guess, so it can admit
+ * the week instead of blanking the table. See finalWeeks.
+ */
+function weekGamesFinal(week) {
+  if (!state.schedule) return null;
+  const states = gameStates(state.schedule, week);
+  // An empty map means the schedule has no rows for that week at all, which is
+  // absence of evidence; allGamesFinal already returns false for it, but false
+  // here would withhold the week forever. Report it as unknown instead.
+  if (states.size === 0) return null;
+  return allGamesFinal(states);
+}
+
+/**
+ * The weeks worth asking Sleeper about.
+ *
+ * `state.week` alone was not enough, and this is the bug that stranded a
+ * Monday night game on the page for half a day. Sleeper rolls `week` to the
+ * NEXT week once the current one's games are done — on a Tuesday it reads 2
+ * while `display_week` still reads 1. refreshLive fetched week 2, found
+ * nothing played, returned early, and so never touched the week the reader was
+ * actually looking at. The week you are shown became unreachable by the live
+ * path at exactly the moment its last game ended.
+ *
+ * Both, deduped: `display_week` is the week being shown, `week` is the one
+ * coming up. In-season they are usually the same number and this costs one
+ * extra request only in the window where it matters.
+ */
+function weeksToRefresh(st) {
+  const shown = currentWeek({ ...st, week: st?.display_week });
+  const next = currentWeek(st);
+  return [...new Set([shown, next])].filter((w) => w >= 1);
+}
+
+/**
+ * Pull one week from Sleeper and fold it into state. Returns true if the week
+ * scored into something real, false if there was nothing to score.
+ */
+async function refreshWeek(client, week, rosters, schedule, players) {
+  const excluded = unownedRosterIds(rosters);
+  const [payload, weekStats] = await Promise.all([
+    client.matchups(week),
+    client.stats(week).catch(() => ({})),
+  ]);
+  if (!Array.isArray(payload) || payload.length === 0) return false;
+
+  state.livePayloads[week] = payload;
+
+  const fresh = resolveWeek(
+    week,
+    payload,
+    excluded,
+    byeTeams(schedule, week),
+    players,
+    opportunitySet(weekStats),
+    gameStates(schedule, week),
+  );
+  if (!fresh.played || fresh.degenerate) return false;
+
+  state.weeks = state.weeks.filter((w) => w.week !== week).concat(fresh);
+  state.weeks.sort((a, b) => a.week - b.week);
+  return true;
+}
+
+/**
+ * Refresh live data from Sleeper.
+ *
+ * Falls back to the committed snapshot on any failure — the page is readable
+ * without this ever succeeding, which is why every error here is a warning
+ * rather than a thrown one.
  *
  * Rosters still come from the committed snapshot. Reading them from the same
- * snapshot as the team names stops the page holding a fresh ghost id against
- * a stale name map.
+ * snapshot as the team names stops the page holding a fresh ghost id against a
+ * stale name map.
  */
 async function refreshLive() {
-  const client = createClient();
+  const client = sleeper();
   const [st, rosters, schedule, players] = await Promise.all([
     client.state(),
     json('data/raw/rosters.json'),
@@ -186,43 +274,66 @@ async function refreshLive() {
     json('data/players-slim.json'),
   ]);
 
-  const week = currentWeek(st);
-  if (week === 0) return; // preseason: nothing real to score yet
+  const weeks = weeksToRefresh(st);
+  if (weeks.length === 0) return; // preseason: nothing real to score yet
 
   // Kept on state so mountResults can decide whether a card is settled without
   // fetching the schedule a second time.
   state.schedule = schedule;
-
   state.ghostRosterId = findGhostRosterId(rosters) ?? state.ghostRosterId;
-  const excluded = unownedRosterIds(rosters);
-  // Opportunity stats must be live: a stale set would show a +20 for a player
-  // who has already caught a pass this afternoon.
-  const [payload, weekStats] = await Promise.all([
-    client.matchups(week),
-    client.stats(week).catch(() => ({})),
-  ]);
-  if (!Array.isArray(payload) || payload.length === 0) return;
 
-  // Kept, not discarded: the Results detail for the live week reads this
-  // instead of re-fetching data/raw/wk{N}.json, which the Action may not
-  // have written yet anyway.
-  state.livePayloads[week] = payload;
+  let any = false;
+  for (const week of weeks) {
+    // Sequential rather than parallel: the client dedupes by path but not by
+    // rate, and two weeks is not worth doubling the burst at Sleeper.
+    // eslint-disable-next-line no-await-in-loop
+    if (await refreshWeek(client, week, rosters, schedule, players)) any = true;
+  }
+  if (!any) return;
 
-  const fresh = resolveWeek(
-    week,
-    payload,
-    excluded,
-    byeTeams(schedule, week),
-    players,
-    opportunitySet(weekStats),
-    gameStates(schedule, week),
-  );
-  if (!fresh.played || fresh.degenerate) return;
-
-  state.weeks = state.weeks.filter((w) => w.week !== week).concat(fresh);
-  state.weeks.sort((a, b) => a.week - b.week);
   state.live = true;
   paint();
+  scheduleNextRefresh(weeks);
+}
+
+/**
+ * Keep refreshing while there is still football to watch.
+ *
+ * The page used to fetch once on load and never again, so a phone left open
+ * through a Sunday afternoon showed the same numbers all day. Now it polls,
+ * but only while a refreshed week still has an unfinished game: once
+ * everything is final the timer is not rearmed and the page goes quiet until
+ * something brings it back. Midweek and in the offseason that is zero
+ * requests.
+ *
+ * The arming test is weekIsPlaying, NOT "this week is not final". Those look
+ * interchangeable and are not: a week that has not kicked off yet is also not
+ * final, so the not-final version polled every minute from Tuesday through
+ * Saturday for scores that could not move. See its comment in rules.js.
+ *
+ * REFRESH_MS is above the Sleeper client's own 30s cache floor, so a poll and
+ * a focus event landing together cost one request, not two.
+ */
+function scheduleNextRefresh(weeks) {
+  clearTimeout(refreshTimer);
+  const playing = weeks.some((w) => weekIsPlaying(state.schedule, w));
+  if (!playing) return;
+  refreshTimer = setTimeout(() => {
+    refreshLive().catch((e) => console.warn('live refresh failed', e));
+  }, REFRESH_MS);
+}
+
+/**
+ * A phone spends most of its life with the tab in the background, where timers
+ * are throttled or stopped outright. Coming back to the tab is the moment the
+ * numbers are most likely to be stale and most likely to be looked at, so it
+ * gets an immediate refresh rather than waiting out the timer.
+ */
+function wireLiveRefresh() {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible') return;
+    refreshLive().catch((e) => console.warn('live refresh failed', e));
+  });
 }
 
 /**
@@ -301,6 +412,7 @@ function wireNav() {
 if (typeof document !== 'undefined') {
   wireNav();
   wireStandingsSort();
+  wireLiveRefresh();
 
   // Parsed before the snapshot so a cold load of a deep link knows where it is
   // going, and applied after so it paints against loaded data rather than
@@ -333,4 +445,4 @@ if (typeof document !== 'undefined') {
     .catch((e) => console.warn('live refresh failed, snapshot still shown', e));
 }
 
-export { loadSnapshot, refreshLive };
+export { loadSnapshot, refreshLive, weeksToRefresh };

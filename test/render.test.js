@@ -239,3 +239,30 @@ test('the sorted column is marked on every body cell, for the eye', () => {
   assert.match(html, /<td class="num adjpf sorted">/);
   assert.doesNotMatch(html, /<td class="num pen20 sorted">/);
 });
+
+/*
+ * Why the standings have stopped moving.
+ *
+ * A table that sits still on a Tuesday afternoon reads as broken unless it
+ * says why. There are two different reasons and they need different words:
+ * waiting for the clock ("joins Tuesday 10:00") and waiting for a game that
+ * is still being played. The second used to be impossible — the gate was the
+ * clock alone — so only the first sentence existed.
+ */
+test('the gate note names the clock when the week is waiting on the clock', () => {
+  const html = renderStandings(ROWS, TEAMS, { nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00' });
+  assert.match(html, /Week 2 joins Tuesday 22 September, 10:00\./);
+});
+
+test('the gate note names the games when the week is waiting on a game', () => {
+  const html = renderStandings(ROWS, TEAMS, {
+    nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00', waitingOnGames: true,
+  });
+  assert.match(html, /Week 2 joins once its last game is final\./);
+  assert.doesNotMatch(html, /Tuesday 22 September/, 'the clock has already passed; naming it would mislead');
+});
+
+test('waitingOnGames needs no gate label to say something useful', () => {
+  const html = renderStandings(ROWS, TEAMS, { nextWeek: 2, nextGate: null, waitingOnGames: true });
+  assert.match(html, /Week 2 joins once its last game is final\./);
+});

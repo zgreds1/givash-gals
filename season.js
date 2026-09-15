@@ -107,9 +107,29 @@ export function isWeekFinal(week, seasonStart, now) {
   return stamp(now) >= gate;
 }
 
-/** The weeks the standings are allowed to see. */
-export function finalWeeks(weeks, seasonStart, now) {
-  return (weeks || []).filter((w) => isWeekFinal(w.week, seasonStart, now));
+/**
+ * The weeks the standings are allowed to see.
+ *
+ * Two conditions, not one. The Tuesday gate is a league rule about WHEN a week
+ * counts; `gamesFinal` is a fact about whether it has finished being played.
+ * The gate alone was not enough: it admitted week 1 at Tuesday 10:00 Israel
+ * while that week's Monday night game was still `pre_game` in the data, and
+ * four of five teams' totals moved when it finally landed. The ranking
+ * survived by luck, not by design.
+ *
+ * `gamesFinal(week)` returns true, false, or null/undefined for "no idea".
+ * Only an explicit false withholds a week. Unknown admits it, for the same
+ * reason isWeekFinal admits everything on a missing seasonStart: refusing on
+ * absent metadata blanks the whole table, which is worse than the staleness it
+ * is guarding against. Omitting the argument keeps the calendar-only behaviour
+ * every existing caller had.
+ */
+export function finalWeeks(weeks, seasonStart, now, gamesFinal = null) {
+  return (weeks || []).filter((w) => {
+    if (!isWeekFinal(w.week, seasonStart, now)) return false;
+    if (gamesFinal === null) return true;
+    return gamesFinal(w.week) !== false;
+  });
 }
 
 /**

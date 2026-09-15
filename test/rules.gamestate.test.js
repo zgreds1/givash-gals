@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { gameStates, allGamesFinal } from '../rules.js';
+import { gameStates, allGamesFinal , weekIsPlaying } from '../rules.js';
 import { SCHEDULE_LIVE } from './helpers.js';
 
 test('complete and canceled are both final', () => {
@@ -112,4 +112,57 @@ test('a game with no status field is left out of the map entirely', () => {
     gameStates([{ week: 1, home: 'HOU', away: 'CIN', status: 'halftime' }], 1).get('HOU'),
     'live',
   );
+});
+
+/*
+ * When an open page should keep asking Sleeper.
+ *
+ * Not "the week is not final" — that is true all week for a week that has not
+ * kicked off yet, and a page polling every minute from Tuesday to Sunday for
+ * scores that cannot move is a battery drain and a lie about what it is
+ * watching. Two things justify a poll: a game actually in progress, or a game
+ * scheduled TODAY that has not finished, so a page left open before kickoff
+ * still notices the kickoff.
+ */
+const SUNDAY = new Date('2026-09-13T18:00:00Z');
+const WEDNESDAY = new Date('2026-09-16T12:00:00Z');
+
+const sched = (rows) => rows.map((r) => ({ week: 1, ...r }));
+
+test('a game in progress justifies polling', () => {
+  const s = sched([{ home: 'KC', away: 'DEN', status: 'in_game', date: '2026-09-13' }]);
+  assert.equal(weekIsPlaying(s, 1, SUNDAY), true);
+});
+
+test('a week that has not kicked off does not, even though it is not final', () => {
+  // The bug this exists to prevent: pre_game is not final, so a "not final"
+  // test polls every minute from Tuesday to Sunday.
+  const s = sched([{ week: 2, home: 'KC', away: 'DEN', status: 'pre_game', date: '2026-09-20' }]);
+  assert.equal(weekIsPlaying(s, 2, WEDNESDAY), false);
+});
+
+test('a game scheduled today but not yet kicked off does justify polling', () => {
+  // A page opened five minutes before kickoff has to notice the kickoff.
+  const s = sched([{ home: 'KC', away: 'DEN', status: 'pre_game', date: '2026-09-13' }]);
+  assert.equal(weekIsPlaying(s, 1, SUNDAY), true);
+});
+
+test('a finished week stops polling even on the day it was played', () => {
+  const s = sched([{ home: 'KC', away: 'DEN', status: 'complete', date: '2026-09-13' }]);
+  assert.equal(weekIsPlaying(s, 1, SUNDAY), false);
+});
+
+test('a cancelled game is settled, not something to wait for', () => {
+  const s = sched([{ home: 'KC', away: 'DEN', status: 'canceled', date: '2026-09-13' }]);
+  assert.equal(weekIsPlaying(s, 1, SUNDAY), false);
+});
+
+test('no schedule means nothing to poll for', () => {
+  assert.equal(weekIsPlaying(null, 1, SUNDAY), false);
+  assert.equal(weekIsPlaying([], 1, SUNDAY), false);
+});
+
+test('only the named week counts', () => {
+  const s = sched([{ week: 2, home: 'KC', away: 'DEN', status: 'in_game', date: '2026-09-13' }]);
+  assert.equal(weekIsPlaying(s, 1, SUNDAY), false, 'week 2 is live, week 1 was asked about');
 });

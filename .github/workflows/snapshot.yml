@@ -4,6 +4,25 @@ on:
   schedule:
     - cron: '0 17-23 * * 0'   # Sun 1pm-7pm ET, during games
     - cron: '0 0-4 * * 1'     # Sun evening -> Mon midnight ET
+    - cron: '0 1-5 * * 2'     # Tue 01:00-05:00 UTC — Monday Night Football, swept
+                              # hourly instead of resting on the single 06:00
+                              # run below. That run was scheduled to clear the
+                              # Tue 10:00 Israel standings gate (07:00 UTC on
+                              # IDT) by about an hour — but GitHub delays this
+                              # repo's scheduled runs by FOUR hours as a matter
+                              # of routine (cron 06:00 ran 10:34 on Fri
+                              # 2026-09-11, 10:03 on Sat the 12th, and a 04:00
+                              # cron ran 09:36 on Mon the 14th). A one-hour
+                              # margin against four hours of jitter is not a
+                              # margin. On 2026-09-15 the 06:00 run had still
+                              # not fired at 08:19 and week 1 entered the
+                              # standings without its Monday night game.
+                              #
+                              # Five hourly attempts starting at 01:00 means the
+                              # first one only has to beat the gate by six
+                              # hours, and any one of them landing is enough.
+                              # The run is a no-op when nothing changed, so the
+                              # extra attempts cost a few seconds each.
     - cron: '0 6 * * 2'       # Tue 06:00 UTC — the run that carries MNF into
                               # the standings, sized against BOTH DST regimes
                               # rather than one UTC figure. MNF kicks at 20:15

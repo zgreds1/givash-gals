@@ -282,6 +282,40 @@ a `div[role="button"]`. That is what makes the hover possible at all: an
 interactive element cannot nest inside another one, so while the card *was* the
 button, a score could not be its own hover target.
 
+## Staying current
+
+The page reads live from Sleeper in the browser, and the committed snapshot is
+the fallback for when that fails. Three things keep it honest, all of which
+were added after a Monday night game sat stale on the page for half a day.
+
+**The refresh follows the week you are looking at.** Sleeper rolls `week` to
+the NEXT week once the current one's games are done, so on a Tuesday it reads
+2 while `display_week` still reads 1. The refresh used to follow `week`
+alone: it fetched week 2, found nothing played, returned early, and never
+touched the week on screen — so a week stopped being refreshable at exactly
+the moment its last game ended. It now refreshes both, deduped.
+
+**An open page keeps up.** It used to fetch once on load and never again, so a
+phone left open through a Sunday showed the same numbers all day. It now polls
+every 60s, and refreshes immediately whenever the tab regains focus. The
+arming test is `weekIsPlaying`, not "this week is not final" — those look
+interchangeable and are not, because a week that has not kicked off is also
+not final, and that version polled all week for scores that could not move.
+Midweek and in the offseason it makes zero requests.
+
+**The standings gate is a clock and a scoreboard.** `finalWeeks` takes a
+`gamesFinal` predicate alongside the Tuesday gate. Unknown still admits the
+week — refusing on absent metadata would blank the table, which is worse than
+the staleness it guards against — but a week known to have a game still in
+progress is held out, and the note says so rather than naming a deadline
+already behind us.
+
+The Action's cron also sweeps Tuesday 01:00-05:00 UTC hourly rather than
+resting on a single 06:00 run. That run was meant to clear the 07:00 UTC gate
+by an hour, but GitHub routinely delays this repo's scheduled runs by four
+(06:00 crons have started at 10:34, 10:03 and 09:36). A one-hour margin
+against four hours of jitter is not a margin.
+
 The standings do not move mid-week. A week joins at **Tuesday 10:00 Israel
 time**, which `season.js` computes by comparing wall-clock parts from
 `Intl.DateTimeFormat` rather than by any offset arithmetic — so Israel's
