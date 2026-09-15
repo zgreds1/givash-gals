@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { standings } from '../rules.js';
+import { standings, round2 } from '../rules.js';
+import { PENALTY } from '../config.js';
 
 /** Hand-built WeekResults — standings() never touches raw Sleeper data. */
 function week(n, teams, matchups) {
@@ -189,4 +190,89 @@ test('win% is not rounded to two decimals', () => {
   const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
   assert.deepEqual([by[1].w, by[1].l], [2, 1]);
   assert.equal(by[1].winPct.toFixed(3), '0.667'); // not 0.670
+});
+
+/*
+ * The season +20 column.
+ *
+ * Counted per week off the same field the week's adjusted score was built
+ * from, so the column and Adj PF can never tell different stories: across
+ * every counted week, adjPF - rawPF is exactly PENALTY x this total.
+ */
+test('the +20 total accumulates across weeks', () => {
+  const P = (adjusted, raw, settledPenalties) => ({
+    adjusted, raw, settledPenalties, penalties: [],
+  });
+  const rows = standings([
+    week(1, { 1: P(110, 90, 1), 2: P(120, 120, 0) },
+      [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }]),
+    week(2, { 1: P(150, 90, 3), 2: P(130, 110, 1) },
+      [{ type: 'h2h', rosterIds: [1, 2], winner: 2 }]),
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  assert.equal(by[1].settledPenalties, 4);
+  assert.equal(by[2].settledPenalties, 1);
+  // The identity that keeps the column honest against the two PF columns.
+  for (const r of rows) {
+    assert.equal(round2(r.adjPF - r.rawPF), r.settledPenalties * PENALTY);
+  }
+});
+
+test('a week nobody played contributes no +20s', () => {
+  const rows = standings([
+    { ...week(1, { 1: { adjusted: 0, raw: 0, settledPenalties: 9, penalties: [] } }, []), played: false },
+  ]);
+  assert.equal(rows.length, 0);
+});
+
+test('a degenerate week contributes no +20s, as it contributes no points', () => {
+  const rows = standings([
+    week(1, { 1: { adjusted: 110, raw: 90, settledPenalties: 1, penalties: [] },
+      2: { adjusted: 120, raw: 120, settledPenalties: 0, penalties: [] } },
+    [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }]),
+    { ...week(2, { 1: { adjusted: 200, raw: 100, settledPenalties: 5, penalties: [] } }, []), degenerate: true },
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  assert.equal(by[1].settledPenalties, 1, 'the degenerate week is skipped whole');
+});
+
+test('an archived week with no +20 count reads as zero rather than NaN', () => {
+  const rows = standings([
+    week(1, { 1: { adjusted: 110, raw: 90 }, 2: { adjusted: 120, raw: 120 } },
+      [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }]),
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  assert.equal(by[1].settledPenalties, 0);
+});
+
+/*
+ * weeks.json is a committed artifact. A week written before the engine
+ * published a count still carries the penalties it was built from, phases and
+ * all, so the count is recoverable and must be recovered - reading 0 off a
+ * week that plainly charged five +20s is worse than reading nothing.
+ */
+test('a week from before the count existed is counted off its penalties', () => {
+  const archived = (adjusted, raw, phases) => ({
+    adjusted, raw, penalties: phases.map((phase, i) => ({ playerId: String(i), phase })),
+  });
+  const rows = standings([
+    week(1, {
+      1: archived(130, 90, ['final', 'final', 'live']),
+      2: archived(120, 120, []),
+    }, [{ type: 'h2h', rosterIds: [1, 2], winner: 2 }]),
+  ]);
+  const by = Object.fromEntries(rows.map((r) => [r.rosterId, r]));
+  assert.equal(by[1].settledPenalties, 2, 'the live one has not been charged');
+  assert.equal(by[2].settledPenalties, 0);
+});
+
+test('a published count wins over a recount, and they agree anyway', () => {
+  const rows = standings([
+    week(1, {
+      1: { adjusted: 130, raw: 90, settledPenalties: 2,
+        penalties: [{ playerId: '1', phase: 'final' }, { playerId: '2', phase: 'final' }] },
+      2: { adjusted: 120, raw: 120, settledPenalties: 0, penalties: [] },
+    }, [{ type: 'h2h', rosterIds: [1, 2], winner: 2 }]),
+  ]);
+  assert.equal(rows.find((r) => r.rosterId === 1).settledPenalties, 2);
 });

@@ -149,3 +149,54 @@ test('an explicit through: null omits the through-week clause', () => {
   assert.match(html, /lowest adjusted points wins<\/caption>/);
   assert.doesNotMatch(html, /through week/);
 });
+
+/*
+ * The season +20 column.
+ *
+ * Its own column rather than a number folded into Adj PF, because the two
+ * answer different questions: Adj PF is how the team is doing, +20 is how
+ * much of that was self-inflicted. The column sits beside the two PF numbers
+ * it reconciles - adjPF minus rawPF is exactly PENALTY x this cell.
+ */
+const P20 = (settledPenalties) => ({
+  rosterId: 1, w: 2, l: 1, t: 0, gp: 3, winPct: 2 / 3,
+  adjPF: 300 + settledPenalties * PENALTY, rawPF: 300,
+  settledPenalties, median: { w: 0, l: 0, t: 0 }, unresolvedTie: false,
+});
+
+test('the standings carry a season +20 column', () => {
+  const html = renderStandings([P20(7)], TEAMS, {});
+  assert.ok(html.includes(`<th class="num" scope="col">+${PENALTY}s</th>`));
+  assert.ok(html.includes(`data-label="+${PENALTY}s">7</td>`));
+});
+
+test('the +20 cell collapses with a label of its own on a phone', () => {
+  // Under 34rem the header row is hidden and every cell is named by its
+  // data-label instead, so a cell without one becomes an unlabelled number.
+  const html = renderStandings([P20(3)], TEAMS, {});
+  const cells = html.match(/<td[^>]*>/g) || [];
+  const unlabelled = cells.filter((c) => !/data-label=/.test(c) && !/class="rank"/.test(c));
+  assert.deepEqual(unlabelled, [], 'every collapsing cell names itself');
+});
+
+test('a clean season prints 0 rather than a blank cell', () => {
+  const html = renderStandings([P20(0)], TEAMS, {});
+  assert.ok(html.includes(`data-label="+${PENALTY}s">0</td>`));
+});
+
+test('a row from the archive with no +20 count still renders', () => {
+  const html = renderStandings(ROWS, TEAMS, {});
+  assert.ok(html.includes(`data-label="+${PENALTY}s">0</td>`));
+});
+
+test('the +20 column survives the phone collapse, unlike Raw PF', () => {
+  // `.standings .muted` is display:none under 34rem. Raw PF and vs Median
+  // carry it and drop off a phone; the +20 count deliberately does not, because
+  // it is the column that explains the gap between the two PF numbers and is
+  // the reason a manager opens this table on a Sunday.
+  const html = renderStandings([P20(4)], TEAMS, {});
+  const cell = html.match(/<td[^>]*data-label="\+20s"[^>]*>/)[0];
+  assert.doesNotMatch(cell, /muted/, 'must not be hidden on a phone');
+  const rawPF = html.match(/<td[^>]*data-label="Raw PF"[^>]*>/)[0];
+  assert.match(rawPF, /muted/, 'and Raw PF must still be the one that drops');
+});

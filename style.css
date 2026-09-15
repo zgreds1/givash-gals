@@ -603,10 +603,23 @@ table.standings {
  * The same three-column track as .teams above, so each score sits under the
  * name it belongs to. The middle column stays empty: it is the gutter the
  * "vs" occupies one row up. */
+/* align-items is START, not baseline, and that is load-bearing.
+ *
+ * `.score` is a <button>, which is an inline-block, and an inline-block's
+ * baseline is the baseline of its LAST line box. On a phone each side of this
+ * grid is about 116px, which "213.24 (233.24)" cannot fit on one line — so the
+ * bracket wrapped, the button's baseline became that second line, and baseline
+ * alignment hoisted the whole button up by a line to meet the one-line side
+ * opposite. That dragged the real score ABOVE this rule's own border-top, and
+ * the hairline drew straight through the number.
+ *
+ * Aligning the tops instead cannot be moved by how a cell wraps. When both
+ * sides are a single line — every desktop case, and most phone ones — it is
+ * pixel-identical to the baseline it replaces. */
 .scores {
   display: grid;
   grid-template-columns: 1fr minmax(5.5rem, auto) 1fr;
-  align-items: baseline;
+  align-items: start;
   gap: var(--space-sm) var(--space-md);
   padding-top: var(--space-md);
   border-top: 1px solid var(--line);
@@ -647,22 +660,47 @@ table.standings {
   color: var(--muted);
 }
 
-/* How many starters have not kicked off, under the number it qualifies.
+/* The caption under the score: what it has been charged, and how much football
+ * is left to charge more.
  *
- * display:block rather than a flow inline, because .score-tip sits between
- * this and the button in the DOM (see toPlayNote's comment on why it must)
- * and is absolutely positioned, so normal flow would leave this hanging on
- * the button's own line. Muted and two sizes down: it is a caveat about the
- * score, never a second score.
+ * The WRAPPER is the block, not the notes — .score-tip sits between these and
+ * the button in the DOM (see toPlayNote on why it must) and is absolutely
+ * positioned, so without a block of their own the notes would hang on the
+ * button's inline-block line. One wrapper instead of two blocks keeps the
+ * caption to a single line on a phone.
  */
-.to-play {
+.score-notes {
   display: block;
   font: 400 var(--t-3xs) / 1.4 var(--font-data);
-  color: var(--muted);
   padding-top: var(--space-xs);
 }
-.score-cell.l .to-play { text-align: right; }
-.score-cell.r .to-play { text-align: left; }
+.score-cell.l .score-notes { text-align: right; }
+.score-cell.r .score-notes { text-align: left; }
+
+/* How many +20s this side has actually been charged. --pen is the same colour
+ * the drill-down's locked tag uses, so the two views agree on what a charged
+ * penalty looks like — but the colour is never carrying it alone: the note
+ * literally reads "3 × +20", and a screen reader gets "penalties charged". */
+.pen-count { color: var(--pen); }
+
+/* How many starters have not kicked off. Muted and two sizes down: a caveat
+ * about the score, never a second score. */
+.to-play { color: var(--muted); }
+
+/* Neither note ever breaks inside itself. Without this the caption wrapped as
+ * "4 × +20 · 2 to" / "play", splitting a three-word phrase across two lines
+ * while the middot sat mid-sentence. Breaking BETWEEN the notes is the only
+ * break either of them should ever take. */
+.pen-count,
+.to-play { white-space: nowrap; }
+
+/* The separator exists only when both notes do, so neither one has to know
+ * whether the other is there. */
+.pen-count + .to-play::before {
+  content: "·";
+  margin: 0 0.45em;
+  color: var(--line-strong);
+}
 
 /* In the DOM at all times so aria-describedby resolves to real text; CSS is
  * the only thing hiding it. Anchored to its own side rather than centred, so
@@ -745,6 +783,19 @@ table.standings {
 @media (max-width: 34rem) {
   .teams, .lrow, .scores { grid-template-columns: 1fr minmax(4.6rem, auto) 1fr; }
   .score { font-size: var(--t-base); }
+  /* About 116px a side is not enough for "213.24 (233.24)" on one line, so the
+   * bracket was wrapping anyway — but only on whichever side happened to
+   * overflow, which left the two sides of a card built differently. Making the
+   * break explicit puts the projection under its own score on BOTH sides, so a
+   * reader compares two numbers that sit in the same place. */
+  .score .alt { display: block; }
+
+  /* The same width that defeats the score defeats the caption: "4 × +20 · 2 to
+   * play" does not fit 116px either. So the two notes stack instead of sharing
+   * a line, and the middot goes with them — a separator earns its place only
+   * between two things actually side by side. */
+  .pen-count { display: block; }
+  .pen-count + .to-play::before { content: none; }
   /* Half a phone screen is not enough room for a tooltip to hang under its own
    * number without running off the side, so each one anchors to the card edge
    * nearest it and grows inward instead. */

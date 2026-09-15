@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T09:36:14.477Z",
+  "generatedAt": "2026-09-15T08:07:50.304Z",
   "weeks": [
     {
       "week": 1,
@@ -55,6 +55,7 @@
               "phase": "final"
             }
           ],
+          "settledPenalties": 4,
           "yetToPlay": 2
         },
         "2": {
@@ -93,6 +94,7 @@
               "phase": "final"
             }
           ],
+          "settledPenalties": 5,
           "yetToPlay": 0
         },
         "3": {
@@ -125,6 +127,7 @@
               "phase": "final"
             }
           ],
+          "settledPenalties": 2,
           "yetToPlay": 2
         },
         "4": {
@@ -181,6 +184,7 @@
               "phase": "upcoming"
             }
           ],
+          "settledPenalties": 6,
           "yetToPlay": 2
         },
         "5": {
@@ -231,6 +235,7 @@
               "phase": "final"
             }
           ],
+          "settledPenalties": 5,
           "yetToPlay": 2
         }
       },

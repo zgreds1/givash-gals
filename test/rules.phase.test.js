@@ -192,3 +192,36 @@ test('with no game information nothing is yet to play', () => {
   const r = adjustedScore(mkEntry(1, 1, MIXED), WK3, PLAYERS);
   assert.equal(r.yetToPlay, 0, 'states = null scores as if every game had finished');
 });
+
+/*
+ * The count the cards and the standings print.
+ *
+ * It is deliberately NOT `penalties.length`: that array also holds the ones
+ * still pending in games being played, and a card that counted those would
+ * announce a +20 the league has not actually charged yet. The number tracks
+ * `adjusted`, which is the same promise the score itself makes.
+ */
+test('settledPenalties counts only the +20s that have actually landed', () => {
+  const r = adjustedScore(mkEntry(1, 1, MIXED), WK3, PLAYERS, new Set(), LIVE3);
+  assert.equal(r.penalties.length, 2, 'two zeroed starters in all');
+  assert.equal(r.settledPenalties, 1, 'but only the finished game has been charged');
+  assert.equal(r.adjusted, r.raw + 20, 'and the count is what adjusted is built from');
+});
+
+test('settledPenalties ignores a zero whose game has not kicked off', () => {
+  const wk5 = gameStates(SCHEDULE_LIVE, 5); // HOU/CIN pre_game
+  const r = adjustedScore(mkEntry(1, 1, [['6804', 0]]), WK3, PLAYERS, new Set(), wk5);
+  assert.equal(r.penalties.length, 1);
+  assert.equal(r.settledPenalties, 0);
+});
+
+test('with no game information every +20 is settled, as the score already is', () => {
+  const r = adjustedScore(mkEntry(1, 1, MIXED), WK3, PLAYERS);
+  assert.equal(r.settledPenalties, 2);
+  assert.equal(r.adjusted, r.raw + 40);
+});
+
+test('settledPenalties is zero, not absent, for a clean lineup', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['1466', 12.0]]), WK3, PLAYERS, new Set(), LIVE3);
+  assert.equal(r.settledPenalties, 0);
+});

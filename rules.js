@@ -179,7 +179,7 @@ export function opportunitySet(weekStats) {
  * @param {Object<string,{pos:string,team:string,name:string}>} players
  * @param {Set<string>} opportunities - player ids who had a scoring opportunity
  * @param {Map<string, 'final'|'live'|'upcoming'>|null} states - game phases by team
- * @returns {{raw: number, adjusted: number, inPlay: number, penalties: Array, yetToPlay: number}}
+ * @returns {{raw: number, adjusted: number, inPlay: number, penalties: Array, settledPenalties: number, yetToPlay: number}}
  */
 export function adjustedScore(
   entry, byes, players, opportunities = new Set(), states = null,
@@ -261,8 +261,42 @@ export function adjustedScore(
     adjusted: round2(raw + settled * PENALTY),
     inPlay: round2(raw + started * PENALTY),
     penalties,
+    // The same `settled` the adjusted score is built from, published rather
+    // than recomputed by every caller that wants to print it. Deliberately not
+    // `penalties.length`: that array also carries the ones still pending in
+    // games being played, and a view counting those would announce a +20 the
+    // league has not charged. This number and `adjusted` always agree.
+    settledPenalties: settled,
     yetToPlay,
   };
+}
+
+/**
+ * How many +20s a team has OFFICIALLY been charged — the one definition, used
+ * by the cards and by the standings so the two can never disagree.
+ *
+ * Three sources, in order of how much they are trusted:
+ *
+ * 1. `settledPenalties`, published by adjustedScore. It is the very number the
+ *    adjusted score was built from, so it cannot drift from it.
+ * 2. A recount off `penalties`, for a week written to data/weeks.json before
+ *    the engine published a count. Those weeks still carry every penalty with
+ *    its phase, so the answer is recoverable — and recovering it matters: a
+ *    stored week that plainly charged five +20s must not read as zero because
+ *    the artifact predates the field.
+ * 3. Zero, for the 2025 archive, which was slimmed to a points map and has no
+ *    penalties at all. Nothing was recorded, so nothing is claimed.
+ *
+ * Never `penalties.length`: that array also holds the ones still pending in
+ * games being played, which the league has not charged.
+ *
+ * @param {{settledPenalties?:number, penalties?:Array<{phase:string}>}|null} team
+ * @returns {number}
+ */
+export function settledPenaltyCount(team) {
+  if (typeof team?.settledPenalties === 'number') return team.settledPenalties;
+  if (!Array.isArray(team?.penalties)) return 0;
+  return team.penalties.filter((p) => p.phase === 'final').length;
 }
 
 /**
@@ -335,6 +369,7 @@ export function resolveWeek(
       adjusted: s.adjusted,
       inPlay: s.inPlay,
       penalties: s.penalties,
+      settledPenalties: s.settledPenalties,
       yetToPlay: s.yetToPlay,
     };
   }
@@ -432,7 +467,7 @@ export function standings(weeks) {
     if (!rows.has(id)) {
       rows.set(id, {
         rosterId: id, w: 0, l: 0, t: 0, gp: 0,
-        adjPF: 0, rawPF: 0,
+        adjPF: 0, rawPF: 0, settledPenalties: 0,
         median: { w: 0, l: 0, t: 0 },
         unresolvedTie: false,
       });
@@ -459,6 +494,7 @@ export function standings(weeks) {
       const r = ensure(Number(id));
       r.adjPF = round2(r.adjPF + t.adjusted);
       r.rawPF = round2(r.rawPF + t.raw);
+      r.settledPenalties += settledPenaltyCount(t);
     }
 
     for (const m of wk.matchups) {

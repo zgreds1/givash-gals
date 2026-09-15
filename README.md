@@ -53,6 +53,25 @@ dashed outline while that player's game is still on, and both sit beside the
 literal text `+20`; a zero whose game has not kicked off is neither, and says
 "not started" in grey instead of showing a number.
 
+Each score on a summary card carries a count of the +20s that team has
+actually been charged, and the standings carry the season total in a `+20s`
+column between Raw PF and vs Median. Both read the same engine field, and
+both count **official** penalties only — the ones charged once a player's own
+NFL game ended with nothing to his name. Pending +20s are deliberately absent
+from the count: they already have a voice in the bracketed in-play score, and
+counting them twice would announce a penalty as though it had happened. The
+column reconciles the two beside it — `Adj PF` minus `Raw PF` is exactly 20 x
+that cell — and unlike `Raw PF` it survives the phone collapse, because it is
+the column that explains the gap.
+
+The count is read through one shared helper, `settledPenaltyCount`, which
+prefers the field the engine publishes and falls back to counting the stored
+penalties by phase. That fallback is not defensive padding: `data/weeks.json`
+is a committed artifact, so a week written before the field existed still has
+every penalty and its phase, and reading zero off a week that plainly charged
+five +20s would be worse than reading nothing. Only the 2025 archive, slimmed
+to a points map, has nothing to count and reports 0.
+
 ### On a phone
 
 Three layouts change shape below the fold-out widths, and each breakpoint is
@@ -84,6 +103,26 @@ zero-height `::after` with `flex-basis: 100%` sitting at the right point in the
 name flexes from `flex-basis: 0` rather than `auto`, or a long one
 ("Washington Commanders") claims the whole line and shoves its own score onto
 the next while the opposing side keeps both on the first.
+
+A score on a summary card is a real `<button>`, so that the tooltip behind it
+answers to a tap where hover does not exist — and that is what put a hairline
+through the numbers. An inline-block's baseline is the baseline of its *last*
+line box, and at 390px each side of a card is about 116px, which
+`213.24 (233.24)` cannot fit on one line. The bracket wrapped, the button's
+baseline became that second line, and `.scores { align-items: baseline }`
+hoisted the whole button up by a line to meet the one-line side opposite —
+dragging the real score above the grid's own `border-top` so the rule drew
+straight through it. The grid aligns on `start` instead, which no amount of
+wrapping can move, and is pixel-identical whenever both sides are one line.
+
+Two smaller rules finish it. Below 34rem the in-play bracket takes its own
+line on *both* sides rather than wrapping on whichever one happened to
+overflow, so a reader compares two numbers that sit in the same place. And the
+caption under the score — the +20 count and the "to play" note — shares one
+line separated by a middot only where it fits; below 34rem it stacks and drops
+the middot, because `4 x +20 . 2 to play` does not fit 116px either and was
+breaking as "2 to" / "play". Each note carries `white-space: nowrap`, so the
+only break either can take is between them.
 
 The player leaderboard becomes cards below **40rem**. That number is arithmetic,
 not taste: the table's own `min-width` is 38rem (608px) and `main` spends 1rem

@@ -8,6 +8,22 @@ export const esc = (s) =>
   );
 
 /**
+ * The +PENALTY column is a whole count, not a points total: it says how many
+ * times this team was charged. It sits beside the two PF columns because it
+ * reconciles them - adjPF minus rawPF is exactly PENALTY x that cell - and a
+ * reader comparing the three sees at a glance how much of a team's adjusted
+ * total was self-inflicted.
+ *
+ * `?? 0` is for a row this module did not get from standings(), which always
+ * sets the field - the archive case is resolved upstream, in
+ * settledPenaltyCount. Here it only keeps a hand-built row from printing
+ * "undefined" into the table.
+ *
+ * It is pointedly NOT `.muted`, which is the class the 34rem collapse hides.
+ * Raw PF and vs Median drop off a phone; this column stays, because it is the
+ * one that explains the gap between the two PF numbers, and the phone is where
+ * this table is actually read.
+ *
  * @param {Array} rows - standings rows, already sorted
  * @param {Object} teams - rosterId -> team name
  * @param {{through?:number|null, nextWeek?:number|null, nextGate?:string|null}} meta
@@ -42,6 +58,7 @@ export function renderStandings(rows, teams, meta = {}) {
         <td class="pct" data-label="Win%">${r.winPct.toFixed(3).replace(/^0/, '')}</td>
         <td class="num adjpf" data-label="Adj PF">${r.adjPF.toFixed(2)}</td>
         <td class="num muted" data-label="Raw PF">${r.rawPF.toFixed(2)}</td>
+        <td class="num pen20" data-label="+${PENALTY}s">${r.settledPenalties ?? 0}</td>
         <td class="num muted" data-label="vs Median">${med}</td>
       </tr>`;
     })
@@ -60,6 +77,7 @@ export function renderStandings(rows, teams, meta = {}) {
       <th scope="col">Win%</th>
       <th class="num" scope="col">Adj PF <span class="hint">low is good</span></th>
       <th class="num" scope="col">Raw PF</th>
+      <th class="num" scope="col">+${PENALTY}s</th>
       <th class="num" scope="col">vs Median</th>
     </tr></thead>
     <tbody>${body}</tbody>

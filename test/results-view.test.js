@@ -1507,3 +1507,80 @@ test('the bracket is decided on what prints, not on the raw numbers', () => {
   const html = renderWeek({ week: 3, resolved: rounding, teams: NAMES, settled: false });
   assert.doesNotMatch(html, /98\.40 <span class="alt">\(98\.40\)/);
 });
+
+/*
+ * How many +20s this team has actually been charged this week.
+ *
+ * Official only, which is the same promise the score beside it makes: a +20
+ * lands when a player's own game ends with nothing to his name, so a zeroed
+ * starter still on the field is not in this count and not in `adjusted`.
+ * The pending ones are already spoken for by the bracketed in-play score.
+ */
+const PEN_WEEK = {
+  ...LIVE_WEEK,
+  teams: {
+    1: { raw: 78.4, adjusted: 98.4, inPlay: 118.4, penalties: [], settledPenalties: 1, yetToPlay: 2 },
+    2: { raw: 93.6, adjusted: 113.6, inPlay: 133.6, penalties: [], settledPenalties: 0 },
+    3: { raw: 71.2, adjusted: 91.2, inPlay: 131.2, penalties: [], settledPenalties: 3 },
+    4: { raw: 84.8, adjusted: 84.8, inPlay: 104.8, penalties: [], settledPenalties: 0 },
+    5: { raw: 74.3, adjusted: 94.3, inPlay: 114.3, penalties: [], settledPenalties: 2 },
+  },
+};
+
+test('a card names how many +20s each team has been charged', () => {
+  const html = renderWeek({ week: 3, resolved: PEN_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /<span class="pen-count">1 &times; \+20/);
+  assert.match(html, /<span class="pen-count">3 &times; \+20/);
+});
+
+test('the count is singular for one and plural for more', () => {
+  const html = renderWeek({ week: 3, resolved: PEN_WEEK, teams: NAMES, settled: false });
+  assert.match(html, /1 &times; \+20<span class="sr-only"> penalty charged<\/span>/);
+  assert.match(html, /3 &times; \+20<span class="sr-only"> penalties charged<\/span>/);
+});
+
+test('a clean lineup carries no +20 note at all', () => {
+  // Rosters 2 and 4 are on zero. Three teams are charged, so three notes -
+  // a "0 x +20" on the other two would hang a number on every clean side.
+  const html = renderWeek({ week: 3, resolved: PEN_WEEK, teams: NAMES, settled: false });
+  assert.equal((html.match(/class="pen-count"/g) || []).length, 3);
+});
+
+test('the +20 count survives a settled week, where it is the whole story', () => {
+  const html = renderWeek({ week: 3, resolved: PEN_WEEK, teams: NAMES, settled: true });
+  assert.match(html, /<span class="pen-count">3 &times; \+20/);
+});
+
+test('the league median side never carries a +20 count', () => {
+  // It is four other teams averaged, not a lineup, so there is nothing to
+  // charge - the same reason it carries no "to play" count.
+  const html = renderWeek({ week: 3, resolved: PEN_WEEK, teams: NAMES, settled: false });
+  const card = html.slice(html.lastIndexOf('<div class="card'));
+  assert.match(card, /League median/);
+  assert.equal((card.match(/class="pen-count"/g) || []).length, 1,
+    'the manager side only, never the line');
+});
+
+test('an archived week with no count recorded prints no note', () => {
+  const html = renderWeek({ week: 3, resolved: LIVE_WEEK, teams: NAMES, settled: true });
+  assert.doesNotMatch(html, /class="pen-count"/);
+});
+
+test('a card recovers the count from a week stored before the field existed', () => {
+  // weeks.json is a committed artifact: a week written before the engine
+  // published a count still carries the penalties, phases and all.
+  const archived = {
+    ...LIVE_WEEK,
+    teams: {
+      ...LIVE_WEEK.teams,
+      1: {
+        raw: 78.4, adjusted: 98.4, inPlay: 118.4,
+        penalties: [{ playerId: '1', phase: 'final' }, { playerId: '2', phase: 'final' },
+          { playerId: '3', phase: 'live' }],
+      },
+    },
+  };
+  const html = renderWeek({ week: 3, resolved: archived, teams: NAMES, settled: false });
+  assert.match(html, /<span class="pen-count">2 &times; \+20/,
+    'two charged; the live one is not');
+});

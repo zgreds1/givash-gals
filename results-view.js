@@ -4,9 +4,9 @@
 // a pure function here, testable without a DOM, and mountResults is the only
 // part that touches document.
 
-import { LAST_WEEK } from './config.js';
+import { LAST_WEEK, PENALTY } from './config.js';
 import { esc } from './render.js';
-import { medianLine, gameStates, allGamesFinal } from './rules.js';
+import { medianLine, gameStates, allGamesFinal, settledPenaltyCount } from './rules.js';
 import { displayWeek, isWeekFinal } from './season.js';
 import { formatHash } from './router.js';
 
@@ -349,11 +349,64 @@ function toPlayNote(side, settled) {
     + '<span class="sr-only"> — starters whose games have not started</span></span>';
 }
 
-/** Both halves of one score cell. `key` makes the tooltip id unique per card. */
+/**
+ * How many +20s this team has actually been charged this week.
+ *
+ * OFFICIAL ones only, off the engine's own definition so this note and the
+ * standings column can never print different numbers for the same week. It is
+ * the number `adjusted` is built from, so the count and the score beside it
+ * cannot disagree either: a +20 lands when a player's own game ends with
+ * nothing to his name, and a zeroed starter still on the field is in neither.
+ * The pending ones already have a voice on this card — they are the whole
+ * reason the bracketed in-play score is drawn at all — so counting them here
+ * would say the same thing twice, and say it as though it had happened.
+ *
+ * Silent at zero, on the same reasoning as toPlayNote: the note exists to
+ * explain a gap between raw and adjusted, and a clean lineup has no gap. A
+ * "0 × +20" would hang a number on every side that did nothing wrong.
+ *
+ * The League median carries no count and cannot — it is four other teams
+ * averaged, not a lineup, so neither a count nor a penalties array reaches the
+ * object the median card passes in, and settledPenaltyCount reads it as 0. The
+ * 2025 archive, slimmed to a points map, lands on the same 0 for the same
+ * reason: nothing was recorded, so nothing is claimed.
+ *
+ * Rendered after the tooltip for the reason toPlayNote gives: `.score-tip`
+ * opens off an ADJACENT sibling selector, so nothing may come between it and
+ * the button.
+ */
+function penCountNote(side) {
+  const n = settledPenaltyCount(side);
+  if (n < 1) return '';
+  return `<span class="pen-count">${n} &times; +${PENALTY}`
+    + `<span class="sr-only"> ${n === 1 ? 'penalty' : 'penalties'} charged</span></span>`;
+}
+
+/**
+ * Both halves of one score cell. `key` makes the tooltip id unique per card.
+ *
+ * The two notes share one block wrapper rather than stacking as two blocks of
+ * their own. They are a single caption on the score — what it has been charged
+ * and how much football is left to charge more — and on a phone, where each
+ * side of a card is about 116px, two separate lines pushed the median card's
+ * pool chips off the fold for a caption that fits on one.
+ *
+ * The wrapper is also what lets `.to-play` stop being a block. Its old comment
+ * explained that it had to be one because `.score-tip` sits between it and the
+ * button and is absolutely positioned, so in normal flow it would hang on the
+ * button's own line. That is now the wrapper's job, and the notes inside it are
+ * free to be inline and sit beside each other.
+ *
+ * Emitted only when there is something in it, so a settled clean side adds no
+ * empty element and no stray padding.
+ */
 function scoreCell(side, settled, key, align) {
   const id = `tip-${key}`;
+  const notes = `${penCountNote(side)}${toPlayNote(side, settled)}`;
   return `<span class="score-cell ${align}">${scoreLine(side, settled, id)}`
-    + `${scoreTip(side, settled, id)}${toPlayNote(side, settled)}</span>`;
+    + `${scoreTip(side, settled, id)}`
+    + (notes ? `<span class="score-notes">${notes}</span>` : '')
+    + '</span>';
 }
 
 /**

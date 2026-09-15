@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { adjustedScore, byeTeams, opportunitySet, hadOpportunity } from '../rules.js';
+import { adjustedScore, byeTeams, opportunitySet, hadOpportunity, settledPenaltyCount } from '../rules.js';
 import { mkEntry, PLAYERS, SCHEDULE } from './helpers.js';
 
 const WK3 = byeTeams(SCHEDULE, 3); // nobody on bye
@@ -171,4 +171,24 @@ test('opportunitySet delegates to hadOpportunity for every id', () => {
     D: null,
   };
   assert.deepEqual([...opportunitySet(week)].sort(), ['A', 'C']);
+});
+
+/*
+ * The one definition of "official +20s", shared by the cards and the standings
+ * so the two can never print different numbers for the same week.
+ */
+test('settledPenaltyCount prefers the published count', () => {
+  assert.equal(settledPenaltyCount({ settledPenalties: 3, penalties: [] }), 3);
+});
+
+test('settledPenaltyCount falls back to counting settled penalties', () => {
+  assert.equal(settledPenaltyCount({
+    penalties: [{ phase: 'final' }, { phase: 'live' }, { phase: 'final' }, { phase: 'upcoming' }],
+  }), 2);
+});
+
+test('settledPenaltyCount reads a slimmed archive row as nothing', () => {
+  assert.equal(settledPenaltyCount({ adjusted: 100, raw: 100 }), 0);
+  assert.equal(settledPenaltyCount(undefined), 0);
+  assert.equal(settledPenaltyCount(null), 0);
 });
