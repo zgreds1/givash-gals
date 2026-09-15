@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T09:36:14.477Z",
+  "generatedAt": "2026-09-15T08:20:59.404Z",
   "season": "2026",
   "rows": [
     {
@@ -9,10 +9,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": -4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -4,
+      "total": 16,
       "ppg": -4
     },
     {
@@ -22,10 +22,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": -2.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -2.8,
+      "total": 17.2,
       "ppg": -2.8
     },
     {
@@ -35,11 +35,24 @@
       "pos": "RB",
       "gp": 1,
       "raw": -2.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -2.6,
+      "total": 17.4,
       "ppg": -2.6
+    },
+    {
+      "id": "11563",
+      "name": "Bo Nix",
+      "team": "DEN",
+      "pos": "QB",
+      "gp": 1,
+      "raw": -2.56,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 17.44,
+      "ppg": -2.56
     },
     {
       "id": "4574",
@@ -48,10 +61,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -2.28,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -2.28,
+      "total": 17.72,
       "ppg": -2.28
     },
     {
@@ -61,10 +74,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": -1.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -1.8,
+      "total": 18.2,
       "ppg": -1.8
     },
     {
@@ -74,10 +87,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": -1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -1,
+      "total": 19,
       "ppg": -1
     },
     {
@@ -87,10 +100,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.48,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -0.48,
+      "total": 19.52,
       "ppg": -0.48
     },
     {
@@ -100,10 +113,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": -0.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -0.4,
+      "total": 19.6,
       "ppg": -0.4
     },
     {
@@ -113,10 +126,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.38,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -0.38,
+      "total": 19.62,
       "ppg": -0.38
     },
     {
@@ -126,10 +139,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -0.3,
+      "total": 19.7,
       "ppg": -0.3
     },
     {
@@ -139,10 +152,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": -0.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -0.1,
+      "total": 19.9,
       "ppg": -0.1
     },
     {
@@ -152,10 +165,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 0,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0,
+      "total": 20,
       "ppg": 0
     },
     {
@@ -165,10 +178,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.1,
+      "total": 20.1,
       "ppg": 0.1
     },
     {
@@ -178,10 +191,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -191,10 +204,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -204,10 +217,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -217,10 +230,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -230,10 +243,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -243,10 +256,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -256,10 +269,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
     },
     {
@@ -269,11 +282,24 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.3,
+      "total": 20.3,
       "ppg": 0.3
+    },
+    {
+      "id": "11627",
+      "name": "Troy Franklin",
+      "team": "DEN",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0.5,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 20.5,
+      "ppg": 0.5
     },
     {
       "id": "13424",
@@ -282,10 +308,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.5,
+      "total": 20.5,
       "ppg": 0.5
     },
     {
@@ -295,10 +321,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.6,
+      "total": 20.6,
       "ppg": 0.6
     },
     {
@@ -308,11 +334,24 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.6,
+      "total": 20.6,
       "ppg": 0.6
+    },
+    {
+      "id": "7526",
+      "name": "Jaylen Waddle",
+      "team": "DEN",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0.7,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 20.7,
+      "ppg": 0.7
     },
     {
       "id": "11199",
@@ -321,10 +360,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.7,
+      "total": 20.7,
       "ppg": 0.7
     },
     {
@@ -334,10 +373,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.7,
+      "total": 20.7,
       "ppg": 0.7
     },
     {
@@ -347,10 +386,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.8,
+      "total": 20.8,
       "ppg": 0.8
     },
     {
@@ -360,10 +399,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.9
     },
     {
@@ -373,10 +412,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.9
     },
     {
@@ -386,10 +425,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.9
     },
     {
@@ -399,10 +438,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.9
     },
     {
@@ -412,10 +451,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.9
     },
     {
@@ -425,10 +464,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.9
     },
     {
@@ -438,10 +477,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
+      "ppg": 1
+    },
+    {
+      "id": "7828",
+      "name": "Noah Gray",
+      "team": "KC",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 1,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -451,10 +503,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -464,10 +516,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -477,10 +529,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -490,10 +542,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -503,10 +555,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -516,10 +568,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -529,10 +581,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -542,10 +594,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -555,10 +607,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -568,10 +620,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 1
     },
     {
@@ -581,10 +633,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.1,
+      "total": 21.1,
       "ppg": 1.1
     },
     {
@@ -594,10 +646,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.1,
+      "total": 21.1,
       "ppg": 1.1
     },
     {
@@ -607,10 +659,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.2,
+      "total": 21.2,
       "ppg": 1.2
     },
     {
@@ -620,10 +672,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.2,
+      "total": 21.2,
       "ppg": 1.2
     },
     {
@@ -633,10 +685,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.2,
+      "total": 21.2,
       "ppg": 1.2
     },
     {
@@ -646,10 +698,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.3,
+      "total": 21.3,
       "ppg": 1.3
     },
     {
@@ -659,10 +711,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.4,
+      "total": 21.4,
       "ppg": 1.4
     },
     {
@@ -672,10 +724,23 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.4,
+      "total": 21.4,
+      "ppg": 1.4
+    },
+    {
+      "id": "12817",
+      "name": "Jake Briningstool",
+      "team": "KC",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 1.4,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 21.4,
       "ppg": 1.4
     },
     {
@@ -685,10 +750,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.4,
+      "total": 21.4,
       "ppg": 1.4
     },
     {
@@ -698,10 +763,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 1.42,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.42,
+      "total": 21.42,
       "ppg": 1.42
     },
     {
@@ -711,10 +776,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.5,
+      "total": 21.5,
       "ppg": 1.5
     },
     {
@@ -724,10 +789,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.5,
+      "total": 21.5,
       "ppg": 1.5
     },
     {
@@ -737,10 +802,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.6,
+      "total": 21.6,
       "ppg": 1.6
     },
     {
@@ -750,10 +815,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.6,
+      "total": 21.6,
       "ppg": 1.6
     },
     {
@@ -763,10 +828,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.6,
+      "total": 21.6,
       "ppg": 1.6
     },
     {
@@ -776,10 +841,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 1.64,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.64,
+      "total": 21.64,
       "ppg": 1.64
     },
     {
@@ -789,10 +854,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.7,
+      "total": 21.7,
       "ppg": 1.7
     },
     {
@@ -802,10 +867,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.7,
+      "total": 21.7,
       "ppg": 1.7
     },
     {
@@ -815,10 +880,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.7,
+      "total": 21.7,
       "ppg": 1.7
     },
     {
@@ -828,10 +893,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.8,
+      "total": 21.8,
       "ppg": 1.8
     },
     {
@@ -841,10 +906,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.8,
+      "total": 21.8,
       "ppg": 1.8
     },
     {
@@ -854,10 +919,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.9,
+      "total": 21.9,
       "ppg": 1.9
     },
     {
@@ -867,11 +932,24 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.9,
+      "total": 21.9,
       "ppg": 1.9
+    },
+    {
+      "id": "6869",
+      "name": "Adam Trautman",
+      "team": "DEN",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 2,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 22,
+      "ppg": 2
     },
     {
       "id": "8259",
@@ -880,10 +958,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2,
+      "total": 22,
       "ppg": 2
     },
     {
@@ -893,11 +971,24 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2,
+      "total": 22,
       "ppg": 2
+    },
+    {
+      "id": "5045",
+      "name": "Courtland Sutton",
+      "team": "DEN",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 2.1,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 22.1,
+      "ppg": 2.1
     },
     {
       "id": "13307",
@@ -906,10 +997,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.1,
+      "total": 22.1,
       "ppg": 2.1
     },
     {
@@ -919,10 +1010,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.2,
+      "total": 22.2,
       "ppg": 2.2
     },
     {
@@ -932,10 +1023,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.2,
+      "total": 22.2,
       "ppg": 2.2
     },
     {
@@ -945,10 +1036,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.2,
+      "total": 22.2,
       "ppg": 2.2
     },
     {
@@ -958,10 +1049,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.3,
+      "total": 22.3,
       "ppg": 2.3
     },
     {
@@ -971,10 +1062,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.3,
+      "total": 22.3,
       "ppg": 2.3
     },
     {
@@ -984,10 +1075,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.3,
+      "total": 22.3,
       "ppg": 2.3
     },
     {
@@ -997,10 +1088,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.3,
+      "total": 22.3,
       "ppg": 2.3
     },
     {
@@ -1010,10 +1101,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.3,
+      "total": 22.3,
       "ppg": 2.3
     },
     {
@@ -1023,10 +1114,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.4,
+      "total": 22.4,
       "ppg": 2.4
     },
     {
@@ -1036,10 +1127,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.4,
+      "total": 22.4,
       "ppg": 2.4
     },
     {
@@ -1049,10 +1140,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 2.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.4,
+      "total": 22.4,
       "ppg": 2.4
     },
     {
@@ -1062,10 +1153,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.4,
+      "total": 22.4,
       "ppg": 2.4
     },
     {
@@ -1075,10 +1166,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.5,
+      "total": 22.5,
       "ppg": 2.5
     },
     {
@@ -1088,10 +1179,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.5,
+      "total": 22.5,
       "ppg": 2.5
     },
     {
@@ -1101,10 +1192,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.6,
+      "total": 22.6,
       "ppg": 2.6
     },
     {
@@ -1114,10 +1205,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.6,
+      "total": 22.6,
       "ppg": 2.6
     },
     {
@@ -1127,10 +1218,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.7,
+      "total": 22.7,
       "ppg": 2.7
     },
     {
@@ -1140,10 +1231,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.8,
+      "total": 22.8,
       "ppg": 2.8
     },
     {
@@ -1153,10 +1244,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.8,
+      "total": 22.8,
       "ppg": 2.8
     },
     {
@@ -1166,10 +1257,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.8,
+      "total": 22.8,
       "ppg": 2.8
     },
     {
@@ -1179,10 +1270,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 2.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.8,
+      "total": 22.8,
       "ppg": 2.8
     },
     {
@@ -1192,10 +1283,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.9,
+      "total": 22.9,
       "ppg": 2.9
     },
     {
@@ -1205,10 +1296,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.9,
+      "total": 22.9,
       "ppg": 2.9
     },
     {
@@ -1218,10 +1309,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.9,
+      "total": 22.9,
       "ppg": 2.9
     },
     {
@@ -1231,10 +1322,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 2.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.9,
+      "total": 22.9,
       "ppg": 2.9
     },
     {
@@ -1244,10 +1335,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3,
+      "total": 23,
       "ppg": 3
     },
     {
@@ -1257,10 +1348,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3,
+      "total": 23,
       "ppg": 3
     },
     {
@@ -1270,10 +1361,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3,
+      "total": 23,
       "ppg": 3
     },
     {
@@ -1283,10 +1374,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3,
+      "total": 23,
       "ppg": 3
     },
     {
@@ -1296,10 +1387,23 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3,
+      "total": 23,
+      "ppg": 3
+    },
+    {
+      "id": "DEN",
+      "name": "Denver Broncos",
+      "team": "DEN",
+      "pos": "DEF",
+      "gp": 1,
+      "raw": 3,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 23,
       "ppg": 3
     },
     {
@@ -1309,10 +1413,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.1,
+      "total": 23.1,
       "ppg": 3.1
     },
     {
@@ -1322,10 +1426,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.1,
+      "total": 23.1,
       "ppg": 3.1
     },
     {
@@ -1335,10 +1439,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 3.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.1,
+      "total": 23.1,
       "ppg": 3.1
     },
     {
@@ -1348,10 +1452,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 3.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.2,
+      "total": 23.2,
       "ppg": 3.2
     },
     {
@@ -1361,10 +1465,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.2,
+      "total": 23.2,
       "ppg": 3.2
     },
     {
@@ -1374,10 +1478,23 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.3,
+      "total": 23.3,
+      "ppg": 3.3
+    },
+    {
+      "id": "11624",
+      "name": "Xavier Worthy",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 3.3,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 23.3,
       "ppg": 3.3
     },
     {
@@ -1387,10 +1504,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.3,
+      "total": 23.3,
       "ppg": 3.3
     },
     {
@@ -1400,10 +1517,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 3.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.4,
+      "total": 23.4,
       "ppg": 3.4
     },
     {
@@ -1413,10 +1530,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.4,
+      "total": 23.4,
       "ppg": 3.4
     },
     {
@@ -1426,10 +1543,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.5,
+      "total": 23.5,
       "ppg": 3.5
     },
     {
@@ -1439,10 +1556,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.5,
+      "total": 23.5,
       "ppg": 3.5
     },
     {
@@ -1452,10 +1569,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.5,
+      "total": 23.5,
       "ppg": 3.5
     },
     {
@@ -1465,10 +1582,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.5,
+      "total": 23.5,
       "ppg": 3.5
     },
     {
@@ -1478,10 +1595,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.6,
+      "total": 23.6,
+      "ppg": 3.6
+    },
+    {
+      "id": "6806",
+      "name": "J.K. Dobbins",
+      "team": "DEN",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 3.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 23.6,
       "ppg": 3.6
     },
     {
@@ -1491,10 +1621,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.7,
+      "total": 23.7,
       "ppg": 3.7
     },
     {
@@ -1504,10 +1634,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.7,
+      "total": 23.7,
       "ppg": 3.7
     },
     {
@@ -1517,10 +1647,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.7,
+      "total": 23.7,
       "ppg": 3.7
     },
     {
@@ -1530,10 +1660,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.7,
+      "total": 23.7,
       "ppg": 3.7
     },
     {
@@ -1543,10 +1673,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.7,
+      "total": 23.7,
       "ppg": 3.7
     },
     {
@@ -1556,10 +1686,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 3.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.8,
+      "total": 23.8,
       "ppg": 3.8
     },
     {
@@ -1569,10 +1699,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.8,
+      "total": 23.8,
       "ppg": 3.8
     },
     {
@@ -1582,10 +1712,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.8,
+      "total": 23.8,
       "ppg": 3.8
     },
     {
@@ -1595,11 +1725,24 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.9,
+      "total": 23.9,
       "ppg": 3.9
+    },
+    {
+      "id": "3678",
+      "name": "Wil Lutz",
+      "team": "DEN",
+      "pos": "K",
+      "gp": 1,
+      "raw": 4,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 24,
+      "ppg": 4
     },
     {
       "id": "7694",
@@ -1608,10 +1751,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1621,10 +1764,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1634,10 +1777,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1647,10 +1790,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1660,10 +1803,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1673,10 +1816,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1686,10 +1829,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 4
     },
     {
@@ -1699,10 +1842,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1712,10 +1855,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1725,10 +1868,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1738,10 +1881,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1751,10 +1894,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1764,10 +1907,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1777,10 +1920,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1790,10 +1933,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 4.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.1,
+      "total": 24.1,
       "ppg": 4.1
     },
     {
@@ -1803,10 +1946,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.2,
+      "total": 24.2,
       "ppg": 4.2
     },
     {
@@ -1816,10 +1959,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 4.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.2,
+      "total": 24.2,
       "ppg": 4.2
     },
     {
@@ -1829,10 +1972,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.3,
+      "total": 24.3,
       "ppg": 4.3
     },
     {
@@ -1842,10 +1985,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.5,
+      "total": 24.5,
       "ppg": 4.5
     },
     {
@@ -1855,10 +1998,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.5,
+      "total": 24.5,
       "ppg": 4.5
     },
     {
@@ -1868,10 +2011,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.5,
+      "total": 24.5,
       "ppg": 4.5
     },
     {
@@ -1881,10 +2024,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.5,
+      "total": 24.5,
       "ppg": 4.5
     },
     {
@@ -1894,10 +2037,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 4.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.5,
+      "total": 24.5,
       "ppg": 4.5
     },
     {
@@ -1907,10 +2050,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.7,
+      "total": 24.7,
       "ppg": 4.7
     },
     {
@@ -1920,10 +2063,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.7,
+      "total": 24.7,
       "ppg": 4.7
     },
     {
@@ -1933,10 +2076,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 4.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.8,
+      "total": 24.8,
       "ppg": 4.8
     },
     {
@@ -1946,10 +2089,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5,
+      "total": 25,
       "ppg": 5
     },
     {
@@ -1959,10 +2102,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5,
+      "total": 25,
       "ppg": 5
     },
     {
@@ -1972,10 +2115,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5,
+      "total": 25,
       "ppg": 5
     },
     {
@@ -1985,10 +2128,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 5.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.1,
+      "total": 25.1,
       "ppg": 5.1
     },
     {
@@ -1998,10 +2141,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 5.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.4,
+      "total": 25.4,
       "ppg": 5.4
     },
     {
@@ -2011,10 +2154,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 5.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.5,
+      "total": 25.5,
       "ppg": 5.5
     },
     {
@@ -2024,10 +2167,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 5.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.7,
+      "total": 25.7,
       "ppg": 5.7
     },
     {
@@ -2037,10 +2180,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 5.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.8,
+      "total": 25.8,
       "ppg": 5.8
     },
     {
@@ -2050,10 +2193,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 5.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.8,
+      "total": 25.8,
       "ppg": 5.8
     },
     {
@@ -2063,10 +2206,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 5.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.8,
+      "total": 25.8,
       "ppg": 5.8
     },
     {
@@ -2076,10 +2219,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2089,10 +2232,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2102,10 +2245,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2115,10 +2258,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2128,10 +2271,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2141,10 +2284,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2154,10 +2297,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2167,10 +2310,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2180,10 +2323,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
     },
     {
@@ -2193,11 +2336,24 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 6
+    },
+    {
+      "id": "12489",
+      "name": "RJ Harvey",
+      "team": "DEN",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 6.1,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 26.1,
+      "ppg": 6.1
     },
     {
       "id": "1479",
@@ -2206,10 +2362,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.2,
+      "total": 26.2,
       "ppg": 6.2
     },
     {
@@ -2219,10 +2375,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 6.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.2,
+      "total": 26.2,
       "ppg": 6.2
     },
     {
@@ -2232,10 +2388,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.2,
+      "total": 26.2,
+      "ppg": 6.2
+    },
+    {
+      "id": "12492",
+      "name": "Pat Bryant",
+      "team": "DEN",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 6.2,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 26.2,
       "ppg": 6.2
     },
     {
@@ -2245,10 +2414,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.3,
+      "total": 26.3,
       "ppg": 6.3
     },
     {
@@ -2258,10 +2427,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.3,
+      "total": 26.3,
       "ppg": 6.3
     },
     {
@@ -2271,10 +2440,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 6.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.3,
+      "total": 26.3,
       "ppg": 6.3
     },
     {
@@ -2284,10 +2453,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.3,
+      "total": 26.3,
       "ppg": 6.3
     },
     {
@@ -2297,10 +2466,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 6.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.5,
+      "total": 26.5,
       "ppg": 6.5
     },
     {
@@ -2310,10 +2479,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.5,
+      "total": 26.5,
       "ppg": 6.5
     },
     {
@@ -2323,10 +2492,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.6,
+      "total": 26.6,
       "ppg": 6.6
     },
     {
@@ -2336,10 +2505,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 6.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.7,
+      "total": 26.7,
       "ppg": 6.7
     },
     {
@@ -2349,10 +2518,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 6.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.7,
+      "total": 26.7,
       "ppg": 6.7
     },
     {
@@ -2362,10 +2531,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 6.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.8,
+      "total": 26.8,
       "ppg": 6.8
     },
     {
@@ -2375,10 +2544,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 6.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.8,
+      "total": 26.8,
       "ppg": 6.8
     },
     {
@@ -2388,10 +2557,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 6.82,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.82,
+      "total": 26.82,
       "ppg": 6.82
     },
     {
@@ -2401,10 +2570,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 6.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.9,
+      "total": 26.9,
       "ppg": 6.9
     },
     {
@@ -2414,10 +2583,23 @@
       "pos": "K",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
+      "ppg": 7
+    },
+    {
+      "id": "4227",
+      "name": "Harrison Butker",
+      "team": "KC",
+      "pos": "K",
+      "gp": 1,
+      "raw": 7,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2427,10 +2609,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2440,10 +2622,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2453,10 +2635,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2466,10 +2648,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2479,10 +2661,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2492,10 +2674,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2505,10 +2687,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 7
     },
     {
@@ -2518,10 +2700,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 7.04,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.04,
+      "total": 27.04,
       "ppg": 7.04
     },
     {
@@ -2531,10 +2713,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.1,
+      "total": 27.1,
       "ppg": 7.1
     },
     {
@@ -2544,10 +2726,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.3,
+      "total": 27.3,
       "ppg": 7.3
     },
     {
@@ -2557,10 +2739,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 7.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.3,
+      "total": 27.3,
       "ppg": 7.3
     },
     {
@@ -2570,10 +2752,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.4,
+      "total": 27.4,
       "ppg": 7.4
     },
     {
@@ -2583,10 +2765,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 7.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.4,
+      "total": 27.4,
       "ppg": 7.4
     },
     {
@@ -2596,10 +2778,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.5,
+      "total": 27.5,
       "ppg": 7.5
     },
     {
@@ -2609,10 +2791,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 7.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.5,
+      "total": 27.5,
       "ppg": 7.5
     },
     {
@@ -2622,11 +2804,24 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.6,
+      "total": 27.6,
       "ppg": 7.6
+    },
+    {
+      "id": "13337",
+      "name": "Emmett Johnson",
+      "team": "KC",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 7.8,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 27.8,
+      "ppg": 7.8
     },
     {
       "id": "650",
@@ -2635,10 +2830,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 8
     },
     {
@@ -2648,10 +2843,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 8
     },
     {
@@ -2661,10 +2856,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 8
     },
     {
@@ -2674,10 +2869,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 8
     },
     {
@@ -2687,10 +2882,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 8
     },
     {
@@ -2700,10 +2895,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 8
     },
     {
@@ -2713,10 +2908,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 8.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.1,
+      "total": 28.1,
       "ppg": 8.1
     },
     {
@@ -2726,10 +2921,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 8.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.1,
+      "total": 28.1,
       "ppg": 8.1
     },
     {
@@ -2739,10 +2934,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 8.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.3,
+      "total": 28.3,
       "ppg": 8.3
     },
     {
@@ -2752,10 +2947,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 8.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.3,
+      "total": 28.3,
       "ppg": 8.3
     },
     {
@@ -2765,11 +2960,24 @@
       "pos": "RB",
       "gp": 1,
       "raw": 8.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.5,
+      "total": 28.5,
       "ppg": 8.5
+    },
+    {
+      "id": "1466",
+      "name": "Travis Kelce",
+      "team": "KC",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 8.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 28.6,
+      "ppg": 8.6
     },
     {
       "id": "9226",
@@ -2778,10 +2986,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 8.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.6,
+      "total": 28.6,
       "ppg": 8.6
     },
     {
@@ -2791,10 +2999,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 8.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.7,
+      "total": 28.7,
       "ppg": 8.7
     },
     {
@@ -2804,10 +3012,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 8.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.8,
+      "total": 28.8,
       "ppg": 8.8
     },
     {
@@ -2817,11 +3025,24 @@
       "pos": "TE",
       "gp": 1,
       "raw": 8.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.8,
+      "total": 28.8,
       "ppg": 8.8
+    },
+    {
+      "id": "10229",
+      "name": "Rashee Rice",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 8.9,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 28.9,
+      "ppg": 8.9
     },
     {
       "id": "3451",
@@ -2830,10 +3051,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9,
+      "total": 29,
       "ppg": 9
     },
     {
@@ -2843,10 +3064,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9,
+      "total": 29,
       "ppg": 9
     },
     {
@@ -2856,10 +3077,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9,
+      "total": 29,
       "ppg": 9
     },
     {
@@ -2869,10 +3090,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9,
+      "total": 29,
       "ppg": 9
     },
     {
@@ -2882,10 +3103,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9,
+      "total": 29,
       "ppg": 9
     },
     {
@@ -2895,10 +3116,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 9.16,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.16,
+      "total": 29.16,
       "ppg": 9.16
     },
     {
@@ -2908,10 +3129,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 9.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.3,
+      "total": 29.3,
       "ppg": 9.3
     },
     {
@@ -2921,10 +3142,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 9.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.3,
+      "total": 29.3,
       "ppg": 9.3
     },
     {
@@ -2934,10 +3155,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 9.46,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.46,
+      "total": 29.46,
       "ppg": 9.46
     },
     {
@@ -2947,10 +3168,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 9.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.8,
+      "total": 29.8,
       "ppg": 9.8
     },
     {
@@ -2960,10 +3181,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 9.9
     },
     {
@@ -2973,10 +3194,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 9.9
     },
     {
@@ -2986,10 +3207,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 9.9
     },
     {
@@ -2999,10 +3220,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 9.9
     },
     {
@@ -3012,10 +3233,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 10
     },
     {
@@ -3025,10 +3246,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 10
     },
     {
@@ -3038,10 +3259,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 10
     },
     {
@@ -3051,10 +3272,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 10
     },
     {
@@ -3064,10 +3285,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 10
     },
     {
@@ -3077,10 +3298,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 10.26,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.26,
+      "total": 30.26,
       "ppg": 10.26
     },
     {
@@ -3090,10 +3311,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 10.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.5,
+      "total": 30.5,
       "ppg": 10.5
     },
     {
@@ -3103,10 +3324,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 10.54,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.54,
+      "total": 30.54,
       "ppg": 10.54
     },
     {
@@ -3116,10 +3337,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 10.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.7,
+      "total": 30.7,
       "ppg": 10.7
     },
     {
@@ -3129,10 +3350,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 10.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.9,
+      "total": 30.9,
       "ppg": 10.9
     },
     {
@@ -3142,10 +3363,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 11
     },
     {
@@ -3155,10 +3376,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 11
     },
     {
@@ -3168,10 +3389,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 11
     },
     {
@@ -3181,10 +3402,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 11.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.1,
+      "total": 31.1,
       "ppg": 11.1
     },
     {
@@ -3194,10 +3415,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 11.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.2,
+      "total": 31.2,
       "ppg": 11.2
     },
     {
@@ -3207,10 +3428,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 11.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.3,
+      "total": 31.3,
       "ppg": 11.3
     },
     {
@@ -3220,10 +3441,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 11.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.3,
+      "total": 31.3,
       "ppg": 11.3
     },
     {
@@ -3233,10 +3454,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 11.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.3,
+      "total": 31.3,
       "ppg": 11.3
     },
     {
@@ -3246,10 +3467,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 11.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.5,
+      "total": 31.5,
       "ppg": 11.5
     },
     {
@@ -3259,10 +3480,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 11.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.6,
+      "total": 31.6,
       "ppg": 11.6
     },
     {
@@ -3272,10 +3493,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 11.78,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.78,
+      "total": 31.78,
       "ppg": 11.78
     },
     {
@@ -3285,10 +3506,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 11.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.8,
+      "total": 31.8,
       "ppg": 11.8
     },
     {
@@ -3298,10 +3519,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 11.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.9,
+      "total": 31.9,
       "ppg": 11.9
     },
     {
@@ -3311,10 +3532,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 11.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.9,
+      "total": 31.9,
       "ppg": 11.9
     },
     {
@@ -3324,10 +3545,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 12
     },
     {
@@ -3337,10 +3558,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 12
     },
     {
@@ -3350,10 +3571,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 12
     },
     {
@@ -3363,10 +3584,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 12
     },
     {
@@ -3376,10 +3597,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 12
     },
     {
@@ -3389,11 +3610,24 @@
       "pos": "K",
       "gp": 1,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 12
+    },
+    {
+      "id": "4066",
+      "name": "Evan Engram",
+      "team": "DEN",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 12.3,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 32.3,
+      "ppg": 12.3
     },
     {
       "id": "3634",
@@ -3402,10 +3636,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 12.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.4,
+      "total": 32.4,
       "ppg": 12.4
     },
     {
@@ -3415,10 +3649,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 12.48,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.48,
+      "total": 32.48,
       "ppg": 12.48
     },
     {
@@ -3428,10 +3662,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 12.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.5,
+      "total": 32.5,
       "ppg": 12.5
     },
     {
@@ -3441,10 +3675,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 12.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.9,
+      "total": 32.9,
       "ppg": 12.9
     },
     {
@@ -3454,10 +3688,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 12.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.9,
+      "total": 32.9,
       "ppg": 12.9
     },
     {
@@ -3467,10 +3701,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 12.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.9,
+      "total": 32.9,
       "ppg": 12.9
     },
     {
@@ -3480,10 +3714,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
       "ppg": 13
     },
     {
@@ -3493,10 +3727,23 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
+      "ppg": 13
+    },
+    {
+      "id": "KC",
+      "name": "Kansas City Chiefs",
+      "team": "KC",
+      "pos": "DEF",
+      "gp": 1,
+      "raw": 13,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 33,
       "ppg": 13
     },
     {
@@ -3506,10 +3753,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 13.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.1,
+      "total": 33.1,
       "ppg": 13.1
     },
     {
@@ -3519,10 +3766,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 13.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.1,
+      "total": 33.1,
       "ppg": 13.1
     },
     {
@@ -3532,10 +3779,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 13.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.5,
+      "total": 33.5,
       "ppg": 13.5
     },
     {
@@ -3545,10 +3792,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 13.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.8,
+      "total": 33.8,
       "ppg": 13.8
     },
     {
@@ -3558,10 +3805,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 13.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.9,
+      "total": 33.9,
       "ppg": 13.9
     },
     {
@@ -3571,10 +3818,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 14
     },
     {
@@ -3584,10 +3831,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 14
     },
     {
@@ -3597,10 +3844,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 14
     },
     {
@@ -3610,10 +3857,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 14.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.3,
+      "total": 34.3,
       "ppg": 14.3
     },
     {
@@ -3623,10 +3870,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 14.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.4,
+      "total": 34.4,
       "ppg": 14.4
     },
     {
@@ -3636,10 +3883,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 14.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.4,
+      "total": 34.4,
       "ppg": 14.4
     },
     {
@@ -3649,10 +3896,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 14.44,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.44,
+      "total": 34.44,
       "ppg": 14.44
     },
     {
@@ -3662,10 +3909,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 14.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.8,
+      "total": 34.8,
       "ppg": 14.8
     },
     {
@@ -3675,10 +3922,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 15
     },
     {
@@ -3688,10 +3935,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 15
     },
     {
@@ -3701,10 +3948,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 15
     },
     {
@@ -3714,10 +3961,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 15
     },
     {
@@ -3727,10 +3974,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 15.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15.2,
+      "total": 35.2,
       "ppg": 15.2
     },
     {
@@ -3740,10 +3987,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 15.48,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15.48,
+      "total": 35.48,
       "ppg": 15.48
     },
     {
@@ -3753,10 +4000,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 15.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15.5,
+      "total": 35.5,
       "ppg": 15.5
     },
     {
@@ -3766,10 +4013,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 16.22,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.22,
+      "total": 36.22,
       "ppg": 16.22
     },
     {
@@ -3779,10 +4026,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 16.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.3,
+      "total": 36.3,
       "ppg": 16.3
     },
     {
@@ -3792,10 +4039,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 16.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.3,
+      "total": 36.3,
       "ppg": 16.3
     },
     {
@@ -3805,10 +4052,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 16.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.4,
+      "total": 36.4,
       "ppg": 16.4
     },
     {
@@ -3818,10 +4065,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 16.66,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.66,
+      "total": 36.66,
       "ppg": 16.66
     },
     {
@@ -3831,10 +4078,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 16.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.7,
+      "total": 36.7,
       "ppg": 16.7
     },
     {
@@ -3844,10 +4091,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 16.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.8,
+      "total": 36.8,
       "ppg": 16.8
     },
     {
@@ -3857,10 +4104,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 17.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17.7,
+      "total": 37.7,
       "ppg": 17.7
     },
     {
@@ -3870,10 +4117,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 18.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.5,
+      "total": 38.5,
       "ppg": 18.5
     },
     {
@@ -3883,10 +4130,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 18.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.8,
+      "total": 38.8,
       "ppg": 18.8
     },
     {
@@ -3896,10 +4143,10 @@
       "pos": "K",
       "gp": 1,
       "raw": 19,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19,
+      "total": 39,
       "ppg": 19
     },
     {
@@ -3909,11 +4156,24 @@
       "pos": "RB",
       "gp": 1,
       "raw": 19.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.4,
+      "total": 39.4,
       "ppg": 19.4
+    },
+    {
+      "id": "4046",
+      "name": "Patrick Mahomes",
+      "team": "KC",
+      "pos": "QB",
+      "gp": 1,
+      "raw": 19.66,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 39.66,
+      "ppg": 19.66
     },
     {
       "id": "19",
@@ -3922,10 +4182,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -3935,10 +4195,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -3948,10 +4208,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -3961,10 +4221,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -3974,10 +4234,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -3987,10 +4247,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4000,10 +4260,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4013,10 +4273,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4026,10 +4286,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4039,10 +4299,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4052,10 +4312,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4065,10 +4325,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4078,10 +4338,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4091,10 +4351,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4104,10 +4364,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4117,10 +4377,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4130,10 +4390,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4143,10 +4403,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4156,10 +4416,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4169,10 +4429,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4182,10 +4442,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4195,10 +4455,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4208,10 +4468,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4221,10 +4481,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4234,10 +4494,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4247,10 +4507,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4260,10 +4520,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4273,10 +4533,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4286,10 +4546,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4299,10 +4559,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4312,10 +4572,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "7591",
+      "name": "Justin Fields",
+      "team": "KC",
+      "pos": "QB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4325,10 +4598,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4338,10 +4611,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4351,10 +4624,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4364,10 +4637,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4377,10 +4650,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4390,10 +4663,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4403,10 +4676,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4416,10 +4689,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 20,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4429,10 +4702,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "8188",
+      "name": "Tyquan Thornton",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4442,10 +4728,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4455,10 +4741,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4468,10 +4754,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4481,10 +4767,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4494,10 +4780,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4507,10 +4793,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4520,10 +4806,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4533,10 +4819,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4546,10 +4832,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4559,10 +4845,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4572,10 +4858,23 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "9494",
+      "name": "Marvin Mims",
+      "team": "DEN",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4585,10 +4884,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4598,10 +4897,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4611,10 +4910,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4624,10 +4923,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4637,10 +4936,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4650,10 +4949,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4663,10 +4962,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4676,10 +4975,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4689,10 +4988,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4702,10 +5001,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4715,10 +5014,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4728,10 +5027,23 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "11320",
+      "name": "Nikko Remigio",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4741,10 +5053,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "11433",
+      "name": "Nate Adkins",
+      "team": "DEN",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4754,10 +5079,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4767,10 +5092,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4780,10 +5105,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4793,10 +5118,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4806,10 +5131,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4819,10 +5144,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4832,10 +5157,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4845,10 +5170,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4858,10 +5183,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4871,10 +5196,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4884,10 +5209,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4897,10 +5222,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4910,10 +5235,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4923,10 +5248,23 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "12455",
+      "name": "Brashard Smith",
+      "team": "KC",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4936,10 +5274,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4949,10 +5287,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4962,10 +5300,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4975,10 +5313,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -4988,10 +5326,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5001,10 +5339,23 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "12505",
+      "name": "Jalen Royals",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5014,10 +5365,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5027,10 +5378,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5040,10 +5391,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5053,10 +5404,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5066,10 +5417,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5079,10 +5430,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5092,10 +5443,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5105,10 +5456,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5118,10 +5469,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5131,10 +5482,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5144,10 +5495,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5157,10 +5508,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5170,10 +5521,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5183,10 +5534,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5196,10 +5547,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5209,10 +5560,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5222,10 +5573,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5235,10 +5586,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5248,10 +5599,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5261,10 +5612,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5274,10 +5625,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5287,10 +5638,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5300,10 +5651,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5313,10 +5664,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5326,10 +5677,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "13345",
+      "name": "Jonah Coleman",
+      "team": "DEN",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5339,10 +5703,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5352,10 +5716,23 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "13413",
+      "name": "Cyrus Allen",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5365,10 +5742,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5378,10 +5755,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5391,10 +5768,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5404,10 +5781,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5417,10 +5794,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5430,10 +5807,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5443,10 +5820,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5456,10 +5833,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5469,10 +5846,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5482,10 +5859,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5495,10 +5872,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5508,10 +5885,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 20,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 20
     },
     {
@@ -5521,10 +5898,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 20.96,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.96,
+      "total": 40.96,
       "ppg": 20.96
     },
     {
@@ -5534,10 +5911,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 21.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.1,
+      "total": 41.1,
       "ppg": 21.1
     },
     {
@@ -5547,10 +5924,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 21.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.6,
+      "total": 41.6,
       "ppg": 21.6
     },
     {
@@ -5560,10 +5937,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 21.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.7,
+      "total": 41.7,
       "ppg": 21.7
     },
     {
@@ -5573,10 +5950,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 21.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.7,
+      "total": 41.7,
       "ppg": 21.7
     },
     {
@@ -5586,10 +5963,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 21.72,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.72,
+      "total": 41.72,
       "ppg": 21.72
     },
     {
@@ -5599,10 +5976,10 @@
       "pos": "DEF",
       "gp": 1,
       "raw": 22,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22,
+      "total": 42,
       "ppg": 22
     },
     {
@@ -5612,10 +5989,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 22.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.2,
+      "total": 42.2,
       "ppg": 22.2
     },
     {
@@ -5625,10 +6002,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 22.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.2,
+      "total": 42.2,
       "ppg": 22.2
     },
     {
@@ -5638,10 +6015,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 22.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.8,
+      "total": 42.8,
       "ppg": 22.8
     },
     {
@@ -5651,10 +6028,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 23.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 23.2,
+      "total": 43.2,
       "ppg": 23.2
     },
     {
@@ -5664,10 +6041,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 23.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 23.5,
+      "total": 43.5,
       "ppg": 23.5
     },
     {
@@ -5677,10 +6054,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 23.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 23.6,
+      "total": 43.6,
       "ppg": 23.6
     },
     {
@@ -5690,10 +6067,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 23.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 23.7,
+      "total": 43.7,
       "ppg": 23.7
     },
     {
@@ -5703,10 +6080,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 25.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.1,
+      "total": 45.1,
       "ppg": 25.1
     },
     {
@@ -5716,10 +6093,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 25.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.3,
+      "total": 45.3,
       "ppg": 25.3
     },
     {
@@ -5729,10 +6106,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 27.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 27.2,
+      "total": 47.2,
       "ppg": 27.2
     },
     {
@@ -5742,10 +6119,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 27.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 27.4,
+      "total": 47.4,
       "ppg": 27.4
     },
     {
@@ -5755,10 +6132,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 29.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.1,
+      "total": 49.1,
       "ppg": 29.1
     },
     {
@@ -5768,10 +6145,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 29.44,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.44,
+      "total": 49.44,
       "ppg": 29.44
     },
     {
@@ -5781,10 +6158,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 29.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.7,
+      "total": 49.7,
       "ppg": 29.7
     },
     {
@@ -5794,10 +6171,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 29.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.7,
+      "total": 49.7,
       "ppg": 29.7
     },
     {
@@ -5807,10 +6184,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 29.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.8,
+      "total": 49.8,
       "ppg": 29.8
     },
     {
@@ -5820,11 +6197,24 @@
       "pos": "RB",
       "gp": 1,
       "raw": 31.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 31.9,
+      "total": 51.9,
       "ppg": 31.9
+    },
+    {
+      "id": "8151",
+      "name": "Kenneth Walker",
+      "team": "KC",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 32.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 52.6,
+      "ppg": 32.6
     },
     {
       "id": "4984",
@@ -5833,10 +6223,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 32.66,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 32.66,
+      "total": 52.66,
       "ppg": 32.66
     },
     {
@@ -5846,10 +6236,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 34.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 34.8,
+      "total": 54.8,
       "ppg": 34.8
     },
     {
@@ -5859,10 +6249,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 35.26,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 35.26,
+      "total": 55.26,
       "ppg": 35.26
     }
   ]
