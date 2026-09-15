@@ -43,7 +43,6 @@ test('every stat column declares which direction is best', () => {
   assert.equal(bestDirFor('rawPF'), 1);
   assert.equal(bestDirFor('settledPenalties'), 1);
   // More wins is better.
-  assert.equal(bestDirFor('winPct'), -1);
   assert.equal(bestDirFor('record'), -1);
   assert.equal(bestDirFor('median'), -1);
 });
@@ -155,4 +154,13 @@ test('an unresolved tie for first marks no single leader', () => {
   const tied = ROWS.map((r, i) => (i < 2 ? { ...r, unresolvedTie: true } : r));
   const html = renderStandings(tied, TEAMS, {});
   assert.doesNotMatch(html, /class="leader"/);
+});
+
+test('the record header matches what the cells print', () => {
+  // The header read "W-L-T" while the cells printed "1-0" for a moment; a
+  // column heading that promises a third number the rows do not have is worse
+  // than no heading.
+  const html = renderStandings(ROWS, TEAMS, {});
+  assert.ok(html.includes('<span class="lbl-short">W-L</span>'));
+  assert.doesNotMatch(html, /W-L-T/);
 });

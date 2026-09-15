@@ -10,6 +10,13 @@ export const esc = (s) =>
 /**
  * The standings columns, in the order the table prints them.
  *
+ * No Win% column, and records print W-L rather than W-L-T. The league settles
+ * ties by hand - if one happens it gets looked at and adjusted - so a third
+ * number that reads "0" in every row for an entire season is a column of
+ * noise, and a percentage derived from it is the same noise one step removed.
+ * winPct is NOT dropped from the engine: standings() still ranks on it first,
+ * so the order of this table is unchanged. Only the column is gone.
+ *
  * `[key, label, short, numeric, sortable, best]`. `short` is what the header
  * says on a phone, where "vs Median" is three times the width of the numbers
  * beneath it. `best` is the direction that puts the best team first.
@@ -24,8 +31,7 @@ export const esc = (s) =>
 export const STANDINGS_COLUMNS = [
   ['rank', '#', '#', false, false, 0],
   ['team', 'Team', 'Team', false, true, 1],
-  ['record', 'Record', 'W-L-T', false, true, -1],
-  ['winPct', 'Win%', 'Pct', true, true, -1],
+  ['record', 'Record', 'W-L', false, true, -1],
   ['adjPF', 'Adj PF', 'Adj PF', true, true, 1],
   ['rawPF', 'Raw PF', 'Raw PF', true, true, 1],
   ['settledPenalties', `+${PENALTY}s`, `+${PENALTY}`, true, true, 1],
@@ -131,7 +137,7 @@ export function renderStandings(rows, teams, meta = {}) {
   const body = shown
     .map((r) => {
       const name = teams[String(r.rosterId)] || `Roster ${r.rosterId}`;
-      const med = `${r.median.w}-${r.median.l}-${r.median.t}`;
+      const med = `${r.median.w}-${r.median.l}`;
       const cell = (k, cls, val) =>
         `<td class="${cls}${sortKey === k ? ' sorted' : ''}">${val}</td>`;
       // The tint means "this team is leading", so it is attached to the row
@@ -142,8 +148,7 @@ export function renderStandings(rows, teams, meta = {}) {
       return `<tr${leader}>
         <td class="rank">${esc(r.rank)}</td>
         <th class="team${sortKey === 'team' ? ' sorted' : ''}" scope="row">${esc(name)}</th>
-        ${cell('record', 'record', `${r.w}-${r.l}-${r.t}`)}
-        ${cell('winPct', 'pct', r.winPct.toFixed(3).replace(/^0/, ''))}
+        ${cell('record', 'record', `${r.w}-${r.l}`)}
         ${cell('adjPF', 'num adjpf', r.adjPF.toFixed(2))}
         ${cell('rawPF', 'num rawpf', r.rawPF.toFixed(2))}
         ${cell('settledPenalties', 'num pen20', r.settledPenalties ?? 0)}

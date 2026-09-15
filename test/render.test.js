@@ -37,7 +37,15 @@ test('team names are escaped', () => {
   assert.match(html, /&lt;script&gt;/);
 });
 
-test('win% renders three real decimals, not a rounded 2-decimal value', () => {
+/*
+ * No Win% column, and no tie digit in a record.
+ *
+ * The league settles ties by hand, so the third number read "0" in every row
+ * all season and the percentage derived from it carried nothing the W-L did
+ * not. Both are display-only removals: standings() still ranks on winPct and
+ * still counts ties, so the ORDER of this table is untouched.
+ */
+test('the standings carry no Win% column', () => {
   const html = renderStandings(
     [{
       rosterId: 1, w: 2, l: 1, t: 0, gp: 3, winPct: 2 / 3,
@@ -45,8 +53,21 @@ test('win% renders three real decimals, not a rounded 2-decimal value', () => {
     }],
     { 1: 'Alpha' },
   );
-  assert.match(html, /\.667/);
-  assert.doesNotMatch(html, /\.670/);
+  assert.doesNotMatch(html, /Win%|data-k="winPct"/);
+  assert.doesNotMatch(html, /\.667/, 'nor the number it used to print');
+});
+
+test('a record prints W-L, with no tie digit', () => {
+  const html = renderStandings(
+    [{
+      rosterId: 1, w: 2, l: 1, t: 0, gp: 3, winPct: 2 / 3,
+      adjPF: 300, rawPF: 300, median: { w: 1, l: 0, t: 0 }, unresolvedTie: false,
+    }],
+    { 1: 'Alpha' },
+  );
+  assert.match(html, /<td class="record">2-1<\/td>/);
+  assert.match(html, /<td class="num med">1-0<\/td>/);
+  assert.doesNotMatch(html, /2-1-0|1-0-0/, 'no three-part record survives');
 });
 
 test('the rules page states there are no playoffs and that 18 weeks decide it', () => {

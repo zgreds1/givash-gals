@@ -126,6 +126,13 @@ only break either can take is between them.
 
 The standings stay a **table** at every width, and every column is sortable.
 
+There is no Win% column and records print **W-L**, not W-L-T. The league
+settles ties by hand — if one happens it gets looked at and adjusted — so a
+third number that reads `0` in every row for a whole season is a column of
+noise, and a percentage derived from it is that noise one step removed. Both
+are display-only: `standings()` still counts ties and still ranks on win%
+first, so the order of the table is unchanged.
+
 They used to collapse to one labelled card per team below 34rem, on the
 reasoning that seven columns will not fit 375px. Measured rather than assumed,
 that is wrong: at `--t-2xs` all eight columns come to 366px inside a 390px

@@ -383,8 +383,7 @@ table.standings {
   font-size: var(--t-base);
 }
 
-.standings .record,
-.standings .pct {
+.standings .record {
   font-family: var(--font-data);
   font-variant-numeric: tabular-nums;
   font-size: var(--t-xs);
