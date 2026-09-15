@@ -8,6 +8,75 @@ export const esc = (s) =>
   );
 
 /**
+ * The standings columns, in the order the table prints them.
+ *
+ * `[key, label, short, numeric, sortable, best]`. `short` is what the header
+ * says on a phone, where "vs Median" is three times the width of the numbers
+ * beneath it. `best` is the direction that puts the best team first.
+ *
+ * That last field exists because this league inverts the usual reading: the
+ * LOWEST adjusted score wins, and a +20 is a punishment. A table sorting every
+ * column ascending on the first tap would answer "who is winning?" for Adj PF
+ * and the exact opposite for Record. Each column declaring its own direction
+ * means one tap always puts the best team on top, whichever way "good" runs
+ * for that stat.
+ */
+export const STANDINGS_COLUMNS = [
+  ['rank', '#', '#', false, false, 0],
+  ['team', 'Team', 'Team', false, true, 1],
+  ['record', 'Record', 'W-L-T', false, true, -1],
+  ['winPct', 'Win%', 'Pct', true, true, -1],
+  ['adjPF', 'Adj PF', 'Adj PF', true, true, 1],
+  ['rawPF', 'Raw PF', 'Raw PF', true, true, 1],
+  ['settledPenalties', `+${PENALTY}s`, `+${PENALTY}`, true, true, 1],
+  ['median', 'vs Median', 'Med', true, true, -1],
+];
+
+/** Which direction puts the best team first for this column. */
+export function bestDirFor(key) {
+  const col = STANDINGS_COLUMNS.find(([k]) => k === key);
+  return col ? col[5] : 1;
+}
+
+/**
+ * The value a column sorts on.
+ *
+ * Record and vs Median print as "1-0-0" but neither sorts as a string:
+ * "10-0-0" would land between "1-0-0" and "2-0-0". Both sort on wins with
+ * losses breaking the tie the other way, so a better record is never placed
+ * below a worse one that happens to share a win count.
+ */
+function sortValue(row, key, teams) {
+  if (key === 'team') return teams[String(row.rosterId)] || `Roster ${row.rosterId}`;
+  if (key === 'record') return row.w * 1000 - row.l;
+  if (key === 'median') return row.median.w * 1000 - row.median.l;
+  return row[key] ?? 0;
+}
+
+/**
+ * Sort standings rows for display. Pure: the input array is never touched.
+ *
+ * With no `sortKey` the rows come back in the order standings() emitted them,
+ * which is the real ranking - win% then adjusted points then head to head. A
+ * clicked header overrides that for the VIEW only; it never changes who is
+ * actually first, which is why the rank travels with the row and is computed
+ * before this runs.
+ *
+ * Ties fall back to the engine order: Array.prototype.sort is stable, so rows
+ * level on the clicked column keep their standings order instead of
+ * rearranging on every repaint.
+ */
+export function sortStandings(rows, teams = {}, sortKey = null, sortDir = 1) {
+  if (!sortKey) return [...rows];
+  return [...rows].sort((a, b) => {
+    const va = sortValue(a, sortKey, teams);
+    const vb = sortValue(b, sortKey, teams);
+    if (typeof va === 'string') return va.localeCompare(vb) * sortDir;
+    return (va - vb) * sortDir;
+  });
+}
+
+/**
  * The +PENALTY column is a whole count, not a points total: it says how many
  * times this team was charged. It sits beside the two PF columns because it
  * reconciles them - adjPF minus rawPF is exactly PENALTY x that cell - and a
@@ -32,7 +101,10 @@ export const esc = (s) =>
  *   with no seasonStart supplies neither.
  */
 export function renderStandings(rows, teams, meta = {}) {
-  const { through = null, nextWeek = null, nextGate = null } = meta;
+  const {
+    through = null, nextWeek = null, nextGate = null,
+    sortKey = null, sortDir = 1,
+  } = meta;
 
   // Named, not left implicit: a table that has visibly stopped moving mid-week
   // reads as broken unless it says why.
@@ -44,25 +116,63 @@ export function renderStandings(rows, teams, meta = {}) {
     return '<p class="empty">No games played yet. Standings appear after week 1.</p>' + note;
   }
 
-  const body = rows
-    .map((r, i) => {
+  // Rank is stamped from the INCOMING order, which is the engine's real
+  // ranking, and then travels with the row through whatever sort the reader
+  // asks for. Numbering the rows on screen instead would invent a ranking the
+  // league does not have: sort by +20s and the fourth-placed team would be
+  // labelled 1st, which is a claim about the season, not about the column.
+  const ranked = rows.map((r, i) => ({
+    ...r,
+    rank: r.unresolvedTie ? `T-${i + 1}` : String(i + 1),
+  }));
+
+  const shown = sortStandings(ranked, teams, sortKey, sortDir);
+
+  const body = shown
+    .map((r) => {
       const name = teams[String(r.rosterId)] || `Roster ${r.rosterId}`;
-      const rank = r.unresolvedTie ? `T-${i + 1}` : String(i + 1);
       const med = `${r.median.w}-${r.median.l}-${r.median.t}`;
-      // data-label is what each cell is called once the table collapses to
-      // one card per team under 34rem and the header row is hidden.
-      return `<tr>
-        <td class="rank">${esc(rank)}</td>
-        <th class="team" scope="row">${esc(name)}</th>
-        <td class="record" data-label="Record">${r.w}-${r.l}-${r.t}</td>
-        <td class="pct" data-label="Win%">${r.winPct.toFixed(3).replace(/^0/, '')}</td>
-        <td class="num adjpf" data-label="Adj PF">${r.adjPF.toFixed(2)}</td>
-        <td class="num muted" data-label="Raw PF">${r.rawPF.toFixed(2)}</td>
-        <td class="num pen20" data-label="+${PENALTY}s">${r.settledPenalties ?? 0}</td>
-        <td class="num muted" data-label="vs Median">${med}</td>
+      const cell = (k, cls, val) =>
+        `<td class="${cls}${sortKey === k ? ' sorted' : ''}">${val}</td>`;
+      // The tint means "this team is leading", so it is attached to the row
+      // whose RANK is 1, not to whichever row happens to be printed first. An
+      // unresolved tie for first ("T-1") marks nobody: tinting one of them
+      // would settle by accident the very tie the engine refused to settle.
+      const leader = r.rank === '1' ? ' class="leader"' : '';
+      return `<tr${leader}>
+        <td class="rank">${esc(r.rank)}</td>
+        <th class="team${sortKey === 'team' ? ' sorted' : ''}" scope="row">${esc(name)}</th>
+        ${cell('record', 'record', `${r.w}-${r.l}-${r.t}`)}
+        ${cell('winPct', 'pct', r.winPct.toFixed(3).replace(/^0/, ''))}
+        ${cell('adjPF', 'num adjpf', r.adjPF.toFixed(2))}
+        ${cell('rawPF', 'num rawpf', r.rawPF.toFixed(2))}
+        ${cell('settledPenalties', 'num pen20', r.settledPenalties ?? 0)}
+        ${cell('median', 'num med', med)}
       </tr>`;
     })
     .join('');
+
+  // A sortable header is a real <button> so it answers to the keyboard as well
+  // as to a tap; its click bubbles to the <th>, which is where the view
+  // listens, so there is still only one handler. aria-sort tells a screen
+  // reader what the arrow tells everyone else. Same shape as the Players
+  // board's headers, deliberately - one sorting idiom in this codebase.
+  const head = STANDINGS_COLUMNS.map(([k, label, short, num, sortable]) => {
+    const sorted = sortKey === k;
+    const arrow = sorted
+      ? ` <span class="dir" aria-hidden="true">${sortDir === 1 ? '↑' : '↓'}</span>`
+      : '';
+    const cls = [num ? 'num' : '', sortable ? 'sortable' : ''].filter(Boolean).join(' ');
+    const aria = sorted ? ` aria-sort="${sortDir === 1 ? 'ascending' : 'descending'}"` : '';
+    // Both spellings ship in the markup and CSS picks one, so the phone header
+    // is not a second render path that can drift from the desktop one.
+    const text = `<span class="lbl-full">${label}</span>`
+      + `<span class="lbl-short">${short}</span>`;
+    const inner = sortable
+      ? `<button type="button" class="th-btn">${text}${arrow}</button>`
+      : `${text}${arrow}`;
+    return `<th class="${cls}" data-k="${k}" scope="col"${aria}>${inner}</th>`;
+  }).join('');
 
   const caption = `Standings &mdash; lowest adjusted points wins${
     through != null ? `, through week ${through}` : ''
@@ -70,16 +180,7 @@ export function renderStandings(rows, teams, meta = {}) {
 
   return `<div class="table-wrap"><table class="standings">
     <caption>${caption}</caption>
-    <thead><tr>
-      <th scope="col"><span class="sr-only">Rank</span></th>
-      <th scope="col">Team</th>
-      <th scope="col">Record</th>
-      <th scope="col">Win%</th>
-      <th class="num" scope="col">Adj PF <span class="hint">low is good</span></th>
-      <th class="num" scope="col">Raw PF</th>
-      <th class="num" scope="col">+${PENALTY}s</th>
-      <th class="num" scope="col">vs Median</th>
-    </tr></thead>
+    <thead><tr>${head}</tr></thead>
     <tbody>${body}</tbody>
   </table></div>${note}`;
 }

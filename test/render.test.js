@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { renderStandings, renderRules } from '../render.js';
+import { renderStandings, renderRules, STANDINGS_COLUMNS } from '../render.js';
 import { PENALTY } from '../config.js';
 
 /**
@@ -166,37 +166,55 @@ const P20 = (settledPenalties) => ({
 
 test('the standings carry a season +20 column', () => {
   const html = renderStandings([P20(7)], TEAMS, {});
-  assert.ok(html.includes(`<th class="num" scope="col">+${PENALTY}s</th>`));
-  assert.ok(html.includes(`data-label="+${PENALTY}s">7</td>`));
+  assert.ok(html.includes(`<span class="lbl-full">+${PENALTY}s</span>`));
+  assert.ok(html.includes('data-k="settledPenalties"'));
+  assert.match(html, /<td class="num pen20">7<\/td>/);
 });
 
-test('the +20 cell collapses with a label of its own on a phone', () => {
-  // Under 34rem the header row is hidden and every cell is named by its
-  // data-label instead, so a cell without one becomes an unlabelled number.
+/*
+ * No card collapse, at any width.
+ *
+ * The standings used to become one labelled card per team under 34rem - four
+ * captioned rows each and five screens of scrolling to compare two numbers,
+ * which is the opposite of what a standings table is for. Measured at
+ * --t-2xs, all eight columns fit from 360px up, so the table stays a table
+ * and only a 320px phone falls back to scrolling .table-wrap. Nothing is
+ * named by data-label any more because nothing is ever read as a card.
+ */
+test('no cell carries a data-label, because the table never becomes cards', () => {
   const html = renderStandings([P20(3)], TEAMS, {});
-  const cells = html.match(/<td[^>]*>/g) || [];
-  const unlabelled = cells.filter((c) => !/data-label=/.test(c) && !/class="rank"/.test(c));
-  assert.deepEqual(unlabelled, [], 'every collapsing cell names itself');
+  assert.doesNotMatch(html, /data-label=/);
+});
+
+test('a phone gets every column, not a subset', () => {
+  // `.muted` was the class the old 34rem collapse hid. Nothing carries it now:
+  // Raw PF and vs Median are readable on a phone like every other column.
+  const html = renderStandings([P20(4)], TEAMS, {});
+  assert.doesNotMatch(html, /class="[^"]*\bmuted\b/);
+  for (const [k] of STANDINGS_COLUMNS) assert.match(html, new RegExp(`data-k="${k}"`));
+});
+
+test('every header ships both a full and a short label', () => {
+  // CSS picks one by width, so the phone header is not a second render path
+  // that can drift from the desktop one.
+  const html = renderStandings([P20(1)], TEAMS, {});
+  assert.equal((html.match(/class="lbl-full"/g) || []).length, STANDINGS_COLUMNS.length);
+  assert.equal((html.match(/class="lbl-short"/g) || []).length, STANDINGS_COLUMNS.length);
+  assert.ok(html.includes('<span class="lbl-short">Med</span>'));
 });
 
 test('a clean season prints 0 rather than a blank cell', () => {
   const html = renderStandings([P20(0)], TEAMS, {});
-  assert.ok(html.includes(`data-label="+${PENALTY}s">0</td>`));
+  assert.match(html, /<td class="num pen20">0<\/td>/);
 });
 
 test('a row from the archive with no +20 count still renders', () => {
   const html = renderStandings(ROWS, TEAMS, {});
-  assert.ok(html.includes(`data-label="+${PENALTY}s">0</td>`));
+  assert.match(html, /<td class="num pen20">0<\/td>/);
 });
 
-test('the +20 column survives the phone collapse, unlike Raw PF', () => {
-  // `.standings .muted` is display:none under 34rem. Raw PF and vs Median
-  // carry it and drop off a phone; the +20 count deliberately does not, because
-  // it is the column that explains the gap between the two PF numbers and is
-  // the reason a manager opens this table on a Sunday.
-  const html = renderStandings([P20(4)], TEAMS, {});
-  const cell = html.match(/<td[^>]*data-label="\+20s"[^>]*>/)[0];
-  assert.doesNotMatch(cell, /muted/, 'must not be hidden on a phone');
-  const rawPF = html.match(/<td[^>]*data-label="Raw PF"[^>]*>/)[0];
-  assert.match(rawPF, /muted/, 'and Raw PF must still be the one that drops');
+test('the sorted column is marked on every body cell, for the eye', () => {
+  const html = renderStandings([P20(4)], TEAMS, { sortKey: 'adjPF', sortDir: 1 });
+  assert.match(html, /<td class="num adjpf sorted">/);
+  assert.doesNotMatch(html, /<td class="num pen20 sorted">/);
 });

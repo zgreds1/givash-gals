@@ -6,7 +6,7 @@ import { createClient, currentWeek, findGhostRosterId, unownedRosterIds } from '
 import { byeTeams, resolveWeek, standings, opportunitySet, gameStates } from './rules.js';
 import { finalWeeks, gateLabel } from './season.js';
 import { parseHash, formatHash } from './router.js';
-import { renderStandings, renderRules } from './render.js';
+import { renderStandings, renderRules, bestDirFor } from './render.js';
 import { mountLeaderboard } from './leaderboard-view.js';
 import { mountResults } from './results-view.js';
 
@@ -122,6 +122,8 @@ function paint() {
     const through = settled.length ? Math.max(...settled.map((w) => w.week)) : null;
     const nextWeek = through === null ? 1 : through + 1;
     $('standings').innerHTML = renderStandings(standings(settled), state.teams, {
+      sortKey: standingsSort.key,
+      sortDir: standingsSort.dir,
       through,
       nextWeek: nextWeek <= LAST_WEEK ? nextWeek : null,
       nextGate: nextWeek <= LAST_WEEK ? gateLabel(nextWeek, state.seasonStart) : null,
@@ -223,6 +225,51 @@ async function refreshLive() {
   paint();
 }
 
+/**
+ * Which column the standings are sorted by, held outside paint() so it
+ * survives a repaint. paint() runs on every live refresh and on every tab
+ * switch; state kept inside it would silently reset the reader's sort each
+ * time the page got fresh numbers.
+ *
+ * `key: null` means the engine's own ranking - win% then adjusted points then
+ * head to head - which is the only order that is actually the standings.
+ */
+const standingsSort = { key: null, dir: 1 };
+
+/**
+ * One delegated listener on the panel, wired once, because paint() replaces
+ * the table's innerHTML on every repaint and per-header handlers would be
+ * thrown away with it. The click lands on the <button> inside the <th> and
+ * bubbles; closest() finds the header that owns it.
+ *
+ * Three states per column, matching the Players board: best-first, reversed,
+ * then back to the real ranking. The third state matters here more than it
+ * does there - it is the only way back to the actual standings once you have
+ * sorted by something else.
+ */
+function wireStandingsSort() {
+  $('standings').addEventListener('click', (e) => {
+    const th = e.target.closest('th.sortable');
+    if (!th || !$('standings').contains(th)) return;
+    const k = th.dataset.k;
+    if (standingsSort.key === k) {
+      if (standingsSort.dir === -bestDirFor(k)) {
+        standingsSort.key = null;
+        standingsSort.dir = 1;
+      } else {
+        standingsSort.dir = -bestDirFor(k);
+      }
+    } else {
+      standingsSort.key = k;
+      // The FIRST tap puts the best team on top, whichever way "good" runs for
+      // this column. Ascending-always would answer "who is winning?" for Adj PF
+      // and the exact opposite for Record.
+      standingsSort.dir = bestDirFor(k);
+    }
+    paint();
+  });
+}
+
 function wireNav() {
   const buttons = [...document.querySelectorAll('nav button')];
 
@@ -253,6 +300,7 @@ function wireNav() {
 
 if (typeof document !== 'undefined') {
   wireNav();
+  wireStandingsSort();
 
   // Parsed before the snapshot so a cold load of a deep link knows where it is
   // going, and applied after so it paints against loaded data rather than

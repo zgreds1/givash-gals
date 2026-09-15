@@ -124,6 +124,36 @@ the middot, because `4 x +20 . 2 to play` does not fit 116px either and was
 breaking as "2 to" / "play". Each note carries `white-space: nowrap`, so the
 only break either can take is between them.
 
+The standings stay a **table** at every width, and every column is sortable.
+
+They used to collapse to one labelled card per team below 34rem, on the
+reasoning that seven columns will not fit 375px. Measured rather than assumed,
+that is wrong: at `--t-2xs` all eight columns come to 366px inside a 390px
+viewport, and they fit from 360px up. What the collapse cost was the whole
+point of a standings table — four captioned rows per team and five screens of
+scrolling, so comparing two teams' Adj PF meant holding one number in your head
+while you scrolled to the other. Below 360px the table exceeds the page and
+`.table-wrap`'s `overflow-x` scrolls the *table* rather than the document; it
+is still a table.
+
+Each header is a real `<button>` inside its `<th>`, the same idiom the Players
+board uses, so there is one sorting mechanism in this codebase rather than two.
+Three states per column: best-first, reversed, then back to the real ranking.
+
+"Best first" is not one direction here. This league inverts the usual reading —
+lowest adjusted score wins, and a +20 is a punishment — so a table that sorted
+every column ascending would answer "who is winning?" for Adj PF and the exact
+opposite for Record. Each column declares its own `best` direction and the
+first tap uses it; nobody should tap twice to see who is ahead.
+
+Two things follow from sorting that were invisible before it. The **rank**
+column is stamped from the engine's order and travels with its row, so sorting
+by +20s shows the leader as #1 sitting fourth in the list rather than renaming
+the fewest-penalties team "1st" — a claim about the season that the column does
+not support. And the **leader tint** moved from `tr:first-child` to a
+`.leader` class for the same reason: `:first-child` was only ever the leader
+while the table sat in standings order.
+
 The player leaderboard becomes cards below **40rem**. That number is arithmetic,
 not taste: the table's own `min-width` is 38rem (608px) and `main` spends 1rem
 of padding a side, so the table first fits at 640px. Set at 34rem — where the
