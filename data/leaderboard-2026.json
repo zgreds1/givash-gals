@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T08:20:59.404Z",
+  "generatedAt": "2026-09-16T10:49:28.222Z",
   "season": "2026",
   "rows": [
     {
@@ -5011,6 +5011,19 @@
       "id": "11237",
       "name": "Jacob Saylors",
       "team": "DET",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 40,
+      "ppg": 20
+    },
+    {
+      "id": "11273",
+      "name": "Ben VanSumeren",
+      "team": "KC",
       "pos": "RB",
       "gp": 1,
       "raw": 0,
