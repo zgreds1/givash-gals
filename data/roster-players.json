@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T19:14:42.196Z",
+  "generatedAt": "2026-09-17T10:56:04.109Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -145,6 +145,11 @@
       "name": "Marquise Brown",
       "pos": "WR",
       "team": "PHI"
+    },
+    "5854": {
+      "name": "Drew Lock",
+      "pos": "QB",
+      "team": "SEA"
     },
     "5859": {
       "name": "A.J. Brown",
@@ -391,6 +396,11 @@
       "pos": "RB",
       "team": "ATL"
     },
+    "9511": {
+      "name": "Keaton Mitchell",
+      "pos": "RB",
+      "team": "LAC"
+    },
     "9757": {
       "name": "Kendre Miller",
       "pos": "RB",
@@ -441,10 +451,20 @@
       "pos": "QB",
       "team": "ATL"
     },
+    "11563": {
+      "name": "Bo Nix",
+      "pos": "QB",
+      "team": "DEN"
+    },
     "11571": {
       "name": "Isaiah Davis",
       "pos": "RB",
       "team": "NYJ"
+    },
+    "11575": {
+      "name": "Ray Davis",
+      "pos": "RB",
+      "team": "BUF"
     },
     "11579": {
       "name": "Audric Estime",
@@ -560,6 +580,11 @@
       "name": "Kaleb Johnson",
       "pos": "RB",
       "team": "GB"
+    },
+    "12509": {
+      "name": "Tre' Harris",
+      "pos": "WR",
+      "team": "LAC"
     },
     "12522": {
       "name": "Cam Ward",
@@ -705,6 +730,11 @@
       "name": "Miami Dolphins",
       "pos": "DEF",
       "team": "MIA"
+    },
+    "MIN": {
+      "name": "Minnesota Vikings",
+      "pos": "DEF",
+      "team": "MIN"
     },
     "NYJ": {
       "name": "New York Jets",

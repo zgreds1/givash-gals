@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T08:20:59.404Z",
+  "generatedAt": "2026-09-17T10:56:04.109Z",
   "weeks": [
     {
       "week": 1,
@@ -252,7 +252,7 @@
       "degenerate": false,
       "median": 0,
       "medianPool": [
-        0,
+        40,
         0,
         0,
         0
@@ -510,14 +510,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9228",
-              "name": "Bryce Young",
+              "playerId": "5854",
+              "name": "Drew Lock",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "7528",
-              "name": "Najee Harris",
+              "playerId": "9511",
+              "name": "Keaton Mitchell",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -534,14 +534,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13414",
-              "name": "Kaelon Black",
+              "playerId": "11575",
+              "name": "Ray Davis",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "4177",
-              "name": "Mack Hollins",
+              "playerId": "12509",
+              "name": "Tre' Harris",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -611,8 +611,8 @@
         },
         "4": {
           "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "adjusted": 40,
+          "inPlay": 40,
           "penalties": [
             {
               "playerId": "7523",
@@ -639,10 +639,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12455",
-              "name": "Brashard Smith",
-              "reason": "zeroed",
-              "phase": "upcoming"
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
+              "phase": "final"
             },
             {
               "playerId": "13305",
@@ -699,10 +699,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12539",
-              "name": "Arian Smith",
-              "reason": "zeroed",
-              "phase": "upcoming"
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
+              "phase": "final"
             },
             {
               "playerId": "9482",
@@ -723,8 +723,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 0,
-          "yetToPlay": 19
+          "settledPenalties": 2,
+          "yetToPlay": 17
         },
         "5": {
           "raw": 0,
@@ -859,7 +859,7 @@
             4,
             5
           ],
-          "winner": null
+          "winner": 5
         },
         {
           "type": "median",
