@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T10:56:04.109Z",
+  "generatedAt": "2026-09-18T10:32:23.710Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -36,10 +36,20 @@
       "pos": "QB",
       "team": "NYG"
     },
+    "2359": {
+      "name": "Ameer Abdullah",
+      "pos": "RB",
+      "team": "JAX"
+    },
     "2505": {
       "name": "Darren Waller",
       "pos": "TE",
       "team": "CAR"
+    },
+    "3161": {
+      "name": "Carson Wentz",
+      "pos": "QB",
+      "team": "MIN"
     },
     "3198": {
       "name": "Derrick Henry",
@@ -50,6 +60,11 @@
       "name": "Jacoby Brissett",
       "pos": "QB",
       "team": "ARI"
+    },
+    "3271": {
+      "name": "Tyler Higbee",
+      "pos": "TE",
+      "team": "LAR"
     },
     "3678": {
       "name": "Wil Lutz",
@@ -181,6 +196,11 @@
       "pos": "WR",
       "team": "—"
     },
+    "6271": {
+      "name": "Olamide Zaccheaus",
+      "pos": "WR",
+      "team": "ATL"
+    },
     "6768": {
       "name": "Tua Tagovailoa",
       "pos": "QB",
@@ -190,6 +210,11 @@
       "name": "Joe Burrow",
       "pos": "QB",
       "team": "CIN"
+    },
+    "6783": {
+      "name": "Jerry Jeudy",
+      "pos": "WR",
+      "team": "CLE"
     },
     "6786": {
       "name": "CeeDee Lamb",
@@ -210,6 +235,11 @@
       "name": "Cole Kmet",
       "pos": "TE",
       "team": "CHI"
+    },
+    "6828": {
+      "name": "AJ Dillon",
+      "pos": "RB",
+      "team": "CAR"
     },
     "6853": {
       "name": "Van Jefferson",
@@ -326,6 +356,11 @@
       "pos": "TE",
       "team": "WAS"
     },
+    "8755": {
+      "name": "Kaden Davis",
+      "pos": "WR",
+      "team": "CHI"
+    },
     "8917": {
       "name": "KaVontae Turpin",
       "pos": "WR",
@@ -411,6 +446,11 @@
       "pos": "QB",
       "team": "HOU"
     },
+    "10219": {
+      "name": "Chris Rodriguez",
+      "pos": "RB",
+      "team": "JAX"
+    },
     "10231": {
       "name": "Elijah Higgins",
       "pos": "TE",
@@ -441,6 +481,11 @@
       "pos": "RB",
       "team": "SEA"
     },
+    "11510": {
+      "name": "11510",
+      "pos": "",
+      "team": ""
+    },
     "11533": {
       "name": "Brandon Aubrey",
       "pos": "K",
@@ -465,6 +510,16 @@
       "name": "Ray Davis",
       "pos": "RB",
       "team": "BUF"
+    },
+    "11576": {
+      "name": "Braelon Allen",
+      "pos": "RB",
+      "team": "NYJ"
+    },
+    "11577": {
+      "name": "Will Shipley",
+      "pos": "RB",
+      "team": "PHI"
     },
     "11579": {
       "name": "Audric Estime",
@@ -515,6 +570,11 @@
       "name": "Tyrone Tracy",
       "pos": "RB",
       "team": "NYG"
+    },
+    "11729": {
+      "name": "Sione Vaki",
+      "pos": "RB",
+      "team": "DET"
     },
     "12048": {
       "name": "George Holani",
@@ -686,10 +746,20 @@
       "pos": "WR",
       "team": "CLE"
     },
+    "13347": {
+      "name": "Demond Claiborne",
+      "pos": "RB",
+      "team": "MIN"
+    },
     "13349": {
       "name": "Eli Stowers",
       "pos": "TE",
       "team": "PHI"
+    },
+    "13405": {
+      "name": "Kaytron Allen",
+      "pos": "RB",
+      "team": "WAS"
     },
     "13414": {
       "name": "Kaelon Black",

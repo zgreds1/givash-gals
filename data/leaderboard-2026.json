@@ -1,11 +1,115 @@
 {
-  "generatedAt": "2026-09-17T10:56:04.109Z",
+  "generatedAt": "2026-09-18T10:32:23.710Z",
   "season": "2026",
   "rows": [
     {
+      "id": "11729",
+      "name": "Sione Vaki",
+      "team": "DET",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 4.8,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 4.8,
+      "ppg": 2.4
+    },
+    {
+      "id": "5906",
+      "name": "Dawson Knox",
+      "team": "BUF",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 8.7,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 8.7,
+      "ppg": 4.35
+    },
+    {
+      "id": "11637",
+      "name": "Keon Coleman",
+      "team": "BUF",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 9.9,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 9.9,
+      "ppg": 4.95
+    },
+    {
+      "id": "DET",
+      "name": "Detroit Lions",
+      "team": "DET",
+      "pos": "DEF",
+      "gp": 2,
+      "raw": 10,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 10,
+      "ppg": 5
+    },
+    {
+      "id": "8148",
+      "name": "Jameson Williams",
+      "team": "DET",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 10.8,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 10.8,
+      "ppg": 5.4
+    },
+    {
+      "id": "BUF",
+      "name": "Buffalo Bills",
+      "team": "BUF",
+      "pos": "DEF",
+      "gp": 2,
+      "raw": 12,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 12,
+      "ppg": 6
+    },
+    {
+      "id": "8134",
+      "name": "Khalil Shakir",
+      "team": "BUF",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 12.3,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 12.3,
+      "ppg": 6.15
+    },
+    {
+      "id": "11539",
+      "name": "Jake Bates",
+      "team": "DET",
+      "pos": "K",
+      "gp": 2,
+      "raw": 14,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 14,
+      "ppg": 7
+    },
+    {
       "id": "12523",
       "name": "Jimmy Horn",
-      "team": "—",
+      "team": "CLE",
       "pos": "WR",
       "gp": 1,
       "raw": -4,
@@ -14,6 +118,19 @@
       "saved": 0,
       "total": 16,
       "ppg": -4
+    },
+    {
+      "id": "7042",
+      "name": "Tyler Bass",
+      "team": "BUF",
+      "pos": "K",
+      "gp": 2,
+      "raw": 17,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 17,
+      "ppg": 8.5
     },
     {
       "id": "12540",
@@ -79,6 +196,19 @@
       "saved": 0,
       "total": 18.2,
       "ppg": -1.8
+    },
+    {
+      "id": "4983",
+      "name": "DJ Moore",
+      "team": "BUF",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 18.4,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 18.4,
+      "ppg": 9.2
     },
     {
       "id": "HOU",
@@ -215,26 +345,26 @@
       "name": "Frank Gore",
       "team": "BUF",
       "pos": "RB",
-      "gp": 1,
+      "gp": 2,
       "raw": 0.3,
       "pen": 1,
-      "truePen": 0,
+      "truePen": 1,
       "saved": 0,
       "total": 20.3,
-      "ppg": 0.3
+      "ppg": 10.15
     },
     {
       "id": "11575",
       "name": "Ray Davis",
       "team": "BUF",
       "pos": "RB",
-      "gp": 1,
+      "gp": 2,
       "raw": 0.3,
       "pen": 1,
-      "truePen": 0,
+      "truePen": 1,
       "saved": 0,
       "total": 20.3,
-      "ppg": 0.3
+      "ppg": 10.15
     },
     {
       "id": "11599",
@@ -328,19 +458,6 @@
       "ppg": 0.6
     },
     {
-      "id": "11637",
-      "name": "Keon Coleman",
-      "team": "BUF",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 0.6,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 20.6,
-      "ppg": 0.6
-    },
-    {
       "id": "7526",
       "name": "Jaylen Waddle",
       "team": "DEN",
@@ -352,6 +469,19 @@
       "saved": 0,
       "total": 20.7,
       "ppg": 0.7
+    },
+    {
+      "id": "7670",
+      "name": "Joshua Palmer",
+      "team": "BUF",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 20.7,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 20.7,
+      "ppg": 10.35
     },
     {
       "id": "11199",
@@ -501,13 +631,13 @@
       "name": "Brock Wright",
       "team": "DET",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 1,
       "pen": 1,
-      "truePen": 0,
+      "truePen": 1,
       "saved": 0,
       "total": 21,
-      "ppg": 1
+      "ppg": 10.5
     },
     {
       "id": "8755",
@@ -653,19 +783,6 @@
       "ppg": 1.1
     },
     {
-      "id": "5906",
-      "name": "Dawson Knox",
-      "team": "BUF",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 1.2,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 21.2,
-      "ppg": 1.2
-    },
-    {
       "id": "8225",
       "name": "Daniel Bellinger",
       "team": "TEN",
@@ -794,6 +911,19 @@
       "saved": 0,
       "total": 21.5,
       "ppg": 1.5
+    },
+    {
+      "id": "10859",
+      "name": "Sam LaPorta",
+      "team": "DET",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 21.5,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 21.5,
+      "ppg": 10.75
     },
     {
       "id": "8110",
@@ -1086,19 +1216,6 @@
       "name": "AJ Barner",
       "team": "SEA",
       "pos": "TE",
-      "gp": 1,
-      "raw": 2.3,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 22.3,
-      "ppg": 2.3
-    },
-    {
-      "id": "11729",
-      "name": "Sione Vaki",
-      "team": "DET",
-      "pos": "RB",
       "gp": 1,
       "raw": 2.3,
       "pen": 1,
@@ -1613,6 +1730,19 @@
       "saved": 0,
       "total": 23.6,
       "ppg": 3.6
+    },
+    {
+      "id": "12535",
+      "name": "Isaac TeSlaa",
+      "team": "DET",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 3.6,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 23.6,
+      "ppg": 11.8
     },
     {
       "id": "2359",
@@ -2473,19 +2603,6 @@
       "ppg": 6.5
     },
     {
-      "id": "8148",
-      "name": "Jameson Williams",
-      "team": "DET",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 6.5,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 26.5,
-      "ppg": 6.5
-    },
-    {
       "id": "13079",
       "name": "Jahdae Walker",
       "team": "CHI",
@@ -2616,32 +2733,6 @@
       "ppg": 7
     },
     {
-      "id": "8134",
-      "name": "Khalil Shakir",
-      "team": "BUF",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 7,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 27,
-      "ppg": 7
-    },
-    {
-      "id": "11539",
-      "name": "Jake Bates",
-      "team": "DET",
-      "pos": "K",
-      "gp": 1,
-      "raw": 7,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 27,
-      "ppg": 7
-    },
-    {
       "id": "11792",
       "name": "Will Reichard",
       "team": "MIN",
@@ -2733,36 +2824,10 @@
       "ppg": 7.3
     },
     {
-      "id": "10859",
-      "name": "Sam LaPorta",
-      "team": "DET",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 7.3,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 27.3,
-      "ppg": 7.3
-    },
-    {
       "id": "6801",
       "name": "Tee Higgins",
       "team": "CIN",
       "pos": "WR",
-      "gp": 1,
-      "raw": 7.4,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 27.4,
-      "ppg": 7.4
-    },
-    {
-      "id": "8138",
-      "name": "James Cook",
-      "team": "BUF",
-      "pos": "RB",
       "gp": 1,
       "raw": 7.4,
       "pen": 1,
@@ -2809,6 +2874,19 @@
       "saved": 0,
       "total": 27.6,
       "ppg": 7.6
+    },
+    {
+      "id": "8138",
+      "name": "James Cook",
+      "team": "BUF",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 27.8,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 27.8,
+      "ppg": 13.9
     },
     {
       "id": "13337",
@@ -2880,19 +2958,6 @@
       "name": "Tucker Kraft",
       "team": "GB",
       "pos": "TE",
-      "gp": 1,
-      "raw": 8,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 28,
-      "ppg": 8
-    },
-    {
-      "id": "BUF",
-      "name": "Buffalo Bills",
-      "team": "BUF",
-      "pos": "DEF",
       "gp": 1,
       "raw": 8,
       "pen": 1,
@@ -3175,19 +3240,6 @@
       "ppg": 9.8
     },
     {
-      "id": "7670",
-      "name": "Joshua Palmer",
-      "team": "BUF",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 9.9,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 29.9,
-      "ppg": 9.9
-    },
-    {
       "id": "9493",
       "name": "Puka Nacua",
       "team": "LAR",
@@ -3373,19 +3425,6 @@
       "id": "ARI",
       "name": "Arizona Cardinals",
       "team": "ARI",
-      "pos": "DEF",
-      "gp": 1,
-      "raw": 11,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 31,
-      "ppg": 11
-    },
-    {
-      "id": "DET",
-      "name": "Detroit Lions",
-      "team": "DET",
       "pos": "DEF",
       "gp": 1,
       "raw": 11,
@@ -3708,19 +3747,6 @@
       "ppg": 12.9
     },
     {
-      "id": "7042",
-      "name": "Tyler Bass",
-      "team": "BUF",
-      "pos": "K",
-      "gp": 1,
-      "raw": 13,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 33,
-      "ppg": 13
-    },
-    {
       "id": "SEA",
       "name": "Seattle Seahawks",
       "team": "SEA",
@@ -3890,17 +3916,17 @@
       "ppg": 14.4
     },
     {
-      "id": "3163",
-      "name": "Jared Goff",
-      "team": "DET",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 14.44,
-      "pen": 1,
+      "id": "10236",
+      "name": "Dalton Kincaid",
+      "team": "BUF",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 34.5,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 34.44,
-      "ppg": 14.44
+      "total": 34.5,
+      "ppg": 17.25
     },
     {
       "id": "11584",
@@ -3992,19 +4018,6 @@
       "saved": 0,
       "total": 35.48,
       "ppg": 15.48
-    },
-    {
-      "id": "10236",
-      "name": "Dalton Kincaid",
-      "team": "BUF",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 15.5,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 35.5,
-      "ppg": 15.5
     },
     {
       "id": "3161",
@@ -4111,17 +4124,17 @@
       "ppg": 17.7
     },
     {
-      "id": "4983",
-      "name": "DJ Moore",
-      "team": "BUF",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 18.5,
-      "pen": 1,
+      "id": "3163",
+      "name": "Jared Goff",
+      "team": "DET",
+      "pos": "QB",
+      "gp": 2,
+      "raw": 38.22,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 38.5,
-      "ppg": 18.5
+      "total": 38.22,
+      "ppg": 19.11
     },
     {
       "id": "8155",
@@ -4336,10 +4349,10 @@
       "name": "Tyler Conklin",
       "team": "DET",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -4362,10 +4375,10 @@
       "name": "Greg Dortch",
       "team": "BUF",
       "pos": "WR",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -4414,10 +4427,10 @@
       "name": "Tom Kennedy",
       "team": "DET",
       "pos": "WR",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -4765,10 +4778,10 @@
       "name": "Tay Martin",
       "team": "DET",
       "pos": "WR",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -5012,10 +5025,10 @@
       "name": "Jacob Saylors",
       "team": "DET",
       "pos": "RB",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -5398,19 +5411,6 @@
       "ppg": 20
     },
     {
-      "id": "12535",
-      "name": "Isaac TeSlaa",
-      "team": "DET",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 0,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 40,
-      "ppg": 20
-    },
-    {
       "id": "12539",
       "name": "Arian Smith",
       "team": "NYJ",
@@ -5467,10 +5467,10 @@
       "name": "Jackson Hawes",
       "team": "BUF",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -5519,10 +5519,10 @@
       "name": "Keleki Latu",
       "team": "BUF",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -5545,10 +5545,10 @@
       "name": "Jackson Meeks",
       "team": "DET",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 2,
       "saved": 0,
       "total": 40,
       "ppg": 20
@@ -6074,19 +6074,6 @@
       "ppg": 23.6
     },
     {
-      "id": "7547",
-      "name": "Amon-Ra St. Brown",
-      "team": "DET",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 23.7,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 43.7,
-      "ppg": 23.7
-    },
-    {
       "id": "7523",
       "name": "Trevor Lawrence",
       "team": "JAX",
@@ -6143,13 +6130,13 @@
       "name": "Jahmyr Gibbs",
       "team": "DET",
       "pos": "RB",
-      "gp": 1,
-      "raw": 29.1,
-      "pen": 1,
+      "gp": 2,
+      "raw": 49.4,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 49.1,
-      "ppg": 29.1
+      "total": 49.4,
+      "ppg": 24.7
     },
     {
       "id": "9228",
@@ -6230,17 +6217,17 @@
       "ppg": 32.6
     },
     {
-      "id": "4984",
-      "name": "Josh Allen",
-      "team": "BUF",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 32.66,
-      "pen": 1,
+      "id": "7547",
+      "name": "Amon-Ra St. Brown",
+      "team": "DET",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 54.4,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 52.66,
-      "ppg": 32.66
+      "total": 54.4,
+      "ppg": 27.2
     },
     {
       "id": "3198",
@@ -6267,6 +6254,19 @@
       "saved": 0,
       "total": 55.26,
       "ppg": 35.26
+    },
+    {
+      "id": "4984",
+      "name": "Josh Allen",
+      "team": "BUF",
+      "pos": "QB",
+      "gp": 2,
+      "raw": 70.48,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 70.48,
+      "ppg": 35.24
     }
   ]
 }
