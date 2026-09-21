@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T22:17:58.883Z",
+  "generatedAt": "2026-09-21T00:56:20.060Z",
   "weeks": [
     {
       "week": 1,
@@ -250,25 +250,19 @@
       "week": 2,
       "played": true,
       "degenerate": false,
-      "median": 91.9,
+      "median": 130.04,
       "medianPool": [
-        143.96,
-        107.42,
-        76.38,
-        68.6
+        148.04,
+        136.9,
+        123.18,
+        95.68
       ],
       "teams": {
         "1": {
-          "raw": 56.38,
-          "adjusted": 76.38,
-          "inPlay": 136.38,
+          "raw": 55.68,
+          "adjusted": 95.68,
+          "inPlay": 95.68,
           "penalties": [
-            {
-              "playerId": "8917",
-              "name": "KaVontae Turpin",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "12540",
               "name": "Chimere Dike",
@@ -279,7 +273,7 @@
               "playerId": "6783",
               "name": "Jerry Jeudy",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "13285",
@@ -298,21 +292,15 @@
               "name": "Tyler Higbee",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "12048",
-              "name": "George Holani",
-              "reason": "zeroed",
-              "phase": "live"
             }
           ],
-          "settledPenalties": 1,
+          "settledPenalties": 2,
           "yetToPlay": 3
         },
         "2": {
-          "raw": 63.96,
-          "adjusted": 143.96,
-          "inPlay": 163.96,
+          "raw": 68.04,
+          "adjusted": 148.04,
+          "inPlay": 188.04,
           "penalties": [
             {
               "playerId": "11571",
@@ -330,13 +318,13 @@
               "playerId": "13424",
               "name": "Seth McGowan",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "1479",
               "name": "Keenan Allen",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "12498",
@@ -348,28 +336,22 @@
               "playerId": "13311",
               "name": "Chris Bell",
               "reason": "zeroed",
-              "phase": "live"
-            },
-            {
-              "playerId": "11510",
-              "name": "Unknown (11510)",
-              "reason": "zeroed",
               "phase": "final"
             }
           ],
           "settledPenalties": 4,
-          "yetToPlay": 2
+          "yetToPlay": 0
         },
         "3": {
-          "raw": 97.94,
-          "adjusted": 117.94,
-          "inPlay": 137.94,
+          "raw": 115.56,
+          "adjusted": 155.56,
+          "inPlay": 195.56,
           "penalties": [
             {
               "playerId": "13337",
               "name": "Emmett Johnson",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "11575",
@@ -387,40 +369,28 @@
               "playerId": "8188",
               "name": "Tyquan Thornton",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "9506",
               "name": "Sean Tucker",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             }
           ],
-          "settledPenalties": 1,
-          "yetToPlay": 3
+          "settledPenalties": 2,
+          "yetToPlay": 1
         },
         "4": {
-          "raw": 87.42,
-          "adjusted": 107.42,
-          "inPlay": 127.42,
+          "raw": 103.18,
+          "adjusted": 123.18,
+          "inPlay": 123.18,
           "penalties": [
-            {
-              "playerId": "5870",
-              "name": "Daniel Jones",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "11655",
               "name": "Tyrone Tracy",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "13405",
-              "name": "Kaytron Allen",
-              "reason": "zeroed",
-              "phase": "live"
             },
             {
               "playerId": "6826",
@@ -430,39 +400,33 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 2
+          "yetToPlay": 1
         },
         "5": {
-          "raw": 68.6,
-          "adjusted": 68.6,
-          "inPlay": 148.6,
+          "raw": 76.9,
+          "adjusted": 136.9,
+          "inPlay": 136.9,
           "penalties": [
-            {
-              "playerId": "7527",
-              "name": "Mac Jones",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "9494",
               "name": "Marvin Mims",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "8210",
               "name": "Chig Okonkwo",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "12544",
               "name": "LeQuint Allen",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             }
           ],
-          "settledPenalties": 0,
+          "settledPenalties": 3,
           "yetToPlay": 0
         }
       },
@@ -481,12 +445,12 @@
             4,
             5
           ],
-          "winner": 5
+          "winner": 4
         },
         {
           "type": "median",
           "rosterId": 3,
-          "line": 91.9,
+          "line": 130.04,
           "result": "L"
         }
       ]

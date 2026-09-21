@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-20T22:17:58.883Z",
+  "generatedAt": "2026-09-21T00:56:20.060Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -42,9 +42,9 @@
       "l": 0,
       "t": 0,
       "gp": 2,
-      "adjPF": 237.56,
-      "rawPF": 117.56,
-      "settledPenalties": 6,
+      "adjPF": 256.86,
+      "rawPF": 116.86,
+      "settledPenalties": 7,
       "median": {
         "w": 0,
         "l": 0,
@@ -55,20 +55,20 @@
     },
     {
       "rosterId": 5,
-      "w": 2,
-      "l": 0,
+      "w": 1,
+      "l": 1,
       "t": 0,
       "gp": 2,
-      "adjPF": 272.54,
-      "rawPF": 132.54,
-      "settledPenalties": 7,
+      "adjPF": 340.84,
+      "rawPF": 140.84,
+      "settledPenalties": 10,
       "median": {
         "w": 1,
         "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 1
+      "winPct": 0.5
     },
     {
       "rosterId": 2,
@@ -76,9 +76,26 @@
       "l": 1,
       "t": 0,
       "gp": 2,
-      "adjPF": 351.24,
-      "rawPF": 171.24,
+      "adjPF": 355.32,
+      "rawPF": 175.32,
       "settledPenalties": 9,
+      "median": {
+        "w": 0,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": false,
+      "winPct": 0.5
+    },
+    {
+      "rosterId": 4,
+      "w": 1,
+      "l": 1,
+      "t": 0,
+      "gp": 2,
+      "adjPF": 356.42,
+      "rawPF": 196.42,
+      "settledPenalties": 8,
       "median": {
         "w": 0,
         "l": 0,
@@ -93,29 +110,12 @@
       "l": 2,
       "t": 0,
       "gp": 2,
-      "adjPF": 327.48,
-      "rawPF": 247.48,
-      "settledPenalties": 4,
+      "adjPF": 365.1,
+      "rawPF": 265.1,
+      "settledPenalties": 5,
       "median": {
         "w": 0,
         "l": 1,
-        "t": 0
-      },
-      "unresolvedTie": false,
-      "winPct": 0
-    },
-    {
-      "rosterId": 4,
-      "w": 0,
-      "l": 2,
-      "t": 0,
-      "gp": 2,
-      "adjPF": 340.66,
-      "rawPF": 180.66,
-      "settledPenalties": 8,
-      "median": {
-        "w": 0,
-        "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
