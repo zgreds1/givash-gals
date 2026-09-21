@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T00:56:20.060Z",
+  "generatedAt": "2026-09-21T03:33:22.992Z",
   "weeks": [
     {
       "week": 1,
@@ -250,11 +250,11 @@
       "week": 2,
       "played": true,
       "degenerate": false,
-      "median": 130.04,
+      "median": 132.71,
       "medianPool": [
-        148.04,
+        149.04,
         136.9,
-        123.18,
+        128.52,
         95.68
       ],
       "teams": {
@@ -298,9 +298,9 @@
           "yetToPlay": 3
         },
         "2": {
-          "raw": 68.04,
-          "adjusted": 148.04,
-          "inPlay": 188.04,
+          "raw": 69.04,
+          "adjusted": 149.04,
+          "inPlay": 149.04,
           "penalties": [
             {
               "playerId": "11571",
@@ -313,18 +313,6 @@
               "name": "Kendre Miller",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "13424",
-              "name": "Seth McGowan",
-              "reason": "zeroed",
-              "phase": "live"
-            },
-            {
-              "playerId": "1479",
-              "name": "Keenan Allen",
-              "reason": "zeroed",
-              "phase": "live"
             },
             {
               "playerId": "12498",
@@ -343,16 +331,10 @@
           "yetToPlay": 0
         },
         "3": {
-          "raw": 115.56,
-          "adjusted": 155.56,
-          "inPlay": 195.56,
+          "raw": 130.66,
+          "adjusted": 170.66,
+          "inPlay": 170.66,
           "penalties": [
-            {
-              "playerId": "13337",
-              "name": "Emmett Johnson",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "11575",
               "name": "Ray Davis",
@@ -366,12 +348,6 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "8188",
-              "name": "Tyquan Thornton",
-              "reason": "zeroed",
-              "phase": "live"
-            },
-            {
               "playerId": "9506",
               "name": "Sean Tucker",
               "reason": "zeroed",
@@ -382,9 +358,9 @@
           "yetToPlay": 1
         },
         "4": {
-          "raw": 103.18,
-          "adjusted": 123.18,
-          "inPlay": 123.18,
+          "raw": 108.52,
+          "adjusted": 128.52,
+          "inPlay": 128.52,
           "penalties": [
             {
               "playerId": "11655",
@@ -450,7 +426,7 @@
         {
           "type": "median",
           "rosterId": 3,
-          "line": 130.04,
+          "line": 132.71,
           "result": "L"
         }
       ]
