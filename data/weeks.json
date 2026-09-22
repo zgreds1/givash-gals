@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T10:42:32.596Z",
+  "generatedAt": "2026-09-22T17:33:33.504Z",
   "weeks": [
     {
       "week": 1,
@@ -433,8 +433,8 @@
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "adjusted": 20,
+          "inPlay": 20,
           "penalties": [
             {
               "playerId": "9758",
@@ -485,10 +485,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12540",
-              "name": "Chimere Dike",
-              "reason": "zeroed",
-              "phase": "upcoming"
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
+              "phase": "final"
             },
             {
               "playerId": "6783",
@@ -515,8 +515,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "3271",
-              "name": "Tyler Higbee",
+              "playerId": "12472",
+              "name": "Raheim Sanders",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -545,8 +545,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 0,
-          "yetToPlay": 19
+          "settledPenalties": 1,
+          "yetToPlay": 18
         },
         "2": {
           "raw": 0,
@@ -1038,7 +1038,7 @@
           "type": "median",
           "rosterId": 1,
           "line": 0,
-          "result": "T"
+          "result": "L"
         }
       ]
     }
