@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T05:51:07.417Z",
+  "generatedAt": "2026-09-22T10:42:32.596Z",
   "weeks": [
     {
       "week": 1,
@@ -425,7 +425,7 @@
       "degenerate": false,
       "median": 0,
       "medianPool": [
-        20,
+        40,
         0,
         0,
         0
@@ -443,14 +443,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4017",
-              "name": "Deshaun Watson",
+              "playerId": "2307",
+              "name": "Marcus Mariota",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "4574",
-              "name": "Cooper Rush",
+              "playerId": "11559",
+              "name": "Michael Penix",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -550,8 +550,8 @@
         },
         "2": {
           "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "adjusted": 40,
+          "inPlay": 40,
           "penalties": [
             {
               "playerId": "3161",
@@ -560,10 +560,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "1166",
-              "name": "Kirk Cousins",
-              "reason": "zeroed",
-              "phase": "upcoming"
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
+              "phase": "final"
             },
             {
               "playerId": "3257",
@@ -662,8 +662,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 1,
-          "yetToPlay": 18
+          "settledPenalties": 2,
+          "yetToPlay": 17
         },
         "3": {
           "raw": 0,
@@ -683,8 +683,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "5854",
-              "name": "Drew Lock",
+              "playerId": "11563",
+              "name": "Bo Nix",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -737,8 +737,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4033",
-              "name": "David Njoku",
+              "playerId": "2505",
+              "name": "Darren Waller",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -749,8 +749,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9506",
-              "name": "Sean Tucker",
+              "playerId": "7528",
+              "name": "Najee Harris",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -767,14 +767,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "2505",
-              "name": "Darren Waller",
+              "playerId": "4033",
+              "name": "David Njoku",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "12961",
-              "name": "Ryan Fitzgerald",
+              "playerId": "13968",
+              "name": "Drew Stevens",
               "reason": "zeroed",
               "phase": "upcoming"
             }

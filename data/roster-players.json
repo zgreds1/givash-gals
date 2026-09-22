@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T05:51:07.417Z",
+  "generatedAt": "2026-09-22T10:42:32.596Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -476,6 +476,11 @@
       "pos": "RB",
       "team": "DET"
     },
+    "11256": {
+      "name": "Tyson Bagent",
+      "pos": "QB",
+      "team": "CHI"
+    },
     "11370": {
       "name": "Chris Brooks",
       "pos": "RB",
@@ -580,6 +585,11 @@
       "name": "Sione Vaki",
       "pos": "RB",
       "team": "DET"
+    },
+    "11783": {
+      "name": "Ryan Flournoy",
+      "pos": "WR",
+      "team": "DAL"
     },
     "12048": {
       "name": "George Holani",
@@ -785,6 +795,16 @@
       "name": "Dominic Zvada",
       "pos": "K",
       "team": "NYG"
+    },
+    "13968": {
+      "name": "Drew Stevens",
+      "pos": "K",
+      "team": "WAS"
+    },
+    "ARI": {
+      "name": "Arizona Cardinals",
+      "pos": "DEF",
+      "team": "ARI"
     },
     "CAR": {
       "name": "Carolina Panthers",
