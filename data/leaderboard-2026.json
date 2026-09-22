@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T09:38:28.400Z",
+  "generatedAt": "2026-09-22T05:51:07.417Z",
   "season": "2026",
   "rows": [
     {
@@ -9,10 +9,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": -5.84,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -5.84,
+      "total": 14.16,
       "ppg": -2.92
     },
     {
@@ -22,10 +22,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": -0.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": -0.1,
+      "total": 19.9,
       "ppg": -0.05
     },
     {
@@ -35,10 +35,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 0,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0,
+      "total": 20,
       "ppg": 0
     },
     {
@@ -48,10 +48,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.2,
+      "total": 20.2,
       "ppg": 0.1
     },
     {
@@ -61,10 +61,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 1,
-      "total": 0.5,
+      "total": 20.5,
       "ppg": 0.25
     },
     {
@@ -74,10 +74,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 0.9,
+      "total": 20.9,
       "ppg": 0.45
     },
     {
@@ -87,10 +87,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 0.5
     },
     {
@@ -100,10 +100,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1,
+      "total": 21,
       "ppg": 0.5
     },
     {
@@ -113,10 +113,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 1.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 1,
-      "total": 1.1,
+      "total": 21.1,
       "ppg": 0.55
     },
     {
@@ -126,10 +126,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.4,
+      "total": 21.4,
       "ppg": 0.7
     },
     {
@@ -139,10 +139,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 1.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.5,
+      "total": 21.5,
       "ppg": 0.75
     },
     {
@@ -152,10 +152,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 1.8,
+      "total": 21.8,
       "ppg": 0.9
     },
     {
@@ -165,10 +165,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2,
+      "total": 22,
       "ppg": 1
     },
     {
@@ -178,10 +178,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2,
+      "total": 22,
       "ppg": 1
     },
     {
@@ -191,10 +191,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.4,
+      "total": 22.4,
       "ppg": 1.2
     },
     {
@@ -204,10 +204,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 2.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.4,
+      "total": 22.4,
       "ppg": 1.2
     },
     {
@@ -217,10 +217,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 2.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 2.5,
+      "total": 22.5,
       "ppg": 1.25
     },
     {
@@ -230,10 +230,23 @@
       "pos": "K",
       "gp": 2,
       "raw": 3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3,
+      "total": 23,
+      "ppg": 1.5
+    },
+    {
+      "id": "10214",
+      "name": "Davis Allen",
+      "team": "LAR",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 3,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 23,
       "ppg": 1.5
     },
     {
@@ -243,10 +256,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 3.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.1,
+      "total": 23.1,
       "ppg": 1.55
     },
     {
@@ -256,10 +269,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 3.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.2,
+      "total": 23.2,
       "ppg": 1.6
     },
     {
@@ -269,11 +282,24 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.4,
+      "total": 23.4,
       "ppg": 1.7
+    },
+    {
+      "id": "6865",
+      "name": "Colby Parkinson",
+      "team": "LAR",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 3.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 23.6,
+      "ppg": 1.8
     },
     {
       "id": "10219",
@@ -282,10 +308,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 3.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.6,
+      "total": 23.6,
       "ppg": 1.8
     },
     {
@@ -295,10 +321,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.7,
+      "total": 23.7,
       "ppg": 1.85
     },
     {
@@ -308,10 +334,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 3.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 3.9,
+      "total": 23.9,
       "ppg": 1.95
     },
     {
@@ -321,10 +347,23 @@
       "pos": "TE",
       "gp": 2,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
+      "ppg": 2
+    },
+    {
+      "id": "12015",
+      "name": "Harrison Mevis",
+      "team": "LAR",
+      "pos": "K",
+      "gp": 2,
+      "raw": 4,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 24,
       "ppg": 2
     },
     {
@@ -334,10 +373,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4,
+      "total": 24,
       "ppg": 2
     },
     {
@@ -347,10 +386,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 4.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.4,
+      "total": 24.4,
       "ppg": 2.2
     },
     {
@@ -360,10 +399,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 4.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.4,
+      "total": 24.4,
       "ppg": 2.2
     },
     {
@@ -373,10 +412,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 4.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.5,
+      "total": 24.5,
       "ppg": 2.25
     },
     {
@@ -386,10 +425,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 4.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.6,
+      "total": 24.6,
       "ppg": 2.3
     },
     {
@@ -399,10 +438,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 4.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.8,
+      "total": 24.8,
       "ppg": 2.4
     },
     {
@@ -412,10 +451,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 4.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.8,
+      "total": 24.8,
       "ppg": 2.4
     },
     {
@@ -425,10 +464,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 4.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 4.9,
+      "total": 24.9,
       "ppg": 2.45
     },
     {
@@ -438,10 +477,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5,
+      "total": 25,
       "ppg": 2.5
     },
     {
@@ -451,10 +490,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5,
+      "total": 25,
       "ppg": 2.5
     },
     {
@@ -464,10 +503,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 5.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.3,
+      "total": 25.3,
       "ppg": 2.65
     },
     {
@@ -477,10 +516,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 5.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.3,
+      "total": 25.3,
       "ppg": 2.65
     },
     {
@@ -490,10 +529,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 5.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.3,
+      "total": 25.3,
       "ppg": 2.65
     },
     {
@@ -503,10 +542,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 5.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.5,
+      "total": 25.5,
       "ppg": 2.75
     },
     {
@@ -516,10 +555,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 5.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.5,
+      "total": 25.5,
       "ppg": 2.75
     },
     {
@@ -529,10 +568,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 5.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.6,
+      "total": 25.6,
       "ppg": 2.8
     },
     {
@@ -542,10 +581,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 5.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.6,
+      "total": 25.6,
       "ppg": 2.8
     },
     {
@@ -555,10 +594,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 5.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.7,
+      "total": 25.7,
       "ppg": 2.85
     },
     {
@@ -568,10 +607,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 5.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 5.9,
+      "total": 25.9,
       "ppg": 2.95
     },
     {
@@ -581,10 +620,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 3
     },
     {
@@ -594,10 +633,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 3
     },
     {
@@ -607,10 +646,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 3
     },
     {
@@ -620,10 +659,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6,
+      "total": 26,
       "ppg": 3
     },
     {
@@ -633,10 +672,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 6.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.1,
+      "total": 26.1,
       "ppg": 3.05
     },
     {
@@ -646,10 +685,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 6.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.1,
+      "total": 26.1,
       "ppg": 3.05
     },
     {
@@ -659,10 +698,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 6.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.1,
+      "total": 26.1,
       "ppg": 3.05
     },
     {
@@ -672,10 +711,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 6.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.9,
+      "total": 26.9,
       "ppg": 3.45
     },
     {
@@ -685,10 +724,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 6.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 6.9,
+      "total": 26.9,
       "ppg": 3.45
     },
     {
@@ -698,10 +737,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 3.5
     },
     {
@@ -711,10 +750,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 3.5
     },
     {
@@ -724,10 +763,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7,
+      "total": 27,
       "ppg": 3.5
     },
     {
@@ -737,10 +776,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 7.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.1,
+      "total": 27.1,
       "ppg": 3.55
     },
     {
@@ -750,10 +789,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.2,
+      "total": 27.2,
       "ppg": 3.6
     },
     {
@@ -763,10 +802,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 7.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.2,
+      "total": 27.2,
       "ppg": 3.6
     },
     {
@@ -776,10 +815,23 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.5,
+      "total": 27.5,
+      "ppg": 3.75
+    },
+    {
+      "id": "13285",
+      "name": "Malachi Fields",
+      "team": "NYG",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 7.5,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 27.5,
       "ppg": 3.75
     },
     {
@@ -789,10 +841,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 7.52,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.52,
+      "total": 27.52,
       "ppg": 3.76
     },
     {
@@ -802,10 +854,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.7,
+      "total": 27.7,
       "ppg": 3.85
     },
     {
@@ -815,10 +867,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.8,
+      "total": 27.8,
       "ppg": 3.9
     },
     {
@@ -828,10 +880,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 7.8,
+      "total": 27.8,
       "ppg": 3.9
     },
     {
@@ -841,10 +893,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 4
     },
     {
@@ -854,10 +906,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 4
     },
     {
@@ -867,10 +919,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 4
     },
     {
@@ -880,10 +932,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8,
+      "total": 28,
       "ppg": 4
     },
     {
@@ -893,10 +945,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 8.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.3,
+      "total": 28.3,
       "ppg": 4.15
     },
     {
@@ -906,10 +958,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 8.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.4,
+      "total": 28.4,
       "ppg": 4.2
     },
     {
@@ -919,10 +971,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 8.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.5,
+      "total": 28.5,
       "ppg": 4.25
     },
     {
@@ -932,10 +984,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 8.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.7,
+      "total": 28.7,
       "ppg": 4.35
     },
     {
@@ -945,10 +997,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 8.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 8.8,
+      "total": 28.8,
       "ppg": 4.4
     },
     {
@@ -958,10 +1010,23 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9,
+      "total": 29,
+      "ppg": 4.5
+    },
+    {
+      "id": "NYG",
+      "name": "New York Giants",
+      "team": "NYG",
+      "pos": "DEF",
+      "gp": 2,
+      "raw": 9,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 29,
       "ppg": 4.5
     },
     {
@@ -971,10 +1036,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 9.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.2,
+      "total": 29.2,
       "ppg": 4.6
     },
     {
@@ -984,10 +1049,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 9.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.3,
+      "total": 29.3,
       "ppg": 4.65
     },
     {
@@ -997,10 +1062,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.3,
+      "total": 29.3,
       "ppg": 4.65
     },
     {
@@ -1010,10 +1075,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 9.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.3,
+      "total": 29.3,
       "ppg": 4.65
     },
     {
@@ -1023,10 +1088,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 9.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.4,
+      "total": 29.4,
       "ppg": 4.7
     },
     {
@@ -1036,11 +1101,24 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.4,
+      "total": 29.4,
       "ppg": 4.7
+    },
+    {
+      "id": "7090",
+      "name": "Darnell Mooney",
+      "team": "NYG",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 9.5,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 29.5,
+      "ppg": 4.75
     },
     {
       "id": "9484",
@@ -1049,10 +1127,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 9.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.5,
+      "total": 29.5,
       "ppg": 4.75
     },
     {
@@ -1062,10 +1140,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 9.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.5,
+      "total": 29.5,
       "ppg": 4.75
     },
     {
@@ -1075,10 +1153,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.5,
+      "total": 29.5,
       "ppg": 4.75
     },
     {
@@ -1088,10 +1166,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 9.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.6,
+      "total": 29.6,
       "ppg": 4.8
     },
     {
@@ -1101,10 +1179,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 9.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.7,
+      "total": 29.7,
       "ppg": 4.85
     },
     {
@@ -1114,10 +1192,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.7,
+      "total": 29.7,
       "ppg": 4.85
     },
     {
@@ -1127,10 +1205,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 9.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.7,
+      "total": 29.7,
       "ppg": 4.85
     },
     {
@@ -1140,10 +1218,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.7,
+      "total": 29.7,
       "ppg": 4.85
     },
     {
@@ -1153,10 +1231,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 4.95
     },
     {
@@ -1166,10 +1244,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 4.95
     },
     {
@@ -1179,10 +1257,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 9.9,
+      "total": 29.9,
       "ppg": 4.95
     },
     {
@@ -1192,10 +1270,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 5
     },
     {
@@ -1205,10 +1283,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 5
     },
     {
@@ -1218,10 +1296,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 5
     },
     {
@@ -1231,10 +1309,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 5
     },
     {
@@ -1244,10 +1322,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 5
     },
     {
@@ -1257,10 +1335,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 10,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10,
+      "total": 30,
       "ppg": 5
     },
     {
@@ -1270,10 +1348,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 10.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.1,
+      "total": 30.1,
       "ppg": 5.05
     },
     {
@@ -1283,10 +1361,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 10.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.2,
+      "total": 30.2,
       "ppg": 5.1
     },
     {
@@ -1296,11 +1374,24 @@
       "pos": "RB",
       "gp": 2,
       "raw": 10.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.4,
+      "total": 30.4,
       "ppg": 5.2
+    },
+    {
+      "id": "11632",
+      "name": "Malik Nabers",
+      "team": "NYG",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 10.5,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 30.5,
+      "ppg": 5.25
     },
     {
       "id": "12474",
@@ -1309,10 +1400,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 10.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.5,
+      "total": 30.5,
       "ppg": 5.25
     },
     {
@@ -1322,10 +1413,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.7,
+      "total": 30.7,
       "ppg": 5.35
     },
     {
@@ -1335,10 +1426,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.8,
+      "total": 30.8,
       "ppg": 5.4
     },
     {
@@ -1348,10 +1439,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 10.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.8,
+      "total": 30.8,
       "ppg": 5.4
     },
     {
@@ -1361,10 +1452,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 10.82,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.82,
+      "total": 30.82,
       "ppg": 5.41
     },
     {
@@ -1374,10 +1465,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 10.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.9,
+      "total": 30.9,
       "ppg": 5.45
     },
     {
@@ -1387,10 +1478,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 10.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.9,
+      "total": 30.9,
       "ppg": 5.45
     },
     {
@@ -1400,10 +1491,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 10.9,
+      "total": 30.9,
       "ppg": 5.45
     },
     {
@@ -1413,10 +1504,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 5.5
     },
     {
@@ -1426,10 +1517,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 5.5
     },
     {
@@ -1439,10 +1530,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 5.5
     },
     {
@@ -1452,10 +1543,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 5.5
     },
     {
@@ -1465,10 +1556,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 5.5
     },
     {
@@ -1478,10 +1569,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 11,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11,
+      "total": 31,
       "ppg": 5.5
     },
     {
@@ -1491,10 +1582,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 11.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.1,
+      "total": 31.1,
       "ppg": 5.55
     },
     {
@@ -1504,10 +1595,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 11.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.2,
+      "total": 31.2,
       "ppg": 5.6
     },
     {
@@ -1517,10 +1608,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 11.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.3,
+      "total": 31.3,
       "ppg": 5.65
     },
     {
@@ -1530,10 +1621,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 11.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.4,
+      "total": 31.4,
       "ppg": 5.7
     },
     {
@@ -1543,10 +1634,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 11.56,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.56,
+      "total": 31.56,
       "ppg": 5.78
     },
     {
@@ -1556,10 +1647,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 11.84,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 11.84,
+      "total": 31.84,
       "ppg": 5.92
     },
     {
@@ -1569,10 +1660,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -8.04,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 11.96,
+      "total": 31.96,
       "ppg": -8.04
     },
     {
@@ -1582,10 +1673,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1595,10 +1686,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1608,10 +1699,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1621,10 +1712,23 @@
       "pos": "WR",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
+      "ppg": 6
+    },
+    {
+      "id": "13833",
+      "name": "Dominic Zvada",
+      "team": "NYG",
+      "pos": "K",
+      "gp": 2,
+      "raw": 12,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1634,10 +1738,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1647,10 +1751,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1660,10 +1764,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 12,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12,
+      "total": 32,
       "ppg": 6
     },
     {
@@ -1673,10 +1777,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 12.14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.14,
+      "total": 32.14,
       "ppg": 6.07
     },
     {
@@ -1686,10 +1790,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 12.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.3,
+      "total": 32.3,
       "ppg": 6.15
     },
     {
@@ -1699,10 +1803,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 12.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.3,
+      "total": 32.3,
       "ppg": 6.15
     },
     {
@@ -1712,10 +1816,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 12.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.3,
+      "total": 32.3,
       "ppg": 6.15
     },
     {
@@ -1725,11 +1829,24 @@
       "pos": "TE",
       "gp": 2,
       "raw": 12.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 12.6,
+      "total": 32.6,
       "ppg": 6.3
+    },
+    {
+      "id": "6130",
+      "name": "Devin Singletary",
+      "team": "NYG",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 12.7,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 32.7,
+      "ppg": 6.35
     },
     {
       "id": "3678",
@@ -1738,10 +1855,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
       "ppg": 6.5
     },
     {
@@ -1751,10 +1868,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
       "ppg": 6.5
     },
     {
@@ -1764,10 +1881,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
       "ppg": 6.5
     },
     {
@@ -1777,10 +1894,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
       "ppg": 6.5
     },
     {
@@ -1790,10 +1907,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 13,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
+      "total": 33,
       "ppg": 6.5
     },
     {
@@ -1803,10 +1920,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 13.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.1,
+      "total": 33.1,
       "ppg": 6.55
     },
     {
@@ -1816,10 +1933,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 13.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.3,
+      "total": 33.3,
       "ppg": 6.65
     },
     {
@@ -1829,10 +1946,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 13.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.6,
+      "total": 33.6,
       "ppg": 6.8
     },
     {
@@ -1842,10 +1959,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 13.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 13.6,
+      "total": 33.6,
       "ppg": 6.8
     },
     {
@@ -1855,10 +1972,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 7
     },
     {
@@ -1868,10 +1985,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 7
     },
     {
@@ -1881,10 +1998,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 7
     },
     {
@@ -1894,10 +2011,23 @@
       "pos": "K",
       "gp": 2,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
+      "ppg": 7
+    },
+    {
+      "id": "LAR",
+      "name": "Los Angeles Rams",
+      "team": "LAR",
+      "pos": "DEF",
+      "gp": 2,
+      "raw": 14,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 34,
       "ppg": 7
     },
     {
@@ -1907,11 +2037,24 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 14,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14,
+      "total": 34,
       "ppg": 7
+    },
+    {
+      "id": "11586",
+      "name": "Blake Corum",
+      "team": "LAR",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 14.1,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 34.1,
+      "ppg": 7.05
     },
     {
       "id": "11624",
@@ -1920,10 +2063,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 14.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.3,
+      "total": 34.3,
       "ppg": 7.15
     },
     {
@@ -1933,10 +2076,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 14.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.5,
+      "total": 34.5,
       "ppg": 7.25
     },
     {
@@ -1946,10 +2089,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 14.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.5,
+      "total": 34.5,
       "ppg": 7.25
     },
     {
@@ -1959,10 +2102,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 14.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.5,
+      "total": 34.5,
       "ppg": 7.25
     },
     {
@@ -1972,10 +2115,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 14.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.8,
+      "total": 34.8,
       "ppg": 7.4
     },
     {
@@ -1985,10 +2128,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 14.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 14.8,
+      "total": 34.8,
       "ppg": 7.4
     },
     {
@@ -1998,10 +2141,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 7.5
     },
     {
@@ -2011,10 +2154,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 7.5
     },
     {
@@ -2024,10 +2167,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 7.5
     },
     {
@@ -2037,10 +2180,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 15,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15,
+      "total": 35,
       "ppg": 7.5
     },
     {
@@ -2050,10 +2193,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 15.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15.4,
+      "total": 35.4,
       "ppg": 7.7
     },
     {
@@ -2063,10 +2206,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 15.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 15.5,
+      "total": 35.5,
       "ppg": 7.75
     },
     {
@@ -2076,10 +2219,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 16,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16,
+      "total": 36,
       "ppg": 8
     },
     {
@@ -2089,10 +2232,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 16,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16,
+      "total": 36,
       "ppg": 8
     },
     {
@@ -2102,10 +2245,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 16,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16,
+      "total": 36,
       "ppg": 8
     },
     {
@@ -2115,10 +2258,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": -4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 16,
+      "total": 36,
       "ppg": -4
     },
     {
@@ -2128,10 +2271,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 16.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.4,
+      "total": 36.4,
       "ppg": 8.2
     },
     {
@@ -2141,10 +2284,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 16.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.8,
+      "total": 36.8,
       "ppg": 8.4
     },
     {
@@ -2154,10 +2297,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 16.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 16.9,
+      "total": 36.9,
       "ppg": 8.45
     },
     {
@@ -2167,10 +2310,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 17,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17,
+      "total": 37,
       "ppg": 8.5
     },
     {
@@ -2180,10 +2323,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 17,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17,
+      "total": 37,
       "ppg": 8.5
     },
     {
@@ -2193,10 +2336,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 17,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17,
+      "total": 37,
       "ppg": 8.5
     },
     {
@@ -2206,10 +2349,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 17,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17,
+      "total": 37,
       "ppg": 8.5
     },
     {
@@ -2219,10 +2362,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": -2.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 17.2,
+      "total": 37.2,
       "ppg": 8.6
     },
     {
@@ -2232,10 +2375,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 17.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17.4,
+      "total": 37.4,
       "ppg": 8.7
     },
     {
@@ -2243,13 +2386,13 @@
       "name": "Tyrone Tracy",
       "team": "NYG",
       "pos": "RB",
-      "gp": 1,
+      "gp": 2,
       "raw": -2.6,
-      "pen": 1,
-      "truePen": 0,
+      "pen": 2,
+      "truePen": 1,
       "saved": 0,
-      "total": 17.4,
-      "ppg": -2.6
+      "total": 37.4,
+      "ppg": 8.7
     },
     {
       "id": "12514",
@@ -2258,10 +2401,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 17.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 17.6,
+      "total": 37.6,
       "ppg": 8.8
     },
     {
@@ -2271,10 +2414,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18,
+      "total": 38,
       "ppg": 9
     },
     {
@@ -2284,10 +2427,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18,
+      "total": 38,
       "ppg": 9
     },
     {
@@ -2297,10 +2440,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18,
+      "total": 38,
       "ppg": 9
     },
     {
@@ -2310,10 +2453,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18,
+      "total": 38,
       "ppg": 9
     },
     {
@@ -2323,10 +2466,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18,
+      "total": 38,
       "ppg": 9
     },
     {
@@ -2334,13 +2477,13 @@
       "name": "Tyler Higbee",
       "team": "LAR",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": -1.8,
-      "pen": 1,
-      "truePen": 0,
+      "pen": 2,
+      "truePen": 1,
       "saved": 0,
-      "total": 18.2,
-      "ppg": -1.8
+      "total": 38.2,
+      "ppg": 9.1
     },
     {
       "id": "4217",
@@ -2349,10 +2492,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 18.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.2,
+      "total": 38.2,
       "ppg": 9.1
     },
     {
@@ -2362,10 +2505,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 18.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.3,
+      "total": 38.3,
       "ppg": 9.15
     },
     {
@@ -2375,10 +2518,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 18.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.4,
+      "total": 38.4,
       "ppg": 9.2
     },
     {
@@ -2388,10 +2531,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 18.44,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.44,
+      "total": 38.44,
       "ppg": 9.22
     },
     {
@@ -2401,10 +2544,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 18.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.5,
+      "total": 38.5,
       "ppg": 9.25
     },
     {
@@ -2414,10 +2557,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 18.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.5,
+      "total": 38.5,
       "ppg": 9.25
     },
     {
@@ -2427,10 +2570,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 18.54,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.54,
+      "total": 38.54,
       "ppg": 9.27
     },
     {
@@ -2440,10 +2583,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 18.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.6,
+      "total": 38.6,
       "ppg": 9.3
     },
     {
@@ -2453,10 +2596,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 18.88,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.88,
+      "total": 38.88,
       "ppg": 9.44
     },
     {
@@ -2466,10 +2609,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 18.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 18.9,
+      "total": 38.9,
       "ppg": 9.45
     },
     {
@@ -2479,10 +2622,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 19,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19,
+      "total": 39,
       "ppg": 9.5
     },
     {
@@ -2492,10 +2635,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 19,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19,
+      "total": 39,
       "ppg": 9.5
     },
     {
@@ -2505,10 +2648,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 19,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19,
+      "total": 39,
       "ppg": 9.5
     },
     {
@@ -2518,10 +2661,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 19,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19,
+      "total": 39,
       "ppg": 9.5
     },
     {
@@ -2531,10 +2674,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 19,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19,
+      "total": 39,
       "ppg": 9.5
     },
     {
@@ -2544,10 +2687,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 19.18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.18,
+      "total": 39.18,
       "ppg": 9.59
     },
     {
@@ -2557,10 +2700,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 19.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.2,
+      "total": 39.2,
       "ppg": 9.6
     },
     {
@@ -2570,10 +2713,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 19.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.4,
+      "total": 39.4,
       "ppg": 9.7
     },
     {
@@ -2583,10 +2726,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 19.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.4,
+      "total": 39.4,
       "ppg": 9.7
     },
     {
@@ -2596,10 +2739,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": -0.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 19.5,
+      "total": 39.5,
       "ppg": 9.75
     },
     {
@@ -2609,11 +2752,24 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.48,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 39.52,
+      "ppg": -0.48
+    },
+    {
+      "id": "12481",
+      "name": "Cam Skattebo",
+      "team": "NYG",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 19.6,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.52,
-      "ppg": -0.48
+      "total": 39.6,
+      "ppg": 9.8
     },
     {
       "id": "5849",
@@ -2622,10 +2778,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.38,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 19.62,
+      "total": 39.62,
       "ppg": -0.38
     },
     {
@@ -2635,10 +2791,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 19.7,
+      "total": 39.7,
       "ppg": -0.3
     },
     {
@@ -2648,10 +2804,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": -0.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 19.8,
+      "total": 39.8,
       "ppg": -0.2
     },
     {
@@ -2661,10 +2817,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 19.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.9,
+      "total": 39.9,
       "ppg": 9.95
     },
     {
@@ -2674,10 +2830,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 19.98,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 19.98,
+      "total": 39.98,
       "ppg": 9.99
     },
     {
@@ -2687,10 +2843,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 20,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 10
     },
     {
@@ -2700,10 +2856,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 20,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 10
     },
     {
@@ -2713,10 +2869,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 20,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20,
+      "total": 40,
       "ppg": 10
     },
     {
@@ -2726,10 +2882,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.1,
+      "total": 40.1,
       "ppg": 10.05
     },
     {
@@ -2739,10 +2895,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 20.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.2,
+      "total": 40.2,
       "ppg": 10.1
     },
     {
@@ -2752,10 +2908,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 0.3
     },
     {
@@ -2765,10 +2921,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 0.3
     },
     {
@@ -2778,10 +2934,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 10.15
     },
     {
@@ -2791,10 +2947,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 10.15
     },
     {
@@ -2804,10 +2960,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 10.15
     },
     {
@@ -2817,10 +2973,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 0.3
     },
     {
@@ -2830,10 +2986,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 20.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 10.15
     },
     {
@@ -2843,10 +2999,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 0.3
     },
     {
@@ -2856,10 +3012,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 10.15
     },
     {
@@ -2869,10 +3025,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.3,
+      "total": 40.3,
       "ppg": 10.15
     },
     {
@@ -2882,10 +3038,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 20.34,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.34,
+      "total": 40.34,
       "ppg": 10.17
     },
     {
@@ -2895,11 +3051,24 @@
       "pos": "RB",
       "gp": 2,
       "raw": 20.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.5,
+      "total": 40.5,
       "ppg": 10.25
+    },
+    {
+      "id": "2306",
+      "name": "Jameis Winston",
+      "team": "NYG",
+      "pos": "QB",
+      "gp": 1,
+      "raw": 0.54,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 40.54,
+      "ppg": 0.54
     },
     {
       "id": "2505",
@@ -2908,11 +3077,24 @@
       "pos": "TE",
       "gp": 2,
       "raw": 20.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.6,
+      "total": 40.6,
       "ppg": 10.3
+    },
+    {
+      "id": "7528",
+      "name": "Najee Harris",
+      "team": "NYG",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0.6,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 40.6,
+      "ppg": 0.6
     },
     {
       "id": "8168",
@@ -2921,10 +3103,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.6,
+      "total": 40.6,
       "ppg": 10.3
     },
     {
@@ -2934,10 +3116,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 20.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.7,
+      "total": 40.7,
       "ppg": 10.35
     },
     {
@@ -2947,10 +3129,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0.7,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.7,
+      "total": 40.7,
       "ppg": 10.35
     },
     {
@@ -2960,10 +3142,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.7,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.7,
+      "total": 40.7,
       "ppg": 10.35
     },
     {
@@ -2973,10 +3155,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0.7,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 20.7,
+      "total": 40.7,
       "ppg": 0.7
     },
     {
@@ -2986,10 +3168,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 20.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.8,
+      "total": 40.8,
       "ppg": 10.4
     },
     {
@@ -2999,10 +3181,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.8,
+      "total": 40.8,
       "ppg": 10.4
     },
     {
@@ -3012,10 +3194,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 20.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 20.8,
+      "total": 40.8,
       "ppg": 10.4
     },
     {
@@ -3025,10 +3207,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.8,
+      "total": 40.8,
       "ppg": 10.4
     },
     {
@@ -3038,10 +3220,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.8,
+      "total": 40.8,
       "ppg": 10.4
     },
     {
@@ -3051,10 +3233,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.9,
+      "total": 40.9,
       "ppg": 10.45
     },
     {
@@ -3064,10 +3246,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 20.9,
+      "total": 40.9,
       "ppg": 0.9
     },
     {
@@ -3077,10 +3259,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.9,
+      "total": 40.9,
       "ppg": 10.45
     },
     {
@@ -3090,10 +3272,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 20.9,
+      "total": 40.9,
       "ppg": 10.45
     },
     {
@@ -3103,10 +3285,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21,
+      "total": 41,
       "ppg": 10.5
     },
     {
@@ -3116,10 +3298,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21,
+      "total": 41,
       "ppg": 10.5
     },
     {
@@ -3129,10 +3311,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21,
+      "total": 41,
       "ppg": 1
     },
     {
@@ -3142,24 +3324,11 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21,
+      "total": 41,
       "ppg": 10.5
-    },
-    {
-      "id": "12015",
-      "name": "Harrison Mevis",
-      "team": "LAR",
-      "pos": "K",
-      "gp": 1,
-      "raw": 1,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 21,
-      "ppg": 1
     },
     {
       "id": "13288",
@@ -3168,10 +3337,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21,
+      "total": 41,
       "ppg": 1
     },
     {
@@ -3181,24 +3350,11 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 21,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 21,
-      "ppg": 10.5
-    },
-    {
-      "id": "6865",
-      "name": "Colby Parkinson",
-      "team": "LAR",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 1.1,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.1,
-      "ppg": 1.1
+      "total": 41,
+      "ppg": 10.5
     },
     {
       "id": "7521",
@@ -3207,10 +3363,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.1,
+      "total": 41.1,
       "ppg": 10.55
     },
     {
@@ -3220,10 +3376,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.1,
+      "total": 41.1,
       "ppg": 10.55
     },
     {
@@ -3233,10 +3389,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 1.16,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.16,
+      "total": 41.16,
       "ppg": 1.16
     },
     {
@@ -3246,10 +3402,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.2,
+      "total": 41.2,
       "ppg": 1.2
     },
     {
@@ -3259,10 +3415,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.2,
+      "total": 41.2,
       "ppg": 10.6
     },
     {
@@ -3272,10 +3428,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.2,
+      "total": 41.2,
       "ppg": 10.6
     },
     {
@@ -3285,10 +3441,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.2,
+      "total": 41.2,
       "ppg": 10.6
     },
     {
@@ -3298,10 +3454,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.2,
+      "total": 41.2,
       "ppg": 10.6
     },
     {
@@ -3311,10 +3467,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 1.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.3,
+      "total": 41.3,
       "ppg": 1.3
     },
     {
@@ -3322,13 +3478,13 @@
       "name": "Theo Johnson",
       "team": "NYG",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 1.4,
-      "pen": 1,
-      "truePen": 0,
+      "pen": 2,
+      "truePen": 1,
       "saved": 0,
-      "total": 21.4,
-      "ppg": 1.4
+      "total": 41.4,
+      "ppg": 10.7
     },
     {
       "id": "12817",
@@ -3337,10 +3493,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.4,
+      "total": 41.4,
       "ppg": 10.7
     },
     {
@@ -3350,10 +3506,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.4,
+      "total": 41.4,
       "ppg": 10.7
     },
     {
@@ -3363,10 +3519,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.4,
+      "total": 41.4,
       "ppg": 10.7
     },
     {
@@ -3376,10 +3532,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.4,
+      "total": 41.4,
       "ppg": 10.7
     },
     {
@@ -3389,10 +3545,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 1.42,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.42,
+      "total": 41.42,
       "ppg": 1.42
     },
     {
@@ -3402,10 +3558,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 21.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3415,10 +3571,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3428,10 +3584,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3441,10 +3597,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 21.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3454,10 +3610,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3467,10 +3623,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 1.5
     },
     {
@@ -3480,10 +3636,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3493,10 +3649,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 1.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.5,
+      "total": 41.5,
       "ppg": 10.75
     },
     {
@@ -3506,10 +3662,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.6,
+      "total": 41.6,
       "ppg": 10.8
     },
     {
@@ -3519,10 +3675,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.6,
+      "total": 41.6,
       "ppg": 1.6
     },
     {
@@ -3532,10 +3688,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 1.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.6,
+      "total": 41.6,
       "ppg": 1.6
     },
     {
@@ -3545,10 +3701,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.7,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.7,
+      "total": 41.7,
       "ppg": 10.85
     },
     {
@@ -3558,10 +3714,23 @@
       "pos": "WR",
       "gp": 2,
       "raw": 21.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 21.7,
+      "total": 41.7,
+      "ppg": 10.85
+    },
+    {
+      "id": "12718",
+      "name": "Konata Mumpfield",
+      "team": "LAR",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 1.7,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 41.7,
       "ppg": 10.85
     },
     {
@@ -3571,24 +3740,11 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.8,
+      "total": 41.8,
       "ppg": 10.9
-    },
-    {
-      "id": "10214",
-      "name": "Davis Allen",
-      "team": "LAR",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 1.8,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 21.8,
-      "ppg": 1.8
     },
     {
       "id": "13324",
@@ -3597,10 +3753,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.8,
+      "total": 41.8,
       "ppg": 10.9
     },
     {
@@ -3610,10 +3766,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 1.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 21.9,
+      "total": 41.9,
       "ppg": 10.95
     },
     {
@@ -3623,10 +3779,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 1.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 21.9,
+      "total": 41.9,
       "ppg": 1.9
     },
     {
@@ -3636,10 +3792,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22,
+      "total": 42,
       "ppg": 11
     },
     {
@@ -3649,24 +3805,11 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22,
+      "total": 42,
       "ppg": 11
-    },
-    {
-      "id": "LAR",
-      "name": "Los Angeles Rams",
-      "team": "LAR",
-      "pos": "DEF",
-      "gp": 1,
-      "raw": 2,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 22,
-      "ppg": 2
     },
     {
       "id": "13307",
@@ -3675,10 +3818,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.1,
+      "total": 42.1,
       "ppg": 11.05
     },
     {
@@ -3688,10 +3831,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 2.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.2,
+      "total": 42.2,
       "ppg": 11.1
     },
     {
@@ -3701,10 +3844,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.2,
+      "total": 42.2,
       "ppg": 11.1
     },
     {
@@ -3714,10 +3857,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 22.28,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.28,
+      "total": 42.28,
       "ppg": 11.14
     },
     {
@@ -3727,10 +3870,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 2.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.3,
+      "total": 42.3,
       "ppg": 11.15
     },
     {
@@ -3740,11 +3883,24 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.3,
+      "total": 42.3,
       "ppg": 11.15
+    },
+    {
+      "id": "7562",
+      "name": "Tutu Atwell",
+      "team": "LAR",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 2.4,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 42.4,
+      "ppg": 2.4
     },
     {
       "id": "8122",
@@ -3753,10 +3909,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 2.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.4,
+      "total": 42.4,
       "ppg": 11.2
     },
     {
@@ -3766,10 +3922,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.4,
+      "total": 42.4,
       "ppg": 11.2
     },
     {
@@ -3779,10 +3935,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 2.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.4,
+      "total": 42.4,
       "ppg": 11.2
     },
     {
@@ -3792,10 +3948,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 22.48,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.48,
+      "total": 42.48,
       "ppg": 11.24
     },
     {
@@ -3805,10 +3961,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 22.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.5,
+      "total": 42.5,
       "ppg": 11.25
     },
     {
@@ -3818,10 +3974,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 22.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 22.6,
+      "total": 42.6,
       "ppg": 11.3
     },
     {
@@ -3831,10 +3987,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 2.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 22.6,
+      "total": 42.6,
       "ppg": 2.6
     },
     {
@@ -3844,10 +4000,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 2.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 22.9,
+      "total": 42.9,
       "ppg": 11.45
     },
     {
@@ -3855,13 +4011,13 @@
       "name": "Ronnie Rivers",
       "team": "LAR",
       "pos": "RB",
-      "gp": 1,
+      "gp": 2,
       "raw": 2.9,
-      "pen": 1,
-      "truePen": 0,
+      "pen": 2,
+      "truePen": 1,
       "saved": 0,
-      "total": 22.9,
-      "ppg": 2.9
+      "total": 42.9,
+      "ppg": 11.45
     },
     {
       "id": "3202",
@@ -3870,10 +4026,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23,
+      "total": 43,
       "ppg": 11.5
     },
     {
@@ -3883,10 +4039,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 23,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 23,
+      "total": 43,
       "ppg": 11.5
     },
     {
@@ -3896,10 +4052,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23,
+      "total": 43,
       "ppg": 11.5
     },
     {
@@ -3909,24 +4065,11 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23,
+      "total": 43,
       "ppg": 11.5
-    },
-    {
-      "id": "NYG",
-      "name": "New York Giants",
-      "team": "NYG",
-      "pos": "DEF",
-      "gp": 1,
-      "raw": 3,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 23,
-      "ppg": 3
     },
     {
       "id": "9756",
@@ -3935,10 +4078,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.1,
+      "total": 43.1,
       "ppg": 11.55
     },
     {
@@ -3948,10 +4091,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.2,
+      "total": 43.2,
       "ppg": 11.6
     },
     {
@@ -3961,10 +4104,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.3,
+      "total": 43.3,
       "ppg": 11.65
     },
     {
@@ -3974,10 +4117,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 3.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.4,
+      "total": 43.4,
       "ppg": 11.7
     },
     {
@@ -3987,23 +4130,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 3.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 23.5,
-      "ppg": 3.5
-    },
-    {
-      "id": "13285",
-      "name": "Malachi Fields",
-      "team": "NYG",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 3.5,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 23.5,
+      "total": 43.5,
       "ppg": 3.5
     },
     {
@@ -4013,10 +4143,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.6,
+      "total": 43.6,
       "ppg": 11.8
     },
     {
@@ -4026,10 +4156,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 3.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.6,
+      "total": 43.6,
       "ppg": 11.8
     },
     {
@@ -4039,24 +4169,11 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.6,
+      "total": 43.6,
       "ppg": 11.8
-    },
-    {
-      "id": "7090",
-      "name": "Darnell Mooney",
-      "team": "NYG",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 3.7,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 23.7,
-      "ppg": 3.7
     },
     {
       "id": "11628",
@@ -4065,10 +4182,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 3.8,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 23.8,
+      "total": 43.8,
       "ppg": 11.9
     },
     {
@@ -4078,50 +4195,11 @@
       "pos": "RB",
       "gp": 1,
       "raw": 3.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 23.9,
+      "total": 43.9,
       "ppg": 3.9
-    },
-    {
-      "id": "13833",
-      "name": "Dominic Zvada",
-      "team": "NYG",
-      "pos": "K",
-      "gp": 1,
-      "raw": 4,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 24,
-      "ppg": 4
-    },
-    {
-      "id": "421",
-      "name": "Matthew Stafford",
-      "team": "LAR",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 4.1,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 24.1,
-      "ppg": 4.1
-    },
-    {
-      "id": "2133",
-      "name": "Davante Adams",
-      "team": "LAR",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 4.1,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 24.1,
-      "ppg": 4.1
     },
     {
       "id": "5859",
@@ -4130,10 +4208,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 4.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 24.1,
+      "total": 44.1,
       "ppg": 4.1
     },
     {
@@ -4143,10 +4221,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 24.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 24.1,
+      "total": 44.1,
       "ppg": 12.05
     },
     {
@@ -4156,11 +4234,24 @@
       "pos": "WR",
       "gp": 2,
       "raw": 24.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 24.2,
+      "total": 44.2,
       "ppg": 12.1
+    },
+    {
+      "id": "12508",
+      "name": "Jaxson Dart",
+      "team": "NYG",
+      "pos": "QB",
+      "gp": 2,
+      "raw": 24.4,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 44.4,
+      "ppg": 12.2
     },
     {
       "id": "4981",
@@ -4169,10 +4260,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 4.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 24.5,
+      "total": 44.5,
       "ppg": 12.25
     },
     {
@@ -4182,10 +4273,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 4.7,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 24.7,
+      "total": 44.7,
       "ppg": 4.7
     },
     {
@@ -4195,10 +4286,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 25.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.1,
+      "total": 45.1,
       "ppg": 12.55
     },
     {
@@ -4208,10 +4299,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 25.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.2,
+      "total": 45.2,
       "ppg": 12.6
     },
     {
@@ -4221,10 +4312,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 5.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 25.2,
+      "total": 45.2,
       "ppg": 5.2
     },
     {
@@ -4234,24 +4325,11 @@
       "pos": "WR",
       "gp": 2,
       "raw": 25.3,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 25.3,
-      "ppg": 12.65
-    },
-    {
-      "id": "11586",
-      "name": "Blake Corum",
-      "team": "LAR",
-      "pos": "RB",
-      "gp": 1,
-      "raw": 5.4,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.4,
-      "ppg": 5.4
+      "total": 45.3,
+      "ppg": 12.65
     },
     {
       "id": "5001",
@@ -4260,10 +4338,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 25.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.5,
+      "total": 45.5,
       "ppg": 12.75
     },
     {
@@ -4273,10 +4351,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 5.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 25.5,
+      "total": 45.5,
       "ppg": 12.75
     },
     {
@@ -4286,10 +4364,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 25.72,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.72,
+      "total": 45.72,
       "ppg": 12.86
     },
     {
@@ -4299,10 +4377,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 25.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 25.8,
+      "total": 45.8,
       "ppg": 12.9
     },
     {
@@ -4312,10 +4390,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 26,
+      "total": 46,
       "ppg": 13
     },
     {
@@ -4325,10 +4403,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 26,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 26,
+      "total": 46,
       "ppg": 13
     },
     {
@@ -4338,10 +4416,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 6.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 26.1,
+      "total": 46.1,
       "ppg": 6.1
     },
     {
@@ -4351,10 +4429,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 26.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 26.2,
+      "total": 46.2,
       "ppg": 13.1
     },
     {
@@ -4364,11 +4442,24 @@
       "pos": "WR",
       "gp": 2,
       "raw": 6.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 26.6,
+      "total": 46.6,
       "ppg": 13.3
+    },
+    {
+      "id": "8150",
+      "name": "Kyren Williams",
+      "team": "LAR",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 26.7,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 46.7,
+      "ppg": 13.35
     },
     {
       "id": "12522",
@@ -4377,10 +4468,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 26.72,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 26.72,
+      "total": 46.72,
       "ppg": 13.36
     },
     {
@@ -4390,10 +4481,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 27,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 27,
+      "total": 47,
       "ppg": 13.5
     },
     {
@@ -4403,10 +4494,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 27,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 27,
+      "total": 47,
       "ppg": 13.5
     },
     {
@@ -4416,10 +4507,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 7.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 27.3,
+      "total": 47.3,
       "ppg": 7.3
     },
     {
@@ -4429,10 +4520,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 27.4,
+      "total": 47.4,
       "ppg": 13.7
     },
     {
@@ -4442,10 +4533,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 27.6,
+      "total": 47.6,
       "ppg": 13.8
     },
     {
@@ -4455,10 +4546,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 7.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 27.6,
+      "total": 47.6,
       "ppg": 13.8
     },
     {
@@ -4468,10 +4559,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 27.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 27.8,
+      "total": 47.8,
       "ppg": 13.9
     },
     {
@@ -4481,10 +4572,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 28,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 28,
+      "total": 48,
       "ppg": 14
     },
     {
@@ -4494,11 +4585,24 @@
       "pos": "RB",
       "gp": 2,
       "raw": 28.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 28.2,
+      "total": 48.2,
       "ppg": 14.1
+    },
+    {
+      "id": "8131",
+      "name": "Isaiah Likely",
+      "team": "NYG",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 28.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 48.6,
+      "ppg": 14.3
     },
     {
       "id": "2307",
@@ -4507,10 +4611,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 8.74,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 28.74,
+      "total": 48.74,
       "ppg": 8.74
     },
     {
@@ -4520,10 +4624,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 29,
+      "total": 49,
       "ppg": 9
     },
     {
@@ -4533,10 +4637,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 29,
+      "total": 49,
       "ppg": 14.5
     },
     {
@@ -4546,10 +4650,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 29,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29,
+      "total": 49,
       "ppg": 14.5
     },
     {
@@ -4559,10 +4663,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 29.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.1,
+      "total": 49.1,
       "ppg": 14.55
     },
     {
@@ -4572,10 +4676,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 29.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.2,
+      "total": 49.2,
       "ppg": 14.6
     },
     {
@@ -4585,10 +4689,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 29.26,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.26,
+      "total": 49.26,
       "ppg": 14.63
     },
     {
@@ -4598,10 +4702,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 29.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 29.5,
+      "total": 49.5,
       "ppg": 14.75
     },
     {
@@ -4611,10 +4715,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 9.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 29.6,
+      "total": 49.6,
       "ppg": 14.8
     },
     {
@@ -4624,23 +4728,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 9.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 29.9,
-      "ppg": 9.9
-    },
-    {
-      "id": "11632",
-      "name": "Malik Nabers",
-      "team": "NYG",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 9.9,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 29.9,
+      "total": 49.9,
       "ppg": 9.9
     },
     {
@@ -4650,11 +4741,24 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 30,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 30,
+      "total": 50,
       "ppg": 15
+    },
+    {
+      "id": "421",
+      "name": "Matthew Stafford",
+      "team": "LAR",
+      "pos": "QB",
+      "gp": 2,
+      "raw": 30.08,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 50.08,
+      "ppg": 15.04
     },
     {
       "id": "8121",
@@ -4663,10 +4767,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10.1,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 30.1,
+      "total": 50.1,
       "ppg": 15.05
     },
     {
@@ -4676,10 +4780,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 30.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 30.4,
+      "total": 50.4,
       "ppg": 15.2
     },
     {
@@ -4689,10 +4793,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 10.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 30.5,
+      "total": 50.5,
       "ppg": 15.25
     },
     {
@@ -4702,10 +4806,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 30.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 30.5,
+      "total": 50.5,
       "ppg": 15.25
     },
     {
@@ -4715,10 +4819,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 10.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 30.6,
+      "total": 50.6,
       "ppg": 15.3
     },
     {
@@ -4728,10 +4832,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 30.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 30.8,
+      "total": 50.8,
       "ppg": 15.4
     },
     {
@@ -4741,10 +4845,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 30.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 30.9,
+      "total": 50.9,
       "ppg": 15.45
     },
     {
@@ -4754,10 +4858,10 @@
       "pos": "K",
       "gp": 2,
       "raw": 31,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 31,
+      "total": 51,
       "ppg": 15.5
     },
     {
@@ -4767,10 +4871,10 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 31,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 31,
+      "total": 51,
       "ppg": 15.5
     },
     {
@@ -4780,10 +4884,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 11.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 31.3,
+      "total": 51.3,
       "ppg": 15.65
     },
     {
@@ -4793,24 +4897,11 @@
       "pos": "TE",
       "gp": 2,
       "raw": 11.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 31.3,
+      "total": 51.3,
       "ppg": 15.65
-    },
-    {
-      "id": "6130",
-      "name": "Devin Singletary",
-      "team": "NYG",
-      "pos": "RB",
-      "gp": 1,
-      "raw": 11.8,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 31.8,
-      "ppg": 11.8
     },
     {
       "id": "4034",
@@ -4819,10 +4910,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 31.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 31.9,
+      "total": 51.9,
       "ppg": 15.95
     },
     {
@@ -4832,10 +4923,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 11.9,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 31.9,
+      "total": 51.9,
       "ppg": 11.9
     },
     {
@@ -4845,10 +4936,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 32.02,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 32.02,
+      "total": 52.02,
       "ppg": 16.01
     },
     {
@@ -4858,10 +4949,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 32.18,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 32.18,
+      "total": 52.18,
       "ppg": 16.09
     },
     {
@@ -4871,10 +4962,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 32.7,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 32.7,
+      "total": 52.7,
       "ppg": 16.35
     },
     {
@@ -4884,10 +4975,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 32.76,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 32.76,
+      "total": 52.76,
       "ppg": 16.38
     },
     {
@@ -4897,24 +4988,11 @@
       "pos": "DEF",
       "gp": 2,
       "raw": 33,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 33,
-      "ppg": 16.5
-    },
-    {
-      "id": "12481",
-      "name": "Cam Skattebo",
-      "team": "NYG",
-      "pos": "RB",
-      "gp": 1,
-      "raw": 13.1,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 33.1,
-      "ppg": 13.1
+      "total": 53,
+      "ppg": 16.5
     },
     {
       "id": "13345",
@@ -4923,10 +5001,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 13.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 33.3,
+      "total": 53.3,
       "ppg": 16.65
     },
     {
@@ -4936,10 +5014,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 33.58,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 33.58,
+      "total": 53.58,
       "ppg": 16.79
     },
     {
@@ -4949,24 +5027,11 @@
       "pos": "RB",
       "gp": 1,
       "raw": 13.6,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 33.6,
+      "total": 53.6,
       "ppg": 13.6
-    },
-    {
-      "id": "8150",
-      "name": "Kyren Williams",
-      "team": "LAR",
-      "pos": "RB",
-      "gp": 1,
-      "raw": 14,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 34,
-      "ppg": 14
     },
     {
       "id": "8130",
@@ -4975,10 +5040,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 34.1,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 34.1,
+      "total": 54.1,
       "ppg": 17.05
     },
     {
@@ -4988,10 +5053,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 34.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 34.2,
+      "total": 54.2,
       "ppg": 17.1
     },
     {
@@ -5001,11 +5066,24 @@
       "pos": "WR",
       "gp": 2,
       "raw": 14.2,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 34.2,
+      "total": 54.2,
       "ppg": 17.1
+    },
+    {
+      "id": "12487",
+      "name": "Terrance Ferguson",
+      "team": "LAR",
+      "pos": "TE",
+      "gp": 2,
+      "raw": 14.4,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 54.4,
+      "ppg": 17.2
     },
     {
       "id": "10236",
@@ -5014,10 +5092,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 34.5,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 34.5,
+      "total": 54.5,
       "ppg": 17.25
     },
     {
@@ -5027,10 +5105,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 34.88,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 34.88,
+      "total": 54.88,
       "ppg": 17.44
     },
     {
@@ -5040,10 +5118,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 34.9,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 34.9,
+      "total": 54.9,
       "ppg": 17.45
     },
     {
@@ -5053,10 +5131,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 15.4,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 35.4,
+      "total": 55.4,
       "ppg": 17.7
     },
     {
@@ -5066,10 +5144,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 35.6,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 35.6,
+      "total": 55.6,
       "ppg": 17.8
     },
     {
@@ -5079,10 +5157,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 16.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 36.3,
+      "total": 56.3,
       "ppg": 18.15
     },
     {
@@ -5092,10 +5170,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 17.7,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 37.7,
+      "total": 57.7,
       "ppg": 17.7
     },
     {
@@ -5105,10 +5183,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 38,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 38,
+      "total": 58,
       "ppg": 19
     },
     {
@@ -5118,10 +5196,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 38.22,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 38.22,
+      "total": 58.22,
       "ppg": 19.11
     },
     {
@@ -5131,10 +5209,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 18.3,
-      "pen": 1,
+      "pen": 2,
       "truePen": 1,
       "saved": 0,
-      "total": 38.3,
+      "total": 58.3,
       "ppg": 19.15
     },
     {
@@ -5144,11 +5222,24 @@
       "pos": "QB",
       "gp": 2,
       "raw": 38.98,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 38.98,
+      "total": 58.98,
       "ppg": 19.49
+    },
+    {
+      "id": "2133",
+      "name": "Davante Adams",
+      "team": "LAR",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 39.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 59.6,
+      "ppg": 19.8
     },
     {
       "id": "19",
@@ -5157,10 +5248,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5168,12 +5259,12 @@
       "name": "Odell Beckham",
       "team": "NYG",
       "pos": "WR",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
-      "pen": 2,
-      "truePen": 1,
+      "pen": 3,
+      "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5181,12 +5272,12 @@
       "name": "Chris Manhertz",
       "team": "NYG",
       "pos": "TE",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
-      "pen": 2,
-      "truePen": 1,
+      "pen": 3,
+      "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5196,10 +5287,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5209,10 +5300,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5220,12 +5311,12 @@
       "name": "Braxton Berrios",
       "team": "NYG",
       "pos": "WR",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
-      "pen": 2,
-      "truePen": 1,
+      "pen": 3,
+      "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5235,10 +5326,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5248,10 +5339,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5261,10 +5352,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5274,10 +5365,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5287,10 +5378,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5300,10 +5391,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5313,10 +5404,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5326,10 +5417,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5339,10 +5430,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5352,10 +5443,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5365,10 +5456,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5378,10 +5469,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5391,10 +5482,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5404,10 +5495,10 @@
       "pos": "QB",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5417,10 +5508,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5430,10 +5521,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5443,10 +5534,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5456,10 +5547,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5469,10 +5560,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5482,10 +5573,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5495,10 +5586,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5508,10 +5599,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5521,10 +5612,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5534,10 +5625,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5547,10 +5638,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5560,10 +5651,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5573,10 +5664,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5586,10 +5677,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5599,10 +5690,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5612,10 +5703,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5625,10 +5716,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5638,10 +5729,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5651,10 +5742,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5664,10 +5755,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5677,10 +5768,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5690,10 +5781,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5703,10 +5794,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5716,10 +5807,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5727,12 +5818,12 @@
       "name": "Xavier Smith",
       "team": "LAR",
       "pos": "WR",
-      "gp": 1,
+      "gp": 2,
       "raw": 0,
-      "pen": 2,
-      "truePen": 1,
+      "pen": 3,
+      "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5742,10 +5833,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5755,10 +5846,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5768,10 +5859,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5781,10 +5872,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5794,10 +5885,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5807,10 +5898,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5820,10 +5911,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5833,10 +5924,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5846,10 +5937,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5859,10 +5950,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5872,10 +5963,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5885,10 +5976,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5898,10 +5989,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5911,10 +6002,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5924,10 +6015,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5937,10 +6028,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5950,10 +6041,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5963,23 +6054,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
-      "ppg": 20
-    },
-    {
-      "id": "12487",
-      "name": "Terrance Ferguson",
-      "team": "LAR",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 0,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -5989,10 +6067,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6002,10 +6080,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6015,10 +6093,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6028,10 +6106,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6041,10 +6119,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6054,10 +6132,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6067,10 +6145,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6080,23 +6158,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
-      "ppg": 20
-    },
-    {
-      "id": "12718",
-      "name": "Konata Mumpfield",
-      "team": "LAR",
-      "pos": "WR",
-      "gp": 1,
-      "raw": 0,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6106,10 +6171,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6119,10 +6184,10 @@
       "pos": "RB",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6132,10 +6197,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6145,10 +6210,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6158,10 +6223,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6171,10 +6236,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6184,10 +6249,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6197,10 +6262,23 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
+      "ppg": 20
+    },
+    {
+      "id": "13278",
+      "name": "Max Klare",
+      "team": "LAR",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 0,
+      "pen": 3,
+      "truePen": 1,
+      "saved": 0,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6210,10 +6288,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6223,10 +6301,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6236,10 +6314,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6249,10 +6327,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6262,10 +6340,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6275,10 +6353,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6288,10 +6366,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6301,10 +6379,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6314,10 +6392,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6327,10 +6405,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6340,10 +6418,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6353,10 +6431,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6366,10 +6444,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6379,10 +6457,10 @@
       "pos": "TE",
       "gp": 2,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 2,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6392,10 +6470,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6405,10 +6483,10 @@
       "pos": "WR",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6418,10 +6496,10 @@
       "pos": "TE",
       "gp": 1,
       "raw": 0,
-      "pen": 2,
+      "pen": 3,
       "truePen": 1,
       "saved": 0,
-      "total": 40,
+      "total": 60,
       "ppg": 20
     },
     {
@@ -6431,10 +6509,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 40.3,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 40.3,
+      "total": 60.3,
       "ppg": 20.15
     },
     {
@@ -6444,10 +6522,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 40.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 40.4,
+      "total": 60.4,
       "ppg": 20.2
     },
     {
@@ -6457,10 +6535,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 41.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 41.8,
+      "total": 61.8,
       "ppg": 20.9
     },
     {
@@ -6470,10 +6548,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 41.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 41.8,
+      "total": 61.8,
       "ppg": 20.9
     },
     {
@@ -6483,24 +6561,11 @@
       "pos": "QB",
       "gp": 2,
       "raw": 42.16,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 42.16,
-      "ppg": 21.08
-    },
-    {
-      "id": "8131",
-      "name": "Isaiah Likely",
-      "team": "NYG",
-      "pos": "TE",
-      "gp": 1,
-      "raw": 22.8,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 42.8,
-      "ppg": 22.8
+      "total": 62.16,
+      "ppg": 21.08
     },
     {
       "id": "9997",
@@ -6509,24 +6574,11 @@
       "pos": "WR",
       "gp": 1,
       "raw": 23.5,
-      "pen": 1,
+      "pen": 2,
       "truePen": 0,
       "saved": 0,
-      "total": 43.5,
+      "total": 63.5,
       "ppg": 23.5
-    },
-    {
-      "id": "12508",
-      "name": "Jaxson Dart",
-      "team": "NYG",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 23.6,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 43.6,
-      "ppg": 23.6
     },
     {
       "id": "6786",
@@ -6535,10 +6587,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 44.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 44.2,
+      "total": 64.2,
       "ppg": 22.1
     },
     {
@@ -6548,10 +6600,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 46.64,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 46.64,
+      "total": 66.64,
       "ppg": 23.32
     },
     {
@@ -6561,10 +6613,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 48.8,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 48.8,
+      "total": 68.8,
       "ppg": 24.4
     },
     {
@@ -6574,10 +6626,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 49.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 49.4,
+      "total": 69.4,
       "ppg": 24.7
     },
     {
@@ -6587,10 +6639,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 49.58,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 49.58,
+      "total": 69.58,
       "ppg": 24.79
     },
     {
@@ -6600,10 +6652,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 51,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 51,
+      "total": 71,
       "ppg": 25.5
     },
     {
@@ -6613,10 +6665,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 51.52,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 51.52,
+      "total": 71.52,
       "ppg": 25.76
     },
     {
@@ -6626,10 +6678,10 @@
       "pos": "RB",
       "gp": 2,
       "raw": 53.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 53.4,
+      "total": 73.4,
       "ppg": 26.7
     },
     {
@@ -6639,10 +6691,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 54.4,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 54.4,
+      "total": 74.4,
       "ppg": 27.2
     },
     {
@@ -6652,10 +6704,10 @@
       "pos": "WR",
       "gp": 2,
       "raw": 60.2,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 60.2,
+      "total": 80.2,
       "ppg": 30.1
     },
     {
@@ -6665,10 +6717,10 @@
       "pos": "QB",
       "gp": 2,
       "raw": 70.48,
-      "pen": 0,
+      "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 70.48,
+      "total": 90.48,
       "ppg": 35.24
     }
   ]

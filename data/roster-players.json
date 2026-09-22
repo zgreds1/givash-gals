@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-18T10:32:23.710Z",
+  "generatedAt": "2026-09-22T05:51:07.417Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -35,6 +35,11 @@
       "name": "Jameis Winston",
       "pos": "QB",
       "team": "NYG"
+    },
+    "2307": {
+      "name": "Marcus Mariota",
+      "pos": "QB",
+      "team": "WAS"
     },
     "2359": {
       "name": "Ameer Abdullah",
@@ -194,7 +199,7 @@
     "6149": {
       "name": "Darius Slayton",
       "pos": "WR",
-      "team": "—"
+      "team": "IND"
     },
     "6271": {
       "name": "Olamide Zaccheaus",
