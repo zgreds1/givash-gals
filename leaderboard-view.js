@@ -23,7 +23,7 @@ const COLUMNS = [
   ['pen', '+20s', true, true],
   ['truePen', 'True +20s', true, true, 'Zeros in games actually played'],
   ['total', 'Adj Total', true, true],
-  ['ppg', 'PPG', true, true],
+  ['ppg', 'PPG', true, true, 'In games played'],
 ];
 
 /*

@@ -114,11 +114,11 @@ test('the Saved column is gone from both header and body', () => {
   assert.doesNotMatch(html, /class="num saved"/);
 });
 
-test('True +20s carries a hover explanation and nothing else does', () => {
+test('only the two columns that need explaining carry a hover', () => {
+  // Both get the dotted underline free, from table.leaderboard th[title].
   const html = renderLeaderboard([row({})], {});
   const titled = [...html.matchAll(/<th class="[^"]*" title="([^"]*)"/g)].map((m) => m[1]);
-  assert.equal(titled.length, 1);
-  assert.match(titled[0], /Zeros in games actually played/);
+  assert.deepEqual(titled, ['Zeros in games actually played', 'In games played']);
 });
 
 test('the owner filter separates free agents from rostered players', () => {
