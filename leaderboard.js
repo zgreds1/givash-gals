@@ -107,10 +107,28 @@ export function slimForLeaderboard(rawPlayers) {
  * @param {Array<Object<string, {pts: number, gp: number, opp: number}>>} weeks
  * @param {Array|null} savedLog - when supplied, one entry per zero-point week
  *   spared by the opportunity rule
+ * @param {Array<Map<string, 'final'|'live'|'upcoming'>>|null} phases - one
+ *   gameStates() map per week, parallel to `weeks`. Omit it and every missed
+ *   week charges, which is what the frozen 2025 archive wants.
  * @returns {Array<Object>} ascending by total — worst scorer first
  */
-export function buildLeaderboard(players, weeks, savedLog = null) {
+export function buildLeaderboard(players, weeks, savedLog = null, phases = null) {
   const rows = [];
+
+  // Whether a whole week has finished, which is the only thing a player with
+  // no fixture of his own can wait on. Computed once per week rather than per
+  // player-week: 32 teams against 500-odd rows.
+  //
+  // A week with NO phase information — no schedule at all, or one predating
+  // `status` — reads as finished. That is the same permissive reading
+  // gameStates' other callers take of a missing status, and it is what keeps
+  // a frozen season rescoring to the numbers it has always had.
+  const weekSettled = weeks.map((_, w) => {
+    const m = phases?.[w];
+    if (!m) return true;
+    for (const phase of m.values()) if (phase !== 'final') return false;
+    return true;
+  });
 
   for (const [id, p] of Object.entries(players)) {
     const isDef = p.pos === 'DEF';
@@ -125,6 +143,30 @@ export function buildLeaderboard(players, weeks, savedLog = null) {
     for (let w = 0; w < weeks.length; w++) {
       const s = weeks[w][id];
       const played = !!s;
+      // A missed week is only charged once there is nothing left to wait for.
+      // Until then it counts toward NOTHING — not games played, not raw, not
+      // a +20 — which is the stance RULES.md already takes on a starter whose
+      // game is yet to start.
+      //
+      // Without this the snapshot's in-progress week, archived empty because
+      // no game has produced a stat line yet, reads as 32 teams' worth of
+      // absence: on 2026-09-22 all 517 rows carried a phantom +20 with every
+      // week-3 fixture still `pre_game`. The uniform shift left the ORDER
+      // untouched, which is why it survived; a Friday, with Thursday's
+      // players scored and everyone else not, would have moved the ranking.
+      //
+      // Two different waits, because there are two ways to have no stat line:
+      //   'upcoming'  his own game has not kicked off -> wait for that game
+      //   no fixture  a bye, or no NFL team at all    -> wait for the WEEK
+      // Nothing of a bye's is ever going to start, so the week finishing is
+      // the only event that can settle it. A player absent from a game that
+      // is under way ('live') or over ('final') is charged: his team took the
+      // field without him.
+      if (!played) {
+        const phase = phases?.[w]?.get(p.team);
+        if (phase === 'upcoming') continue;
+        if (phase === undefined && !weekSettled[w]) continue;
+      }
       const pts = played ? s.pts : 0;
       const opp = played && s.opp === 1;
       const { adj, penalized } = adjustWeek(pts, played, isDef, opp);

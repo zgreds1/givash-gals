@@ -122,15 +122,27 @@ export function buildPairings(payloadsByWeek) {
  * would silently shorten the season and drop the missed-week penalties that
  * `total` depends on.
  *
+ * The schedule comes along so the current week can be told apart from a week
+ * genuinely missed. The loop above archives weeks up to and including the one
+ * in progress, and an unplayed week is archived EMPTY — without the per-week
+ * phases every player in the league looks absent from it and takes a +20 days
+ * before kickoff. Past weeks are all 'final', so this only ever bites the
+ * live week.
+ *
  * @param {Object} players - slim player map
  * @param {Object<number, Object>} slimWeeks - keyed by week number
+ * @param {Array|null} schedule - Sleeper's season schedule, for gameStates
  */
-export function buildSeasonLeaderboard(players, slimWeeks) {
+export function buildSeasonLeaderboard(players, slimWeeks, schedule = null) {
   const nums = Object.keys(slimWeeks).map(Number).sort((a, b) => a - b);
   if (!nums.length) return [];
   const dense = [];
-  for (let w = 1; w <= nums[nums.length - 1]; w++) dense.push(slimWeeks[w] || {});
-  return buildLeaderboard(players, dense);
+  const phases = [];
+  for (let w = 1; w <= nums[nums.length - 1]; w++) {
+    dense.push(slimWeeks[w] || {});
+    phases.push(schedule ? gameStates(schedule, w) : new Map());
+  }
+  return buildLeaderboard(players, dense, null, phases);
 }
 
 /**
@@ -434,7 +446,7 @@ async function main() {
 
   // playersAll, not players: a player cut mid-season drops out of the active
   // map, and naming him is most of the point of this board.
-  const rows = buildSeasonLeaderboard(playersAll, slimWeeks);
+  const rows = buildSeasonLeaderboard(playersAll, slimWeeks, schedule);
   const lb = await writeStamped(
     path.join(DATA, `leaderboard-${SEASON}.json`),
     { season: SEASON, rows },

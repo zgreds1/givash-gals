@@ -214,6 +214,26 @@ write `data/leaderboard-{season}.json`; `leaderboard-view.js` holds the
 filtering, sorting and rendering that turns those rows into the table, plus
 the DOM controller that mounts it.
 
+The two penalty columns count different things, and the gap between them is
+the point. `+20s` answers "what would starting him every week have cost",
+so it charges a week he did not appear in at all; `True +20s` counts only the
+ones earned on the field, playing to an exact 0. A missed week charges neither until there is
+nothing left to wait for, and until then it is left out of `GP` and `Raw` as
+well — the snapshot archives the in-progress week as soon as it starts,
+empty, and without that gate every player in the league reads as absent from
+it. That is the same stance `rules.js` takes on a starter whose game is yet
+to start.
+
+What counts as "nothing left to wait for" depends on why the line is missing.
+A player whose own fixture is still `pre_game` waits on that fixture. A
+player on a **bye**, or with no NFL team at all, has no fixture that can ever
+start, so he waits on the whole week going final instead. A player missing
+from a game already under way is charged: his team took the field without
+him. Note this is stricter than the weekly score, where a bye settles
+immediately — the leaderboard is a season aggregate rebuilt from scratch on
+every run, so holding a bye back for a few days costs nothing and keeps a
+week from being half-counted.
+
 ### Every view has a URL
 
 `router.js` maps the address bar onto the view, so the browser's back button

@@ -468,3 +468,59 @@ test('a schedule carrying no status at all scores as fully settled', () => {
   assert.equal(wk.teams[2].adjusted, 20);
   assert.equal(wk.teams[1].inPlay, 20, 'and nothing is left pending');
 });
+
+test('buildSeasonLeaderboard withholds the +20 for a week that has not kicked off', () => {
+  const players = {
+    A: { pos: 'QB', team: 'CIN', name: 'Quincy Back' },
+    B: { pos: 'WR', team: 'MIN', name: 'Wide Out' },
+  };
+  // Week 1 played, week 2 played, week 3 archived empty because it has not
+  // started — which is exactly the shape the Action writes mid-week.
+  const schedule = [
+    { week: 1, home: 'HOU', away: 'CIN', status: 'complete' },
+    { week: 1, home: 'KC', away: 'MIN', status: 'complete' },
+    { week: 2, home: 'HOU', away: 'CIN', status: 'complete' },
+    // MIN is on bye in week 2: no fixture at all.
+    { week: 3, home: 'HOU', away: 'CIN', status: 'pre_game' },
+    { week: 3, home: 'KC', away: 'MIN', status: 'pre_game' },
+  ];
+  const slim = {
+    1: { A: { pts: 6, gp: 1, opp: 0 }, B: { pts: 1, gp: 1, opp: 0 } },
+    2: { A: { pts: 4, gp: 1, opp: 0 } },
+    3: {},
+  };
+  const rows = buildSeasonLeaderboard(players, slim, schedule);
+  const a = rows.find((r) => r.id === 'A');
+  const b = rows.find((r) => r.id === 'B');
+
+  // A played both completed weeks and week 3 has not kicked off: no penalty.
+  assert.deepEqual({ gp: a.gp, raw: a.raw, pen: a.pen, total: a.total }, {
+    gp: 2, raw: 10, pen: 0, total: 10,
+  });
+  // B was on bye in week 2, which still charges; week 3 still withholds.
+  assert.deepEqual({ gp: b.gp, raw: b.raw, pen: b.pen, total: b.total }, {
+    gp: 1, raw: 1, pen: 1, total: 21,
+  });
+});
+
+test('buildSeasonLeaderboard with no schedule charges every missed week, as the 2025 rebuild does', () => {
+  const players = { A: { pos: 'QB', team: 'CIN', name: 'Quincy Back' } };
+  const rows = buildSeasonLeaderboard(players, { 1: { A: { pts: 6, gp: 1, opp: 0 } }, 2: {} });
+  assert.equal(rows[0].pen, 1);
+  assert.equal(rows[0].total, 26);
+});
+
+test('buildSeasonLeaderboard holds a bye back until the whole week is final', () => {
+  const players = { B: { pos: 'WR', team: 'MIN', name: 'Wide Out' } };
+  const slim = { 1: { B: { pts: 1, gp: 1, opp: 0 } }, 2: {} };
+  // MIN is on bye in week 2. One fixture of that week is still in progress.
+  const running = [
+    { week: 1, home: 'KC', away: 'MIN', status: 'complete' },
+    { week: 2, home: 'HOU', away: 'CIN', status: 'complete' },
+    { week: 2, home: 'KC', away: 'NYJ', status: 'in_game' },
+  ];
+  assert.equal(buildSeasonLeaderboard(players, slim, running)[0].pen, 0);
+
+  const done = running.map((g) => ({ ...g, status: 'complete' }));
+  assert.equal(buildSeasonLeaderboard(players, slim, done)[0].pen, 1);
+});

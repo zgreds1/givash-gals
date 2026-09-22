@@ -157,3 +157,77 @@ test('a slim week survives a JSON round trip unchanged', () => {
   const viaDisk = JSON.parse(JSON.stringify(slim));
   assert.deepEqual(buildLeaderboard(PLAYERS, [slim]), buildLeaderboard(PLAYERS, [viaDisk]));
 });
+
+// A week whose games have not kicked off is archived empty, and every player
+// in the league is "missing" from it. Charging that as an absence put a +20 on
+// all 517 rows of the live board on 2026-09-22, week 3, before a ball was
+// thrown. Phases come straight from gameStates(): 'upcoming' withholds.
+
+test('a missed week the player\'s NFL team has not kicked off counts toward nothing', () => {
+  const weeks = [{ A: { pts: 10, gp: 1, opp: 0 } }, {}];
+  const phases = [new Map([['CIN', 'final']]), new Map([['CIN', 'upcoming']])];
+  const [a] = buildLeaderboard({ A: PLAYERS.A }, weeks, null, phases);
+  assert.deepEqual(
+    { gp: a.gp, raw: a.raw, pen: a.pen, truePen: a.truePen, total: a.total, ppg: a.ppg },
+    { gp: 1, raw: 10, pen: 0, truePen: 0, total: 10, ppg: 10 },
+  );
+});
+
+test('a missed week whose game is in progress still charges: he is absent from a game being played', () => {
+  const weeks = [{ A: { pts: 10, gp: 1, opp: 0 } }, {}];
+  const phases = [new Map([['CIN', 'final']]), new Map([['CIN', 'live']])];
+  const [a] = buildLeaderboard({ A: PLAYERS.A }, weeks, null, phases);
+  assert.equal(a.pen, 1);
+  assert.equal(a.total, 30);
+});
+
+test('a bye charges once every fixture in the week is final', () => {
+  const weeks = [{ A: { pts: 10, gp: 1, opp: 0 } }, {}];
+  // CIN is on bye in week 2 — no entry — and the rest of the week is done.
+  const phases = [new Map([['CIN', 'final']]), new Map([['HOU', 'final']])];
+  const [a] = buildLeaderboard({ A: PLAYERS.A }, weeks, null, phases);
+  assert.equal(a.pen, 1);
+  assert.equal(a.total, 30);
+});
+
+test('a bye withholds while any fixture in the week is still to come', () => {
+  const weeks = [{ A: { pts: 10, gp: 1, opp: 0 } }, {}];
+  const phases = [
+    new Map([['CIN', 'final']]),
+    new Map([['HOU', 'final'], ['NYJ', 'upcoming']]),
+  ];
+  const [a] = buildLeaderboard({ A: PLAYERS.A }, weeks, null, phases);
+  assert.deepEqual({ gp: a.gp, raw: a.raw, pen: a.pen, total: a.total }, {
+    gp: 1, raw: 10, pen: 0, total: 10,
+  });
+});
+
+test('a bye withholds while a fixture in the week is in progress', () => {
+  const weeks = [{ A: { pts: 10, gp: 1, opp: 0 } }, {}];
+  const phases = [
+    new Map([['CIN', 'final']]),
+    new Map([['HOU', 'final'], ['NYJ', 'live']]),
+  ];
+  const [a] = buildLeaderboard({ A: PLAYERS.A }, weeks, null, phases);
+  assert.equal(a.pen, 0);
+  assert.equal(a.total, 10);
+});
+
+test('with no phases supplied every missed week charges, so the frozen 2025 archive rescores identically', () => {
+  const weeks = [{ A: { pts: 10, gp: 1, opp: 0 } }, {}];
+  const [a] = buildLeaderboard({ A: PLAYERS.A }, weeks);
+  assert.equal(a.pen, 1);
+  assert.equal(a.total, 30);
+});
+
+test('a player with no NFL team waits on the week, exactly as a bye does', () => {
+  // He has no fixture of his own to settle, so the same gate applies: nothing
+  // of his can start, and the wait is on the week finishing.
+  const players = { F: { pos: 'K', team: null, name: 'Free Agent Kicker' } };
+  const weeks = [{ F: { pts: 3, gp: 1, opp: 0 } }, {}];
+  const running = [new Map([['CIN', 'final']]), new Map([['CIN', 'upcoming']])];
+  assert.equal(buildLeaderboard(players, weeks, null, running)[0].pen, 0);
+
+  const done = [new Map([['CIN', 'final']]), new Map([['CIN', 'final']])];
+  assert.equal(buildLeaderboard(players, weeks, null, done)[0].pen, 1);
+});
