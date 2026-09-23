@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T17:33:33.504Z",
+  "generatedAt": "2026-09-23T10:44:51.176Z",
   "weeks": [
     {
       "week": 1,
@@ -671,8 +671,8 @@
           "inPlay": 0,
           "penalties": [
             {
-              "playerId": "12545",
-              "name": "Tyler Shough",
+              "playerId": "5854",
+              "name": "Drew Lock",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -737,8 +737,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "2505",
-              "name": "Darren Waller",
+              "playerId": "5985",
+              "name": "Foster Moreau",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -767,8 +767,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4033",
-              "name": "David Njoku",
+              "playerId": "11783",
+              "name": "Ryan Flournoy",
               "reason": "zeroed",
               "phase": "upcoming"
             },

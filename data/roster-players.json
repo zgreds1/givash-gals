@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T17:33:33.504Z",
+  "generatedAt": "2026-09-23T10:44:51.176Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -185,6 +185,11 @@
       "name": "Dawson Knox",
       "pos": "TE",
       "team": "BUF"
+    },
+    "5985": {
+      "name": "Foster Moreau",
+      "pos": "TE",
+      "team": "HOU"
     },
     "5995": {
       "name": "Justice Hill",
