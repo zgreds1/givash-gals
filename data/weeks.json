@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T06:08:18.637Z",
+  "generatedAt": "2026-09-25T06:09:54.651Z",
   "weeks": [
     {
       "week": 1,
@@ -423,11 +423,11 @@
       "week": 3,
       "played": true,
       "degenerate": false,
-      "median": 5.95,
+      "median": 0.45,
       "medianPool": [
-        20,
         11,
         0.9,
+        0,
         0
       ],
       "teams": {
@@ -538,8 +538,8 @@
         },
         "2": {
           "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
               "playerId": "3161",
@@ -551,7 +551,7 @@
               "playerId": null,
               "name": "Empty slot",
               "reason": "empty-slot",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "3257",
@@ -650,7 +650,7 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 1,
+          "settledPenalties": 0,
           "yetToPlay": 18
         },
         "3": {
@@ -1000,7 +1000,7 @@
             2,
             5
           ],
-          "winner": 5
+          "winner": 2
         },
         {
           "type": "h2h",
@@ -1013,7 +1013,7 @@
         {
           "type": "median",
           "rosterId": 1,
-          "line": 5.95,
+          "line": 0.45,
           "result": "L"
         }
       ]
