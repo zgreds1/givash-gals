@@ -83,11 +83,13 @@ test('slimForLeaderboard keeps fantasy positions regardless of active flag', () 
     A: { position: 'QB', full_name: 'Quincy Back', team: 'CIN', active: true },
     R: { position: 'RB', first_name: 'Retired', last_name: 'Guy', team: null, active: false },
     X: { position: 'OL', full_name: 'Lineman Guy', team: 'CIN', active: true },
+    F: { position: 'FB', fantasy_positions: ['RB'], full_name: 'Full Back', team: 'DAL', active: true },
   };
   // A retired player still played last season; history must not rot.
   assert.deepEqual(slimForLeaderboard(raw), {
     A: { pos: 'QB', team: 'CIN', name: 'Quincy Back' },
     R: { pos: 'RB', team: '—', name: 'Retired Guy' },
+    F: { pos: 'RB', team: 'DAL', name: 'Full Back' },
   });
 });
 

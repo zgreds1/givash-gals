@@ -30,6 +30,18 @@ test('slimPlayers keeps only active skill players and three fields', () => {
   assert.deepEqual(slim.HOU, { pos: 'DEF', team: 'HOU', name: 'Houston Texans' });
 });
 
+test('slimPlayers keeps a fullback Sleeper lists as a fantasy RB', () => {
+  // Hunter Luepke: position FB, fantasy_positions RB. Dropping him charged
+  // Kirko chains a settled +20 in 2026 week 3 before Dallas had played.
+  const raw = {
+    11510: { position: 'FB', fantasy_positions: ['RB'], team: 'DAL', full_name: 'Hunter Luepke', active: true },
+    9998: { position: 'FB', fantasy_positions: ['FB'], team: 'DAL', full_name: 'Blocking Back', active: true },
+  };
+  assert.deepEqual(slimPlayers(raw), {
+    11510: { pos: 'RB', team: 'DAL', name: 'Hunter Luepke' },
+  });
+});
+
 test('buildSnapshot resolves every supplied week and names the teams', () => {
   const players = { 4199: { pos: 'WR', team: 'MIN', name: 'Justin Jefferson' } };
   const solo = (r, m, p) => mkEntry(r, m, [['4199', p]]);

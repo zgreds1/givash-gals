@@ -21,14 +21,14 @@ import {
   unownedRosterIds,
 } from '../sleeper.js';
 import { byeTeams, gameStates, opportunitySet, resolveWeek, standings } from '../rules.js';
-import { buildLeaderboard, slimForLeaderboard, slimWeek } from '../leaderboard.js';
+import {
+  buildLeaderboard, fantasyPosition, slimForLeaderboard, slimWeek,
+} from '../leaderboard.js';
 import { pairsFromPayload } from '../results-view.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = path.join(ROOT, 'data');
 const RAW = path.join(DATA, 'raw');
-
-const SKILL = new Set(['QB', 'RB', 'WR', 'TE', 'K', 'DEF']);
 
 /**
  * Reduce the 14.6 MB players payload to the three fields rules.js needs.
@@ -41,10 +41,11 @@ const SKILL = new Set(['QB', 'RB', 'WR', 'TE', 'K', 'DEF']);
 export function slimPlayers(raw) {
   const out = {};
   for (const [id, p] of Object.entries(raw)) {
-    if (!p.active || !SKILL.has(p.position)) continue;
+    const pos = fantasyPosition(p);
+    if (!p.active || !pos) continue;
     const name =
       p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim() || id;
-    out[id] = { pos: p.position, team: p.team, name };
+    out[id] = { pos, team: p.team, name };
   }
   return out;
 }

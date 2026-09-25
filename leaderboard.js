@@ -15,6 +15,23 @@ export const LEADERBOARD_POSITIONS = ['QB', 'RB', 'WR', 'TE', 'K', 'DEF'];
 const POS_SET = new Set(LEADERBOARD_POSITIONS);
 
 /**
+ * The fantasy position a Sleeper player record plays at, or null.
+ *
+ * `position` is the NFL position, and for some players it is not a fantasy
+ * one: Sleeper lists Hunter Luepke as `FB` with `fantasy_positions: ['RB']`.
+ * Filtering on `position` alone drops him from every player map, and a
+ * started player missing from the map is scored as an inactive zero - a
+ * settled +20 before his game has even kicked off.
+ *
+ * @param {Object} p - one raw Sleeper player record
+ * @returns {string|null}
+ */
+export function fantasyPosition(p) {
+  if (POS_SET.has(p?.position)) return p.position;
+  return (p?.fantasy_positions || []).find((f) => POS_SET.has(f)) || null;
+}
+
+/**
  * Raw fantasy points for one player-week under the league's scoring map.
  *
  * @param {Object} stats - one player's week from Sleeper
@@ -89,10 +106,11 @@ export function slimWeek(weekStats, players, scoring) {
 export function slimForLeaderboard(rawPlayers) {
   const out = {};
   for (const [id, p] of Object.entries(rawPlayers || {})) {
-    if (!POS_SET.has(p.position)) continue;
+    const pos = fantasyPosition(p);
+    if (!pos) continue;
     const name =
       p.full_name || `${p.first_name || ''} ${p.last_name || ''}`.trim() || id;
-    out[id] = { pos: p.position, team: p.team || '—', name };
+    out[id] = { pos, team: p.team || '—', name };
   }
   return out;
 }
