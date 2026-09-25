@@ -1560,7 +1560,15 @@ table.standings th .dir {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.lineup-name.empty { color: var(--muted); font-style: italic; }
+/* `.empty` is also the page-wide empty-state message (padding, centred text),
+ * and that rule reaches this span too: it made an empty slot's row 80px
+ * tall and pushed its +20 tag onto a line of its own. Undo both here. */
+.lineup-name.empty {
+  color: var(--muted);
+  font-style: italic;
+  padding: 0;
+  text-align: inherit;
+}
 
 .lineup-pts {
   font-family: var(--font-data);
