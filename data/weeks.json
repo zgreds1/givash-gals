@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T10:44:51.176Z",
+  "generatedAt": "2026-09-25T06:08:18.637Z",
   "weeks": [
     {
       "week": 1,
@@ -421,20 +421,20 @@
     },
     {
       "week": 3,
-      "played": false,
+      "played": true,
       "degenerate": false,
-      "median": 0,
+      "median": 5.95,
       "medianPool": [
-        40,
-        0,
-        0,
+        20,
+        11,
+        0.9,
         0
       ],
       "teams": {
         "1": {
-          "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "raw": 24.04,
+          "adjusted": 24.04,
+          "inPlay": 24.04,
           "penalties": [
             {
               "playerId": "9758",
@@ -445,12 +445,6 @@
             {
               "playerId": "2307",
               "name": "Marcus Mariota",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "11559",
-              "name": "Michael Penix",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -485,10 +479,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": null,
-              "name": "Empty slot",
-              "reason": "empty-slot",
-              "phase": "final"
+              "playerId": "5947",
+              "name": "Jakobi Meyers",
+              "reason": "zeroed",
+              "phase": "upcoming"
             },
             {
               "playerId": "6783",
@@ -537,21 +531,15 @@
               "name": "Braelon Allen",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "650",
-              "name": "Nick Folk",
-              "reason": "zeroed",
-              "phase": "upcoming"
             }
           ],
-          "settledPenalties": 1,
-          "yetToPlay": 18
+          "settledPenalties": 0,
+          "yetToPlay": 17
         },
         "2": {
           "raw": 0,
-          "adjusted": 40,
-          "inPlay": 40,
+          "adjusted": 20,
+          "inPlay": 20,
           "penalties": [
             {
               "playerId": "3161",
@@ -651,9 +639,9 @@
             },
             {
               "playerId": "11510",
-              "name": "Unknown (11510)",
+              "name": "Hunter Luepke",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "7922",
@@ -662,13 +650,13 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 17
+          "settledPenalties": 1,
+          "yetToPlay": 18
         },
         "3": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 0.9,
+          "adjusted": 0.9,
+          "inPlay": 0.9,
           "penalties": [
             {
               "playerId": "5854",
@@ -697,12 +685,6 @@
             {
               "playerId": "13337",
               "name": "Emmett Johnson",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "11370",
-              "name": "Chris Brooks",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -780,7 +762,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 18
         },
         "4": {
           "raw": 0,
@@ -848,8 +830,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "7571",
-              "name": "Rashod Bateman",
+              "playerId": "13317",
+              "name": "Ted Hurst",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -872,8 +854,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13317",
-              "name": "Ted Hurst",
+              "playerId": "12474",
+              "name": "Woody Marks",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -900,9 +882,9 @@
           "yetToPlay": 19
         },
         "5": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 11,
+          "adjusted": 11,
+          "inPlay": 11,
           "penalties": [
             {
               "playerId": "12522",
@@ -919,12 +901,6 @@
             {
               "playerId": "7527",
               "name": "Mac Jones",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "8154",
-              "name": "Brian Robinson",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1014,7 +990,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 18
         }
       },
       "matchups": [
@@ -1032,12 +1008,12 @@
             3,
             4
           ],
-          "winner": null
+          "winner": 4
         },
         {
           "type": "median",
           "rosterId": 1,
-          "line": 0,
+          "line": 5.95,
           "result": "L"
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T11:05:24.641Z",
+  "generatedAt": "2026-09-25T06:08:18.637Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -186,6 +186,11 @@
       "pos": "TE",
       "team": "BUF"
     },
+    "5947": {
+      "name": "Jakobi Meyers",
+      "pos": "WR",
+      "team": "JAX"
+    },
     "5985": {
       "name": "Foster Moreau",
       "pos": "TE",
@@ -280,11 +285,6 @@
       "name": "Ja'Marr Chase",
       "pos": "WR",
       "team": "CIN"
-    },
-    "7567": {
-      "name": "Kenny Gainwell",
-      "pos": "RB",
-      "team": "TB"
     },
     "7569": {
       "name": "Nico Collins",
@@ -502,9 +502,9 @@
       "team": "SEA"
     },
     "11510": {
-      "name": "11510",
-      "pos": "",
-      "team": ""
+      "name": "Hunter Luepke",
+      "pos": "RB",
+      "team": "DAL"
     },
     "11533": {
       "name": "Brandon Aubrey",
@@ -621,6 +621,11 @@
       "pos": "RB",
       "team": "CLE"
     },
+    "12474": {
+      "name": "Woody Marks",
+      "pos": "RB",
+      "team": "HOU"
+    },
     "12483": {
       "name": "Jack Bech",
       "pos": "WR",
@@ -687,9 +692,9 @@
       "team": "CLE"
     },
     "12530": {
-      "name": "12530",
-      "pos": "",
-      "team": ""
+      "name": "Travis Hunter",
+      "pos": "WR",
+      "team": "JAX"
     },
     "12535": {
       "name": "Isaac TeSlaa",
