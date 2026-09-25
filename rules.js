@@ -211,7 +211,8 @@ export function opportunitySet(weekStats) {
  * lineups, not good ones.
  *
  * A penalty is only counted once that player's own NFL game is complete.
- * Several cases settle immediately: empty slots, a player whose NFL team is on
+ * An empty slot settles when the week's last game kicks off, since it can be
+ * filled until then. Several cases settle immediately: a player whose NFL team is on
  * bye, a player with no NFL team at all (an unrecognised id, or an id carrying
  * `team: null`), and a cancelled game. The `states` parameter reads
  * that week's schedule and maps each team to its game status ('final',
@@ -248,6 +249,18 @@ export function adjustedScore(
   // never sit pending forever waiting for a game that is not being played.
   const phaseOf = (team) => (states === null ? 'final' : states.get(team) ?? 'final');
 
+  // An empty slot has no game of its own, but it can still be filled until the
+  // week's LAST game kicks off - a manager can drop in a player from any team
+  // that has not started. So it stays pending while any game is still
+  // 'upcoming', and settles the moment the final kickoff happens. No schedule
+  // information reads as settled, the same as phaseOf.
+  let emptySlotPhase = 'final';
+  if (states !== null) {
+    for (const phase of states.values()) {
+      if (phase === 'upcoming') { emptySlotPhase = 'upcoming'; break; }
+    }
+  }
+
   for (let i = 0; i < starters.length; i++) {
     const id = starters[i];
     const pts = points[i] ?? 0;
@@ -270,7 +283,7 @@ export function adjustedScore(
 
     if (!id || id === '0') {
       penalties.push({
-        playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'final',
+        playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: emptySlotPhase,
       });
       continue;
     }

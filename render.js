@@ -223,8 +223,11 @@ export function renderRules() {
     <p>A +${PENALTY} only counts once <strong>that player's own NFL game is
        complete</strong>. A starter sitting on 0 at half-time has not cost you
        anything yet; he costs ${PENALTY} when his game ends still on 0.</p>
+    <p>An <strong>empty slot</strong> lands when the <strong>last game of
+       the week kicks off</strong>: until then you can still put someone in
+       it.</p>
     <p>Some cases settle straight away, because no game is going to change
-       them: an <strong>empty slot</strong>; a starter with no NFL game to
+       them: a starter with no NFL game to
        wait for, whether his team is on bye or he has no team at all; and a
        game that is <strong>cancelled</strong>.</p>
     <p>So a team's score moves during the week, and Results shows three

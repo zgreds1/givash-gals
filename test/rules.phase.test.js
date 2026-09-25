@@ -51,13 +51,37 @@ test('the three scores order as raw <= adjusted <= inPlay', () => {
   assert.ok(r.raw <= r.adjusted && r.adjusted <= r.inPlay);
 });
 
-test('an empty slot is settled the moment the week starts', () => {
-  // wk5 has not kicked off, so a slot taking its phase from anywhere but the
-  // literal would land on 'upcoming' and leave both readings at 0.
+test('an empty slot stays pending while any game has yet to kick off', () => {
+  // wk5 has not kicked off: the slot can still be filled, so nothing lands.
   const wk5 = gameStates(SCHEDULE_LIVE, 5);
   const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), wk5);
-  assert.equal(r.adjusted, 20, 'no game can rescue an empty slot');
+  assert.equal(r.adjusted, 0);
+  assert.equal(r.inPlay, 0);
+  assert.equal(r.penalties[0].phase, 'upcoming');
+});
+
+test('an empty slot stays pending while the last game is still to start', () => {
+  // Most of the week is over; one game remains unplayed.
+  const states = gameStates([
+    { week: 3, home: 'HOU', away: 'CIN', status: 'complete' },
+    { week: 3, home: 'KC', away: 'MIN', status: 'pre_game' },
+  ], 3);
+  const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), states);
+  assert.equal(r.adjusted, 0);
+  assert.equal(r.penalties[0].phase, 'upcoming');
+});
+
+test('an empty slot settles once the last game of the week kicks off', () => {
+  // LIVE3: HOU/CIN final, KC/MIN in progress - nothing left to kick off.
+  const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), LIVE3);
+  assert.equal(r.adjusted, 20, 'no one can be added after the last kickoff');
   assert.equal(r.inPlay, 20);
+  assert.equal(r.penalties[0].phase, 'final');
+});
+
+test('an empty slot with no schedule information is settled', () => {
+  const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), null);
+  assert.equal(r.adjusted, 20);
   assert.equal(r.penalties[0].phase, 'final');
 });
 

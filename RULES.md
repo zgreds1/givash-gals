@@ -41,9 +41,13 @@ A penalty is only counted once **that player's own NFL game is complete**. A
 starter sitting on 0 at half-time has not yet cost anything; he costs 20 when
 his game ends still on 0.
 
+An **empty starter slot** settles when the **last game of the week kicks
+off**. Until then the manager can still put a player in it from any team that
+has not started, so it shows as pending; once the final game starts nobody can
+be added and the +20 lands.
+
 These settle immediately, because no game is going to change them:
 
-- an **empty starter slot**, which no result can rescue;
 - a player whose **NFL team is on bye** — absence, which is exactly what this
   rule punishes;
 - a player with **no NFL team at all**, which is two distinct cases that reach
