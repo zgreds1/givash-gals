@@ -51,16 +51,17 @@ test('the three scores order as raw <= adjusted <= inPlay', () => {
   assert.ok(r.raw <= r.adjusted && r.adjusted <= r.inPlay);
 });
 
-test('an empty slot stays pending while any game has yet to kick off', () => {
-  // wk5 has not kicked off: the slot can still be filled, so nothing lands.
+test('an empty slot counts in play but not adjusted before any kickoff', () => {
+  // wk5 has not kicked off: the slot can still be filled, so it is not
+  // official, but if the week ended now it would cost 20.
   const wk5 = gameStates(SCHEDULE_LIVE, 5);
   const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), wk5);
   assert.equal(r.adjusted, 0);
-  assert.equal(r.inPlay, 0);
-  assert.equal(r.penalties[0].phase, 'upcoming');
+  assert.equal(r.inPlay, 20);
+  assert.equal(r.penalties[0].phase, 'live');
 });
 
-test('an empty slot stays pending while the last game is still to start', () => {
+test('an empty slot is in play, not settled, while the last game is still to start', () => {
   // Most of the week is over; one game remains unplayed.
   const states = gameStates([
     { week: 3, home: 'HOU', away: 'CIN', status: 'complete' },
@@ -68,7 +69,8 @@ test('an empty slot stays pending while the last game is still to start', () => 
   ], 3);
   const r = adjustedScore(mkEntry(1, 1, [['0', 0]]), WK3, PLAYERS, new Set(), states);
   assert.equal(r.adjusted, 0);
-  assert.equal(r.penalties[0].phase, 'upcoming');
+  assert.equal(r.inPlay, 20);
+  assert.equal(r.penalties[0].phase, 'live');
 });
 
 test('an empty slot settles once the last game of the week kicks off', () => {

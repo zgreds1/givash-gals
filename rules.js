@@ -251,13 +251,14 @@ export function adjustedScore(
 
   // An empty slot has no game of its own, but it can still be filled until the
   // week's LAST game kicks off - a manager can drop in a player from any team
-  // that has not started. So it stays pending while any game is still
-  // 'upcoming', and settles the moment the final kickoff happens. No schedule
-  // information reads as settled, the same as phaseOf.
+  // that has not started. So while any game is still 'upcoming' it reads
+  // 'live': counted in `in play` (if nothing changes, the +20 is coming) but
+  // not in `adjusted`. It settles the moment the final kickoff happens. No
+  // schedule information reads as settled, the same as phaseOf.
   let emptySlotPhase = 'final';
   if (states !== null) {
     for (const phase of states.values()) {
-      if (phase === 'upcoming') { emptySlotPhase = 'upcoming'; break; }
+      if (phase === 'upcoming') { emptySlotPhase = 'live'; break; }
     }
   }
 

@@ -43,8 +43,9 @@ his game ends still on 0.
 
 An **empty starter slot** settles when the **last game of the week kicks
 off**. Until then the manager can still put a player in it from any team that
-has not started, so it shows as pending; once the final game starts nobody can
-be added and the +20 lands.
+has not started, so it counts in `in play` (the score if everything ended now)
+but not in `adjusted`; once the final game starts nobody can be added and the
++20 lands.
 
 These settle immediately, because no game is going to change them:
 

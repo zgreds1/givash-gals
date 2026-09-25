@@ -225,7 +225,8 @@ export function renderRules() {
        anything yet; he costs ${PENALTY} when his game ends still on 0.</p>
     <p>An <strong>empty slot</strong> lands when the <strong>last game of
        the week kicks off</strong>: until then you can still put someone in
-       it.</p>
+       it, so it counts toward <strong>in play</strong> but not the official
+       score.</p>
     <p>Some cases settle straight away, because no game is going to change
        them: a starter with no NFL game to
        wait for, whether his team is on bye or he has no team at all; and a

@@ -1391,6 +1391,33 @@ test('a penalised row explains itself with the reason the penalty carries', () =
   assert.match(def, /class="pen-reason">DEF on bye<\/span>/, 'a bye DEF is captioned "DEF on bye"');
 });
 
+test('a pending empty slot says it can still be filled, not that a game is on', () => {
+  const resolved = {
+    teams: {
+      1: {
+        raw: 0, adjusted: 0, inPlay: 20,
+        penalties: [{ playerId: null, name: 'Empty slot', reason: 'empty-slot', phase: 'live' }],
+      },
+      2: { raw: 10, adjusted: 10, inPlay: 10, penalties: [] },
+    },
+    matchups: [{ type: 'h2h', rosterIds: [1, 2], winner: 1 }],
+    medianPool: [],
+  };
+  const payload = [
+    { roster_id: 1, starters: ['0'], starters_points: [0], players: [], players_points: {} },
+    { roster_id: 2, starters: ['4199'], starters_points: [10], players: ['4199'], players_points: { 4199: 10 } },
+  ];
+  const html = renderMatchupDetail({
+    week: 3, matchup: resolved.matchups[0], resolved, payload,
+    teams: { 1: 'A', 2: 'B' }, rosterPositions: ['QB'], players: PLAYERS,
+  });
+  const row = html.split('<div class="lineup-row">').slice(1).find((r) => r.includes('Empty slot'));
+  assert.ok(row);
+  assert.match(row, /class="pen pending">\+20<\/span>/);
+  assert.match(row, /can still be filled until the last kickoff/);
+  assert.doesNotMatch(row, /this game is still being played/);
+});
+
 test('an unpenalised row carries no reason caption', () => {
   const resolved = {
     teams: {

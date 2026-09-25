@@ -603,6 +603,11 @@ const PHASE_TAG = {
   upcoming: '<span class="pen waiting">not started</span>',
 };
 
+// An empty slot has no game of its own: it is pending because it can still
+// be filled until the week's last kickoff, not because a game is on.
+const EMPTY_LIVE_TAG = '<span class="pen pending">+20</span>' +
+  '<span class="sr-only">pending: can still be filled until the last kickoff</span>';
+
 /**
  * What each penalty reason means, in plain words.
  *
@@ -619,7 +624,9 @@ const REASON = {
 };
 
 function playerCell(row, align) {
-  const pen = row.phase ? PHASE_TAG[row.phase] || '' : '';
+  const pen = !row.phase ? ''
+    : row.empty && row.phase === 'live' ? EMPTY_LIVE_TAG
+      : PHASE_TAG[row.phase] || '';
   // Subordinate to the +20 tag by construction: it reads after the tag, in
   // the smallest type size the file has (the same one .lrow .lbl .cap and
   // .pool-row .pool-cap already use for a quiet caption), not a new one.
