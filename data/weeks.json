@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T06:09:54.651Z",
+  "generatedAt": "2026-09-25T06:20:20.531Z",
   "weeks": [
     {
       "week": 1,
@@ -539,7 +539,7 @@
         "2": {
           "raw": 0,
           "adjusted": 0,
-          "inPlay": 0,
+          "inPlay": 20,
           "penalties": [
             {
               "playerId": "3161",
@@ -551,7 +551,7 @@
               "playerId": null,
               "name": "Empty slot",
               "reason": "empty-slot",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "3257",
