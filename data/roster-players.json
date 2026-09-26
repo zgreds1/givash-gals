@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-25T06:08:18.637Z",
+  "generatedAt": "2026-09-26T10:47:30.152Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -835,6 +835,11 @@
       "name": "Cincinnati Bengals",
       "pos": "DEF",
       "team": "CIN"
+    },
+    "LAC": {
+      "name": "Los Angeles Chargers",
+      "pos": "DEF",
+      "team": "LAC"
     },
     "LAR": {
       "name": "Los Angeles Rams",
