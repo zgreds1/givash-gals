@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T10:47:30.152Z",
+  "generatedAt": "2026-09-27T19:59:11.194Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -296,6 +296,16 @@
       "pos": "WR",
       "team": "BAL"
     },
+    "7694": {
+      "name": "Tommy Tremble",
+      "pos": "TE",
+      "team": "CAR"
+    },
+    "7842": {
+      "name": "Luke Farrell",
+      "pos": "TE",
+      "team": "SF"
+    },
     "7922": {
       "name": "Riley Patterson",
       "pos": "K",
@@ -490,6 +500,11 @@
       "name": "Tyson Bagent",
       "pos": "QB",
       "team": "CHI"
+    },
+    "11280": {
+      "name": "Brady Russell",
+      "pos": "RB",
+      "team": "SEA"
     },
     "11370": {
       "name": "Chris Brooks",
@@ -835,6 +850,11 @@
       "name": "Cincinnati Bengals",
       "pos": "DEF",
       "team": "CIN"
+    },
+    "DAL": {
+      "name": "Dallas Cowboys",
+      "pos": "DEF",
+      "team": "DAL"
     },
     "LAC": {
       "name": "Los Angeles Chargers",
