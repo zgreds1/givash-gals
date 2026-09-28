@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T01:32:32.806Z",
+  "generatedAt": "2026-09-28T03:55:01.853Z",
   "weeks": [
     {
       "week": 1,
@@ -423,12 +423,12 @@
       "week": 3,
       "played": true,
       "degenerate": false,
-      "median": 164.63,
+      "median": 168.58,
       "medianPool": [
         208.92,
-        191.82,
-        137.44,
-        121.2
+        193.82,
+        143.34,
+        139.14
       ],
       "teams": {
         "1": {
@@ -516,9 +516,9 @@
           "yetToPlay": 2
         },
         "3": {
-          "raw": 81.2,
-          "adjusted": 121.2,
-          "inPlay": 121.2,
+          "raw": 103.34,
+          "adjusted": 143.34,
+          "inPlay": 143.34,
           "penalties": [
             {
               "playerId": "5854",
@@ -537,9 +537,9 @@
           "yetToPlay": 0
         },
         "4": {
-          "raw": 91.82,
-          "adjusted": 191.82,
-          "inPlay": 191.82,
+          "raw": 93.82,
+          "adjusted": 193.82,
+          "inPlay": 193.82,
           "penalties": [
             {
               "playerId": "11199",
@@ -582,9 +582,9 @@
           "yetToPlay": 1
         },
         "5": {
-          "raw": 117.44,
-          "adjusted": 137.44,
-          "inPlay": 157.44,
+          "raw": 119.14,
+          "adjusted": 139.14,
+          "inPlay": 159.14,
           "penalties": [
             {
               "playerId": "12503",
@@ -623,7 +623,7 @@
         {
           "type": "median",
           "rosterId": 1,
-          "line": 164.63,
+          "line": 168.58,
           "result": "L"
         }
       ]
