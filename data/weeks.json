@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T03:55:01.853Z",
+  "generatedAt": "2026-09-28T10:38:07.479Z",
   "weeks": [
     {
       "week": 1,
@@ -423,12 +423,12 @@
       "week": 3,
       "played": true,
       "degenerate": false,
-      "median": 168.58,
+      "median": 176.48,
       "medianPool": [
         208.92,
         193.82,
-        143.34,
-        139.14
+        159.14,
+        143.34
       ],
       "teams": {
         "1": {
@@ -583,7 +583,7 @@
         },
         "5": {
           "raw": 119.14,
-          "adjusted": 139.14,
+          "adjusted": 159.14,
           "inPlay": 159.14,
           "penalties": [
             {
@@ -596,10 +596,10 @@
               "playerId": "9494",
               "name": "Marvin Mims",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             }
           ],
-          "settledPenalties": 1,
+          "settledPenalties": 2,
           "yetToPlay": 0
         }
       },
@@ -623,7 +623,7 @@
         {
           "type": "median",
           "rosterId": 1,
-          "line": 168.58,
+          "line": 176.48,
           "result": "L"
         }
       ]

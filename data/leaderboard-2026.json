@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T03:55:01.853Z",
+  "generatedAt": "2026-09-28T10:38:07.479Z",
   "season": "2026",
   "rows": [
     {
@@ -4713,13 +4713,13 @@
       "name": "Stetson Bennett",
       "team": "LAR",
       "pos": "QB",
-      "gp": 2,
+      "gp": 1,
       "raw": 1.42,
       "pen": 2,
-      "truePen": 1,
+      "truePen": 0,
       "saved": 0,
       "total": 41.42,
-      "ppg": 10.71
+      "ppg": 1.42
     },
     {
       "id": "8204",
@@ -5957,19 +5957,6 @@
       "ppg": 20
     },
     {
-      "id": "6136",
-      "name": "Jarrett Stidham",
-      "team": "DEN",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 3,
-      "truePen": 1,
-      "saved": 0,
-      "total": 60,
-      "ppg": 20
-    },
-    {
       "id": "6323",
       "name": "Andrew Beck",
       "team": "NYJ",
@@ -6728,19 +6715,6 @@
       "name": "Montorie Foster",
       "team": "SEA",
       "pos": "WR",
-      "gp": 1,
-      "raw": 0,
-      "pen": 3,
-      "truePen": 1,
-      "saved": 0,
-      "total": 60,
-      "ppg": 20
-    },
-    {
-      "id": "13269",
-      "name": "Fernando Mendoza",
-      "team": "LV",
-      "pos": "QB",
       "gp": 1,
       "raw": 0,
       "pen": 3,
