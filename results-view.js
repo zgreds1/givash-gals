@@ -420,7 +420,7 @@ function weekStatus(week, settled) {
   const msg = settled
     ? `<b>Week ${week} final.</b> Counted in the standings.`
     : `<b>Week ${week} in progress.</b> Leader shown on adjusted — a +20 lands `
-      + 'only when a game ends. Standings update Tuesday 10:00.';
+      + 'only when a game ends. Standings update Tuesday 08:00.';
   return `<p class="week-status" role="status" aria-atomic="true">${msg}</p>`;
 }
 

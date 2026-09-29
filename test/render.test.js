@@ -123,7 +123,7 @@ test('the rules page names the three readings, in that order', () => {
 test('the rules page says the standings absorb a week on the Tuesday gate', () => {
   const lands = section(renderRules(), LANDS);
   assert.match(lands, /standings themselves do not move mid-week/i);
-  assert.match(lands, /Tuesday at 10:00 Israel time/);
+  assert.match(lands, /Tuesday at 08:00 Israel time/);
 });
 
 test('the standings caption says which week it is through', () => {
@@ -139,18 +139,18 @@ test('the caption omits the clause when nothing has settled', () => {
 
 test('a pending week names when it joins', () => {
   const html = renderStandings(ROWS, TEAMS, {
-    through: 1, nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00',
+    through: 1, nextWeek: 2, nextGate: 'Tuesday 22 September, 08:00',
   });
-  assert.match(html, /Week 2 joins Tuesday 22 September, 10:00\./);
+  assert.match(html, /Week 2 joins Tuesday 22 September, 08:00\./);
 });
 
 test('the empty table still names the first gate', () => {
   // Before week 1 settles there are no rows, and "no games played yet" alone
   // reads as broken during a week that has visibly been played.
   const html = renderStandings([], TEAMS, {
-    nextWeek: 1, nextGate: 'Tuesday 15 September, 10:00',
+    nextWeek: 1, nextGate: 'Tuesday 15 September, 08:00',
   });
-  assert.match(html, /Week 1 joins Tuesday 15 September, 10:00\./);
+  assert.match(html, /Week 1 joins Tuesday 15 September, 08:00\./);
 });
 
 test('a nextWeek with no nextGate renders no note', () => {
@@ -245,18 +245,18 @@ test('the sorted column is marked on every body cell, for the eye', () => {
  *
  * A table that sits still on a Tuesday afternoon reads as broken unless it
  * says why. There are two different reasons and they need different words:
- * waiting for the clock ("joins Tuesday 10:00") and waiting for a game that
+ * waiting for the clock ("joins Tuesday 08:00") and waiting for a game that
  * is still being played. The second used to be impossible — the gate was the
  * clock alone — so only the first sentence existed.
  */
 test('the gate note names the clock when the week is waiting on the clock', () => {
-  const html = renderStandings(ROWS, TEAMS, { nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00' });
-  assert.match(html, /Week 2 joins Tuesday 22 September, 10:00\./);
+  const html = renderStandings(ROWS, TEAMS, { nextWeek: 2, nextGate: 'Tuesday 22 September, 08:00' });
+  assert.match(html, /Week 2 joins Tuesday 22 September, 08:00\./);
 });
 
 test('the gate note names the games when the week is waiting on a game', () => {
   const html = renderStandings(ROWS, TEAMS, {
-    nextWeek: 2, nextGate: 'Tuesday 22 September, 10:00', waitingOnGames: true,
+    nextWeek: 2, nextGate: 'Tuesday 22 September, 08:00', waitingOnGames: true,
   });
   assert.match(html, /Week 2 joins once its last game is final\./);
   assert.doesNotMatch(html, /Tuesday 22 September/, 'the clock has already passed; naming it would mislead');

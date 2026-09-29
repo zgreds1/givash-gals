@@ -331,12 +331,16 @@ progress is held out, and the note says so rather than naming a deadline
 already behind us.
 
 The Action's cron also sweeps Tuesday 01:00-05:00 UTC hourly rather than
-resting on a single 06:00 run. That run was meant to clear the 07:00 UTC gate
-by an hour, but GitHub routinely delays this repo's scheduled runs by four
-(06:00 crons have started at 10:34, 10:03 and 09:36). A one-hour margin
-against four hours of jitter is not a margin.
+resting on a single 06:00 run. That run was meant to clear the then-07:00 UTC
+gate by an hour, but GitHub routinely delays this repo's scheduled runs by
+four (06:00 crons have started at 10:34, 10:03 and 09:36). A one-hour margin
+against four hours of jitter is not a margin. Since the gate moved to 08:00
+Israel (05:00 UTC on IDT, 06:00 on IST) the 06:00 run lands at or after it,
+which is fine: the page scores the week live, and a stale fallback snapshot
+still shows Monday night as unfinished, so the scoreboard half of the gate
+holds the week out instead of admitting it short.
 
-The standings do not move mid-week. A week joins at **Tuesday 10:00 Israel
+The standings do not move mid-week. A week joins at **Tuesday 08:00 Israel
 time**, which `season.js` computes by comparing wall-clock parts from
 `Intl.DateTimeFormat` rather than by any offset arithmetic — so Israel's
 late-October DST change is absorbed with no branch and no dependency.

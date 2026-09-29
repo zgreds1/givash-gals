@@ -15,7 +15,7 @@ import { LAST_WEEK } from './config.js';
 const TZ = 'Asia/Jerusalem';
 
 /** Wall-clock hour, in TZ, at which a week's result joins the standings. */
-const GATE_HOUR = 10;
+const GATE_HOUR = 8;
 
 /**
  * Which week the Results tab opens on.
@@ -63,8 +63,8 @@ const dayLabel = new Intl.DateTimeFormat('en-GB', {
  * This deliberately never computes a UTC offset. Israel leaves DST in late
  * October, mid-season, so offset arithmetic would need a branch that this does
  * not have: formatting into wall-clock parts and comparing THOSE makes the
- * shift the formatter's problem. Week 1's gate fires at 07:00 UTC and week 7's
- * at 08:00 UTC, and no line of code is aware of the difference.
+ * shift the formatter's problem. Week 1's gate fires at 05:00 UTC and week 7's
+ * at 06:00 UTC, and no line of code is aware of the difference.
  */
 function stamp(now) {
   const p = {};
@@ -95,7 +95,7 @@ export function weekGate(week, seasonStart) {
 }
 
 /**
- * Has `week` passed its Tuesday 10:00 gate?
+ * Has `week` passed its Tuesday 08:00 gate?
  *
  * An unknown season start returns true. Withholding every week on missing
  * metadata would blank the standings entirely, which is worse than the
@@ -133,7 +133,7 @@ export function finalWeeks(weeks, seasonStart, now, gamesFinal = null) {
 }
 
 /**
- * Human label for when a week joins, e.g. "Tuesday 22 September, 10:00".
+ * Human label for when a week joins, e.g. "Tuesday 22 September, 08:00".
  *
  * Formatted here rather than in render.js so the locale is pinned in one place
  * and the string is testable without a DOM.

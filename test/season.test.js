@@ -5,23 +5,23 @@ import { weekGate, isWeekFinal, finalWeeks, gateLabel, displayWeek } from '../se
 const START = '2026-09-09'; // a Wednesday
 
 test('every gate lands on the Tuesday that closes its week', () => {
-  assert.equal(weekGate(1, START), 2026091510);  // Tue 15 Sep
-  assert.equal(weekGate(2, START), 2026092210);  // Tue 22 Sep
-  assert.equal(weekGate(7, START), 2026102710);  // Tue 27 Oct
-  assert.equal(weekGate(18, START), 2027011210); // Tue 12 Jan
+  assert.equal(weekGate(1, START), 2026091508);  // Tue 15 Sep
+  assert.equal(weekGate(2, START), 2026092208);  // Tue 22 Sep
+  assert.equal(weekGate(7, START), 2026102708);  // Tue 27 Oct
+  assert.equal(weekGate(18, START), 2027011208); // Tue 12 Jan
 });
 
-test('the gate opens at 10:00 Israel, to the minute', () => {
-  // 07:00 UTC is 10:00 in Jerusalem while Israel is on IDT (UTC+3).
-  assert.equal(isWeekFinal(1, START, new Date('2026-09-15T06:59:00Z')), false);
-  assert.equal(isWeekFinal(1, START, new Date('2026-09-15T07:00:00Z')), true);
+test('the gate opens at 08:00 Israel, to the minute', () => {
+  // 05:00 UTC is 08:00 in Jerusalem while Israel is on IDT (UTC+3).
+  assert.equal(isWeekFinal(1, START, new Date('2026-09-15T04:59:00Z')), false);
+  assert.equal(isWeekFinal(1, START, new Date('2026-09-15T05:00:00Z')), true);
 });
 
 test('the gate follows Israel across its DST change with no offset arithmetic', () => {
-  // Israel leaves DST on 25 Oct 2026, so week 7's identical 10:00 local gate
+  // Israel leaves DST on 25 Oct 2026, so week 7's identical 08:00 local gate
   // fires an hour later in UTC than week 1's. Nothing in the code knows this.
-  assert.equal(isWeekFinal(7, START, new Date('2026-10-27T07:59:00Z')), false);
-  assert.equal(isWeekFinal(7, START, new Date('2026-10-27T08:00:00Z')), true);
+  assert.equal(isWeekFinal(7, START, new Date('2026-10-27T05:59:00Z')), false);
+  assert.equal(isWeekFinal(7, START, new Date('2026-10-27T06:00:00Z')), true);
 });
 
 test('a week is not final the day before its gate', () => {
@@ -51,7 +51,7 @@ test('finalWeeks tolerates a missing list', () => {
 });
 
 test('gateLabel names the day a week joins', () => {
-  assert.equal(gateLabel(2, START), 'Tuesday 22 September, 10:00');
+  assert.equal(gateLabel(2, START), 'Tuesday 22 September, 08:00');
   assert.equal(gateLabel(1, null), null);
 });
 

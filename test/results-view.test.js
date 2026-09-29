@@ -1131,7 +1131,7 @@ test('the card is a link over a div, which is what lets the scores be buttons', 
 });
 
 // Week 3 of a season starting 2026-09-09 runs Wed 23 Sep to Tue 29 Sep, and
-// its standings gate is Tue 29 Sep 10:00. Two clocks are used below: the 24th,
+// its standings gate is Tue 29 Sep 08:00. Two clocks are used below: the 24th,
 // inside the week with the gate still ahead, and the 29th at noon, with the
 // gate already behind. Both display week 3, so neither needs a click.
 const GATE_AHEAD = local(2026, 9, 24);

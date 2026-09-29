@@ -244,7 +244,7 @@ export function renderRules() {
        with no +${PENALTY} of any kind. A starter whose game has not kicked
        off is charged by neither of the first two.</p>
     <p>The standings themselves do not move mid-week: a week joins them on
-       <strong>Tuesday at 10:00 Israel time</strong>, once its games are done
+       <strong>Tuesday at 08:00 Israel time</strong>, once its games are done
        and its adjusted scores have stopped changing.</p>
 
     <h2>The median matchup</h2>
