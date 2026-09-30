@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-27T19:59:11.194Z",
+  "generatedAt": "2026-09-30T11:54:00.833Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -876,10 +876,20 @@
       "pos": "DEF",
       "team": "MIN"
     },
+    "NE": {
+      "name": "New England Patriots",
+      "pos": "DEF",
+      "team": "NE"
+    },
     "NYJ": {
       "name": "New York Jets",
       "pos": "DEF",
       "team": "NYJ"
+    },
+    "PHI": {
+      "name": "Philadelphia Eagles",
+      "pos": "DEF",
+      "team": "PHI"
     },
     "TEN": {
       "name": "Tennessee Titans",

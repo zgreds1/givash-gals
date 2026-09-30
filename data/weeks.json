@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T06:34:21.676Z",
+  "generatedAt": "2026-09-30T11:54:00.833Z",
   "weeks": [
     {
       "week": 1,
@@ -730,8 +730,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "11576",
-              "name": "Braelon Allen",
+              "playerId": "12504",
+              "name": "Kaleb Johnson",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -868,14 +868,14 @@
           "inPlay": 0,
           "penalties": [
             {
-              "playerId": "5854",
-              "name": "Drew Lock",
+              "playerId": "8161",
+              "name": "Malik Willis",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "8161",
-              "name": "Malik Willis",
+              "playerId": "12545",
+              "name": "Tyler Shough",
               "reason": "zeroed",
               "phase": "upcoming"
             },
