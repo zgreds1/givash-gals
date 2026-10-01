@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T11:54:00.833Z",
+  "generatedAt": "2026-10-01T12:24:56.132Z",
   "season": "2026",
   "rows": [
     {
@@ -5816,7 +5816,7 @@
     {
       "id": "2078",
       "name": "Odell Beckham",
-      "team": "NYG",
+      "team": "—",
       "pos": "WR",
       "gp": 3,
       "raw": 0,
@@ -6413,7 +6413,7 @@
     },
     {
       "id": "11506",
-      "name": "Jalen Moreno-Cropper",
+      "name": "Jalen Cropper",
       "team": "NO",
       "pos": "WR",
       "gp": 1,
