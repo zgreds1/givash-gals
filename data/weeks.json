@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T11:54:00.833Z",
+  "generatedAt": "2026-10-02T11:51:22.653Z",
   "weeks": [
     {
       "week": 1,
@@ -618,20 +618,20 @@
     },
     {
       "week": 4,
-      "played": false,
+      "played": true,
       "degenerate": false,
-      "median": 0,
+      "median": 8.95,
       "medianPool": [
-        0,
-        0,
-        0,
+        17.66,
+        10.2,
+        7.7,
         0
       ],
       "teams": {
         "1": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 7.7,
+          "adjusted": 7.7,
+          "inPlay": 7.7,
           "penalties": [
             {
               "playerId": "9758",
@@ -664,8 +664,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9225",
-              "name": "Tank Bigsby",
+              "playerId": "11643",
+              "name": "Jaylen Wright",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -688,32 +688,20 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "6783",
-              "name": "Jerry Jeudy",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "13285",
               "name": "Malachi Fields",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "11597",
-              "name": "Theo Johnson",
+              "playerId": "12493",
+              "name": "Oronde Gadsden",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
               "playerId": "8172",
               "name": "Greg Dulcich",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "12472",
-              "name": "Raheim Sanders",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -743,7 +731,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 17
         },
         "2": {
           "raw": 0,
@@ -863,9 +851,9 @@
           "yetToPlay": 19
         },
         "3": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 10.2,
+          "adjusted": 10.2,
+          "inPlay": 10.2,
           "penalties": [
             {
               "playerId": "8161",
@@ -940,12 +928,6 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9479",
-              "name": "Darnell Washington",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "7528",
               "name": "Najee Harris",
               "reason": "zeroed",
@@ -977,7 +959,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 18
         },
         "4": {
           "raw": 0,
@@ -1097,19 +1079,13 @@
           "yetToPlay": 19
         },
         "5": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 17.66,
+          "adjusted": 17.66,
+          "inPlay": 17.66,
           "penalties": [
             {
               "playerId": "12522",
               "name": "Cam Ward",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "96",
-              "name": "Aaron Rodgers",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1146,12 +1122,6 @@
             {
               "playerId": "9501",
               "name": "DeMario Douglas",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "12503",
-              "name": "Isaiah Bond",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1211,7 +1181,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 17
         }
       },
       "matchups": [
@@ -1221,7 +1191,7 @@
             1,
             5
           ],
-          "winner": null
+          "winner": 1
         },
         {
           "type": "h2h",
@@ -1229,13 +1199,13 @@
             2,
             3
           ],
-          "winner": null
+          "winner": 2
         },
         {
           "type": "median",
           "rosterId": 4,
-          "line": 0,
-          "result": "T"
+          "line": 8.95,
+          "result": "W"
         }
       ]
     }

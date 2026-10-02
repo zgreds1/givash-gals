@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T12:24:56.132Z",
+  "generatedAt": "2026-10-02T11:51:22.653Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -650,6 +650,11 @@
       "name": "Corey Kiner",
       "pos": "RB",
       "team": "NE"
+    },
+    "12493": {
+      "name": "Oronde Gadsden",
+      "pos": "TE",
+      "team": "LAC"
     },
     "12494": {
       "name": "Kyle McCord",
