@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-02T11:51:22.653Z",
+  "generatedAt": "2026-10-04T19:57:42.327Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -51,6 +51,11 @@
       "pos": "TE",
       "team": "CAR"
     },
+    "3155": {
+      "name": "Laquon Treadwell",
+      "pos": "WR",
+      "team": "IND"
+    },
     "3161": {
       "name": "Carson Wentz",
       "pos": "QB",
@@ -60,6 +65,11 @@
       "name": "Derrick Henry",
       "pos": "RB",
       "team": "BAL"
+    },
+    "3214": {
+      "name": "Hunter Henry",
+      "pos": "TE",
+      "team": "NE"
     },
     "3257": {
       "name": "Jacoby Brissett",
@@ -130,6 +140,11 @@
       "name": "Cooper Rush",
       "pos": "QB",
       "team": "ATL"
+    },
+    "4663": {
+      "name": "Austin Ekeler",
+      "pos": "RB",
+      "team": "WAS"
     },
     "4881": {
       "name": "Lamar Jackson",
@@ -215,6 +230,11 @@
       "name": "Olamide Zaccheaus",
       "pos": "WR",
       "team": "ATL"
+    },
+    "6528": {
+      "name": "Joey Slye",
+      "pos": "K",
+      "team": "TEN"
     },
     "6768": {
       "name": "Tua Tagovailoa",
@@ -591,6 +611,11 @@
       "pos": "WR",
       "team": "CAR"
     },
+    "11627": {
+      "name": "Troy Franklin",
+      "pos": "WR",
+      "team": "DEN"
+    },
     "11643": {
       "name": "Jaylen Wright",
       "pos": "RB",
@@ -646,6 +671,11 @@
       "pos": "WR",
       "team": "LV"
     },
+    "12485": {
+      "name": "Tez Johnson",
+      "pos": "WR",
+      "team": "TB"
+    },
     "12491": {
       "name": "Corey Kiner",
       "pos": "RB",
@@ -665,6 +695,11 @@
       "name": "Ollie Gordon",
       "pos": "RB",
       "team": "MIA"
+    },
+    "12497": {
+      "name": "Tory Horton",
+      "pos": "WR",
+      "team": "SEA"
     },
     "12498": {
       "name": "Mason Taylor",
@@ -830,6 +865,11 @@
       "name": "Seth McGowan",
       "pos": "RB",
       "team": "IND"
+    },
+    "13425": {
+      "name": "Jalon Daniels",
+      "pos": "QB",
+      "team": "TB"
     },
     "13833": {
       "name": "Dominic Zvada",

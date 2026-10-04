@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-10-02T11:51:22.653Z",
+  "generatedAt": "2026-10-04T19:57:42.327Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
     "2": "Kirko chains",
-    "3": "Nsaker",
+    "3": "The best worst team",
     "4": "Ben-Gvir's balagan",
     "5": "Nsanders10"
   },
@@ -42,8 +42,8 @@
       "l": 0,
       "t": 0,
       "gp": 4,
-      "adjPF": 483.4,
-      "rawPF": 263.4,
+      "adjPF": 544.5,
+      "rawPF": 324.5,
       "settledPenalties": 11,
       "median": {
         "w": 1,
@@ -59,9 +59,9 @@
       "l": 1,
       "t": 0,
       "gp": 4,
-      "adjPF": 517.64,
-      "rawPF": 277.64,
-      "settledPenalties": 12,
+      "adjPF": 589,
+      "rawPF": 329,
+      "settledPenalties": 13,
       "median": {
         "w": 1,
         "l": 0,
@@ -71,34 +71,34 @@
       "winPct": 0.75
     },
     {
-      "rosterId": 2,
+      "rosterId": 3,
       "w": 2,
       "l": 2,
       "t": 0,
       "gp": 4,
-      "adjPF": 586.84,
-      "rawPF": 266.84,
-      "settledPenalties": 16,
+      "adjPF": 583.66,
+      "rawPF": 443.66,
+      "settledPenalties": 7,
       "median": {
         "w": 0,
-        "l": 0,
+        "l": 1,
         "t": 0
       },
       "unresolvedTie": false,
       "winPct": 0.5
     },
     {
-      "rosterId": 3,
+      "rosterId": 2,
       "w": 1,
       "l": 3,
       "t": 0,
       "gp": 4,
-      "adjPF": 539.54,
-      "rawPF": 399.54,
-      "settledPenalties": 7,
+      "adjPF": 655.32,
+      "rawPF": 315.32,
+      "settledPenalties": 17,
       "median": {
         "w": 0,
-        "l": 1,
+        "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
@@ -110,9 +110,9 @@
       "l": 3,
       "t": 0,
       "gp": 4,
-      "adjPF": 598,
-      "rawPF": 298,
-      "settledPenalties": 15,
+      "adjPF": 661.02,
+      "rawPF": 341.02,
+      "settledPenalties": 16,
       "median": {
         "w": 1,
         "l": 0,
