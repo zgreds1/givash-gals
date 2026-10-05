@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T22:59:58.548Z",
+  "generatedAt": "2026-10-05T01:52:01.202Z",
   "weeks": [
     {
       "week": 1,
@@ -620,18 +620,18 @@
       "week": 4,
       "played": true,
       "degenerate": false,
-      "median": 117.14,
+      "median": 144.19,
       "medianPool": [
-        164.14,
-        119.36,
-        114.92,
-        101.22
+        171.64,
+        148.76,
+        139.62,
+        125.12
       ],
       "teams": {
         "1": {
-          "raw": 74.92,
-          "adjusted": 114.92,
-          "inPlay": 134.92,
+          "raw": 79.62,
+          "adjusted": 139.62,
+          "inPlay": 139.62,
           "penalties": [
             {
               "playerId": "11559",
@@ -640,22 +640,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "11729",
-              "name": "Sione Vaki",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "2359",
               "name": "Ameer Abdullah",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "6828",
-              "name": "AJ Dillon",
-              "reason": "zeroed",
-              "phase": "upcoming"
             },
             {
               "playerId": "8917",
@@ -667,7 +655,7 @@
               "playerId": "8172",
               "name": "Greg Dulcich",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "650",
@@ -676,13 +664,13 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 4
+          "settledPenalties": 3,
+          "yetToPlay": 2
         },
         "2": {
-          "raw": 79.36,
-          "adjusted": 119.36,
-          "inPlay": 139.36,
+          "raw": 88.76,
+          "adjusted": 148.76,
+          "inPlay": 168.76,
           "penalties": [
             {
               "playerId": "11571",
@@ -700,13 +688,13 @@
               "playerId": "12535",
               "name": "Isaac TeSlaa",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "13311",
               "name": "Chris Bell",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "6271",
@@ -715,13 +703,13 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 2
+          "settledPenalties": 3,
+          "yetToPlay": 1
         },
         "3": {
-          "raw": 61.22,
-          "adjusted": 101.22,
-          "inPlay": 121.22,
+          "raw": 65.12,
+          "adjusted": 125.12,
+          "inPlay": 125.12,
           "penalties": [
             {
               "playerId": "12545",
@@ -733,7 +721,7 @@
               "playerId": "11627",
               "name": "Troy Franklin",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "7090",
@@ -748,13 +736,13 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 2,
+          "settledPenalties": 3,
           "yetToPlay": 1
         },
         "4": {
-          "raw": 64.96,
-          "adjusted": 104.96,
-          "inPlay": 104.96,
+          "raw": 66.96,
+          "adjusted": 106.96,
+          "inPlay": 126.96,
           "penalties": [
             {
               "playerId": "12491",
@@ -772,7 +760,7 @@
               "playerId": "11626",
               "name": "Xavier Legette",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "11625",
@@ -782,12 +770,12 @@
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 2
+          "yetToPlay": 1
         },
         "5": {
-          "raw": 124.14,
-          "adjusted": 164.14,
-          "inPlay": 164.14,
+          "raw": 131.64,
+          "adjusted": 171.64,
+          "inPlay": 171.64,
           "penalties": [
             {
               "playerId": "8154",
@@ -802,12 +790,6 @@
               "phase": "final"
             },
             {
-              "playerId": "7694",
-              "name": "Tommy Tremble",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "12544",
               "name": "LeQuint Allen",
               "reason": "zeroed",
@@ -815,7 +797,7 @@
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 2
+          "yetToPlay": 1
         }
       },
       "matchups": [
@@ -838,7 +820,7 @@
         {
           "type": "median",
           "rosterId": 4,
-          "line": 117.14,
+          "line": 144.19,
           "result": "W"
         }
       ]
