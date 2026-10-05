@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T01:52:01.202Z",
+  "generatedAt": "2026-10-05T04:18:18.073Z",
   "weeks": [
     {
       "week": 1,
@@ -620,18 +620,18 @@
       "week": 4,
       "played": true,
       "degenerate": false,
-      "median": 144.19,
+      "median": 149.99,
       "medianPool": [
-        171.64,
-        148.76,
-        139.62,
+        172.44,
+        160.26,
+        139.72,
         125.12
       ],
       "teams": {
         "1": {
-          "raw": 79.62,
-          "adjusted": 139.62,
-          "inPlay": 139.62,
+          "raw": 79.72,
+          "adjusted": 139.72,
+          "inPlay": 139.72,
           "penalties": [
             {
               "playerId": "11559",
@@ -668,9 +668,9 @@
           "yetToPlay": 2
         },
         "2": {
-          "raw": 88.76,
-          "adjusted": 148.76,
-          "inPlay": 168.76,
+          "raw": 100.26,
+          "adjusted": 160.26,
+          "inPlay": 160.26,
           "penalties": [
             {
               "playerId": "11571",
@@ -683,12 +683,6 @@
               "name": "Devin Singletary",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "12535",
-              "name": "Isaac TeSlaa",
-              "reason": "zeroed",
-              "phase": "live"
             },
             {
               "playerId": "13311",
@@ -741,7 +735,7 @@
         },
         "4": {
           "raw": 66.96,
-          "adjusted": 106.96,
+          "adjusted": 126.96,
           "inPlay": 126.96,
           "penalties": [
             {
@@ -760,7 +754,7 @@
               "playerId": "11626",
               "name": "Xavier Legette",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "11625",
@@ -769,13 +763,13 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 2,
+          "settledPenalties": 3,
           "yetToPlay": 1
         },
         "5": {
-          "raw": 131.64,
-          "adjusted": 171.64,
-          "inPlay": 171.64,
+          "raw": 132.44,
+          "adjusted": 172.44,
+          "inPlay": 172.44,
           "penalties": [
             {
               "playerId": "8154",
@@ -820,7 +814,7 @@
         {
           "type": "median",
           "rosterId": 4,
-          "line": 144.19,
+          "line": 149.99,
           "result": "W"
         }
       ]
