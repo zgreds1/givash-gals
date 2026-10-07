@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T19:57:42.327Z",
+  "generatedAt": "2026-10-07T12:37:36.769Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -126,6 +126,11 @@
       "pos": "WR",
       "team": "NE"
     },
+    "4195": {
+      "name": "Jake Elliott",
+      "pos": "K",
+      "team": "PHI"
+    },
     "4381": {
       "name": "Taysom Hill",
       "pos": "TE",
@@ -176,10 +181,20 @@
       "pos": "TE",
       "team": "BAL"
     },
+    "5045": {
+      "name": "Courtland Sutton",
+      "pos": "WR",
+      "team": "DEN"
+    },
     "5848": {
       "name": "Marquise Brown",
       "pos": "WR",
       "team": "PHI"
+    },
+    "5849": {
+      "name": "Kyler Murray",
+      "pos": "QB",
+      "team": "MIN"
     },
     "5854": {
       "name": "Drew Lock",
@@ -280,6 +295,16 @@
       "name": "Van Jefferson",
       "pos": "WR",
       "team": "WAS"
+    },
+    "6931": {
+      "name": "DeeJay Dallas",
+      "pos": "RB",
+      "team": "MIN"
+    },
+    "7083": {
+      "name": "Tyler Huntley",
+      "pos": "QB",
+      "team": "BAL"
     },
     "7090": {
       "name": "Darnell Mooney",
@@ -791,6 +816,11 @@
       "pos": "QB",
       "team": "LV"
     },
+    "13277": {
+      "name": "CJ Donaldson",
+      "pos": "RB",
+      "team": "NO"
+    },
     "13278": {
       "name": "Max Klare",
       "pos": "TE",
@@ -800,6 +830,11 @@
       "name": "Malachi Fields",
       "pos": "WR",
       "team": "NYG"
+    },
+    "13294": {
+      "name": "Makai Lemon",
+      "pos": "WR",
+      "team": "PHI"
     },
     "13298": {
       "name": "KC Concepcion",

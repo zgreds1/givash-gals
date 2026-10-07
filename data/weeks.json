@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T07:10:31.331Z",
+  "generatedAt": "2026-10-07T12:37:36.769Z",
   "weeks": [
     {
       "week": 1,
@@ -793,34 +793,34 @@
       "week": 5,
       "played": false,
       "degenerate": false,
-      "median": 20,
+      "median": 10,
       "medianPool": [
         20,
         20,
-        20,
-        20
+        0,
+        0
       ],
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
-            {
-              "playerId": "9758",
-              "name": "C.J. Stroud",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "2307",
-              "name": "Marcus Mariota",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "11559",
               "name": "Michael Penix",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "5849",
+              "name": "Kyler Murray",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "7083",
+              "name": "Tyler Huntley",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -831,8 +831,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "2359",
-              "name": "Ameer Abdullah",
+              "playerId": "13277",
+              "name": "CJ Donaldson",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -843,14 +843,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "6828",
-              "name": "AJ Dillon",
+              "playerId": "12048",
+              "name": "George Holani",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "8917",
-              "name": "KaVontae Turpin",
+              "playerId": "5045",
+              "name": "Courtland Sutton",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -861,8 +861,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "6783",
-              "name": "Jerry Jeudy",
+              "playerId": "13294",
+              "name": "Makai Lemon",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -909,14 +909,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "650",
-              "name": "Nick Folk",
+              "playerId": "4195",
+              "name": "Jake Elliott",
               "reason": "zeroed",
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 1,
-          "yetToPlay": 18
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "2": {
           "raw": 0,
@@ -1037,8 +1037,8 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
               "playerId": "8161",
@@ -1065,20 +1065,20 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13337",
-              "name": "Emmett Johnson",
-              "reason": "zeroed",
-              "phase": "final"
-            },
-            {
-              "playerId": "9225",
-              "name": "Tank Bigsby",
+              "playerId": "11575",
+              "name": "Ray Davis",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "9506",
-              "name": "Sean Tucker",
+              "playerId": "6931",
+              "name": "DeeJay Dallas",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13347",
+              "name": "Demond Claiborne",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1149,8 +1149,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 1,
-          "yetToPlay": 18
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "4": {
           "raw": 0,
@@ -1394,7 +1394,7 @@
             1,
             4
           ],
-          "winner": null
+          "winner": 1
         },
         {
           "type": "h2h",
@@ -1402,12 +1402,12 @@
             3,
             5
           ],
-          "winner": null
+          "winner": 3
         },
         {
           "type": "median",
           "rosterId": 2,
-          "line": 20,
+          "line": 10,
           "result": "W"
         }
       ]
