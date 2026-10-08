@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T12:37:36.769Z",
+  "generatedAt": "2026-10-08T12:47:17.544Z",
   "season": "2026",
   "rows": [
     {
@@ -6089,7 +6089,7 @@
     {
       "id": "2078",
       "name": "Odell Beckham",
-      "team": "—",
+      "team": "MIN",
       "pos": "WR",
       "gp": 3,
       "raw": 0,
@@ -6635,7 +6635,7 @@
     {
       "id": "11168",
       "name": "Xavier Smith",
-      "team": "—",
+      "team": "SF",
       "pos": "WR",
       "gp": 3,
       "raw": 0,
@@ -6778,7 +6778,7 @@
     {
       "id": "11911",
       "name": "Jeshaun Jones",
-      "team": "—",
+      "team": "MIN",
       "pos": "WR",
       "gp": 1,
       "raw": 0,
@@ -6973,7 +6973,7 @@
     {
       "id": "12939",
       "name": "Anthony Tyus",
-      "team": "CAR",
+      "team": "—",
       "pos": "RB",
       "gp": 2,
       "raw": 0,
