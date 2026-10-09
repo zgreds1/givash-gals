@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T07:10:31.331Z",
+  "generatedAt": "2026-10-09T12:32:55.849Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -38,10 +38,10 @@
   "standings": [
     {
       "rosterId": 1,
-      "w": 4,
+      "w": 5,
       "l": 0,
       "t": 0,
-      "gp": 4,
+      "gp": 5,
       "adjPF": 636.14,
       "rawPF": 356.14,
       "settledPenalties": 14,
@@ -55,29 +55,29 @@
     },
     {
       "rosterId": 5,
-      "w": 3,
+      "w": 4,
       "l": 1,
       "t": 0,
-      "gp": 4,
-      "adjPF": 697.62,
-      "rawPF": 417.62,
-      "settledPenalties": 14,
+      "gp": 5,
+      "adjPF": 718.62,
+      "rawPF": 418.62,
+      "settledPenalties": 15,
       "median": {
         "w": 1,
         "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.75
+      "winPct": 0.8
     },
     {
       "rosterId": 3,
       "w": 2,
-      "l": 2,
+      "l": 3,
       "t": 0,
-      "gp": 4,
-      "adjPF": 668.4,
-      "rawPF": 468.4,
+      "gp": 5,
+      "adjPF": 698.66,
+      "rawPF": 498.66,
       "settledPenalties": 10,
       "median": {
         "w": 0,
@@ -85,41 +85,41 @@
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.5
+      "winPct": 0.4
     },
     {
-      "rosterId": 4,
-      "w": 1,
+      "rosterId": 2,
+      "w": 2,
       "l": 3,
       "t": 0,
-      "gp": 4,
-      "adjPF": 745.26,
-      "rawPF": 385.26,
-      "settledPenalties": 18,
+      "gp": 5,
+      "adjPF": 767.6,
+      "rawPF": 367.6,
+      "settledPenalties": 20,
       "median": {
         "w": 1,
         "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.25
+      "winPct": 0.4
     },
     {
-      "rosterId": 2,
+      "rosterId": 4,
       "w": 1,
-      "l": 3,
+      "l": 4,
       "t": 0,
-      "gp": 4,
-      "adjPF": 767.1,
-      "rawPF": 367.1,
-      "settledPenalties": 20,
+      "gp": 5,
+      "adjPF": 765.26,
+      "rawPF": 385.26,
+      "settledPenalties": 19,
       "median": {
-        "w": 0,
+        "w": 1,
         "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.25
+      "winPct": 0.2
     }
   ]
 }
