@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-09T12:32:55.849Z",
+  "generatedAt": "2026-10-10T11:53:26.626Z",
   "season": "2026",
   "rows": [
     {
@@ -1058,7 +1058,7 @@
     {
       "id": "13405",
       "name": "Kaytron Allen",
-      "team": "WAS",
+      "team": "MIA",
       "pos": "RB",
       "gp": 4,
       "raw": 4.1,
@@ -2822,6 +2822,19 @@
       "saved": 0,
       "total": 41.5,
       "ppg": 10.38
+    },
+    {
+      "id": "11199",
+      "name": "Emari Demercado",
+      "team": "—",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 1.5,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 41.5,
+      "ppg": 0.75
     },
     {
       "id": "11575",
@@ -5175,19 +5188,6 @@
       "saved": 0,
       "total": 61.5,
       "ppg": 15.38
-    },
-    {
-      "id": "11199",
-      "name": "Emari Demercado",
-      "team": "DAL",
-      "pos": "RB",
-      "gp": 2,
-      "raw": 1.5,
-      "pen": 3,
-      "truePen": 0,
-      "saved": 0,
-      "total": 61.5,
-      "ppg": 0.75
     },
     {
       "id": "11592",
