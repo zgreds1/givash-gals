@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T11:53:26.626Z",
+  "generatedAt": "2026-10-11T20:50:46.888Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -221,6 +221,11 @@
       "pos": "WR",
       "team": "JAX"
     },
+    "5967": {
+      "name": "Tony Pollard",
+      "pos": "RB",
+      "team": "TEN"
+    },
     "5985": {
       "name": "Foster Moreau",
       "pos": "TE",
@@ -275,6 +280,11 @@
       "name": "Justin Jefferson",
       "pos": "WR",
       "team": "MIN"
+    },
+    "6806": {
+      "name": "J.K. Dobbins",
+      "pos": "RB",
+      "team": "DEN"
     },
     "6813": {
       "name": "Jonathan Taylor",
@@ -495,6 +505,11 @@
       "name": "Sean Tucker",
       "pos": "RB",
       "team": "TB"
+    },
+    "9508": {
+      "name": "Tyjae Spears",
+      "pos": "RB",
+      "team": "TEN"
     },
     "9509": {
       "name": "Bijan Robinson",
@@ -775,6 +790,11 @@
       "name": "Travis Hunter",
       "pos": "WR",
       "team": "JAX"
+    },
+    "12533": {
+      "name": "Jacory Croskey-Merritt",
+      "pos": "RB",
+      "team": "WAS"
     },
     "12535": {
       "name": "Isaac TeSlaa",
