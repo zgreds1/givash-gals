@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-12T00:20:45.585Z",
+  "generatedAt": "2026-10-12T04:33:49.924Z",
   "weeks": [
     {
       "week": 1,
@@ -793,31 +793,19 @@
       "week": 5,
       "played": true,
       "degenerate": false,
-      "median": 116.88,
+      "median": 136.95,
       "medianPool": [
-        195.94,
-        140.8,
-        92.96,
-        89.28
+        197.54,
+        149.5,
+        124.4,
+        98.08
       ],
       "teams": {
         "1": {
-          "raw": 72.96,
-          "adjusted": 92.96,
-          "inPlay": 92.96,
+          "raw": 104.4,
+          "adjusted": 124.4,
+          "inPlay": 124.4,
           "penalties": [
-            {
-              "playerId": "11559",
-              "name": "Michael Penix",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "7083",
-              "name": "Tyler Huntley",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "12493",
               "name": "Oronde Gadsden",
@@ -826,7 +814,7 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 2
+          "yetToPlay": 0
         },
         "2": {
           "raw": 113.68,
@@ -856,37 +844,25 @@
           "yetToPlay": 0
         },
         "3": {
-          "raw": 89.28,
-          "adjusted": 89.28,
-          "inPlay": 89.28,
+          "raw": 98.08,
+          "adjusted": 98.08,
+          "inPlay": 98.08,
           "penalties": [
             {
               "playerId": "11575",
               "name": "Ray Davis",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "5995",
-              "name": "Justice Hill",
-              "reason": "zeroed",
-              "phase": "upcoming"
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 2
+          "yetToPlay": 1
         },
         "4": {
-          "raw": 100.8,
-          "adjusted": 140.8,
-          "inPlay": 140.8,
+          "raw": 109.5,
+          "adjusted": 149.5,
+          "inPlay": 149.5,
           "penalties": [
-            {
-              "playerId": "7571",
-              "name": "Rashod Bateman",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "13317",
               "name": "Ted Hurst",
@@ -907,19 +883,13 @@
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 2
+          "yetToPlay": 1
         },
         "5": {
-          "raw": 115.94,
-          "adjusted": 195.94,
-          "inPlay": 195.94,
+          "raw": 117.54,
+          "adjusted": 197.54,
+          "inPlay": 197.54,
           "penalties": [
-            {
-              "playerId": "8154",
-              "name": "Brian Robinson",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "8145",
               "name": "Jeremy Ruckert",
@@ -946,7 +916,7 @@
             }
           ],
           "settledPenalties": 4,
-          "yetToPlay": 1
+          "yetToPlay": 0
         }
       },
       "matchups": [
@@ -969,7 +939,7 @@
         {
           "type": "median",
           "rosterId": 2,
-          "line": 116.88,
+          "line": 136.95,
           "result": "L"
         }
       ]
