@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T07:20:37.838Z",
+  "generatedAt": "2026-10-13T19:46:54.908Z",
   "season": "2026",
   "rows": [
     {
@@ -7135,6 +7135,19 @@
       "raw": 0,
       "pen": 5,
       "truePen": 4,
+      "saved": 0,
+      "total": 100,
+      "ppg": 20
+    },
+    {
+      "id": "11963",
+      "name": "Chris Collier",
+      "team": "LV",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 5,
+      "truePen": 1,
       "saved": 0,
       "total": 100,
       "ppg": 20
