@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:46:54.908Z",
+  "generatedAt": "2026-10-14T11:09:18.419Z",
   "weeks": [
     {
       "week": 1,
@@ -946,7 +946,7 @@
         "1": {
           "raw": 0,
           "adjusted": 40,
-          "inPlay": 40,
+          "inPlay": 60,
           "penalties": [
             {
               "playerId": "11559",
@@ -985,10 +985,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12472",
-              "name": "Raheim Sanders",
-              "reason": "zeroed",
-              "phase": "upcoming"
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
+              "phase": "live"
             },
             {
               "playerId": "5045",
@@ -1058,7 +1058,7 @@
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 17
+          "yetToPlay": 16
         },
         "2": {
           "raw": 0,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T19:46:54.908Z",
+  "generatedAt": "2026-10-14T11:09:18.419Z",
   "season": "2026",
   "rows": [
     {
@@ -2644,7 +2644,7 @@
     {
       "id": "11056",
       "name": "Jared Wayne",
-      "team": "HOU",
+      "team": "MIA",
       "pos": "WR",
       "gp": 5,
       "raw": 8.5,
@@ -3697,7 +3697,7 @@
     {
       "id": "11199",
       "name": "Emari Demercado",
-      "team": "—",
+      "team": "DAL",
       "pos": "RB",
       "gp": 2,
       "raw": 1.5,
@@ -7337,7 +7337,7 @@
     {
       "id": "12925",
       "name": "Jamaal Pritchett",
-      "team": "—",
+      "team": "NYJ",
       "pos": "WR",
       "gp": 1,
       "raw": 0,
