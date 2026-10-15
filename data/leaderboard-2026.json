@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T11:09:18.419Z",
+  "generatedAt": "2026-10-15T10:50:27.388Z",
   "season": "2026",
   "rows": [
     {
@@ -263,6 +263,19 @@
       "ppg": 4
     },
     {
+      "id": "11655",
+      "name": "Tyrone Tracy",
+      "team": "NYG",
+      "pos": "RB",
+      "gp": 5,
+      "raw": 0.7,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 20.7,
+      "ppg": 4.14
+    },
+    {
       "id": "13298",
       "name": "KC Concepcion",
       "team": "CLE",
@@ -323,19 +336,6 @@
       "raw": 21.7,
       "pen": 0,
       "truePen": 0,
-      "saved": 0,
-      "total": 21.7,
-      "ppg": 4.34
-    },
-    {
-      "id": "11655",
-      "name": "Tyrone Tracy",
-      "team": "NYG",
-      "pos": "RB",
-      "gp": 5,
-      "raw": 1.7,
-      "pen": 1,
-      "truePen": 1,
       "saved": 0,
       "total": 21.7,
       "ppg": 4.34
@@ -707,21 +707,8 @@
     {
       "id": "12015",
       "name": "Harrison Mevis",
-      "team": "LAR",
+      "team": "—",
       "pos": "K",
-      "gp": 5,
-      "raw": 28,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 28,
-      "ppg": 5.6
-    },
-    {
-      "id": "WAS",
-      "name": "Washington Commanders",
-      "team": "WAS",
-      "pos": "DEF",
       "gp": 5,
       "raw": 28,
       "pen": 0,
@@ -826,6 +813,19 @@
       "name": "Antonio Williams",
       "team": "WAS",
       "pos": "WR",
+      "gp": 5,
+      "raw": 29,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 29,
+      "ppg": 5.8
+    },
+    {
+      "id": "WAS",
+      "name": "Washington Commanders",
+      "team": "WAS",
+      "pos": "DEF",
       "gp": 5,
       "raw": 29,
       "pen": 0,
@@ -2107,6 +2107,19 @@
       "saved": 0,
       "total": 43.4,
       "ppg": 8.68
+    },
+    {
+      "id": "11942",
+      "name": "Colson Yankoff",
+      "team": "WAS",
+      "pos": "TE",
+      "gp": 5,
+      "raw": 3.6,
+      "pen": 2,
+      "truePen": 2,
+      "saved": 0,
+      "total": 43.6,
+      "ppg": 8.72
     },
     {
       "id": "6271",
@@ -3812,19 +3825,6 @@
       "ppg": 12.5
     },
     {
-      "id": "11942",
-      "name": "Colson Yankoff",
-      "team": "WAS",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 2.6,
-      "pen": 3,
-      "truePen": 3,
-      "saved": 0,
-      "total": 62.6,
-      "ppg": 12.52
-    },
-    {
       "id": "4314",
       "name": "Johnny Mundt",
       "team": "PHI",
@@ -4945,7 +4945,7 @@
     {
       "id": "11421",
       "name": "Ryan Miller",
-      "team": "MIA",
+      "team": "—",
       "pos": "WR",
       "gp": 5,
       "raw": 16.7,
@@ -5452,7 +5452,7 @@
     {
       "id": "8200",
       "name": "Kevin Austin",
-      "team": "—",
+      "team": "NO",
       "pos": "WR",
       "gp": 4,
       "raw": 1.2,
@@ -6687,7 +6687,7 @@
     {
       "id": "7050",
       "name": "Josiah Deguara",
-      "team": "PHI",
+      "team": "—",
       "pos": "TE",
       "gp": 1,
       "raw": 0,

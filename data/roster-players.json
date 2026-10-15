@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T11:09:18.419Z",
+  "generatedAt": "2026-10-15T10:50:27.388Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -281,6 +281,11 @@
       "pos": "WR",
       "team": "MIN"
     },
+    "6797": {
+      "name": "Justin Herbert",
+      "pos": "QB",
+      "team": "LAC"
+    },
     "6806": {
       "name": "J.K. Dobbins",
       "pos": "RB",
@@ -341,6 +346,11 @@
       "pos": "WR",
       "team": "CIN"
     },
+    "7567": {
+      "name": "Kenny Gainwell",
+      "pos": "RB",
+      "team": "TB"
+    },
     "7569": {
       "name": "Nico Collins",
       "pos": "WR",
@@ -365,6 +375,11 @@
       "name": "Riley Patterson",
       "pos": "K",
       "team": "MIA"
+    },
+    "8111": {
+      "name": "Cade Otton",
+      "pos": "TE",
+      "team": "TB"
     },
     "8112": {
       "name": "Drake London",
