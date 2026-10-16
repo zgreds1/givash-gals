@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T10:50:27.388Z",
+  "generatedAt": "2026-10-16T10:40:10.889Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -281,11 +281,6 @@
       "pos": "WR",
       "team": "MIN"
     },
-    "6797": {
-      "name": "Justin Herbert",
-      "pos": "QB",
-      "team": "LAC"
-    },
     "6806": {
       "name": "J.K. Dobbins",
       "pos": "RB",
@@ -485,6 +480,11 @@
       "name": "Bryce Young",
       "pos": "QB",
       "team": "CAR"
+    },
+    "9230": {
+      "name": "Tanner McKee",
+      "pos": "QB",
+      "team": "PHI"
     },
     "9479": {
       "name": "Darnell Washington",
