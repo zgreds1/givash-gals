@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T10:07:31.278Z",
+  "generatedAt": "2026-10-18T19:19:51.291Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -186,6 +186,11 @@
       "pos": "WR",
       "team": "DEN"
     },
+    "5119": {
+      "name": "Jason Sanders",
+      "pos": "K",
+      "team": "NYJ"
+    },
     "5848": {
       "name": "Marquise Brown",
       "pos": "WR",
@@ -200,6 +205,11 @@
       "name": "Drew Lock",
       "pos": "QB",
       "team": "SEA"
+    },
+    "5857": {
+      "name": "Noah Fant",
+      "pos": "TE",
+      "team": "NO"
     },
     "5859": {
       "name": "A.J. Brown",
@@ -235,6 +245,11 @@
       "name": "Justice Hill",
       "pos": "RB",
       "team": "BAL"
+    },
+    "6039": {
+      "name": "Ty Johnson",
+      "pos": "RB",
+      "team": "BUF"
     },
     "6130": {
       "name": "Devin Singletary",
@@ -396,6 +411,11 @@
       "pos": "RB",
       "team": "ARI"
     },
+    "8134": {
+      "name": "Khalil Shakir",
+      "pos": "WR",
+      "team": "BUF"
+    },
     "8137": {
       "name": "George Pickens",
       "pos": "WR",
@@ -445,6 +465,11 @@
       "name": "Chig Okonkwo",
       "pos": "TE",
       "team": "WAS"
+    },
+    "8676": {
+      "name": "Rashid Shaheed",
+      "pos": "WR",
+      "team": "SEA"
     },
     "8755": {
       "name": "Kaden Davis",
@@ -536,6 +561,11 @@
       "pos": "RB",
       "team": "LAC"
     },
+    "9754": {
+      "name": "Quentin Johnston",
+      "pos": "WR",
+      "team": "LAC"
+    },
     "9757": {
       "name": "Kendre Miller",
       "pos": "RB",
@@ -555,6 +585,11 @@
       "name": "Elijah Higgins",
       "pos": "TE",
       "team": "ARI"
+    },
+    "10235": {
+      "name": "Roschon Johnson",
+      "pos": "RB",
+      "team": "CHI"
     },
     "10955": {
       "name": "Chad Ryland",
@@ -611,6 +646,11 @@
       "pos": "QB",
       "team": "DEN"
     },
+    "11565": {
+      "name": "J.J. McCarthy",
+      "pos": "QB",
+      "team": "NYG"
+    },
     "11571": {
       "name": "Isaiah Davis",
       "pos": "RB",
@@ -655,6 +695,11 @@
       "name": "Brock Bowers",
       "pos": "TE",
       "team": "LV"
+    },
+    "11616": {
+      "name": "Jacob Cowing",
+      "pos": "WR",
+      "team": "SF"
     },
     "11625": {
       "name": "Adonai Mitchell",
