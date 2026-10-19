@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T03:27:31.449Z",
+  "generatedAt": "2026-10-19T09:37:29.646Z",
   "season": "2026",
   "rows": [
     {
@@ -198,19 +198,6 @@
       "ppg": 0.78
     },
     {
-      "id": "11510",
-      "name": "Hunter Luepke",
-      "team": "DAL",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 3.4,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 23.4,
-      "ppg": 3.9
-    },
-    {
       "id": "12048",
       "name": "George Holani",
       "team": "SEA",
@@ -300,6 +287,19 @@
       "saved": 0,
       "total": 24.2,
       "ppg": 4.03
+    },
+    {
+      "id": "11510",
+      "name": "Hunter Luepke",
+      "team": "DAL",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 4.4,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 24.4,
+      "ppg": 4.07
     },
     {
       "id": "5045",
@@ -640,19 +640,6 @@
       "ppg": 5.27
     },
     {
-      "id": "11783",
-      "name": "Ryan Flournoy",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 31.7,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 31.7,
-      "ppg": 5.28
-    },
-    {
       "id": "4039",
       "name": "Cooper Kupp",
       "team": "SEA",
@@ -814,12 +801,12 @@
       "team": "GB",
       "pos": "RB",
       "gp": 6,
-      "raw": 35.4,
+      "raw": 35.7,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 35.4,
-      "ppg": 5.9
+      "total": 35.7,
+      "ppg": 5.95
     },
     {
       "id": "8259",
@@ -1147,6 +1134,19 @@
       "ppg": 4.16
     },
     {
+      "id": "11783",
+      "name": "Ryan Flournoy",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 40.9,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 40.9,
+      "ppg": 6.82
+    },
+    {
       "id": "GB",
       "name": "Green Bay Packers",
       "team": "GB",
@@ -1210,19 +1210,6 @@
       "saved": 0,
       "total": 41.4,
       "ppg": 8.28
-    },
-    {
-      "id": "9484",
-      "name": "Tucker Kraft",
-      "team": "GB",
-      "pos": "TE",
-      "gp": 6,
-      "raw": 41.6,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 41.6,
-      "ppg": 6.93
     },
     {
       "id": "9500",
@@ -1314,6 +1301,19 @@
       "saved": 0,
       "total": 42.5,
       "ppg": 5.63
+    },
+    {
+      "id": "9484",
+      "name": "Tucker Kraft",
+      "team": "GB",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 42.9,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 42.9,
+      "ppg": 7.15
     },
     {
       "id": "650",
@@ -2850,19 +2850,6 @@
       "ppg": 8.3
     },
     {
-      "id": "8137",
-      "name": "George Pickens",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 61.5,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 61.5,
-      "ppg": 10.25
-    },
-    {
       "id": "1479",
       "name": "Keenan Allen",
       "team": "IND",
@@ -3355,6 +3342,19 @@
       "saved": 0,
       "total": 65.1,
       "ppg": 9.02
+    },
+    {
+      "id": "8137",
+      "name": "George Pickens",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 65.3,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 65.3,
+      "ppg": 10.88
     },
     {
       "id": "8219",
@@ -5268,32 +5268,6 @@
       "ppg": 15.19
     },
     {
-      "id": "3294",
-      "name": "Dak Prescott",
-      "team": "DAL",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 91.22,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 91.22,
-      "ppg": 15.2
-    },
-    {
-      "id": "6804",
-      "name": "Jordan Love",
-      "team": "GB",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 91.24,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 91.24,
-      "ppg": 15.21
-    },
-    {
       "id": "11559",
       "name": "Michael Penix",
       "team": "ATL",
@@ -5305,6 +5279,19 @@
       "saved": 0,
       "total": 91.26,
       "ppg": 12.82
+    },
+    {
+      "id": "6804",
+      "name": "Jordan Love",
+      "team": "GB",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 91.36,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 91.36,
+      "ppg": 15.23
     },
     {
       "id": "8144",
@@ -5606,17 +5593,30 @@
       "ppg": 19.22
     },
     {
+      "id": "3294",
+      "name": "Dak Prescott",
+      "team": "DAL",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 97.86,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 97.86,
+      "ppg": 16.31
+    },
+    {
       "id": "7588",
       "name": "Javonte Williams",
       "team": "DAL",
       "pos": "RB",
       "gp": 6,
-      "raw": 98,
+      "raw": 98.5,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 98,
-      "ppg": 16.33
+      "total": 98.5,
+      "ppg": 16.42
     },
     {
       "id": "11433",
@@ -5675,13 +5675,13 @@
       "name": "Tyrod Taylor",
       "team": "GB",
       "pos": "QB",
-      "gp": 2,
+      "gp": 1,
       "raw": -0.2,
       "pen": 5,
-      "truePen": 1,
+      "truePen": 0,
       "saved": 0,
       "total": 99.8,
-      "ppg": 9.9
+      "ppg": -0.2
     },
     {
       "id": "12531",
@@ -6763,19 +6763,6 @@
       "ppg": 12.2
     },
     {
-      "id": "6786",
-      "name": "CeeDee Lamb",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 104.5,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 104.5,
-      "ppg": 17.42
-    },
-    {
       "id": "6109",
       "name": "Alec Ingold",
       "team": "LAC",
@@ -6839,6 +6826,19 @@
       "saved": 0,
       "total": 107,
       "ppg": 17.83
+    },
+    {
+      "id": "6786",
+      "name": "CeeDee Lamb",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 107.1,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 107.1,
+      "ppg": 17.85
     },
     {
       "id": "12389",
@@ -7140,19 +7140,6 @@
       "ppg": 20
     },
     {
-      "id": "5850",
-      "name": "Josh Jacobs",
-      "team": "GB",
-      "pos": "RB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 1,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
       "id": "5970",
       "name": "Greg Dortch",
       "team": "BUF",
@@ -7317,19 +7304,6 @@
       "raw": 0,
       "pen": 6,
       "truePen": 2,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
-      "id": "8162",
-      "name": "Sam Howell",
-      "team": "DAL",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 1,
       "saved": 0,
       "total": 120,
       "ppg": 20
