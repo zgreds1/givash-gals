@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-18T22:18:57.941Z",
+  "generatedAt": "2026-10-19T00:58:03.928Z",
   "season": "2026",
   "rows": [
     {
@@ -68,17 +68,17 @@
       "ppg": 2.46
     },
     {
-      "id": "DAL",
-      "name": "Dallas Cowboys",
-      "team": "DAL",
-      "pos": "DEF",
-      "gp": 5,
-      "raw": 13,
+      "id": "5906",
+      "name": "Dawson Knox",
+      "team": "BUF",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 13.6,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 13,
-      "ppg": 2.6
+      "total": 13.6,
+      "ppg": 2.27
     },
     {
       "id": "13414",
@@ -133,6 +133,19 @@
       "ppg": 3.1
     },
     {
+      "id": "DAL",
+      "name": "Dallas Cowboys",
+      "team": "DAL",
+      "pos": "DEF",
+      "gp": 6,
+      "raw": 19,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 19,
+      "ppg": 3.17
+    },
+    {
       "id": "13294",
       "name": "Makai Lemon",
       "team": "PHI",
@@ -150,13 +163,13 @@
       "name": "Hunter Luepke",
       "team": "DAL",
       "pos": "RB",
-      "gp": 5,
-      "raw": 2,
+      "gp": 6,
+      "raw": 2.7,
       "pen": 1,
       "truePen": 1,
       "saved": 0,
-      "total": 22,
-      "ppg": 4.4
+      "total": 22.7,
+      "ppg": 3.78
     },
     {
       "id": "11643",
@@ -176,19 +189,6 @@
       "name": "Elic Ayomanor",
       "team": "TEN",
       "pos": "WR",
-      "gp": 6,
-      "raw": 22.8,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 22.8,
-      "ppg": 3.8
-    },
-    {
-      "id": "13305",
-      "name": "Mike Washington",
-      "team": "LV",
-      "pos": "RB",
       "gp": 6,
       "raw": 22.8,
       "pen": 0,
@@ -315,6 +315,32 @@
       "ppg": 4.13
     },
     {
+      "id": "BUF",
+      "name": "Buffalo Bills",
+      "team": "BUF",
+      "pos": "DEF",
+      "gp": 6,
+      "raw": 25,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 25,
+      "ppg": 4.17
+    },
+    {
+      "id": "13305",
+      "name": "Mike Washington",
+      "team": "LV",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 25.4,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 25.4,
+      "ppg": 4.23
+    },
+    {
       "id": "7891",
       "name": "Brock Wright",
       "team": "DET",
@@ -326,19 +352,6 @@
       "saved": 0,
       "total": 25.6,
       "ppg": 5.12
-    },
-    {
-      "id": "8168",
-      "name": "Skyy Moore",
-      "team": "GB",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 6,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 26,
-      "ppg": 5.2
     },
     {
       "id": "4147",
@@ -393,19 +406,6 @@
       "ppg": 4.52
     },
     {
-      "id": "12504",
-      "name": "Kaleb Johnson",
-      "team": "GB",
-      "pos": "RB",
-      "gp": 5,
-      "raw": 7.1,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 27.1,
-      "ppg": 5.42
-    },
-    {
       "id": "11603",
       "name": "AJ Barner",
       "team": "SEA",
@@ -417,19 +417,6 @@
       "saved": 0,
       "total": 27.4,
       "ppg": 4.57
-    },
-    {
-      "id": "11783",
-      "name": "Ryan Flournoy",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 27.4,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 27.4,
-      "ppg": 5.48
     },
     {
       "id": "12015",
@@ -497,19 +484,6 @@
       "ppg": 1.78
     },
     {
-      "id": "8917",
-      "name": "KaVontae Turpin",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 8.9,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 28.9,
-      "ppg": 5.78
-    },
-    {
       "id": "13301",
       "name": "Antonio Williams",
       "team": "WAS",
@@ -545,6 +519,19 @@
       "pen": 1,
       "truePen": 1,
       "saved": 1,
+      "total": 29.3,
+      "ppg": 4.88
+    },
+    {
+      "id": "11783",
+      "name": "Ryan Flournoy",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 29.3,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
       "total": 29.3,
       "ppg": 4.88
     },
@@ -588,35 +575,9 @@
       "ppg": 4.98
     },
     {
-      "id": "13545",
-      "name": "Trey Smack",
-      "team": "GB",
-      "pos": "K",
-      "gp": 5,
-      "raw": 30,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 30,
-      "ppg": 6
-    },
-    {
       "id": "ARI",
       "name": "Arizona Cardinals",
       "team": "ARI",
-      "pos": "DEF",
-      "gp": 6,
-      "raw": 30,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 30,
-      "ppg": 5
-    },
-    {
-      "id": "BUF",
-      "name": "Buffalo Bills",
-      "team": "BUF",
       "pos": "DEF",
       "gp": 6,
       "raw": 30,
@@ -640,17 +601,17 @@
       "ppg": 5.12
     },
     {
-      "id": "11370",
-      "name": "Chris Brooks",
+      "id": "13545",
+      "name": "Trey Smack",
       "team": "GB",
-      "pos": "RB",
-      "gp": 4,
-      "raw": 10.9,
-      "pen": 1,
+      "pos": "K",
+      "gp": 6,
+      "raw": 31,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 30.9,
-      "ppg": 2.73
+      "total": 31,
+      "ppg": 5.17
     },
     {
       "id": "LAR",
@@ -692,19 +653,6 @@
       "ppg": 5.27
     },
     {
-      "id": "8110",
-      "name": "Jake Ferguson",
-      "team": "DAL",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 31.7,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 31.7,
-      "ppg": 6.34
-    },
-    {
       "id": "4039",
       "name": "Cooper Kupp",
       "team": "SEA",
@@ -722,19 +670,6 @@
       "name": "Eddy Pineiro",
       "team": "SF",
       "pos": "K",
-      "gp": 5,
-      "raw": 32,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 32,
-      "ppg": 6.4
-    },
-    {
-      "id": "GB",
-      "name": "Green Bay Packers",
-      "team": "GB",
-      "pos": "DEF",
       "gp": 5,
       "raw": 32,
       "pen": 0,
@@ -783,29 +718,16 @@
       "ppg": 5.5
     },
     {
-      "id": "5906",
-      "name": "Dawson Knox",
-      "team": "BUF",
-      "pos": "TE",
+      "id": "6797",
+      "name": "Justin Herbert",
+      "team": "LAC",
+      "pos": "QB",
       "gp": 6,
-      "raw": 13.1,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 33.1,
-      "ppg": 5.52
-    },
-    {
-      "id": "8132",
-      "name": "Tyler Allgeier",
-      "team": "ARI",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 33.4,
+      "raw": 33.44,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 33.4,
+      "total": 33.44,
       "ppg": 5.57
     },
     {
@@ -822,17 +744,17 @@
       "ppg": 5.58
     },
     {
-      "id": "6797",
-      "name": "Justin Herbert",
-      "team": "LAC",
-      "pos": "QB",
+      "id": "8132",
+      "name": "Tyler Allgeier",
+      "team": "ARI",
+      "pos": "RB",
       "gp": 6,
-      "raw": 33.8,
+      "raw": 33.6,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 33.8,
-      "ppg": 5.63
+      "total": 33.6,
+      "ppg": 5.6
     },
     {
       "id": "8208",
@@ -852,13 +774,13 @@
       "name": "MarShawn Lloyd",
       "team": "GB",
       "pos": "RB",
-      "gp": 5,
-      "raw": 34.7,
+      "gp": 6,
+      "raw": 34.5,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 34.7,
-      "ppg": 6.94
+      "total": 34.5,
+      "ppg": 5.75
     },
     {
       "id": "4037",
@@ -913,19 +835,6 @@
       "ppg": 7.2
     },
     {
-      "id": "9484",
-      "name": "Tucker Kraft",
-      "team": "GB",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 36.7,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 36.7,
-      "ppg": 7.34
-    },
-    {
       "id": "11610",
       "name": "Malik Washington",
       "team": "MIA",
@@ -937,19 +846,6 @@
       "saved": 0,
       "total": 36.7,
       "ppg": 7.34
-    },
-    {
-      "id": "LAC",
-      "name": "Los Angeles Chargers",
-      "team": "LAC",
-      "pos": "DEF",
-      "gp": 6,
-      "raw": 37,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 37,
-      "ppg": 6.17
     },
     {
       "id": "TB",
@@ -1069,10 +965,10 @@
       "ppg": 6.33
     },
     {
-      "id": "8134",
-      "name": "Khalil Shakir",
-      "team": "BUF",
-      "pos": "WR",
+      "id": "LAC",
+      "name": "Los Angeles Chargers",
+      "team": "LAC",
+      "pos": "DEF",
       "gp": 6,
       "raw": 38,
       "pen": 0,
@@ -1126,12 +1022,12 @@
       "team": "KC",
       "pos": "RB",
       "gp": 5,
-      "raw": 18.7,
+      "raw": 18.9,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 38.7,
-      "ppg": 3.74
+      "total": 38.9,
+      "ppg": 3.78
     },
     {
       "id": "3678",
@@ -1277,19 +1173,6 @@
       "ppg": 8.24
     },
     {
-      "id": "9482",
-      "name": "Michael Mayer",
-      "team": "LV",
-      "pos": "TE",
-      "gp": 6,
-      "raw": 41.3,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 41.3,
-      "ppg": 6.88
-    },
-    {
       "id": "12533",
       "name": "Jacory Croskey-Merritt",
       "team": "WAS",
@@ -1355,6 +1238,32 @@
       "ppg": 4.34
     },
     {
+      "id": "8134",
+      "name": "Khalil Shakir",
+      "team": "BUF",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 42,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 42,
+      "ppg": 7
+    },
+    {
+      "id": "GB",
+      "name": "Green Bay Packers",
+      "team": "GB",
+      "pos": "DEF",
+      "gp": 6,
+      "raw": 42,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 42,
+      "ppg": 7
+    },
+    {
       "id": "12641",
       "name": "Jaylin Lane",
       "team": "WAS",
@@ -1379,19 +1288,6 @@
       "saved": 0,
       "total": 43,
       "ppg": 7.17
-    },
-    {
-      "id": "11533",
-      "name": "Brandon Aubrey",
-      "team": "DAL",
-      "pos": "K",
-      "gp": 5,
-      "raw": 43,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 43,
-      "ppg": 8.6
     },
     {
       "id": "3634",
@@ -1537,19 +1433,6 @@
       "ppg": 7.4
     },
     {
-      "id": "10871",
-      "name": "Luke Schoonmaker",
-      "team": "DAL",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 4.5,
-      "pen": 2,
-      "truePen": 2,
-      "saved": 0,
-      "total": 44.5,
-      "ppg": 8.9
-    },
-    {
       "id": "6806",
       "name": "J.K. Dobbins",
       "team": "DEN",
@@ -1615,19 +1498,6 @@
       "ppg": 9
     },
     {
-      "id": "10236",
-      "name": "Dalton Kincaid",
-      "team": "BUF",
-      "pos": "TE",
-      "gp": 6,
-      "raw": 45.1,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 45.1,
-      "ppg": 7.52
-    },
-    {
       "id": "4066",
       "name": "Evan Engram",
       "team": "DEN",
@@ -1667,19 +1537,6 @@
       "ppg": 1.4
     },
     {
-      "id": "12507",
-      "name": "Omarion Hampton",
-      "team": "LAC",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 45.8,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 45.8,
-      "ppg": 7.63
-    },
-    {
       "id": "9480",
       "name": "Brenton Strange",
       "team": "JAX",
@@ -1691,6 +1548,19 @@
       "saved": 0,
       "total": 45.9,
       "ppg": 7.65
+    },
+    {
+      "id": "8168",
+      "name": "Skyy Moore",
+      "team": "GB",
+      "pos": "WR",
+      "gp": 5,
+      "raw": 6,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 46,
+      "ppg": 5.2
     },
     {
       "id": "12529",
@@ -1732,30 +1602,17 @@
       "ppg": 7.67
     },
     {
-      "id": "11637",
-      "name": "Keon Coleman",
-      "team": "BUF",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 46.1,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 46.1,
-      "ppg": 7.68
-    },
-    {
-      "id": "10213",
-      "name": "Tre Tucker",
+      "id": "9482",
+      "name": "Michael Mayer",
       "team": "LV",
-      "pos": "WR",
+      "pos": "TE",
       "gp": 6,
-      "raw": 46.4,
+      "raw": 46.6,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 46.4,
-      "ppg": 7.73
+      "total": 46.6,
+      "ppg": 7.77
     },
     {
       "id": "11575",
@@ -1810,6 +1667,19 @@
       "ppg": 7.82
     },
     {
+      "id": "10236",
+      "name": "Dalton Kincaid",
+      "team": "BUF",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 47,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 47,
+      "ppg": 7.83
+    },
+    {
       "id": "SEA",
       "name": "Seattle Seahawks",
       "team": "SEA",
@@ -1834,6 +1704,19 @@
       "saved": 0,
       "total": 47,
       "ppg": 7.83
+    },
+    {
+      "id": "12504",
+      "name": "Kaleb Johnson",
+      "team": "GB",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 7.1,
+      "pen": 2,
+      "truePen": 2,
+      "saved": 0,
+      "total": 47.1,
+      "ppg": 7.85
     },
     {
       "id": "5967",
@@ -1886,19 +1769,6 @@
       "saved": 0,
       "total": 47.8,
       "ppg": 9.56
-    },
-    {
-      "id": "6865",
-      "name": "Colby Parkinson",
-      "team": "LAR",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 8,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 48,
-      "ppg": 5.6
     },
     {
       "id": "NE",
@@ -1966,6 +1836,19 @@
       "ppg": 9.72
     },
     {
+      "id": "8917",
+      "name": "KaVontae Turpin",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 8.9,
+      "pen": 2,
+      "truePen": 2,
+      "saved": 0,
+      "total": 48.9,
+      "ppg": 8.15
+    },
+    {
       "id": "11539",
       "name": "Jake Bates",
       "team": "DET",
@@ -1977,6 +1860,45 @@
       "saved": 0,
       "total": 49,
       "ppg": 9.8
+    },
+    {
+      "id": "12507",
+      "name": "Omarion Hampton",
+      "team": "LAC",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 49,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 49,
+      "ppg": 8.17
+    },
+    {
+      "id": "LV",
+      "name": "Las Vegas Raiders",
+      "team": "LV",
+      "pos": "DEF",
+      "gp": 6,
+      "raw": 49,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 49,
+      "ppg": 8.17
+    },
+    {
+      "id": "8180",
+      "name": "Jalen Nailor",
+      "team": "LV",
+      "pos": "WR",
+      "gp": 5,
+      "raw": 9.1,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 49.1,
+      "ppg": 5.82
     },
     {
       "id": "5872",
@@ -2083,17 +2005,17 @@
       "ppg": 8.47
     },
     {
-      "id": "4144",
-      "name": "Jonnu Smith",
+      "id": "11370",
+      "name": "Chris Brooks",
       "team": "GB",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 11,
+      "pos": "RB",
+      "gp": 4,
+      "raw": 10.9,
       "pen": 2,
-      "truePen": 2,
+      "truePen": 0,
       "saved": 0,
-      "total": 51,
-      "ppg": 10.2
+      "total": 50.9,
+      "ppg": 2.73
     },
     {
       "id": "5119",
@@ -2126,19 +2048,6 @@
       "name": "Andre Szmyt",
       "team": "CLE",
       "pos": "K",
-      "gp": 6,
-      "raw": 51,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 51,
-      "ppg": 8.5
-    },
-    {
-      "id": "LV",
-      "name": "Las Vegas Raiders",
-      "team": "LV",
-      "pos": "DEF",
       "gp": 6,
       "raw": 51,
       "pen": 0,
@@ -2198,6 +2107,19 @@
       "saved": 0,
       "total": 51.6,
       "ppg": 8.6
+    },
+    {
+      "id": "8110",
+      "name": "Jake Ferguson",
+      "team": "DAL",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 31.7,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 51.7,
+      "ppg": 8.62
     },
     {
       "id": "8210",
@@ -2343,19 +2265,6 @@
       "ppg": 9
     },
     {
-      "id": "10232",
-      "name": "Michael Wilson",
-      "team": "ARI",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 54.18,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 54.18,
-      "ppg": 9.03
-    },
-    {
       "id": "13299",
       "name": "Nate Boerkircher",
       "team": "JAX",
@@ -2382,6 +2291,19 @@
       "ppg": 10.86
     },
     {
+      "id": "3271",
+      "name": "Tyler Higbee",
+      "team": "LAR",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 34.6,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 54.6,
+      "ppg": 9.1
+    },
+    {
       "id": "11563",
       "name": "Bo Nix",
       "team": "DEN",
@@ -2395,6 +2317,19 @@
       "ppg": 9.11
     },
     {
+      "id": "10232",
+      "name": "Michael Wilson",
+      "team": "ARI",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 54.78,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 54.78,
+      "ppg": 9.13
+    },
+    {
       "id": "7611",
       "name": "Rhamondre Stevenson",
       "team": "NE",
@@ -2406,32 +2341,6 @@
       "saved": 0,
       "total": 54.9,
       "ppg": 9.15
-    },
-    {
-      "id": "7042",
-      "name": "Tyler Bass",
-      "team": "BUF",
-      "pos": "K",
-      "gp": 6,
-      "raw": 55,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 55,
-      "ppg": 9.17
-    },
-    {
-      "id": "8137",
-      "name": "George Pickens",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 55,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 55,
-      "ppg": 11
     },
     {
       "id": "11786",
@@ -2486,17 +2395,17 @@
       "ppg": 9.23
     },
     {
-      "id": "11624",
-      "name": "Xavier Worthy",
-      "team": "KC",
+      "id": "11637",
+      "name": "Keon Coleman",
+      "team": "BUF",
       "pos": "WR",
-      "gp": 5,
-      "raw": 35.8,
-      "pen": 1,
+      "gp": 6,
+      "raw": 55.8,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
       "total": 55.8,
-      "ppg": 7.16
+      "ppg": 9.3
     },
     {
       "id": "12519",
@@ -2525,17 +2434,17 @@
       "ppg": 7.18
     },
     {
-      "id": "10955",
-      "name": "Chad Ryland",
-      "team": "ARI",
-      "pos": "K",
-      "gp": 6,
-      "raw": 56,
-      "pen": 0,
-      "truePen": 0,
+      "id": "6865",
+      "name": "Colby Parkinson",
+      "team": "LAR",
+      "pos": "TE",
+      "gp": 5,
+      "raw": 16,
+      "pen": 2,
+      "truePen": 1,
       "saved": 0,
       "total": 56,
-      "ppg": 9.33
+      "ppg": 7.2
     },
     {
       "id": "12711",
@@ -2567,19 +2476,6 @@
       "id": "CAR",
       "name": "Carolina Panthers",
       "team": "CAR",
-      "pos": "DEF",
-      "gp": 5,
-      "raw": 36,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 56,
-      "ppg": 7.2
-    },
-    {
-      "id": "KC",
-      "name": "Kansas City Chiefs",
-      "team": "KC",
       "pos": "DEF",
       "gp": 5,
       "raw": 36,
@@ -2642,6 +2538,19 @@
       "ppg": 9.44
     },
     {
+      "id": "9484",
+      "name": "Tucker Kraft",
+      "team": "GB",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 36.7,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 56.7,
+      "ppg": 9.45
+    },
+    {
       "id": "DEN",
       "name": "Denver Broncos",
       "team": "DEN",
@@ -2653,6 +2562,19 @@
       "saved": 0,
       "total": 57,
       "ppg": 9.5
+    },
+    {
+      "id": "11624",
+      "name": "Xavier Worthy",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 5,
+      "raw": 37.1,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 57.1,
+      "ppg": 7.42
     },
     {
       "id": "12514",
@@ -2720,19 +2642,6 @@
       "ppg": 9.67
     },
     {
-      "id": "6083",
-      "name": "Matt Gay",
-      "team": "LV",
-      "pos": "K",
-      "gp": 6,
-      "raw": 58,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 58,
-      "ppg": 9.67
-    },
-    {
       "id": "4866",
       "name": "Saquon Barkley",
       "team": "PHI",
@@ -2746,6 +2655,32 @@
       "ppg": 5
     },
     {
+      "id": "7042",
+      "name": "Tyler Bass",
+      "team": "BUF",
+      "pos": "K",
+      "gp": 6,
+      "raw": 60,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 60,
+      "ppg": 10
+    },
+    {
+      "id": "10955",
+      "name": "Chad Ryland",
+      "team": "ARI",
+      "pos": "K",
+      "gp": 6,
+      "raw": 60,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 60,
+      "ppg": 10
+    },
+    {
       "id": "11631",
       "name": "Brian Thomas",
       "team": "JAX",
@@ -2757,19 +2692,6 @@
       "saved": 0,
       "total": 60,
       "ppg": 10
-    },
-    {
-      "id": "12493",
-      "name": "Oronde Gadsden",
-      "team": "LAC",
-      "pos": "TE",
-      "gp": 6,
-      "raw": 20.3,
-      "pen": 2,
-      "truePen": 2,
-      "saved": 0,
-      "total": 60.3,
-      "ppg": 10.05
     },
     {
       "id": "13533",
@@ -2915,19 +2837,6 @@
       "ppg": 8.3
     },
     {
-      "id": "11199",
-      "name": "Emari Demercado",
-      "team": "DAL",
-      "pos": "RB",
-      "gp": 2,
-      "raw": 1.5,
-      "pen": 3,
-      "truePen": 0,
-      "saved": 0,
-      "total": 61.5,
-      "ppg": 0.75
-    },
-    {
       "id": "1479",
       "name": "Keenan Allen",
       "team": "IND",
@@ -3058,6 +2967,19 @@
       "ppg": 10.4
     },
     {
+      "id": "12493",
+      "name": "Oronde Gadsden",
+      "team": "LAC",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 22.5,
+      "pen": 2,
+      "truePen": 2,
+      "saved": 0,
+      "total": 62.5,
+      "ppg": 10.42
+    },
+    {
       "id": "12718",
       "name": "Konata Mumpfield",
       "team": "LAR",
@@ -3084,17 +3006,30 @@
       "ppg": 8.56
     },
     {
-      "id": "4227",
-      "name": "Harrison Butker",
-      "team": "KC",
+      "id": "6083",
+      "name": "Matt Gay",
+      "team": "LV",
       "pos": "K",
-      "gp": 5,
-      "raw": 43,
-      "pen": 1,
+      "gp": 6,
+      "raw": 63,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
       "total": 63,
-      "ppg": 8.6
+      "ppg": 10.5
+    },
+    {
+      "id": "11533",
+      "name": "Brandon Aubrey",
+      "team": "DAL",
+      "pos": "K",
+      "gp": 6,
+      "raw": 43,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 63,
+      "ppg": 10.5
     },
     {
       "id": "13346",
@@ -3108,6 +3043,19 @@
       "saved": 0,
       "total": 63,
       "ppg": 10.5
+    },
+    {
+      "id": "KC",
+      "name": "Kansas City Chiefs",
+      "team": "KC",
+      "pos": "DEF",
+      "gp": 5,
+      "raw": 43,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 63,
+      "ppg": 8.6
     },
     {
       "id": "8135",
@@ -3160,19 +3108,6 @@
       "saved": 0,
       "total": 63.3,
       "ppg": 10.55
-    },
-    {
-      "id": "8207",
-      "name": "Tyler Goodson",
-      "team": "DAL",
-      "pos": "RB",
-      "gp": 3,
-      "raw": 3.4,
-      "pen": 3,
-      "truePen": 1,
-      "saved": 0,
-      "total": 63.4,
-      "ppg": 7.8
     },
     {
       "id": "10226",
@@ -3279,30 +3214,17 @@
       "ppg": 10.67
     },
     {
-      "id": "10222",
-      "name": "Jayden Reed",
-      "team": "GB",
-      "pos": "WR",
-      "gp": 2,
-      "raw": 4.4,
-      "pen": 3,
-      "truePen": 0,
-      "saved": 0,
-      "total": 64.4,
-      "ppg": 2.2
-    },
-    {
-      "id": "10225",
-      "name": "Jonathan Mingo",
+      "id": "10871",
+      "name": "Luke Schoonmaker",
       "team": "DAL",
-      "pos": "WR",
-      "gp": 5,
+      "pos": "TE",
+      "gp": 6,
       "raw": 4.5,
       "pen": 3,
       "truePen": 3,
       "saved": 0,
       "total": 64.5,
-      "ppg": 12.9
+      "ppg": 10.75
     },
     {
       "id": "11592",
@@ -3344,19 +3266,6 @@
       "ppg": 1.53
     },
     {
-      "id": "11593",
-      "name": "Brevyn Spann-Ford",
-      "team": "DAL",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 4.8,
-      "pen": 3,
-      "truePen": 3,
-      "saved": 0,
-      "total": 64.8,
-      "ppg": 12.96
-    },
-    {
       "id": "13322",
       "name": "Sam Roush",
       "team": "CHI",
@@ -3370,6 +3279,19 @@
       "ppg": 10.8
     },
     {
+      "id": "4227",
+      "name": "Harrison Butker",
+      "team": "KC",
+      "pos": "K",
+      "gp": 5,
+      "raw": 45,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 65,
+      "ppg": 9
+    },
+    {
       "id": "6650",
       "name": "Chase McLaughlin",
       "team": "TB",
@@ -3381,19 +3303,6 @@
       "saved": 0,
       "total": 65,
       "ppg": 10.83
-    },
-    {
-      "id": "8204",
-      "name": "Bo Melton",
-      "team": "GB",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 5,
-      "pen": 3,
-      "truePen": 3,
-      "saved": 0,
-      "total": 65,
-      "ppg": 13
     },
     {
       "id": "MIN",
@@ -3539,19 +3448,6 @@
       "ppg": 8.7
     },
     {
-      "id": "12501",
-      "name": "Matthew Golden",
-      "team": "GB",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 66.3,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 66.3,
-      "ppg": 13.26
-    },
-    {
       "id": "4663",
       "name": "Austin Ekeler",
       "team": "WAS",
@@ -3576,6 +3472,32 @@
       "saved": 0,
       "total": 66.4,
       "ppg": 13.28
+    },
+    {
+      "id": "11574",
+      "name": "Dylan Laube",
+      "team": "LV",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 6.4,
+      "pen": 3,
+      "truePen": 3,
+      "saved": 0,
+      "total": 66.4,
+      "ppg": 11.07
+    },
+    {
+      "id": "10213",
+      "name": "Tre Tucker",
+      "team": "LV",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 66.5,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 66.5,
+      "ppg": 11.08
     },
     {
       "id": "12700",
@@ -3641,19 +3563,6 @@
       "saved": 0,
       "total": 67.4,
       "ppg": 6.85
-    },
-    {
-      "id": "8180",
-      "name": "Jalen Nailor",
-      "team": "LV",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 7.7,
-      "pen": 3,
-      "truePen": 2,
-      "saved": 0,
-      "total": 67.7,
-      "ppg": 9.54
     },
     {
       "id": "9756",
@@ -3734,6 +3643,19 @@
       "ppg": 2.72
     },
     {
+      "id": "8127",
+      "name": "Charlie Kolar",
+      "team": "LAC",
+      "pos": "TE",
+      "gp": 4,
+      "raw": 8.3,
+      "pen": 3,
+      "truePen": 1,
+      "saved": 0,
+      "total": 68.3,
+      "ppg": 7.08
+    },
+    {
       "id": "13333",
       "name": "Deion Burks",
       "team": "IND",
@@ -3758,32 +3680,6 @@
       "saved": 0,
       "total": 68.4,
       "ppg": 7.1
-    },
-    {
-      "id": "11647",
-      "name": "Kimani Vidal",
-      "team": "LAC",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 28.6,
-      "pen": 2,
-      "truePen": 2,
-      "saved": 0,
-      "total": 68.6,
-      "ppg": 11.43
-    },
-    {
-      "id": "1466",
-      "name": "Travis Kelce",
-      "team": "KC",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 49.6,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 69.6,
-      "ppg": 9.92
     },
     {
       "id": "12498",
@@ -3825,19 +3721,6 @@
       "ppg": 7.58
     },
     {
-      "id": "12505",
-      "name": "Jalen Royals",
-      "team": "KC",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 10.3,
-      "pen": 3,
-      "truePen": 2,
-      "saved": 0,
-      "total": 70.3,
-      "ppg": 10.06
-    },
-    {
       "id": "4981",
       "name": "Calvin Ridley",
       "team": "TEN",
@@ -3849,6 +3732,32 @@
       "saved": 0,
       "total": 70.6,
       "ppg": 11.77
+    },
+    {
+      "id": "11647",
+      "name": "Kimani Vidal",
+      "team": "LAC",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 30.7,
+      "pen": 2,
+      "truePen": 2,
+      "saved": 0,
+      "total": 70.7,
+      "ppg": 11.78
+    },
+    {
+      "id": "4144",
+      "name": "Jonnu Smith",
+      "team": "GB",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 11,
+      "pen": 3,
+      "truePen": 3,
+      "saved": 0,
+      "total": 71,
+      "ppg": 11.83
     },
     {
       "id": "4054",
@@ -3929,6 +3838,19 @@
       "ppg": 10.34
     },
     {
+      "id": "1466",
+      "name": "Travis Kelce",
+      "team": "KC",
+      "pos": "TE",
+      "gp": 5,
+      "raw": 51.9,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 71.9,
+      "ppg": 10.38
+    },
+    {
       "id": "6819",
       "name": "Michael Pittman",
       "team": "PIT",
@@ -3955,17 +3877,17 @@
       "ppg": 10.5
     },
     {
-      "id": "8122",
-      "name": "Zonovan Knight",
-      "team": "ARI",
-      "pos": "RB",
-      "gp": 6,
+      "id": "12505",
+      "name": "Jalen Royals",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 5,
       "raw": 12.6,
       "pen": 3,
-      "truePen": 3,
+      "truePen": 2,
       "saved": 0,
       "total": 72.6,
-      "ppg": 12.1
+      "ppg": 10.52
     },
     {
       "id": "8112",
@@ -3979,6 +3901,19 @@
       "saved": 0,
       "total": 72.9,
       "ppg": 12.15
+    },
+    {
+      "id": "8122",
+      "name": "Zonovan Knight",
+      "team": "ARI",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 13,
+      "pen": 3,
+      "truePen": 3,
+      "saved": 0,
+      "total": 73,
+      "ppg": 12.17
     },
     {
       "id": "4995",
@@ -4046,19 +3981,6 @@
       "ppg": 10.7
     },
     {
-      "id": "3257",
-      "name": "Jacoby Brissett",
-      "team": "ARI",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 73.74,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 73.74,
-      "ppg": 12.29
-    },
-    {
       "id": "3269",
       "name": "Chris Moore",
       "team": "BAL",
@@ -4070,19 +3992,6 @@
       "saved": 0,
       "total": 73.8,
       "ppg": 8.45
-    },
-    {
-      "id": "6804",
-      "name": "Jordan Love",
-      "team": "GB",
-      "pos": "QB",
-      "gp": 5,
-      "raw": 74.12,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 74.12,
-      "ppg": 14.82
     },
     {
       "id": "4574",
@@ -4111,17 +4020,17 @@
       "ppg": 12.38
     },
     {
-      "id": "3271",
-      "name": "Tyler Higbee",
-      "team": "LAR",
-      "pos": "TE",
+      "id": "3257",
+      "name": "Jacoby Brissett",
+      "team": "ARI",
+      "pos": "QB",
       "gp": 6,
-      "raw": 34.4,
-      "pen": 2,
-      "truePen": 2,
+      "raw": 74.72,
+      "pen": 0,
+      "truePen": 0,
       "saved": 0,
-      "total": 74.4,
-      "ppg": 12.4
+      "total": 74.72,
+      "ppg": 12.45
     },
     {
       "id": "8145",
@@ -4174,6 +4083,19 @@
       "saved": 0,
       "total": 74.9,
       "ppg": 10.98
+    },
+    {
+      "id": "8137",
+      "name": "George Pickens",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 55,
+      "pen": 1,
+      "truePen": 1,
+      "saved": 0,
+      "total": 75,
+      "ppg": 12.5
     },
     {
       "id": "11584",
@@ -4410,6 +4332,19 @@
       "ppg": 12.98
     },
     {
+      "id": "12501",
+      "name": "Matthew Golden",
+      "team": "GB",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 77.9,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 77.9,
+      "ppg": 12.98
+    },
+    {
       "id": "13273",
       "name": "Josh Cuevas",
       "team": "BAL",
@@ -4475,19 +4410,6 @@
       "ppg": 13.1
     },
     {
-      "id": "827",
-      "name": "Tyrod Taylor",
-      "team": "GB",
-      "pos": "QB",
-      "gp": 1,
-      "raw": -0.2,
-      "pen": 4,
-      "truePen": 0,
-      "saved": 0,
-      "total": 79.8,
-      "ppg": -0.2
-    },
-    {
       "id": "7527",
       "name": "Mac Jones",
       "team": "SF",
@@ -4525,6 +4447,19 @@
       "saved": 0,
       "total": 80.4,
       "ppg": 0.4
+    },
+    {
+      "id": "6804",
+      "name": "Jordan Love",
+      "team": "GB",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 80.48,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 80.48,
+      "ppg": 13.41
     },
     {
       "id": "8527",
@@ -4655,6 +4590,19 @@
       "saved": 0,
       "total": 81.4,
       "ppg": 13.57
+    },
+    {
+      "id": "11199",
+      "name": "Emari Demercado",
+      "team": "DAL",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 1.5,
+      "pen": 4,
+      "truePen": 0,
+      "saved": 0,
+      "total": 81.5,
+      "ppg": 0.75
     },
     {
       "id": "12467",
@@ -4865,30 +4813,17 @@
       "ppg": 14.4
     },
     {
-      "id": "8116",
-      "name": "Pierre Strong",
-      "team": "GB",
+      "id": "8207",
+      "name": "Tyler Goodson",
+      "team": "DAL",
       "pos": "RB",
-      "gp": 1,
-      "raw": 3.3,
+      "gp": 4,
+      "raw": 3.4,
       "pen": 4,
-      "truePen": 0,
+      "truePen": 2,
       "saved": 0,
-      "total": 83.3,
-      "ppg": 3.3
-    },
-    {
-      "id": "12860",
-      "name": "Theo Wease",
-      "team": "LAC",
-      "pos": "WR",
-      "gp": 2,
-      "raw": 3.3,
-      "pen": 4,
-      "truePen": 0,
-      "saved": 0,
-      "total": 83.3,
-      "ppg": 1.65
+      "total": 83.4,
+      "ppg": 10.85
     },
     {
       "id": "1339",
@@ -4915,58 +4850,6 @@
       "saved": 0,
       "total": 83.7,
       "ppg": 16.74
-    },
-    {
-      "id": "13770",
-      "name": "J. Michael Sturdivant",
-      "team": "GB",
-      "pos": "WR",
-      "gp": 4,
-      "raw": 3.7,
-      "pen": 4,
-      "truePen": 3,
-      "saved": 0,
-      "total": 83.7,
-      "ppg": 15.93
-    },
-    {
-      "id": "421",
-      "name": "Matthew Stafford",
-      "team": "LAR",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 83.82,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 83.82,
-      "ppg": 13.97
-    },
-    {
-      "id": "13013",
-      "name": "Mark Redman",
-      "team": "GB",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 3.9,
-      "pen": 4,
-      "truePen": 4,
-      "saved": 0,
-      "total": 83.9,
-      "ppg": 16.78
-    },
-    {
-      "id": "11034",
-      "name": "Jalen Brooks",
-      "team": "ARI",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 4,
-      "pen": 4,
-      "truePen": 4,
-      "saved": 0,
-      "total": 84,
-      "ppg": 14
     },
     {
       "id": "6904",
@@ -5008,6 +4891,32 @@
       "ppg": 12.86
     },
     {
+      "id": "10222",
+      "name": "Jayden Reed",
+      "team": "GB",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 4.4,
+      "pen": 4,
+      "truePen": 0,
+      "saved": 0,
+      "total": 84.4,
+      "ppg": 2.2
+    },
+    {
+      "id": "10225",
+      "name": "Jonathan Mingo",
+      "team": "DAL",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 4.5,
+      "pen": 4,
+      "truePen": 4,
+      "saved": 0,
+      "total": 84.5,
+      "ppg": 14.08
+    },
+    {
       "id": "11911",
       "name": "Jeshaun Jones",
       "team": "MIN",
@@ -5021,30 +4930,43 @@
       "ppg": 12.35
     },
     {
-      "id": "8127",
-      "name": "Charlie Kolar",
-      "team": "LAC",
+      "id": "11593",
+      "name": "Brevyn Spann-Ford",
+      "team": "DAL",
       "pos": "TE",
-      "gp": 4,
+      "gp": 6,
       "raw": 4.8,
       "pen": 4,
-      "truePen": 2,
+      "truePen": 4,
       "saved": 0,
       "total": 84.8,
-      "ppg": 11.2
+      "ppg": 14.13
     },
     {
-      "id": "2133",
-      "name": "Davante Adams",
-      "team": "LAR",
+      "id": "8204",
+      "name": "Bo Melton",
+      "team": "GB",
       "pos": "WR",
       "gp": 6,
-      "raw": 84.9,
-      "pen": 0,
+      "raw": 5,
+      "pen": 4,
+      "truePen": 4,
+      "saved": 0,
+      "total": 85,
+      "ppg": 14.17
+    },
+    {
+      "id": "12860",
+      "name": "Theo Wease",
+      "team": "LAC",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 5.2,
+      "pen": 4,
       "truePen": 0,
       "saved": 0,
-      "total": 84.9,
-      "ppg": 14.15
+      "total": 85.2,
+      "ppg": 2.6
     },
     {
       "id": "6770",
@@ -5058,6 +4980,19 @@
       "saved": 0,
       "total": 85.24,
       "ppg": 17.05
+    },
+    {
+      "id": "8116",
+      "name": "Pierre Strong",
+      "team": "GB",
+      "pos": "RB",
+      "gp": 2,
+      "raw": 5.3,
+      "pen": 4,
+      "truePen": 0,
+      "saved": 0,
+      "total": 85.3,
+      "ppg": 2.65
     },
     {
       "id": "7543",
@@ -5086,19 +5021,6 @@
       "ppg": 14.25
     },
     {
-      "id": "1166",
-      "name": "Kirk Cousins",
-      "team": "LV",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 85.6,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 85.6,
-      "ppg": 14.27
-    },
-    {
       "id": "4351",
       "name": "Tim Patrick",
       "team": "NYJ",
@@ -5110,19 +5032,6 @@
       "saved": 0,
       "total": 85.6,
       "ppg": 2.8
-    },
-    {
-      "id": "11574",
-      "name": "Dylan Laube",
-      "team": "LV",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 6,
-      "pen": 4,
-      "truePen": 4,
-      "saved": 0,
-      "total": 86,
-      "ppg": 14.33
     },
     {
       "id": "11068",
@@ -5138,17 +5047,30 @@
       "ppg": 13.2
     },
     {
-      "id": "7588",
-      "name": "Javonte Williams",
-      "team": "DAL",
-      "pos": "RB",
-      "gp": 5,
-      "raw": 86.5,
+      "id": "11034",
+      "name": "Jalen Brooks",
+      "team": "ARI",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 6.6,
+      "pen": 4,
+      "truePen": 4,
+      "saved": 0,
+      "total": 86.6,
+      "ppg": 14.43
+    },
+    {
+      "id": "2133",
+      "name": "Davante Adams",
+      "team": "LAR",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 87,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 86.5,
-      "ppg": 17.3
+      "total": 87,
+      "ppg": 14.5
     },
     {
       "id": "12634",
@@ -5190,6 +5112,19 @@
       "ppg": 3.65
     },
     {
+      "id": "12527",
+      "name": "Ashton Jeanty",
+      "team": "LV",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 87.4,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 87.4,
+      "ppg": 14.57
+    },
+    {
       "id": "13293",
       "name": "Ja'Kobi Lane",
       "team": "BAL",
@@ -5203,30 +5138,17 @@
       "ppg": 3.8
     },
     {
-      "id": "12527",
-      "name": "Ashton Jeanty",
-      "team": "LV",
+      "id": "7588",
+      "name": "Javonte Williams",
+      "team": "DAL",
       "pos": "RB",
       "gp": 6,
-      "raw": 87.7,
+      "raw": 88,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 87.7,
-      "ppg": 14.62
-    },
-    {
-      "id": "3294",
-      "name": "Dak Prescott",
-      "team": "DAL",
-      "pos": "QB",
-      "gp": 5,
-      "raw": 87.84,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 87.84,
-      "ppg": 17.57
+      "total": 88,
+      "ppg": 14.67
     },
     {
       "id": "11583",
@@ -5240,6 +5162,19 @@
       "saved": 0,
       "total": 88.3,
       "ppg": 4.15
+    },
+    {
+      "id": "3294",
+      "name": "Dak Prescott",
+      "team": "DAL",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 88.52,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 88.52,
+      "ppg": 14.75
     },
     {
       "id": "8131",
@@ -5333,19 +5268,6 @@
       "ppg": 14.02
     },
     {
-      "id": "8138",
-      "name": "James Cook",
-      "team": "BUF",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 90.2,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 90.2,
-      "ppg": 15.03
-    },
-    {
       "id": "8228",
       "name": "Jaylen Warren",
       "team": "PIT",
@@ -5370,6 +5292,19 @@
       "saved": 0,
       "total": 90.8,
       "ppg": 15.13
+    },
+    {
+      "id": "421",
+      "name": "Matthew Stafford",
+      "team": "LAR",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 90.86,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 90.86,
+      "ppg": 15.14
     },
     {
       "id": "12545",
@@ -5554,19 +5489,6 @@
       "ppg": 7.76
     },
     {
-      "id": "6786",
-      "name": "CeeDee Lamb",
-      "team": "DAL",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 95.6,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 95.6,
-      "ppg": 19.12
-    },
-    {
       "id": "12487",
       "name": "Terrance Ferguson",
       "team": "LAR",
@@ -5591,6 +5513,19 @@
       "saved": 0,
       "total": 96,
       "ppg": 14
+    },
+    {
+      "id": "11320",
+      "name": "Nikko Remigio",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 5,
+      "raw": -4,
+      "pen": 5,
+      "truePen": 4,
+      "saved": 0,
+      "total": 96,
+      "ppg": 15.2
     },
     {
       "id": "11617",
@@ -5619,17 +5554,17 @@
       "ppg": -4
     },
     {
-      "id": "8167",
-      "name": "Christian Watson",
-      "team": "GB",
+      "id": "6786",
+      "name": "CeeDee Lamb",
+      "team": "DAL",
       "pos": "WR",
-      "gp": 5,
-      "raw": 96.4,
+      "gp": 6,
+      "raw": 96.7,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 96.4,
-      "ppg": 19.28
+      "total": 96.7,
+      "ppg": 16.12
     },
     {
       "id": "11625",
@@ -5656,19 +5591,6 @@
       "saved": 0,
       "total": 96.8,
       "ppg": 14.2
-    },
-    {
-      "id": "8150",
-      "name": "Kyren Williams",
-      "team": "LAR",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 97.3,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 97.3,
-      "ppg": 16.22
     },
     {
       "id": "8155",
@@ -5749,6 +5671,19 @@
       "ppg": 14.85
     },
     {
+      "id": "8167",
+      "name": "Christian Watson",
+      "team": "GB",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 99.6,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 99.6,
+      "ppg": 16.6
+    },
+    {
       "id": "4464",
       "name": "Nick Mullens",
       "team": "JAX",
@@ -5760,6 +5695,19 @@
       "saved": 0,
       "total": 99.7,
       "ppg": -0.3
+    },
+    {
+      "id": "827",
+      "name": "Tyrod Taylor",
+      "team": "GB",
+      "pos": "QB",
+      "gp": 2,
+      "raw": -0.2,
+      "pen": 5,
+      "truePen": 1,
+      "saved": 0,
+      "total": 99.8,
+      "ppg": 9.9
     },
     {
       "id": "12531",
@@ -5926,19 +5874,6 @@
       "raw": 0,
       "pen": 5,
       "truePen": 1,
-      "saved": 0,
-      "total": 100,
-      "ppg": 20
-    },
-    {
-      "id": "10212",
-      "name": "Josh Whyle",
-      "team": "GB",
-      "pos": "TE",
-      "gp": 5,
-      "raw": 0,
-      "pen": 5,
-      "truePen": 5,
       "saved": 0,
       "total": 100,
       "ppg": 20
@@ -6208,13 +6143,13 @@
       "name": "Brenen Thompson",
       "team": "LAC",
       "pos": "WR",
-      "gp": 3,
+      "gp": 2,
       "raw": 0.8,
       "pen": 5,
-      "truePen": 2,
+      "truePen": 1,
       "saved": 0,
       "total": 100.8,
-      "ppg": 13.6
+      "ppg": 10.4
     },
     {
       "id": "5008",
@@ -6295,19 +6230,6 @@
       "ppg": 16.18
     },
     {
-      "id": "13413",
-      "name": "Cyrus Allen",
-      "team": "KC",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 0.9,
-      "pen": 5,
-      "truePen": 4,
-      "saved": 0,
-      "total": 100.9,
-      "ppg": 16.18
-    },
-    {
       "id": "8755",
       "name": "Kaden Davis",
       "team": "CHI",
@@ -6345,6 +6267,19 @@
       "saved": 0,
       "total": 101,
       "ppg": 10.5
+    },
+    {
+      "id": "1166",
+      "name": "Kirk Cousins",
+      "team": "LV",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 101.08,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 101.08,
+      "ppg": 16.85
     },
     {
       "id": "4443",
@@ -6477,6 +6412,19 @@
       "ppg": 15.43
     },
     {
+      "id": "12670",
+      "name": "KeAndre Lambert-Smith",
+      "team": "LAC",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 1.7,
+      "pen": 5,
+      "truePen": 1,
+      "saved": 0,
+      "total": 101.7,
+      "ppg": 10.85
+    },
+    {
       "id": "7075",
       "name": "Charlie Woerner",
       "team": "ATL",
@@ -6542,6 +6490,19 @@
       "ppg": 17
     },
     {
+      "id": "8150",
+      "name": "Kyren Williams",
+      "team": "LAR",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 102,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 102,
+      "ppg": 17
+    },
+    {
       "id": "13307",
       "name": "Marlin Klein",
       "team": "HOU",
@@ -6581,30 +6542,17 @@
       "ppg": 17.03
     },
     {
-      "id": "12670",
-      "name": "KeAndre Lambert-Smith",
-      "team": "LAC",
-      "pos": "WR",
-      "gp": 2,
-      "raw": 2.2,
-      "pen": 5,
-      "truePen": 1,
-      "saved": 0,
-      "total": 102.2,
-      "ppg": 11.1
-    },
-    {
       "id": "13269",
       "name": "Fernando Mendoza",
       "team": "LV",
       "pos": "QB",
-      "gp": 2,
+      "gp": 1,
       "raw": 2.22,
       "pen": 5,
-      "truePen": 1,
+      "truePen": 0,
       "saved": 0,
       "total": 102.22,
-      "ppg": 11.11
+      "ppg": 2.22
     },
     {
       "id": "8223",
@@ -6631,6 +6579,19 @@
       "saved": 0,
       "total": 102.5,
       "ppg": 15.63
+    },
+    {
+      "id": "8138",
+      "name": "James Cook",
+      "team": "BUF",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 102.6,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 102.6,
+      "ppg": 17.1
     },
     {
       "id": "13308",
@@ -6711,6 +6672,19 @@
       "ppg": 14.4
     },
     {
+      "id": "12482",
+      "name": "Savion Williams",
+      "team": "GB",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 3.2,
+      "pen": 5,
+      "truePen": 0,
+      "saved": 0,
+      "total": 103.2,
+      "ppg": 3.2
+    },
+    {
       "id": "10228",
       "name": "Charlie Jones",
       "team": "NYG",
@@ -6722,6 +6696,45 @@
       "saved": 0,
       "total": 103.6,
       "ppg": 14.53
+    },
+    {
+      "id": "13413",
+      "name": "Cyrus Allen",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 5,
+      "raw": 3.7,
+      "pen": 5,
+      "truePen": 4,
+      "saved": 0,
+      "total": 103.7,
+      "ppg": 16.74
+    },
+    {
+      "id": "13770",
+      "name": "J. Michael Sturdivant",
+      "team": "GB",
+      "pos": "WR",
+      "gp": 5,
+      "raw": 3.7,
+      "pen": 5,
+      "truePen": 4,
+      "saved": 0,
+      "total": 103.7,
+      "ppg": 16.74
+    },
+    {
+      "id": "13013",
+      "name": "Mark Redman",
+      "team": "GB",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 3.9,
+      "pen": 5,
+      "truePen": 5,
+      "saved": 0,
+      "total": 103.9,
+      "ppg": 17.32
     },
     {
       "id": "13297",
@@ -6776,32 +6789,6 @@
       "ppg": 12.2
     },
     {
-      "id": "9493",
-      "name": "Puka Nacua",
-      "team": "LAR",
-      "pos": "WR",
-      "gp": 4,
-      "raw": 64.9,
-      "pen": 2,
-      "truePen": 0,
-      "saved": 0,
-      "total": 104.9,
-      "ppg": 16.23
-    },
-    {
-      "id": "4046",
-      "name": "Patrick Mahomes",
-      "team": "KC",
-      "pos": "QB",
-      "gp": 5,
-      "raw": 84.98,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 104.98,
-      "ppg": 17
-    },
-    {
       "id": "6109",
       "name": "Alec Ingold",
       "team": "LAC",
@@ -6813,6 +6800,19 @@
       "saved": 0,
       "total": 105,
       "ppg": 17
+    },
+    {
+      "id": "11604",
+      "name": "Brock Bowers",
+      "team": "LV",
+      "pos": "TE",
+      "gp": 4,
+      "raw": 66.2,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 106.2,
+      "ppg": 16.55
     },
     {
       "id": "13079",
@@ -6878,6 +6878,19 @@
       "saved": 0,
       "total": 107.9,
       "ppg": 7.9
+    },
+    {
+      "id": "4046",
+      "name": "Patrick Mahomes",
+      "team": "KC",
+      "pos": "QB",
+      "gp": 5,
+      "raw": 88.06,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 108.06,
+      "ppg": 17.61
     },
     {
       "id": "9230",
@@ -6971,6 +6984,19 @@
       "ppg": 18.52
     },
     {
+      "id": "9493",
+      "name": "Puka Nacua",
+      "team": "LAR",
+      "pos": "WR",
+      "gp": 4,
+      "raw": 73.3,
+      "pen": 2,
+      "truePen": 0,
+      "saved": 0,
+      "total": 113.3,
+      "ppg": 18.33
+    },
+    {
       "id": "13345",
       "name": "Jonah Coleman",
       "team": "DEN",
@@ -7021,19 +7047,6 @@
       "saved": 0,
       "total": 116.5,
       "ppg": 19.42
-    },
-    {
-      "id": "11604",
-      "name": "Brock Bowers",
-      "team": "LV",
-      "pos": "TE",
-      "gp": 4,
-      "raw": 57.2,
-      "pen": 3,
-      "truePen": 1,
-      "saved": 0,
-      "total": 117.2,
-      "ppg": 19.3
     },
     {
       "id": "9228",
@@ -7101,19 +7114,6 @@
       "ppg": 20
     },
     {
-      "id": "5127",
-      "name": "Kyle Allen",
-      "team": "BUF",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 1,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
       "id": "5154",
       "name": "Trent Sherfield",
       "team": "BUF",
@@ -7140,6 +7140,19 @@
       "ppg": 20
     },
     {
+      "id": "5850",
+      "name": "Josh Jacobs",
+      "team": "GB",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 6,
+      "truePen": 1,
+      "saved": 0,
+      "total": 120,
+      "ppg": 20
+    },
+    {
       "id": "5970",
       "name": "Greg Dortch",
       "team": "BUF",
@@ -7148,19 +7161,6 @@
       "raw": 0,
       "pen": 6,
       "truePen": 6,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
-      "id": "6011",
-      "name": "Gardner Minshew",
-      "team": "ARI",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 1,
       "saved": 0,
       "total": 120,
       "ppg": 20
@@ -7261,10 +7261,10 @@
       "name": "Justin Fields",
       "team": "KC",
       "pos": "QB",
-      "gp": 2,
+      "gp": 1,
       "raw": 0,
       "pen": 6,
-      "truePen": 2,
+      "truePen": 1,
       "saved": 0,
       "total": 120,
       "ppg": 20
@@ -7317,6 +7317,19 @@
       "raw": 0,
       "pen": 6,
       "truePen": 2,
+      "saved": 0,
+      "total": 120,
+      "ppg": 20
+    },
+    {
+      "id": "8162",
+      "name": "Sam Howell",
+      "team": "DAL",
+      "pos": "QB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 6,
+      "truePen": 1,
       "saved": 0,
       "total": 120,
       "ppg": 20
@@ -7426,6 +7439,19 @@
       "ppg": 20
     },
     {
+      "id": "10212",
+      "name": "Josh Whyle",
+      "team": "GB",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 0,
+      "pen": 6,
+      "truePen": 6,
+      "saved": 0,
+      "total": 120,
+      "ppg": 20
+    },
+    {
       "id": "10444",
       "name": "Cedric Tillman",
       "team": "NO",
@@ -7460,19 +7486,6 @@
       "raw": 0,
       "pen": 6,
       "truePen": 6,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
-      "id": "11320",
-      "name": "Nikko Remigio",
-      "team": "KC",
-      "pos": "WR",
-      "gp": 5,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 5,
       "saved": 0,
       "total": 120,
       "ppg": 20
@@ -7699,10 +7712,10 @@
       "ppg": 20
     },
     {
-      "id": "12773",
-      "name": "DJ Uiagalelei",
-      "team": "LAC",
-      "pos": "QB",
+      "id": "12787",
+      "name": "Josh Williams",
+      "team": "TB",
+      "pos": "RB",
       "gp": 1,
       "raw": 0,
       "pen": 6,
@@ -7712,10 +7725,10 @@
       "ppg": 20
     },
     {
-      "id": "12787",
-      "name": "Josh Williams",
-      "team": "TB",
-      "pos": "RB",
+      "id": "12829",
+      "name": "Coleman Owen",
+      "team": "GB",
+      "pos": "WR",
       "gp": 1,
       "raw": 0,
       "pen": 6,
@@ -7998,19 +8011,6 @@
       "ppg": 20
     },
     {
-      "id": "4984",
-      "name": "Josh Allen",
-      "team": "BUF",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 136.38,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 136.38,
-      "ppg": 22.73
-    },
-    {
       "id": "9221",
       "name": "Jahmyr Gibbs",
       "team": "DET",
@@ -8037,17 +8037,30 @@
       "ppg": 23.39
     },
     {
+      "id": "4984",
+      "name": "Josh Allen",
+      "team": "BUF",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 143.76,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 143.76,
+      "ppg": 23.96
+    },
+    {
       "id": "8151",
       "name": "Kenneth Walker",
       "team": "KC",
       "pos": "RB",
       "gp": 5,
-      "raw": 127.8,
+      "raw": 131,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 147.8,
-      "ppg": 25.56
+      "total": 151,
+      "ppg": 26.2
     }
   ]
 }
