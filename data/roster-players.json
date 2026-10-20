@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T05:39:38.198Z",
+  "generatedAt": "2026-10-20T10:47:10.497Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -155,6 +155,11 @@
       "name": "Lamar Jackson",
       "pos": "QB",
       "team": "BAL"
+    },
+    "4943": {
+      "name": "Sam Darnold",
+      "pos": "QB",
+      "team": "SEA"
     },
     "4950": {
       "name": "Christian Kirk",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T05:39:38.198Z",
+  "generatedAt": "2026-10-20T10:47:10.497Z",
   "weeks": [
     {
       "week": 1,
@@ -1071,22 +1071,22 @@
       "week": 7,
       "played": false,
       "degenerate": false,
-      "median": 50,
+      "median": 40,
       "medianPool": [
-        100,
         60,
+        40,
         40,
         20
       ],
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 100,
-          "inPlay": 100,
+          "adjusted": 40,
+          "inPlay": 40,
           "penalties": [
             {
-              "playerId": "7083",
-              "name": "Tyler Huntley",
+              "playerId": "11559",
+              "name": "Michael Penix",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1115,10 +1115,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4663",
-              "name": "Austin Ekeler",
+              "playerId": "11643",
+              "name": "Jaylen Wright",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "13414",
@@ -1151,10 +1151,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12493",
-              "name": "Oronde Gadsden",
+              "playerId": "8172",
+              "name": "Greg Dulcich",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "8111",
@@ -1175,14 +1175,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "10219",
-              "name": "Chris Rodriguez",
+              "playerId": "13424",
+              "name": "Seth McGowan",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "12504",
-              "name": "Kaleb Johnson",
+              "playerId": "11729",
+              "name": "Sione Vaki",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1199,8 +1199,8 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 5,
-          "yetToPlay": 14
+          "settledPenalties": 2,
+          "yetToPlay": 17
         },
         "2": {
           "raw": 0,
@@ -1678,7 +1678,7 @@
             1,
             2
           ],
-          "winner": 2
+          "winner": null
         },
         {
           "type": "h2h",
@@ -1691,8 +1691,8 @@
         {
           "type": "median",
           "rosterId": 3,
-          "line": 50,
-          "result": "W"
+          "line": 40,
+          "result": "T"
         }
       ]
     }
