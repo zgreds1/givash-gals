@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T10:47:10.497Z",
+  "generatedAt": "2026-10-21T11:08:05.510Z",
   "weeks": [
     {
       "week": 1,
@@ -935,11 +935,11 @@
       "week": 6,
       "played": true,
       "degenerate": false,
-      "median": 159.84,
+      "median": 160.34,
       "medianPool": [
         186.46,
         174.58,
-        145.1,
+        146.1,
         88.06
       ],
       "teams": {
@@ -973,9 +973,9 @@
           "yetToPlay": 0
         },
         "3": {
-          "raw": 125.1,
-          "adjusted": 145.1,
-          "inPlay": 145.1,
+          "raw": 126.1,
+          "adjusted": 146.1,
+          "inPlay": 146.1,
           "penalties": [
             {
               "playerId": "12540",
@@ -1062,7 +1062,7 @@
         {
           "type": "median",
           "rosterId": 5,
-          "line": 159.84,
+          "line": 160.34,
           "result": "L"
         }
       ]
@@ -1321,8 +1321,8 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 40,
-          "inPlay": 40,
+          "adjusted": 60,
+          "inPlay": 60,
           "penalties": [
             {
               "playerId": "11563",
@@ -1364,7 +1364,7 @@
               "playerId": "7528",
               "name": "Najee Harris",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "11627",
@@ -1433,8 +1433,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 17
+          "settledPenalties": 3,
+          "yetToPlay": 16
         },
         "4": {
           "raw": 0,
@@ -1692,7 +1692,7 @@
           "type": "median",
           "rosterId": 3,
           "line": 40,
-          "result": "T"
+          "result": "L"
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-20T05:39:38.198Z",
+  "generatedAt": "2026-10-21T11:08:05.510Z",
   "season": "2026",
   "rows": [
     {
@@ -369,7 +369,7 @@
     {
       "id": "7528",
       "name": "Najee Harris",
-      "team": "NYG",
+      "team": "—",
       "pos": "RB",
       "gp": 5,
       "raw": 8.9,
@@ -432,19 +432,6 @@
       "ppg": 4.98
     },
     {
-      "id": "ARI",
-      "name": "Arizona Cardinals",
-      "team": "ARI",
-      "pos": "DEF",
-      "gp": 6,
-      "raw": 30,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 30,
-      "ppg": 5
-    },
-    {
       "id": "5985",
       "name": "Foster Moreau",
       "team": "HOU",
@@ -456,6 +443,19 @@
       "saved": 0,
       "total": 30.7,
       "ppg": 5.12
+    },
+    {
+      "id": "ARI",
+      "name": "Arizona Cardinals",
+      "team": "ARI",
+      "pos": "DEF",
+      "gp": 6,
+      "raw": 31,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 31,
+      "ppg": 5.17
     },
     {
       "id": "LAR",
@@ -1201,7 +1201,7 @@
     {
       "id": "7922",
       "name": "Riley Patterson",
-      "team": "MIA",
+      "team": "—",
       "pos": "K",
       "gp": 5,
       "raw": 24,
@@ -6232,7 +6232,7 @@
     {
       "id": "5086",
       "name": "Marquez Valdes-Scantling",
-      "team": "—",
+      "team": "PIT",
       "pos": "WR",
       "gp": 3,
       "raw": 3.2,
@@ -6919,19 +6919,6 @@
       "ppg": 20
     },
     {
-      "id": "6011",
-      "name": "Gardner Minshew",
-      "team": "ARI",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 1,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
       "id": "6045",
       "name": "Gary Jennings",
       "team": "LAC",
@@ -6973,7 +6960,7 @@
     {
       "id": "6529",
       "name": "Chris Myarick",
-      "team": "LV",
+      "team": "—",
       "pos": "TE",
       "gp": 2,
       "raw": 0,
@@ -7564,19 +7551,6 @@
       "raw": 0,
       "pen": 6,
       "truePen": 5,
-      "saved": 0,
-      "total": 120,
-      "ppg": 20
-    },
-    {
-      "id": "12656",
-      "name": "Robbie Ouzts",
-      "team": "SEA",
-      "pos": "RB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 6,
-      "truePen": 1,
       "saved": 0,
       "total": 120,
       "ppg": 20
