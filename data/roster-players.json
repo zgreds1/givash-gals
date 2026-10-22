@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:08:05.510Z",
+  "generatedAt": "2026-10-22T11:07:55.217Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -80,6 +80,11 @@
       "name": "Tyler Higbee",
       "pos": "TE",
       "team": "LAR"
+    },
+    "3634": {
+      "name": "Kalif Raymond",
+      "pos": "WR",
+      "team": "CHI"
     },
     "3678": {
       "name": "Wil Lutz",
@@ -427,7 +432,7 @@
       "team": "DAL"
     },
     "8138": {
-      "name": "James Cook",
+      "name": "James Cook III",
       "pos": "RB",
       "team": "BUF"
     },
@@ -437,7 +442,7 @@
       "team": "NYJ"
     },
     "8154": {
-      "name": "Brian Robinson",
+      "name": "Brian Robinson Jr.",
       "pos": "RB",
       "team": "ATL"
     },
@@ -460,6 +465,11 @@
       "name": "Tyquan Thornton",
       "pos": "WR",
       "team": "KC"
+    },
+    "8207": {
+      "name": "Tyler Goodson",
+      "pos": "RB",
+      "team": "DAL"
     },
     "8208": {
       "name": "Tyler Badie",
@@ -537,7 +547,7 @@
       "team": "LAR"
     },
     "9494": {
-      "name": "Marvin Mims",
+      "name": "Marvin Mims Jr.",
       "pos": "WR",
       "team": "DEN"
     },
@@ -582,7 +592,7 @@
       "team": "HOU"
     },
     "10219": {
-      "name": "Chris Rodriguez",
+      "name": "Chris Rodriguez Jr.",
       "pos": "RB",
       "team": "JAX"
     },
@@ -642,7 +652,7 @@
       "team": "DAL"
     },
     "11559": {
-      "name": "Michael Penix",
+      "name": "Michael Penix Jr.",
       "pos": "QB",
       "team": "ATL"
     },
@@ -732,7 +742,7 @@
       "team": "LAC"
     },
     "11655": {
-      "name": "Tyrone Tracy",
+      "name": "Tyrone Tracy Jr.",
       "pos": "RB",
       "team": "NYG"
     },
@@ -797,7 +807,7 @@
       "team": "MIA"
     },
     "12495": {
-      "name": "Ollie Gordon",
+      "name": "Ollie Gordon II",
       "pos": "RB",
       "team": "MIA"
     },
@@ -882,7 +892,7 @@
       "team": "TEN"
     },
     "12544": {
-      "name": "LeQuint Allen",
+      "name": "LeQuint Allen Jr.",
       "pos": "RB",
       "team": "JAX"
     },
@@ -890,6 +900,11 @@
       "name": "Tyler Shough",
       "pos": "QB",
       "team": "NO"
+    },
+    "12713": {
+      "name": "Andy Borregales",
+      "pos": "K",
+      "team": "NE"
     },
     "12961": {
       "name": "Ryan Fitzgerald",
@@ -922,12 +937,12 @@
       "team": "PHI"
     },
     "13298": {
-      "name": "KC Concepcion",
+      "name": "KC Concepcion Jr.",
       "pos": "WR",
       "team": "CLE"
     },
     "13305": {
-      "name": "Mike Washington",
+      "name": "Mike Washington Jr.",
       "pos": "RB",
       "team": "LV"
     },
@@ -937,7 +952,7 @@
       "team": "MIA"
     },
     "13317": {
-      "name": "Ted Hurst",
+      "name": "Ted Hurst III",
       "pos": "WR",
       "team": "TB"
     },
@@ -1020,6 +1035,11 @@
       "name": "Dallas Cowboys",
       "pos": "DEF",
       "team": "DAL"
+    },
+    "GB": {
+      "name": "Green Bay Packers",
+      "pos": "DEF",
+      "team": "GB"
     },
     "LAC": {
       "name": "Los Angeles Chargers",

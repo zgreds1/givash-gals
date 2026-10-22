@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:08:05.510Z",
+  "generatedAt": "2026-10-22T11:07:55.217Z",
   "weeks": [
     {
       "week": 1,
@@ -97,9 +97,9 @@
           "inPlay": 209.54,
           "penalties": [
             {
-              "playerId": "7528",
-              "name": "Najee Harris",
-              "reason": "zeroed",
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
               "phase": "final"
             },
             {
@@ -194,7 +194,7 @@
             },
             {
               "playerId": "9494",
-              "name": "Marvin Mims",
+              "name": "Marvin Mims Jr.",
               "reason": "zeroed",
               "phase": "final"
             },
@@ -206,13 +206,13 @@
             },
             {
               "playerId": "12495",
-              "name": "Ollie Gordon",
+              "name": "Ollie Gordon II",
               "reason": "zeroed",
               "phase": "final"
             },
             {
               "playerId": "12544",
-              "name": "LeQuint Allen",
+              "name": "LeQuint Allen Jr.",
               "reason": "zeroed",
               "phase": "final"
             }
@@ -352,7 +352,7 @@
           "penalties": [
             {
               "playerId": "11655",
-              "name": "Tyrone Tracy",
+              "name": "Tyrone Tracy Jr.",
               "reason": "zeroed",
               "phase": "final"
             },
@@ -373,7 +373,7 @@
           "penalties": [
             {
               "playerId": "9494",
-              "name": "Marvin Mims",
+              "name": "Marvin Mims Jr.",
               "reason": "zeroed",
               "phase": "final"
             },
@@ -385,7 +385,7 @@
             },
             {
               "playerId": "12544",
-              "name": "LeQuint Allen",
+              "name": "LeQuint Allen Jr.",
               "reason": "zeroed",
               "phase": "final"
             }
@@ -582,7 +582,7 @@
             },
             {
               "playerId": "9494",
-              "name": "Marvin Mims",
+              "name": "Marvin Mims Jr.",
               "reason": "zeroed",
               "phase": "final"
             }
@@ -755,7 +755,7 @@
             },
             {
               "playerId": "12544",
-              "name": "LeQuint Allen",
+              "name": "LeQuint Allen Jr.",
               "reason": "zeroed",
               "phase": "final"
             }
@@ -858,7 +858,7 @@
           "penalties": [
             {
               "playerId": "13317",
-              "name": "Ted Hurst",
+              "name": "Ted Hurst III",
               "reason": "zeroed",
               "phase": "final"
             },
@@ -897,7 +897,7 @@
             },
             {
               "playerId": "12544",
-              "name": "LeQuint Allen",
+              "name": "LeQuint Allen Jr.",
               "reason": "zeroed",
               "phase": "final"
             }
@@ -1033,7 +1033,7 @@
             },
             {
               "playerId": "12495",
-              "name": "Ollie Gordon",
+              "name": "Ollie Gordon II",
               "reason": "zeroed",
               "phase": "final"
             }
@@ -1071,22 +1071,22 @@
       "week": 7,
       "played": false,
       "degenerate": false,
-      "median": 40,
+      "median": 30,
       "medianPool": [
         60,
         40,
-        40,
-        20
+        20,
+        0
       ],
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 40,
-          "inPlay": 40,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
               "playerId": "11559",
-              "name": "Michael Penix",
+              "name": "Michael Penix Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1133,10 +1133,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "5947",
-              "name": "Jakobi Meyers",
+              "playerId": "3634",
+              "name": "Kalif Raymond",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "13294",
@@ -1191,16 +1191,10 @@
               "name": "Jake Elliott",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "WAS",
-              "name": "Washington Commanders",
-              "reason": "bye-def",
-              "phase": "final"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 17
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "2": {
           "raw": 0,
@@ -1321,8 +1315,8 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 60,
-          "inPlay": 60,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
               "playerId": "11563",
@@ -1343,16 +1337,16 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9511",
-              "name": "Keaton Mitchell",
+              "playerId": "13347",
+              "name": "Demond Claiborne",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "11575",
-              "name": "Ray Davis",
+              "playerId": "4147",
+              "name": "Samaje Perine",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "13337",
@@ -1361,10 +1355,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "7528",
-              "name": "Najee Harris",
+              "playerId": "8207",
+              "name": "Tyler Goodson",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "11627",
@@ -1427,14 +1421,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "6528",
-              "name": "Joey Slye",
+              "playerId": "12713",
+              "name": "Andy Borregales",
               "reason": "zeroed",
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 3,
-          "yetToPlay": 16
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "4": {
           "raw": 0,
@@ -1467,13 +1461,13 @@
             },
             {
               "playerId": "11655",
-              "name": "Tyrone Tracy",
+              "name": "Tyrone Tracy Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
               "playerId": "13305",
-              "name": "Mike Washington",
+              "name": "Mike Washington Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1503,7 +1497,7 @@
             },
             {
               "playerId": "13317",
-              "name": "Ted Hurst",
+              "name": "Ted Hurst III",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1578,7 +1572,7 @@
             },
             {
               "playerId": "8154",
-              "name": "Brian Robinson",
+              "name": "Brian Robinson Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1614,7 +1608,7 @@
             },
             {
               "playerId": "9494",
-              "name": "Marvin Mims",
+              "name": "Marvin Mims Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1650,13 +1644,13 @@
             },
             {
               "playerId": "12495",
-              "name": "Ollie Gordon",
+              "name": "Ollie Gordon II",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
               "playerId": "12544",
-              "name": "LeQuint Allen",
+              "name": "LeQuint Allen Jr.",
               "reason": "zeroed",
               "phase": "final"
             },
@@ -1678,7 +1672,7 @@
             1,
             2
           ],
-          "winner": null
+          "winner": 1
         },
         {
           "type": "h2h",
@@ -1691,8 +1685,8 @@
         {
           "type": "median",
           "rosterId": 3,
-          "line": 40,
-          "result": "L"
+          "line": 30,
+          "result": "W"
         }
       ]
     }

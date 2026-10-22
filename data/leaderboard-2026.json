@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:08:05.510Z",
+  "generatedAt": "2026-10-22T11:07:55.217Z",
   "season": "2026",
   "rows": [
     {
@@ -251,7 +251,7 @@
     },
     {
       "id": "13305",
-      "name": "Mike Washington",
+      "name": "Mike Washington Jr.",
       "team": "LV",
       "pos": "RB",
       "gp": 6,
@@ -290,7 +290,7 @@
     },
     {
       "id": "13298",
-      "name": "KC Concepcion",
+      "name": "KC Concepcion Jr.",
       "team": "CLE",
       "pos": "WR",
       "gp": 6,
@@ -420,7 +420,7 @@
     },
     {
       "id": "10219",
-      "name": "Chris Rodriguez",
+      "name": "Chris Rodriguez Jr.",
       "team": "JAX",
       "pos": "RB",
       "gp": 6,
@@ -641,7 +641,7 @@
     },
     {
       "id": "4037",
-      "name": "Chris Godwin",
+      "name": "Chris Godwin Jr.",
       "team": "TB",
       "pos": "WR",
       "gp": 6,
@@ -849,7 +849,7 @@
     },
     {
       "id": "11655",
-      "name": "Tyrone Tracy",
+      "name": "Tyrone Tracy Jr.",
       "team": "NYG",
       "pos": "RB",
       "gp": 6,
@@ -1239,7 +1239,7 @@
     },
     {
       "id": "12506",
-      "name": "Harold Fannin",
+      "name": "Harold Fannin Jr.",
       "team": "CLE",
       "pos": "TE",
       "gp": 6,
@@ -1629,7 +1629,7 @@
     },
     {
       "id": "13317",
-      "name": "Ted Hurst",
+      "name": "Ted Hurst III",
       "team": "TB",
       "pos": "WR",
       "gp": 6,
@@ -1759,7 +1759,7 @@
     },
     {
       "id": "8154",
-      "name": "Brian Robinson",
+      "name": "Brian Robinson Jr.",
       "team": "ATL",
       "pos": "RB",
       "gp": 6,
@@ -2110,7 +2110,7 @@
     },
     {
       "id": "12519",
-      "name": "Luther Burden",
+      "name": "Luther Burden III",
       "team": "CHI",
       "pos": "WR",
       "gp": 6,
@@ -2422,7 +2422,7 @@
     },
     {
       "id": "11631",
-      "name": "Brian Thomas",
+      "name": "Brian Thomas Jr.",
       "team": "JAX",
       "pos": "WR",
       "gp": 6,
@@ -2487,7 +2487,7 @@
     },
     {
       "id": "12542",
-      "name": "Efton Chism",
+      "name": "Efton Chism III",
       "team": "NE",
       "pos": "WR",
       "gp": 5,
@@ -2591,7 +2591,7 @@
     },
     {
       "id": "9494",
-      "name": "Marvin Mims",
+      "name": "Marvin Mims Jr.",
       "team": "DEN",
       "pos": "WR",
       "gp": 4,
@@ -2630,7 +2630,7 @@
     },
     {
       "id": "11628",
-      "name": "Marvin Harrison",
+      "name": "Marvin Harrison Jr.",
       "team": "HOU",
       "pos": "WR",
       "gp": 5,
@@ -2669,7 +2669,7 @@
     },
     {
       "id": "7553",
-      "name": "Kyle Pitts",
+      "name": "Kyle Pitts Sr.",
       "team": "ATL",
       "pos": "TE",
       "gp": 6,
@@ -3319,7 +3319,7 @@
     },
     {
       "id": "5872",
-      "name": "Deebo Samuel",
+      "name": "Deebo Samuel Sr.",
       "team": "SF",
       "pos": "WR",
       "gp": 5,
@@ -3553,7 +3553,7 @@
     },
     {
       "id": "13338",
-      "name": "Kevin Coleman",
+      "name": "Kevin Coleman Jr.",
       "team": "MIA",
       "pos": "WR",
       "gp": 5,
@@ -3566,7 +3566,7 @@
     },
     {
       "id": "6819",
-      "name": "Michael Pittman",
+      "name": "Michael Pittman Jr.",
       "team": "PIT",
       "pos": "WR",
       "gp": 3,
@@ -3982,7 +3982,7 @@
     },
     {
       "id": "8147",
-      "name": "John Metchie",
+      "name": "John Metchie III",
       "team": "CAR",
       "pos": "WR",
       "gp": 4,
@@ -4151,7 +4151,7 @@
     },
     {
       "id": "4199",
-      "name": "Aaron Jones",
+      "name": "Aaron Jones Sr.",
       "team": "MIN",
       "pos": "RB",
       "gp": 5,
@@ -4320,7 +4320,7 @@
     },
     {
       "id": "12544",
-      "name": "LeQuint Allen",
+      "name": "LeQuint Allen Jr.",
       "team": "JAX",
       "pos": "RB",
       "gp": 6,
@@ -4515,7 +4515,7 @@
     },
     {
       "id": "11592",
-      "name": "Erick All",
+      "name": "Erick All Jr.",
       "team": "CIN",
       "pos": "TE",
       "gp": 5,
@@ -4554,7 +4554,7 @@
     },
     {
       "id": "12860",
-      "name": "Theo Wease",
+      "name": "Theo Wease Jr.",
       "team": "LAC",
       "pos": "WR",
       "gp": 2,
@@ -4567,7 +4567,7 @@
     },
     {
       "id": "7543",
-      "name": "Travis Etienne",
+      "name": "Travis Etienne Jr.",
       "team": "NO",
       "pos": "RB",
       "gp": 3,
@@ -4593,7 +4593,7 @@
     },
     {
       "id": "12495",
-      "name": "Ollie Gordon",
+      "name": "Ollie Gordon II",
       "team": "MIA",
       "pos": "RB",
       "gp": 5,
@@ -4957,7 +4957,7 @@
     },
     {
       "id": "11559",
-      "name": "Michael Penix",
+      "name": "Michael Penix Jr.",
       "team": "ATL",
       "pos": "QB",
       "gp": 4,
@@ -5048,7 +5048,7 @@
     },
     {
       "id": "8116",
-      "name": "Pierre Strong",
+      "name": "Pierre Strong Jr.",
       "team": "GB",
       "pos": "RB",
       "gp": 2,
@@ -5230,7 +5230,7 @@
     },
     {
       "id": "12523",
-      "name": "Jimmy Horn",
+      "name": "Jimmy Horn Jr.",
       "team": "CLE",
       "pos": "WR",
       "gp": 1,
@@ -5516,7 +5516,7 @@
     },
     {
       "id": "11573",
-      "name": "Frank Gore",
+      "name": "Frank Gore Jr.",
       "team": "BUF",
       "pos": "RB",
       "gp": 2,
@@ -5660,7 +5660,7 @@
     {
       "id": "11582",
       "name": "Carson Steele",
-      "team": "PHI",
+      "team": "—",
       "pos": "RB",
       "gp": 2,
       "raw": 0.9,
@@ -5790,7 +5790,7 @@
     {
       "id": "8200",
       "name": "Kevin Austin",
-      "team": "NO",
+      "team": "—",
       "pos": "WR",
       "gp": 4,
       "raw": 1.2,
@@ -5893,7 +5893,7 @@
     },
     {
       "id": "10857",
-      "name": "Stetson Bennett",
+      "name": "Stetson Bennett IV",
       "team": "LAR",
       "pos": "QB",
       "gp": 2,
@@ -6101,7 +6101,7 @@
     },
     {
       "id": "8223",
-      "name": "Velus Jones",
+      "name": "Velus Jones Jr.",
       "team": "SEA",
       "pos": "WR",
       "gp": 5,
@@ -6127,7 +6127,7 @@
     },
     {
       "id": "8138",
-      "name": "James Cook",
+      "name": "James Cook III",
       "team": "BUF",
       "pos": "RB",
       "gp": 6,
@@ -6179,7 +6179,7 @@
     },
     {
       "id": "13276",
-      "name": "Omar Cooper",
+      "name": "Omar Cooper Jr.",
       "team": "NYJ",
       "pos": "WR",
       "gp": 2,
@@ -6764,7 +6764,7 @@
     },
     {
       "id": "2078",
-      "name": "Odell Beckham",
+      "name": "Odell Beckham Jr.",
       "team": "MIN",
       "pos": "WR",
       "gp": 3,
@@ -6868,7 +6868,7 @@
     },
     {
       "id": "5154",
-      "name": "Trent Sherfield",
+      "name": "Trent Sherfield Sr.",
       "team": "BUF",
       "pos": "WR",
       "gp": 1,
@@ -7244,6 +7244,19 @@
       "ppg": 20
     },
     {
+      "id": "9227",
+      "name": "Israel Abanikanda",
+      "team": "DAL",
+      "pos": "RB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 6,
+      "truePen": 1,
+      "saved": 0,
+      "total": 120,
+      "ppg": 20
+    },
+    {
       "id": "10210",
       "name": "Cameron Latu",
       "team": "NE",
@@ -7310,7 +7323,7 @@
     },
     {
       "id": "11186",
-      "name": "Carlos Washington",
+      "name": "Carlos Washington Jr.",
       "team": "MIA",
       "pos": "RB",
       "gp": 1,
@@ -7504,6 +7517,19 @@
       "ppg": 20
     },
     {
+      "id": "12460",
+      "name": "Antwane Wells Jr.",
+      "team": "ATL",
+      "pos": "WR",
+      "gp": 1,
+      "raw": 0,
+      "pen": 6,
+      "truePen": 1,
+      "saved": 0,
+      "total": 120,
+      "ppg": 20
+    },
+    {
       "id": "12469",
       "name": "Dylan Sampson",
       "team": "CLE",
@@ -7570,7 +7596,7 @@
     },
     {
       "id": "12715",
-      "name": "Thomas Fidone",
+      "name": "Thomas Fidone II",
       "team": "NYG",
       "pos": "TE",
       "gp": 2,
@@ -7661,7 +7687,7 @@
     },
     {
       "id": "12939",
-      "name": "Anthony Tyus",
+      "name": "Anthony Tyus III",
       "team": "CAR",
       "pos": "RB",
       "gp": 3,
@@ -7700,7 +7726,7 @@
     },
     {
       "id": "13199",
-      "name": "Montorie Foster",
+      "name": "Montorie Foster Jr.",
       "team": "SEA",
       "pos": "WR",
       "gp": 1,
@@ -7946,6 +7972,19 @@
       "ppg": 20
     },
     {
+      "id": "13712",
+      "name": "Hayden Large",
+      "team": "CHI",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 0,
+      "pen": 6,
+      "truePen": 1,
+      "saved": 0,
+      "total": 120,
+      "ppg": 20
+    },
+    {
       "id": "13825",
       "name": "Malik McClain",
       "team": "NYJ",
@@ -8025,7 +8064,7 @@
     },
     {
       "id": "8151",
-      "name": "Kenneth Walker",
+      "name": "Kenneth Walker III",
       "team": "KC",
       "pos": "RB",
       "gp": 5,
