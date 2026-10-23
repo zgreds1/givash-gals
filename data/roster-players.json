@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T11:07:55.217Z",
+  "generatedAt": "2026-10-23T10:59:06.560Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -115,6 +115,11 @@
       "name": "Cooper Kupp",
       "pos": "WR",
       "team": "SEA"
+    },
+    "4046": {
+      "name": "Patrick Mahomes",
+      "pos": "QB",
+      "team": "KC"
     },
     "4066": {
       "name": "Evan Engram",
@@ -395,6 +400,11 @@
       "name": "Riley Patterson",
       "pos": "K",
       "team": "—"
+    },
+    "8110": {
+      "name": "Jake Ferguson",
+      "pos": "TE",
+      "team": "DAL"
     },
     "8111": {
       "name": "Cade Otton",
