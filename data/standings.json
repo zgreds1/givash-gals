@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T10:59:06.560Z",
+  "generatedAt": "2026-10-25T19:28:55.490Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -38,20 +38,20 @@
   "standings": [
     {
       "rosterId": 1,
-      "w": 7,
-      "l": 0,
+      "w": 6,
+      "l": 1,
       "t": 0,
       "gp": 7,
-      "adjPF": 869.9,
-      "rawPF": 549.9,
-      "settledPenalties": 16,
+      "adjPF": 959.5,
+      "rawPF": 619.5,
+      "settledPenalties": 17,
       "median": {
         "w": 1,
         "l": 0,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 1
+      "winPct": 0.8571428571428571
     },
     {
       "rosterId": 3,
@@ -59,8 +59,8 @@
       "l": 3,
       "t": 0,
       "gp": 7,
-      "adjPF": 923.38,
-      "rawPF": 703.38,
+      "adjPF": 986,
+      "rawPF": 766,
       "settledPenalties": 11,
       "median": {
         "w": 1,
@@ -71,30 +71,13 @@
       "winPct": 0.5714285714285714
     },
     {
-      "rosterId": 4,
-      "w": 3,
-      "l": 4,
-      "t": 0,
-      "gp": 7,
-      "adjPF": 1075.04,
-      "rawPF": 635.04,
-      "settledPenalties": 22,
-      "median": {
-        "w": 1,
-        "l": 0,
-        "t": 0
-      },
-      "unresolvedTie": false,
-      "winPct": 0.42857142857142855
-    },
-    {
       "rosterId": 5,
-      "w": 3,
-      "l": 4,
+      "w": 4,
+      "l": 3,
       "t": 0,
       "gp": 7,
-      "adjPF": 1103.24,
-      "rawPF": 643.24,
+      "adjPF": 1135.9,
+      "rawPF": 675.9,
       "settledPenalties": 23,
       "median": {
         "w": 1,
@@ -102,24 +85,41 @@
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.42857142857142855
+      "winPct": 0.5714285714285714
+    },
+    {
+      "rosterId": 4,
+      "w": 2,
+      "l": 5,
+      "t": 0,
+      "gp": 7,
+      "adjPF": 1138.62,
+      "rawPF": 698.62,
+      "settledPenalties": 22,
+      "median": {
+        "w": 1,
+        "l": 0,
+        "t": 0
+      },
+      "unresolvedTie": false,
+      "winPct": 0.2857142857142857
     },
     {
       "rosterId": 2,
-      "w": 1,
-      "l": 6,
+      "w": 2,
+      "l": 5,
       "t": 0,
       "gp": 7,
-      "adjPF": 1190.94,
-      "rawPF": 650.94,
-      "settledPenalties": 27,
+      "adjPF": 1204.02,
+      "rawPF": 704.02,
+      "settledPenalties": 25,
       "median": {
         "w": 0,
         "l": 1,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.14285714285714285
+      "winPct": 0.2857142857142857
     }
   ]
 }
