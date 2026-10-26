@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T01:03:28.378Z",
+  "generatedAt": "2026-10-26T03:26:45.510Z",
   "season": "2026",
   "rows": [
     {
@@ -81,19 +81,6 @@
       "ppg": 4
     },
     {
-      "id": "12048",
-      "name": "George Holani",
-      "team": "SEA",
-      "pos": "RB",
-      "gp": 7,
-      "raw": 24.1,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 24.1,
-      "ppg": 3.44
-    },
-    {
       "id": "11510",
       "name": "Hunter Luepke",
       "team": "DAL",
@@ -131,6 +118,19 @@
       "saved": 0,
       "total": 26.2,
       "ppg": 3.74
+    },
+    {
+      "id": "12048",
+      "name": "George Holani",
+      "team": "SEA",
+      "pos": "RB",
+      "gp": 7,
+      "raw": 26.6,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 26.6,
+      "ppg": 3.8
     },
     {
       "id": "9504",
@@ -250,19 +250,6 @@
       "ppg": 4.98
     },
     {
-      "id": "11603",
-      "name": "AJ Barner",
-      "team": "SEA",
-      "pos": "TE",
-      "gp": 7,
-      "raw": 29.9,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 29.9,
-      "ppg": 4.27
-    },
-    {
       "id": "12485",
       "name": "Tez Johnson",
       "team": "TB",
@@ -380,19 +367,6 @@
       "ppg": 5.57
     },
     {
-      "id": "4039",
-      "name": "Cooper Kupp",
-      "team": "SEA",
-      "pos": "WR",
-      "gp": 7,
-      "raw": 33.5,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 33.5,
-      "ppg": 4.79
-    },
-    {
       "id": "12491",
       "name": "Corey Kiner",
       "team": "NE",
@@ -419,6 +393,19 @@
       "ppg": 5.67
     },
     {
+      "id": "11603",
+      "name": "AJ Barner",
+      "team": "SEA",
+      "pos": "TE",
+      "gp": 7,
+      "raw": 34,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 34,
+      "ppg": 4.86
+    },
+    {
       "id": "WAS",
       "name": "Washington Commanders",
       "team": "WAS",
@@ -443,6 +430,19 @@
       "saved": 0,
       "total": 34.6,
       "ppg": 2.43
+    },
+    {
+      "id": "4039",
+      "name": "Cooper Kupp",
+      "team": "SEA",
+      "pos": "WR",
+      "gp": 7,
+      "raw": 34.9,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 34.9,
+      "ppg": 4.99
     },
     {
       "id": "MIA",
@@ -690,6 +690,19 @@
       "saved": 1,
       "total": 41,
       "ppg": 5.86
+    },
+    {
+      "id": "13337",
+      "name": "Emmett Johnson",
+      "team": "KC",
+      "pos": "RB",
+      "gp": 6,
+      "raw": 21.6,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 41.6,
+      "ppg": 3.6
     },
     {
       "id": "8134",
@@ -1524,19 +1537,6 @@
       "ppg": 5.5
     },
     {
-      "id": "11435",
-      "name": "Emanuel Wilson",
-      "team": "SEA",
-      "pos": "RB",
-      "gp": 7,
-      "raw": 53.1,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 53.1,
-      "ppg": 7.59
-    },
-    {
       "id": "9225",
       "name": "Tank Bigsby",
       "team": "PHI",
@@ -1784,19 +1784,6 @@
       "ppg": 8.14
     },
     {
-      "id": "SEA",
-      "name": "Seattle Seahawks",
-      "team": "SEA",
-      "pos": "DEF",
-      "gp": 7,
-      "raw": 57,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 57,
-      "ppg": 8.14
-    },
-    {
       "id": "12472",
       "name": "Raheim Sanders",
       "team": "CLE",
@@ -1823,17 +1810,17 @@
       "ppg": 8.17
     },
     {
-      "id": "11624",
-      "name": "Xavier Worthy",
-      "team": "KC",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 37.8,
-      "pen": 1,
+      "id": "SEA",
+      "name": "Seattle Seahawks",
+      "team": "SEA",
+      "pos": "DEF",
+      "gp": 7,
+      "raw": 58,
+      "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 57.8,
-      "ppg": 6.3
+      "total": 58,
+      "ppg": 8.29
     },
     {
       "id": "13420",
@@ -1860,19 +1847,6 @@
       "saved": 0,
       "total": 58.5,
       "ppg": 7.7
-    },
-    {
-      "id": "13337",
-      "name": "Emmett Johnson",
-      "team": "KC",
-      "pos": "RB",
-      "gp": 6,
-      "raw": 18.9,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 58.9,
-      "ppg": 6.48
     },
     {
       "id": "2020",
@@ -1914,19 +1888,6 @@
       "ppg": 8.47
     },
     {
-      "id": "7828",
-      "name": "Noah Gray",
-      "team": "KC",
-      "pos": "TE",
-      "gp": 6,
-      "raw": 19.4,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 59.4,
-      "ppg": 6.57
-    },
-    {
       "id": "5846",
       "name": "DK Metcalf",
       "team": "PIT",
@@ -1951,6 +1912,19 @@
       "saved": 0,
       "total": 59.7,
       "ppg": 8.53
+    },
+    {
+      "id": "11624",
+      "name": "Xavier Worthy",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 39.7,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 59.7,
+      "ppg": 6.62
     },
     {
       "id": "4866",
@@ -2042,6 +2016,19 @@
       "saved": 0,
       "total": 61.7,
       "ppg": 6.95
+    },
+    {
+      "id": "7828",
+      "name": "Noah Gray",
+      "team": "KC",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 21.8,
+      "pen": 2,
+      "truePen": 1,
+      "saved": 0,
+      "total": 61.8,
+      "ppg": 6.97
     },
     {
       "id": "8136",
@@ -2460,19 +2447,6 @@
       "ppg": 9.39
     },
     {
-      "id": "4943",
-      "name": "Sam Darnold",
-      "team": "SEA",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 45.9,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 65.9,
-      "ppg": 7.65
-    },
-    {
       "id": "8219",
       "name": "Jelani Woods",
       "team": "NYJ",
@@ -2486,6 +2460,19 @@
       "ppg": 9.41
     },
     {
+      "id": "2747",
+      "name": "Jason Myers",
+      "team": "SEA",
+      "pos": "K",
+      "gp": 7,
+      "raw": 66,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 66,
+      "ppg": 9.43
+    },
+    {
       "id": "8168",
       "name": "Skyy Moore",
       "team": "GB",
@@ -2497,6 +2484,19 @@
       "saved": 0,
       "total": 66,
       "ppg": 5.2
+    },
+    {
+      "id": "KC",
+      "name": "Kansas City Chiefs",
+      "team": "KC",
+      "pos": "DEF",
+      "gp": 6,
+      "raw": 46,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 66,
+      "ppg": 7.67
     },
     {
       "id": "1479",
@@ -2549,6 +2549,19 @@
       "saved": 0,
       "total": 67.8,
       "ppg": 9.69
+    },
+    {
+      "id": "4227",
+      "name": "Harrison Butker",
+      "team": "KC",
+      "pos": "K",
+      "gp": 6,
+      "raw": 48,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 68,
+      "ppg": 8
     },
     {
       "id": "12961",
@@ -2642,6 +2655,19 @@
       "ppg": 9.76
     },
     {
+      "id": "11435",
+      "name": "Emanuel Wilson",
+      "team": "SEA",
+      "pos": "RB",
+      "gp": 7,
+      "raw": 68.8,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 68.8,
+      "ppg": 9.83
+    },
+    {
       "id": "1945",
       "name": "Chris Boswell",
       "team": "PIT",
@@ -2705,6 +2731,19 @@
       "saved": 0,
       "total": 69.4,
       "ppg": 9.91
+    },
+    {
+      "id": "4189",
+      "name": "Eric Saubert",
+      "team": "SEA",
+      "pos": "TE",
+      "gp": 7,
+      "raw": 9.5,
+      "pen": 3,
+      "truePen": 3,
+      "saved": 0,
+      "total": 69.5,
+      "ppg": 9.93
     },
     {
       "id": "13333",
@@ -2889,19 +2928,6 @@
       "ppg": 3.2
     },
     {
-      "id": "KC",
-      "name": "Kansas City Chiefs",
-      "team": "KC",
-      "pos": "DEF",
-      "gp": 6,
-      "raw": 53,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 73,
-      "ppg": 8.83
-    },
-    {
       "id": "7553",
       "name": "Kyle Pitts Sr.",
       "team": "ATL",
@@ -3032,6 +3058,19 @@
       "ppg": 10.74
     },
     {
+      "id": "4943",
+      "name": "Sam Darnold",
+      "team": "SEA",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 56.8,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 76.8,
+      "ppg": 9.47
+    },
+    {
       "id": "12530",
       "name": "Travis Hunter",
       "team": "JAX",
@@ -3123,19 +3162,6 @@
       "ppg": 12.98
     },
     {
-      "id": "2747",
-      "name": "Jason Myers",
-      "team": "SEA",
-      "pos": "K",
-      "gp": 7,
-      "raw": 58,
-      "pen": 1,
-      "truePen": 1,
-      "saved": 0,
-      "total": 78,
-      "ppg": 11.14
-    },
-    {
       "id": "11539",
       "name": "Jake Bates",
       "team": "DET",
@@ -3160,6 +3186,19 @@
       "saved": 0,
       "total": 78.12,
       "ppg": 11.16
+    },
+    {
+      "id": "1466",
+      "name": "Travis Kelce",
+      "team": "KC",
+      "pos": "TE",
+      "gp": 6,
+      "raw": 58.3,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 78.3,
+      "ppg": 9.72
     },
     {
       "id": "13311",
@@ -3630,19 +3669,6 @@
       "ppg": 12.11
     },
     {
-      "id": "4227",
-      "name": "Harrison Butker",
-      "team": "KC",
-      "pos": "K",
-      "gp": 6,
-      "raw": 45,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 85,
-      "ppg": 10.83
-    },
-    {
       "id": "13319",
       "name": "Oscar Delp",
       "team": "NO",
@@ -3822,19 +3848,6 @@
       "truePen": 0,
       "saved": 0,
       "total": 87.26,
-      "ppg": 12.47
-    },
-    {
-      "id": "4189",
-      "name": "Eric Saubert",
-      "team": "SEA",
-      "pos": "TE",
-      "gp": 7,
-      "raw": 7.3,
-      "pen": 4,
-      "truePen": 4,
-      "saved": 0,
-      "total": 87.3,
       "ppg": 12.47
     },
     {
@@ -4200,19 +4213,6 @@
       "saved": 0,
       "total": 91.7,
       "ppg": 10.34
-    },
-    {
-      "id": "1466",
-      "name": "Travis Kelce",
-      "team": "KC",
-      "pos": "TE",
-      "gp": 6,
-      "raw": 51.9,
-      "pen": 2,
-      "truePen": 1,
-      "saved": 0,
-      "total": 91.9,
-      "ppg": 11.98
     },
     {
       "id": "5857",
@@ -5073,6 +5073,19 @@
       "ppg": 17.1
     },
     {
+      "id": "12863",
+      "name": "Andrew Armstrong",
+      "team": "KC",
+      "pos": "WR",
+      "gp": 2,
+      "raw": 2.6,
+      "pen": 5,
+      "truePen": 0,
+      "saved": 0,
+      "total": 102.6,
+      "ppg": 1.3
+    },
+    {
       "id": "11565",
       "name": "J.J. McCarthy",
       "team": "NYG",
@@ -5125,6 +5138,19 @@
       "ppg": 14.73
     },
     {
+      "id": "8223",
+      "name": "Velus Jones Jr.",
+      "team": "SEA",
+      "pos": "WR",
+      "gp": 6,
+      "raw": 3.2,
+      "pen": 5,
+      "truePen": 4,
+      "saved": 0,
+      "total": 103.2,
+      "ppg": 13.87
+    },
+    {
       "id": "10226",
       "name": "Andrei Iosivas",
       "team": "CIN",
@@ -5162,19 +5188,6 @@
       "saved": 0,
       "total": 103.5,
       "ppg": 14.79
-    },
-    {
-      "id": "8223",
-      "name": "Velus Jones Jr.",
-      "team": "SEA",
-      "pos": "WR",
-      "gp": 6,
-      "raw": 3.8,
-      "pen": 5,
-      "truePen": 4,
-      "saved": 0,
-      "total": 103.8,
-      "ppg": 13.97
     },
     {
       "id": "7569",
@@ -5502,19 +5515,6 @@
       "ppg": 10.04
     },
     {
-      "id": "4046",
-      "name": "Patrick Mahomes",
-      "team": "KC",
-      "pos": "QB",
-      "gp": 6,
-      "raw": 90.38,
-      "pen": 1,
-      "truePen": 0,
-      "saved": 0,
-      "total": 110.38,
-      "ppg": 15.06
-    },
-    {
       "id": "10229",
       "name": "Rashee Rice",
       "team": "KC",
@@ -5552,6 +5552,19 @@
       "saved": 0,
       "total": 111.96,
       "ppg": -8.04
+    },
+    {
+      "id": "4046",
+      "name": "Patrick Mahomes",
+      "team": "KC",
+      "pos": "QB",
+      "gp": 6,
+      "raw": 92.06,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 112.06,
+      "ppg": 15.34
     },
     {
       "id": "12483",
@@ -6579,19 +6592,6 @@
       "saved": 0,
       "total": 121.7,
       "ppg": 16.34
-    },
-    {
-      "id": "12863",
-      "name": "Andrew Armstrong",
-      "team": "KC",
-      "pos": "WR",
-      "gp": 2,
-      "raw": 1.8,
-      "pen": 6,
-      "truePen": 1,
-      "saved": 0,
-      "total": 121.8,
-      "ppg": 10.9
     },
     {
       "id": "13268",
@@ -8232,30 +8232,30 @@
       "ppg": 23.96
     },
     {
-      "id": "9488",
-      "name": "Jaxon Smith-Njigba",
-      "team": "SEA",
-      "pos": "WR",
-      "gp": 7,
-      "raw": 147.56,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 147.56,
-      "ppg": 21.08
-    },
-    {
       "id": "8151",
       "name": "Kenneth Walker III",
       "team": "KC",
       "pos": "RB",
       "gp": 6,
-      "raw": 133.8,
+      "raw": 138.7,
       "pen": 1,
       "truePen": 0,
       "saved": 0,
-      "total": 153.8,
-      "ppg": 22.3
+      "total": 158.7,
+      "ppg": 23.12
+    },
+    {
+      "id": "9488",
+      "name": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "pos": "WR",
+      "gp": 7,
+      "raw": 167.16,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 167.16,
+      "ppg": 23.88
     },
     {
       "id": "9221",

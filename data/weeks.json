@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T01:03:28.378Z",
+  "generatedAt": "2026-10-26T03:26:45.510Z",
   "weeks": [
     {
       "week": 1,
@@ -1071,18 +1071,18 @@
       "week": 7,
       "played": true,
       "degenerate": false,
-      "median": 163.78,
+      "median": 174.56,
       "medianPool": [
-        212.86,
-        178.12,
-        149.44,
-        148.12
+        232.86,
+        195.22,
+        153.9,
+        151.94
       ],
       "teams": {
         "1": {
-          "raw": 89.44,
-          "adjusted": 149.44,
-          "inPlay": 149.44,
+          "raw": 91.94,
+          "adjusted": 151.94,
+          "inPlay": 151.94,
           "penalties": [
             {
               "playerId": "9230",
@@ -1126,7 +1126,7 @@
         },
         "2": {
           "raw": 152.86,
-          "adjusted": 212.86,
+          "adjusted": 232.86,
           "inPlay": 232.86,
           "penalties": [
             {
@@ -1139,7 +1139,7 @@
               "playerId": "12497",
               "name": "Tory Horton",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "11625",
@@ -1154,25 +1154,19 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 3,
+          "settledPenalties": 4,
           "yetToPlay": 0
         },
         "3": {
-          "raw": 112.82,
-          "adjusted": 192.82,
-          "inPlay": 212.82,
+          "raw": 115.52,
+          "adjusted": 195.52,
+          "inPlay": 195.52,
           "penalties": [
             {
               "playerId": "13347",
               "name": "Demond Claiborne",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "13337",
-              "name": "Emmett Johnson",
-              "reason": "zeroed",
-              "phase": "live"
             },
             {
               "playerId": "8207",
@@ -1209,9 +1203,9 @@
           "yetToPlay": 2
         },
         "4": {
-          "raw": 108.12,
-          "adjusted": 148.12,
-          "inPlay": 148.12,
+          "raw": 113.9,
+          "adjusted": 153.9,
+          "inPlay": 153.9,
           "penalties": [
             {
               "playerId": "4981",
@@ -1236,9 +1230,9 @@
           "yetToPlay": 1
         },
         "5": {
-          "raw": 78.12,
-          "adjusted": 178.12,
-          "inPlay": 178.12,
+          "raw": 95.22,
+          "adjusted": 195.22,
+          "inPlay": 195.22,
           "penalties": [
             {
               "playerId": "8154",
@@ -1295,7 +1289,7 @@
         {
           "type": "median",
           "rosterId": 3,
-          "line": 163.78,
+          "line": 174.56,
           "result": "L"
         }
       ]
