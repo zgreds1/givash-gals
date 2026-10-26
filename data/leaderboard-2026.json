@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-26T03:26:45.510Z",
+  "generatedAt": "2026-10-26T09:46:01.900Z",
   "season": "2026",
   "rows": [
     {
@@ -7469,10 +7469,10 @@
       "name": "Justin Fields",
       "team": "KC",
       "pos": "QB",
-      "gp": 2,
+      "gp": 1,
       "raw": 0,
       "pen": 7,
-      "truePen": 2,
+      "truePen": 1,
       "saved": 0,
       "total": 140,
       "ppg": 20
@@ -7846,19 +7846,6 @@
       "name": "Antwane Wells Jr.",
       "team": "ATL",
       "pos": "WR",
-      "gp": 1,
-      "raw": 0,
-      "pen": 7,
-      "truePen": 1,
-      "saved": 0,
-      "total": 140,
-      "ppg": 20
-    },
-    {
-      "id": "12510",
-      "name": "Jalen Milroe",
-      "team": "SEA",
-      "pos": "QB",
       "gp": 1,
       "raw": 0,
       "pen": 7,
