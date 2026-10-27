@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T05:58:25.462Z",
+  "generatedAt": "2026-10-27T11:23:22.641Z",
   "weeks": [
     {
       "week": 1,
@@ -97,9 +97,9 @@
           "inPlay": 209.54,
           "penalties": [
             {
-              "playerId": "7528",
-              "name": "Najee Harris",
-              "reason": "zeroed",
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
               "phase": "final"
             },
             {
