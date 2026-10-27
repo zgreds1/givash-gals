@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T05:58:25.462Z",
+  "generatedAt": "2026-10-27T18:35:48.040Z",
   "season": "2026",
   "rows": [
     {
@@ -2568,13 +2568,13 @@
       "name": "Tanner Hudson",
       "team": "CIN",
       "pos": "TE",
-      "gp": 4,
+      "gp": 5,
       "raw": 12.8,
       "pen": 3,
-      "truePen": 0,
+      "truePen": 1,
       "saved": 0,
       "total": 72.8,
-      "ppg": 3.2
+      "ppg": 6.56
     },
     {
       "id": "7553",
@@ -7161,6 +7161,19 @@
       "raw": 0,
       "pen": 7,
       "truePen": 6,
+      "saved": 0,
+      "total": 140,
+      "ppg": 20
+    },
+    {
+      "id": "6011",
+      "name": "Gardner Minshew II",
+      "team": "ARI",
+      "pos": "QB",
+      "gp": 1,
+      "raw": 0,
+      "pen": 7,
+      "truePen": 1,
       "saved": 0,
       "total": 140,
       "ppg": 20

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T11:23:22.641Z",
+  "generatedAt": "2026-10-27T18:35:48.040Z",
   "weeks": [
     {
       "week": 1,
@@ -1268,12 +1268,12 @@
       "week": 8,
       "played": false,
       "degenerate": false,
-      "median": 60,
+      "median": 40,
       "medianPool": [
         100,
         60,
-        60,
-        20
+        20,
+        0
       ],
       "teams": {
         "1": {
@@ -1512,8 +1512,8 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 60,
-          "inPlay": 60,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
               "playerId": "11563",
@@ -1522,10 +1522,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12545",
-              "name": "Tyler Shough",
+              "playerId": "6797",
+              "name": "Justin Herbert",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "8161",
@@ -1540,8 +1540,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4147",
-              "name": "Samaje Perine",
+              "playerId": "12531",
+              "name": "Trevor Etienne",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1564,10 +1564,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "7090",
-              "name": "Darnell Mooney",
+              "playerId": "13293",
+              "name": "Ja'Kobi Lane",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "4454",
@@ -1582,10 +1582,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "5985",
-              "name": "Foster Moreau",
+              "playerId": "4066",
+              "name": "Evan Engram",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "9479",
@@ -1624,8 +1624,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 3,
-          "yetToPlay": 16
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "4": {
           "raw": 0,
@@ -1877,13 +1877,13 @@
             3,
             4
           ],
-          "winner": null
+          "winner": 3
         },
         {
           "type": "median",
           "rosterId": 1,
-          "line": 60,
-          "result": "T"
+          "line": 40,
+          "result": "L"
         }
       ]
     }
