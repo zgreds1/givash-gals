@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T18:35:48.040Z",
+  "generatedAt": "2026-10-28T12:05:13.121Z",
   "weeks": [
     {
       "week": 1,
@@ -1140,9 +1140,9 @@
           "yetToPlay": 0
         },
         "3": {
-          "raw": 128.32,
-          "adjusted": 208.32,
-          "inPlay": 208.32,
+          "raw": 128.22,
+          "adjusted": 208.22,
+          "inPlay": 208.22,
           "penalties": [
             {
               "playerId": "13347",

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T18:35:48.040Z",
+  "generatedAt": "2026-10-28T12:05:13.121Z",
   "season": "2026",
   "rows": [
     {
@@ -2568,13 +2568,13 @@
       "name": "Tanner Hudson",
       "team": "CIN",
       "pos": "TE",
-      "gp": 5,
+      "gp": 4,
       "raw": 12.8,
       "pen": 3,
-      "truePen": 1,
+      "truePen": 0,
       "saved": 0,
       "total": 72.8,
-      "ppg": 6.56
+      "ppg": 3.2
     },
     {
       "id": "7553",
@@ -2894,12 +2894,12 @@
       "team": "DEN",
       "pos": "QB",
       "gp": 7,
-      "raw": 78.94,
+      "raw": 78.84,
       "pen": 0,
       "truePen": 0,
       "saved": 0,
-      "total": 78.94,
-      "ppg": 11.28
+      "total": 78.84,
+      "ppg": 11.26
     },
     {
       "id": "7839",
@@ -4401,13 +4401,13 @@
       "name": "Roman Wilson",
       "team": "PIT",
       "pos": "WR",
-      "gp": 6,
+      "gp": 5,
       "raw": 37.8,
       "pen": 3,
-      "truePen": 2,
+      "truePen": 1,
       "saved": 0,
       "total": 97.8,
-      "ppg": 12.97
+      "ppg": 11.56
     },
     {
       "id": "9487",
@@ -7166,32 +7166,6 @@
       "ppg": 20
     },
     {
-      "id": "6011",
-      "name": "Gardner Minshew II",
-      "team": "ARI",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 7,
-      "truePen": 1,
-      "saved": 0,
-      "total": 140,
-      "ppg": 20
-    },
-    {
-      "id": "6037",
-      "name": "Brett Rypien",
-      "team": "TB",
-      "pos": "QB",
-      "gp": 1,
-      "raw": 0,
-      "pen": 7,
-      "truePen": 1,
-      "saved": 0,
-      "total": 140,
-      "ppg": 20
-    },
-    {
       "id": "6045",
       "name": "Gary Jennings",
       "team": "LAC",
@@ -7377,6 +7351,19 @@
       "id": "7946",
       "name": "Jack Stoll",
       "team": "SF",
+      "pos": "TE",
+      "gp": 1,
+      "raw": 0,
+      "pen": 7,
+      "truePen": 1,
+      "saved": 0,
+      "total": 140,
+      "ppg": 20
+    },
+    {
+      "id": "8107",
+      "name": "Nikola Kalinic",
+      "team": "CHI",
       "pos": "TE",
       "gp": 1,
       "raw": 0,
@@ -7935,7 +7922,7 @@
     {
       "id": "13199",
       "name": "Montorie Foster Jr.",
-      "team": "—",
+      "team": "SEA",
       "pos": "WR",
       "gp": 1,
       "raw": 0,
@@ -8195,7 +8182,7 @@
     {
       "id": "13580",
       "name": "Carsen Ryan",
-      "team": "CLE",
+      "team": "—",
       "pos": "TE",
       "gp": 6,
       "raw": 0,
