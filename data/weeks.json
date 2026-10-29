@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T12:05:13.121Z",
+  "generatedAt": "2026-10-29T12:16:28.861Z",
   "weeks": [
     {
       "week": 1,
@@ -1278,12 +1278,12 @@
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 60,
-          "inPlay": 60,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
-              "playerId": "11559",
-              "name": "Michael Penix Jr.",
+              "playerId": "4943",
+              "name": "Sam Darnold",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1306,10 +1306,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13277",
-              "name": "CJ Donaldson",
+              "playerId": "6828",
+              "name": "AJ Dillon",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "11643",
@@ -1318,10 +1318,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13414",
-              "name": "Kaelon Black",
+              "playerId": "10219",
+              "name": "Chris Rodriguez Jr.",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "5045",
@@ -1342,10 +1342,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13285",
-              "name": "Malachi Fields",
+              "playerId": "13320",
+              "name": "Zachariah Branch",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "8172",
@@ -1354,8 +1354,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "8111",
-              "name": "Cade Otton",
+              "playerId": "5012",
+              "name": "Mark Andrews",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1366,8 +1366,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "7567",
-              "name": "Kenny Gainwell",
+              "playerId": "4663",
+              "name": "Austin Ekeler",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1390,8 +1390,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 3,
-          "yetToPlay": 16
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "2": {
           "raw": 0,
@@ -1883,7 +1883,7 @@
           "type": "median",
           "rosterId": 1,
           "line": 40,
-          "result": "L"
+          "result": "W"
         }
       ]
     }
