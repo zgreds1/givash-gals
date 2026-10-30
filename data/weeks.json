@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T12:16:28.861Z",
+  "generatedAt": "2026-10-30T12:06:41.378Z",
   "weeks": [
     {
       "week": 1,
@@ -1266,20 +1266,20 @@
     },
     {
       "week": 8,
-      "played": false,
+      "played": true,
       "degenerate": false,
-      "median": 40,
+      "median": 41.2,
       "medianPool": [
         100,
         60,
-        20,
-        0
+        22.4,
+        12.1
       ],
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "adjusted": 20,
+          "inPlay": 20,
           "penalties": [
             {
               "playerId": "4943",
@@ -1309,7 +1309,7 @@
               "playerId": "6828",
               "name": "AJ Dillon",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "11643",
@@ -1390,8 +1390,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 0,
-          "yetToPlay": 19
+          "settledPenalties": 1,
+          "yetToPlay": 18
         },
         "2": {
           "raw": 0,
@@ -1511,9 +1511,9 @@
           "yetToPlay": 14
         },
         "3": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 12.1,
+          "adjusted": 12.1,
+          "inPlay": 12.1,
           "penalties": [
             {
               "playerId": "11563",
@@ -1536,12 +1536,6 @@
             {
               "playerId": "13347",
               "name": "Demond Claiborne",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "12531",
-              "name": "Trevor Etienne",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1625,7 +1619,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 17
         },
         "4": {
           "raw": 0,
@@ -1745,9 +1739,9 @@
           "yetToPlay": 16
         },
         "5": {
-          "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "raw": 2.4,
+          "adjusted": 22.4,
+          "inPlay": 22.4,
           "penalties": [
             {
               "playerId": "12522",
@@ -1834,12 +1828,6 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "7694",
-              "name": "Tommy Tremble",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "12495",
               "name": "Ollie Gordon II",
               "reason": "zeroed",
@@ -1859,7 +1847,7 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 18
+          "yetToPlay": 17
         }
       },
       "matchups": [
@@ -1882,7 +1870,7 @@
         {
           "type": "median",
           "rosterId": 1,
-          "line": 40,
+          "line": 41.2,
           "result": "W"
         }
       ]
