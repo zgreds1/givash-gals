@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T12:16:28.861Z",
+  "generatedAt": "2026-11-01T21:01:26.371Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -111,6 +111,11 @@
       "pos": "RB",
       "team": "NO"
     },
+    "4037": {
+      "name": "Chris Godwin Jr.",
+      "pos": "WR",
+      "team": "TB"
+    },
     "4039": {
       "name": "Cooper Kupp",
       "pos": "WR",
@@ -140,6 +145,11 @@
       "name": "Jake Elliott",
       "pos": "K",
       "team": "PHI"
+    },
+    "4219": {
+      "name": "Jeremy McNichols",
+      "pos": "RB",
+      "team": "WAS"
     },
     "4381": {
       "name": "Taysom Hill",
@@ -396,6 +406,11 @@
       "pos": "WR",
       "team": "BAL"
     },
+    "7608": {
+      "name": "Khalil Herbert",
+      "pos": "RB",
+      "team": "ATL"
+    },
     "7694": {
       "name": "Tommy Tremble",
       "pos": "TE",
@@ -571,6 +586,11 @@
       "pos": "WR",
       "team": "DEN"
     },
+    "9500": {
+      "name": "Josh Downs",
+      "pos": "WR",
+      "team": "IND"
+    },
     "9501": {
       "name": "DeMario Douglas",
       "pos": "WR",
@@ -600,6 +620,11 @@
       "name": "Quentin Johnston",
       "pos": "WR",
       "team": "LAC"
+    },
+    "9756": {
+      "name": "Jordan Addison",
+      "pos": "WR",
+      "team": "MIN"
     },
     "9757": {
       "name": "Kendre Miller",
@@ -735,6 +760,11 @@
       "name": "Jacob Cowing",
       "pos": "WR",
       "team": "SF"
+    },
+    "11620": {
+      "name": "Rome Odunze",
+      "pos": "WR",
+      "team": "CHI"
     },
     "11625": {
       "name": "Adonai Mitchell",
@@ -915,6 +945,11 @@
       "name": "Chimere Dike",
       "pos": "WR",
       "team": "TEN"
+    },
+    "12542": {
+      "name": "Efton Chism III",
+      "pos": "WR",
+      "team": "NE"
     },
     "12544": {
       "name": "LeQuint Allen Jr.",
