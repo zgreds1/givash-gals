@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T01:22:21.947Z",
+  "generatedAt": "2026-11-02T04:40:32.141Z",
   "weeks": [
     {
       "week": 1,
@@ -1273,23 +1273,17 @@
         239.14,
         188.5,
         180.9,
-        134.24
+        137.54
       ],
       "teams": {
         "1": {
-          "raw": 42.86,
-          "adjusted": 82.86,
-          "inPlay": 82.86,
+          "raw": 61.14,
+          "adjusted": 101.14,
+          "inPlay": 101.14,
           "penalties": [
             {
               "playerId": "4943",
               "name": "Sam Darnold",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "9230",
-              "name": "Tanner McKee",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1312,12 +1306,6 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13294",
-              "name": "Makai Lemon",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "13320",
               "name": "Zachariah Branch",
               "reason": "zeroed",
@@ -1328,34 +1316,16 @@
               "name": "George Holani",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "4663",
-              "name": "Austin Ekeler",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "4195",
-              "name": "Jake Elliott",
-              "reason": "zeroed",
-              "phase": "upcoming"
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 8
+          "yetToPlay": 4
         },
         "2": {
-          "raw": 114.24,
-          "adjusted": 134.24,
-          "inPlay": 134.24,
+          "raw": 117.54,
+          "adjusted": 137.54,
+          "inPlay": 137.54,
           "penalties": [
-            {
-              "playerId": "4219",
-              "name": "Jeremy McNichols",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "12497",
               "name": "Tory Horton",
@@ -1376,7 +1346,7 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 3
+          "yetToPlay": 2
         },
         "3": {
           "raw": 128.5,
