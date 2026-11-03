@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T04:40:32.141Z",
+  "generatedAt": "2026-11-03T07:32:40.697Z",
   "weeks": [
     {
       "week": 1,
@@ -97,9 +97,9 @@
           "inPlay": 209.54,
           "penalties": [
             {
-              "playerId": null,
-              "name": "Empty slot",
-              "reason": "empty-slot",
+              "playerId": "7528",
+              "name": "Najee Harris",
+              "reason": "zeroed",
               "phase": "final"
             },
             {
@@ -1268,31 +1268,19 @@
       "week": 8,
       "played": true,
       "degenerate": false,
-      "median": 184.7,
+      "median": 196.35,
       "medianPool": [
-        239.14,
+        266.34,
+        204.2,
         188.5,
-        180.9,
-        137.54
+        154.34
       ],
       "teams": {
         "1": {
-          "raw": 61.14,
-          "adjusted": 101.14,
-          "inPlay": 101.14,
+          "raw": 86.16,
+          "adjusted": 126.16,
+          "inPlay": 126.16,
           "penalties": [
-            {
-              "playerId": "4943",
-              "name": "Sam Darnold",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "10235",
-              "name": "Roschon Johnson",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "6828",
               "name": "AJ Dillon",
@@ -1300,44 +1288,20 @@
               "phase": "final"
             },
             {
-              "playerId": "3634",
-              "name": "Kalif Raymond",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "13320",
               "name": "Zachariah Branch",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "12048",
-              "name": "George Holani",
-              "reason": "zeroed",
-              "phase": "upcoming"
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 4
+          "yetToPlay": 0
         },
         "2": {
-          "raw": 117.54,
-          "adjusted": 137.54,
-          "inPlay": 137.54,
+          "raw": 134.34,
+          "adjusted": 154.34,
+          "inPlay": 154.34,
           "penalties": [
-            {
-              "playerId": "12497",
-              "name": "Tory Horton",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "11620",
-              "name": "Rome Odunze",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "4037",
               "name": "Chris Godwin Jr.",
@@ -1346,7 +1310,7 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 2
+          "yetToPlay": 0
         },
         "3": {
           "raw": 128.5,
@@ -1376,9 +1340,9 @@
           "yetToPlay": 0
         },
         "4": {
-          "raw": 80.9,
-          "adjusted": 180.9,
-          "inPlay": 180.9,
+          "raw": 84.2,
+          "adjusted": 204.2,
+          "inPlay": 204.2,
           "penalties": [
             {
               "playerId": "11655",
@@ -1405,12 +1369,6 @@
               "phase": "final"
             },
             {
-              "playerId": "11603",
-              "name": "AJ Barner",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "12474",
               "name": "Woody Marks",
               "reason": "zeroed",
@@ -1420,16 +1378,16 @@
               "playerId": "6826",
               "name": "Cole Kmet",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             }
           ],
-          "settledPenalties": 5,
-          "yetToPlay": 2
+          "settledPenalties": 6,
+          "yetToPlay": 0
         },
         "5": {
-          "raw": 119.14,
-          "adjusted": 239.14,
-          "inPlay": 239.14,
+          "raw": 126.34,
+          "adjusted": 266.34,
+          "inPlay": 266.34,
           "penalties": [
             {
               "playerId": "2306",
@@ -1447,7 +1405,7 @@
               "playerId": "11435",
               "name": "Emanuel Wilson",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "8208",
@@ -1462,12 +1420,6 @@
               "phase": "final"
             },
             {
-              "playerId": "4039",
-              "name": "Cooper Kupp",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "8145",
               "name": "Jeremy Ruckert",
               "reason": "zeroed",
@@ -1480,8 +1432,8 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 6,
-          "yetToPlay": 2
+          "settledPenalties": 7,
+          "yetToPlay": 0
         }
       },
       "matchups": [
@@ -1499,12 +1451,641 @@
             3,
             4
           ],
-          "winner": 4
+          "winner": 3
         },
         {
           "type": "median",
           "rosterId": 1,
-          "line": 184.7,
+          "line": 196.35,
+          "result": "W"
+        }
+      ]
+    },
+    {
+      "week": 9,
+      "played": false,
+      "degenerate": false,
+      "median": 40,
+      "medianPool": [
+        60,
+        40,
+        40,
+        0
+      ],
+      "teams": {
+        "1": {
+          "raw": 0,
+          "adjusted": 0,
+          "inPlay": 0,
+          "penalties": [
+            {
+              "playerId": "4943",
+              "name": "Sam Darnold",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4017",
+              "name": "Deshaun Watson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9230",
+              "name": "Tanner McKee",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "10235",
+              "name": "Roschon Johnson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "6828",
+              "name": "AJ Dillon",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11643",
+              "name": "Jaylen Wright",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "10219",
+              "name": "Chris Rodriguez Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "5045",
+              "name": "Courtland Sutton",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "3634",
+              "name": "Kalif Raymond",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13294",
+              "name": "Makai Lemon",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13320",
+              "name": "Zachariah Branch",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8172",
+              "name": "Greg Dulcich",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "5012",
+              "name": "Mark Andrews",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12048",
+              "name": "George Holani",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4663",
+              "name": "Austin Ekeler",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13424",
+              "name": "Seth McGowan",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11729",
+              "name": "Sione Vaki",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4195",
+              "name": "Jake Elliott",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            }
+          ],
+          "settledPenalties": 0,
+          "yetToPlay": 19
+        },
+        "2": {
+          "raw": 0,
+          "adjusted": 40,
+          "inPlay": 40,
+          "penalties": [
+            {
+              "playerId": "5849",
+              "name": "Kyler Murray",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "3257",
+              "name": "Jacoby Brissett",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "1166",
+              "name": "Kirk Cousins",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11571",
+              "name": "Isaiah Davis",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4219",
+              "name": "Jeremy McNichols",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "7608",
+              "name": "Khalil Herbert",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12469",
+              "name": "Dylan Sampson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12497",
+              "name": "Tory Horton",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11620",
+              "name": "Rome Odunze",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12542",
+              "name": "Efton Chism III",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12499",
+              "name": "Elic Ayomanor",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "3214",
+              "name": "Hunter Henry",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13421",
+              "name": "Eli Raridon",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9756",
+              "name": "Jordan Addison",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9500",
+              "name": "Josh Downs",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "6806",
+              "name": "J.K. Dobbins",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4037",
+              "name": "Chris Godwin Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "5119",
+              "name": "Jason Sanders",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "TEN",
+              "name": "Tennessee Titans",
+              "reason": "bye-def",
+              "phase": "final"
+            }
+          ],
+          "settledPenalties": 2,
+          "yetToPlay": 17
+        },
+        "3": {
+          "raw": 0,
+          "adjusted": 40,
+          "inPlay": 40,
+          "penalties": [
+            {
+              "playerId": "11563",
+              "name": "Bo Nix",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "6797",
+              "name": "Justin Herbert",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8161",
+              "name": "Malik Willis",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11575",
+              "name": "Ray Davis",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12531",
+              "name": "Trevor Etienne",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13337",
+              "name": "Emmett Johnson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8207",
+              "name": "Tyler Goodson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11627",
+              "name": "Troy Franklin",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13293",
+              "name": "Ja'Kobi Lane",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4454",
+              "name": "Kendrick Bourne",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12485",
+              "name": "Tez Johnson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4066",
+              "name": "Evan Engram",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9479",
+              "name": "Darnell Washington",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "6783",
+              "name": "Jerry Jeudy",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "5995",
+              "name": "Justice Hill",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12540",
+              "name": "Chimere Dike",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "11783",
+              "name": "Ryan Flournoy",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12713",
+              "name": "Andy Borregales",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            }
+          ],
+          "settledPenalties": 2,
+          "yetToPlay": 17
+        },
+        "4": {
+          "raw": 0,
+          "adjusted": 20,
+          "inPlay": 20,
+          "penalties": [
+            {
+              "playerId": "4046",
+              "name": "Patrick Mahomes",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "5870",
+              "name": "Daniel Jones",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "1373",
+              "name": "Geno Smith",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12491",
+              "name": "Corey Kiner",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11655",
+              "name": "Tyrone Tracy Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13305",
+              "name": "Mike Washington Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4035",
+              "name": "Alvin Kamara",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "7571",
+              "name": "Rashod Bateman",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13346",
+              "name": "Denzel Boston",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4981",
+              "name": "Calvin Ridley",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "13317",
+              "name": "Ted Hurst III",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8110",
+              "name": "Jake Ferguson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11603",
+              "name": "AJ Barner",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "13298",
+              "name": "KC Concepcion Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12474",
+              "name": "Woody Marks",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9482",
+              "name": "Michael Mayer",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "6826",
+              "name": "Cole Kmet",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "3678",
+              "name": "Wil Lutz",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            }
+          ],
+          "settledPenalties": 1,
+          "yetToPlay": 18
+        },
+        "5": {
+          "raw": 0,
+          "adjusted": 60,
+          "inPlay": 60,
+          "penalties": [
+            {
+              "playerId": "12522",
+              "name": "Cam Ward",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "96",
+              "name": "Aaron Rodgers",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "2306",
+              "name": "Jameis Winston",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8154",
+              "name": "Brian Robinson Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8132",
+              "name": "Tyler Allgeier",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "11435",
+              "name": "Emanuel Wilson",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8208",
+              "name": "Tyler Badie",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9501",
+              "name": "DeMario Douglas",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12503",
+              "name": "Isaiah Bond",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "9494",
+              "name": "Marvin Mims Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "4039",
+              "name": "Cooper Kupp",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "10231",
+              "name": "Elijah Higgins",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "8145",
+              "name": "Jeremy Ruckert",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12502",
+              "name": "Gunnar Helm",
+              "reason": "zeroed",
+              "phase": "final"
+            },
+            {
+              "playerId": "7694",
+              "name": "Tommy Tremble",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12495",
+              "name": "Ollie Gordon II",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "12544",
+              "name": "LeQuint Allen Jr.",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            },
+            {
+              "playerId": "10955",
+              "name": "Chad Ryland",
+              "reason": "zeroed",
+              "phase": "upcoming"
+            }
+          ],
+          "settledPenalties": 3,
+          "yetToPlay": 16
+        }
+      },
+      "matchups": [
+        {
+          "type": "h2h",
+          "rosterIds": [
+            1,
+            5
+          ],
+          "winner": 1
+        },
+        {
+          "type": "h2h",
+          "rosterIds": [
+            2,
+            3
+          ],
+          "winner": null
+        },
+        {
+          "type": "median",
+          "rosterId": 4,
+          "line": 40,
           "result": "W"
         }
       ]
