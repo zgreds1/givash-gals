@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-03T07:32:40.697Z",
+  "generatedAt": "2026-11-03T13:26:01.333Z",
   "weeks": [
     {
       "week": 1,
@@ -97,9 +97,9 @@
           "inPlay": 209.54,
           "penalties": [
             {
-              "playerId": "7528",
-              "name": "Najee Harris",
-              "reason": "zeroed",
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
               "phase": "final"
             },
             {
@@ -1479,8 +1479,8 @@
           "inPlay": 0,
           "penalties": [
             {
-              "playerId": "4943",
-              "name": "Sam Darnold",
+              "playerId": "6011",
+              "name": "Gardner Minshew II",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1503,8 +1503,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "6828",
-              "name": "AJ Dillon",
+              "playerId": "13414",
+              "name": "Kaelon Black",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1539,8 +1539,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13320",
-              "name": "Zachariah Branch",
+              "playerId": "8119",
+              "name": "Jahan Dotson",
               "reason": "zeroed",
               "phase": "upcoming"
             },

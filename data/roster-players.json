@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-01T21:01:26.371Z",
+  "generatedAt": "2026-11-03T13:26:01.333Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -276,6 +276,11 @@
       "pos": "RB",
       "team": "BAL"
     },
+    "6011": {
+      "name": "Gardner Minshew II",
+      "pos": "QB",
+      "team": "ARI"
+    },
     "6039": {
       "name": "Ty Johnson",
       "pos": "RB",
@@ -441,6 +446,11 @@
       "pos": "WR",
       "team": "ATL"
     },
+    "8119": {
+      "name": "Jahan Dotson",
+      "pos": "WR",
+      "team": "ATL"
+    },
     "8127": {
       "name": "Charlie Kolar",
       "pos": "TE",
@@ -595,6 +605,11 @@
       "name": "DeMario Douglas",
       "pos": "WR",
       "team": "NE"
+    },
+    "9504": {
+      "name": "Kayshon Boutte",
+      "pos": "WR",
+      "team": "HOU"
     },
     "9506": {
       "name": "Sean Tucker",
@@ -1050,6 +1065,11 @@
       "name": "Eli Stowers",
       "pos": "TE",
       "team": "PHI"
+    },
+    "13350": {
+      "name": "Joe Fagnano",
+      "pos": "QB",
+      "team": "BAL"
     },
     "13405": {
       "name": "Kaytron Allen",
