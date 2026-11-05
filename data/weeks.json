@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T13:45:47.903Z",
+  "generatedAt": "2026-11-05T13:57:53.423Z",
   "weeks": [
     {
       "week": 1,
@@ -1465,11 +1465,11 @@
       "week": 9,
       "played": false,
       "degenerate": false,
-      "median": 40,
+      "median": 20,
       "medianPool": [
         60,
         40,
-        40,
+        0,
         0
       ],
       "teams": {
@@ -1491,8 +1491,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9230",
-              "name": "Tanner McKee",
+              "playerId": "5854",
+              "name": "Drew Lock",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1715,12 +1715,12 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 40,
-          "inPlay": 40,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
-              "playerId": "11563",
-              "name": "Bo Nix",
+              "playerId": "11557",
+              "name": "Joe Milton",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1749,8 +1749,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "13337",
-              "name": "Emmett Johnson",
+              "playerId": "9511",
+              "name": "Keaton Mitchell",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1773,8 +1773,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4454",
-              "name": "Kendrick Bourne",
+              "playerId": "7090",
+              "name": "Darnell Mooney",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1791,10 +1791,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9479",
-              "name": "Darnell Washington",
+              "playerId": "3202",
+              "name": "Austin Hooper",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "6783",
@@ -1803,20 +1803,20 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "5995",
-              "name": "Justice Hill",
+              "playerId": "12509",
+              "name": "Tre' Harris",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "12540",
-              "name": "Chimere Dike",
+              "playerId": "12535",
+              "name": "Isaac TeSlaa",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "11783",
-              "name": "Ryan Flournoy",
+              "playerId": "11628",
+              "name": "Marvin Harrison Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1827,8 +1827,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 17
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "4": {
           "raw": 0,
@@ -2080,13 +2080,13 @@
             2,
             3
           ],
-          "winner": null
+          "winner": 3
         },
         {
           "type": "median",
           "rosterId": 4,
-          "line": 40,
-          "result": "W"
+          "line": 20,
+          "result": "T"
         }
       ]
     }

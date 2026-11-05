@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T13:45:47.903Z",
+  "generatedAt": "2026-11-05T13:57:53.423Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -65,6 +65,11 @@
       "name": "Derrick Henry",
       "pos": "RB",
       "team": "BAL"
+    },
+    "3202": {
+      "name": "Austin Hooper",
+      "pos": "TE",
+      "team": "ATL"
     },
     "3214": {
       "name": "Hunter Henry",
@@ -711,6 +716,11 @@
       "pos": "K",
       "team": "DAL"
     },
+    "11557": {
+      "name": "Joe Milton",
+      "pos": "QB",
+      "team": "PHI"
+    },
     "11559": {
       "name": "Michael Penix Jr.",
       "pos": "QB",
@@ -795,6 +805,11 @@
       "name": "Troy Franklin",
       "pos": "WR",
       "team": "DEN"
+    },
+    "11628": {
+      "name": "Marvin Harrison Jr.",
+      "pos": "WR",
+      "team": "HOU"
     },
     "11643": {
       "name": "Jaylen Wright",
@@ -1145,6 +1160,11 @@
       "name": "Los Angeles Rams",
       "pos": "DEF",
       "team": "LAR"
+    },
+    "LV": {
+      "name": "Las Vegas Raiders",
+      "pos": "DEF",
+      "team": "LV"
     },
     "MIA": {
       "name": "Miami Dolphins",
