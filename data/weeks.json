@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T13:57:53.423Z",
+  "generatedAt": "2026-11-06T13:43:29.193Z",
   "weeks": [
     {
       "week": 1,
@@ -1463,30 +1463,24 @@
     },
     {
       "week": 9,
-      "played": false,
+      "played": true,
       "degenerate": false,
-      "median": 20,
+      "median": 30,
       "medianPool": [
-        60,
+        80,
         40,
-        0,
-        0
+        20,
+        9.8
       ],
       "teams": {
         "1": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 9.8,
+          "adjusted": 9.8,
+          "inPlay": 9.8,
           "penalties": [
             {
               "playerId": "6011",
               "name": "Gardner Minshew II",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "13350",
-              "name": "Joe Fagnano",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1511,12 +1505,6 @@
             {
               "playerId": "11643",
               "name": "Jaylen Wright",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "10219",
-              "name": "Chris Rodriguez Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1551,14 +1539,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "5012",
-              "name": "Mark Andrews",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "12048",
-              "name": "George Holani",
+              "playerId": "7567",
+              "name": "Kenny Gainwell",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1588,7 +1570,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 16
         },
         "2": {
           "raw": 0,
@@ -1715,8 +1697,8 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "adjusted": 20,
+          "inPlay": 20,
           "penalties": [
             {
               "playerId": "11557",
@@ -1770,7 +1752,7 @@
               "playerId": "13293",
               "name": "Ja'Kobi Lane",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "7090",
@@ -1827,13 +1809,13 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 0,
-          "yetToPlay": 19
+          "settledPenalties": 1,
+          "yetToPlay": 18
         },
         "4": {
-          "raw": 0,
-          "adjusted": 20,
-          "inPlay": 20,
+          "raw": 1.1,
+          "adjusted": 21.1,
+          "inPlay": 21.1,
           "penalties": [
             {
               "playerId": "4046",
@@ -1874,12 +1856,6 @@
             {
               "playerId": "4035",
               "name": "Alvin Kamara",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "7571",
-              "name": "Rashod Bateman",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1945,12 +1921,12 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 18
+          "yetToPlay": 17
         },
         "5": {
           "raw": 0,
-          "adjusted": 60,
-          "inPlay": 60,
+          "adjusted": 80,
+          "inPlay": 80,
           "penalties": [
             {
               "playerId": "12522",
@@ -2052,7 +2028,7 @@
               "playerId": "12544",
               "name": "LeQuint Allen Jr.",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "10955",
@@ -2061,8 +2037,8 @@
               "phase": "upcoming"
             }
           ],
-          "settledPenalties": 3,
-          "yetToPlay": 16
+          "settledPenalties": 4,
+          "yetToPlay": 15
         }
       },
       "matchups": [
@@ -2085,8 +2061,8 @@
         {
           "type": "median",
           "rosterId": 4,
-          "line": 20,
-          "result": "T"
+          "line": 30,
+          "result": "W"
         }
       ]
     }
