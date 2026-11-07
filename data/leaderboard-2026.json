@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T13:43:29.193Z",
+  "generatedAt": "2026-11-07T12:26:13.467Z",
   "season": "2026",
   "rows": [
     {
@@ -2629,19 +2629,6 @@
       "ppg": 9.64
     },
     {
-      "id": "3257",
-      "name": "Jacoby Brissett",
-      "team": "ARI",
-      "pos": "QB",
-      "gp": 8,
-      "raw": 87.66,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 87.66,
-      "ppg": 10.96
-    },
-    {
       "id": "13287",
       "name": "Jeremiyah Love",
       "team": "ARI",
@@ -4005,6 +3992,19 @@
       "saved": 0,
       "total": 107.4,
       "ppg": 6.85
+    },
+    {
+      "id": "3257",
+      "name": "Jacoby Brissett",
+      "team": "BAL",
+      "pos": "QB",
+      "gp": 8,
+      "raw": 87.66,
+      "pen": 1,
+      "truePen": 0,
+      "saved": 0,
+      "total": 107.66,
+      "ppg": 10.96
     },
     {
       "id": "11631",
@@ -8260,7 +8260,7 @@
     {
       "id": "13580",
       "name": "Carsen Ryan",
-      "team": "CLE",
+      "team": "—",
       "pos": "TE",
       "gp": 7,
       "raw": 0,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T13:43:29.193Z",
+  "generatedAt": "2026-11-07T12:26:13.467Z",
   "weeks": [
     {
       "week": 1,
@@ -1465,10 +1465,10 @@
       "week": 9,
       "played": true,
       "degenerate": false,
-      "median": 30,
+      "median": 40,
       "medianPool": [
         80,
-        40,
+        60,
         20,
         9.8
       ],
@@ -1574,8 +1574,8 @@
         },
         "2": {
           "raw": 0,
-          "adjusted": 40,
-          "inPlay": 40,
+          "adjusted": 60,
+          "inPlay": 60,
           "penalties": [
             {
               "playerId": "5849",
@@ -1587,7 +1587,7 @@
               "playerId": "3257",
               "name": "Jacoby Brissett",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "1166",
@@ -1692,8 +1692,8 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 17
+          "settledPenalties": 3,
+          "yetToPlay": 16
         },
         "3": {
           "raw": 0,
@@ -2061,7 +2061,7 @@
         {
           "type": "median",
           "rosterId": 4,
-          "line": 30,
+          "line": 40,
           "result": "W"
         }
       ]
