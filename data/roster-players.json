@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T12:26:13.467Z",
+  "generatedAt": "2026-11-08T20:59:55.618Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -649,7 +649,7 @@
     "9757": {
       "name": "Kendre Miller",
       "pos": "RB",
-      "team": "NO"
+      "team": "—"
     },
     "9758": {
       "name": "C.J. Stroud",
@@ -1006,6 +1006,11 @@
       "pos": "QB",
       "team": "LV"
     },
+    "13276": {
+      "name": "Omar Cooper Jr.",
+      "pos": "WR",
+      "team": "NYJ"
+    },
     "13277": {
       "name": "CJ Donaldson",
       "pos": "RB",
@@ -1110,6 +1115,11 @@
       "name": "Jalon Daniels",
       "pos": "QB",
       "team": "TB"
+    },
+    "13603": {
+      "name": "Gregory Desrosiers",
+      "pos": "RB",
+      "team": "NYG"
     },
     "13833": {
       "name": "Dominic Zvada",
