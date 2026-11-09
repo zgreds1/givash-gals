@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T00:45:41.926Z",
+  "generatedAt": "2026-11-09T04:51:38.993Z",
   "weeks": [
     {
       "week": 1,
@@ -1465,51 +1465,39 @@
       "week": 9,
       "played": true,
       "degenerate": false,
-      "median": 117.14,
+      "median": 142.69,
       "medianPool": [
         240.34,
-        123.54,
-        110.74,
-        92.6
+        144.04,
+        141.34,
+        101.2
       ],
       "teams": {
         "1": {
-          "raw": 90.74,
-          "adjusted": 110.74,
-          "inPlay": 110.74,
+          "raw": 104.04,
+          "adjusted": 144.04,
+          "inPlay": 144.04,
           "penalties": [
             {
               "playerId": "10235",
               "name": "Roschon Johnson",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "12048",
               "name": "George Holani",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "3634",
-              "name": "Kalif Raymond",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "7567",
-              "name": "Kenny Gainwell",
-              "reason": "zeroed",
-              "phase": "upcoming"
             }
           ],
-          "settledPenalties": 1,
-          "yetToPlay": 3
+          "settledPenalties": 2,
+          "yetToPlay": 0
         },
         "2": {
-          "raw": 83.54,
-          "adjusted": 123.54,
-          "inPlay": 123.54,
+          "raw": 101.34,
+          "adjusted": 141.34,
+          "inPlay": 141.34,
           "penalties": [
             {
               "playerId": "3161",
@@ -1530,31 +1518,19 @@
               "phase": "final"
             },
             {
-              "playerId": "11620",
-              "name": "Rome Odunze",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "9756",
               "name": "Jordan Addison",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "4037",
-              "name": "Chris Godwin Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 4
+          "yetToPlay": 2
         },
         "3": {
-          "raw": 52.6,
-          "adjusted": 92.6,
-          "inPlay": 92.6,
+          "raw": 61.2,
+          "adjusted": 101.2,
+          "inPlay": 101.2,
           "penalties": [
             {
               "playerId": "11575",
@@ -1569,12 +1545,6 @@
               "phase": "final"
             },
             {
-              "playerId": "12485",
-              "name": "Tez Johnson",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "3202",
               "name": "Austin Hooper",
               "reason": "zeroed",
@@ -1582,12 +1552,12 @@
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 2
+          "yetToPlay": 1
         },
         "4": {
           "raw": 116.68,
-          "adjusted": 156.68,
-          "inPlay": 156.68,
+          "adjusted": 196.68,
+          "inPlay": 196.68,
           "penalties": [
             {
               "playerId": "11655",
@@ -1605,17 +1575,17 @@
               "playerId": "13317",
               "name": "Ted Hurst III",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             },
             {
               "playerId": "6826",
               "name": "Cole Kmet",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "final"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 2
+          "settledPenalties": 4,
+          "yetToPlay": 0
         },
         "5": {
           "raw": 60.34,
@@ -1701,7 +1671,7 @@
         {
           "type": "median",
           "rosterId": 4,
-          "line": 117.14,
+          "line": 142.69,
           "result": "L"
         }
       ]
