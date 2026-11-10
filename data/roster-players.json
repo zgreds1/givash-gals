@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-08T20:59:55.618Z",
+  "generatedAt": "2026-11-10T14:05:55.667Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -671,6 +671,11 @@
       "pos": "RB",
       "team": "CHI"
     },
+    "10937": {
+      "name": "Jake Moody",
+      "pos": "K",
+      "team": "BAL"
+    },
     "10955": {
       "name": "Chad Ryland",
       "pos": "K",
@@ -835,6 +840,11 @@
       "name": "Ryan Flournoy",
       "pos": "WR",
       "team": "DAL"
+    },
+    "11834": {
+      "name": "Devaughn Vele",
+      "pos": "WR",
+      "team": "NO"
     },
     "12048": {
       "name": "George Holani",

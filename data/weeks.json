@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T07:59:17.615Z",
+  "generatedAt": "2026-11-10T14:05:55.667Z",
   "weeks": [
     {
       "week": 1,
@@ -97,9 +97,9 @@
           "inPlay": 209.54,
           "penalties": [
             {
-              "playerId": "7528",
-              "name": "Najee Harris",
-              "reason": "zeroed",
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
               "phase": "final"
             },
             {
@@ -303,9 +303,9 @@
               "phase": "final"
             },
             {
-              "playerId": "9757",
-              "name": "Kendre Miller",
-              "reason": "zeroed",
+              "playerId": null,
+              "name": "Empty slot",
+              "reason": "empty-slot",
               "phase": "final"
             },
             {
@@ -1662,28 +1662,28 @@
       "week": 10,
       "played": false,
       "degenerate": false,
-      "median": 70,
+      "median": 50,
       "medianPool": [
-        120,
         80,
         60,
-        40
+        40,
+        0
       ],
       "teams": {
         "1": {
           "raw": 0,
-          "adjusted": 120,
-          "inPlay": 120,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
-              "playerId": "6011",
-              "name": "Gardner Minshew II",
+              "playerId": "11559",
+              "name": "Michael Penix Jr.",
               "reason": "zeroed",
               "phase": "upcoming"
             },
             {
-              "playerId": "13350",
-              "name": "Joe Fagnano",
+              "playerId": "4017",
+              "name": "Deshaun Watson",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1694,10 +1694,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "10235",
-              "name": "Roschon Johnson",
+              "playerId": "6039",
+              "name": "Ty Johnson",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "13414",
@@ -1706,8 +1706,8 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12048",
-              "name": "George Holani",
+              "playerId": "5995",
+              "name": "Justice Hill",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1718,22 +1718,22 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "5045",
-              "name": "Courtland Sutton",
+              "playerId": "11834",
+              "name": "Devaughn Vele",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "3634",
-              "name": "Kalif Raymond",
+              "playerId": "12499",
+              "name": "Elic Ayomanor",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "13294",
-              "name": "Makai Lemon",
+              "playerId": "9504",
+              "name": "Kayshon Boutte",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "8119",
@@ -1754,10 +1754,10 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "7567",
-              "name": "Kenny Gainwell",
+              "playerId": "11647",
+              "name": "Kimani Vidal",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "4663",
@@ -1778,14 +1778,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "4195",
-              "name": "Jake Elliott",
+              "playerId": "10937",
+              "name": "Jake Moody",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             }
           ],
-          "settledPenalties": 6,
-          "yetToPlay": 13
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "2": {
           "raw": 0,
@@ -2263,7 +2263,7 @@
             1,
             4
           ],
-          "winner": 4
+          "winner": 1
         },
         {
           "type": "h2h",
@@ -2276,8 +2276,8 @@
         {
           "type": "median",
           "rosterId": 2,
-          "line": 70,
-          "result": "W"
+          "line": 50,
+          "result": "L"
         }
       ]
     }
