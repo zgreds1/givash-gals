@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T14:05:55.667Z",
+  "generatedAt": "2026-11-11T13:31:37.932Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -14,12 +14,12 @@
     "650": {
       "name": "Nick Folk",
       "pos": "K",
-      "team": "ATL"
+      "team": "—"
     },
     "1166": {
       "name": "Kirk Cousins",
       "pos": "QB",
-      "team": "LV"
+      "team": "MIN"
     },
     "1373": {
       "name": "Geno Smith",
@@ -29,7 +29,7 @@
     "1479": {
       "name": "Keenan Allen",
       "pos": "WR",
-      "team": "IND"
+      "team": "SF"
     },
     "2306": {
       "name": "Jameis Winston",
@@ -604,7 +604,7 @@
     "9500": {
       "name": "Josh Downs",
       "pos": "WR",
-      "team": "IND"
+      "team": "KC"
     },
     "9501": {
       "name": "DeMario Douglas",
@@ -649,7 +649,7 @@
     "9757": {
       "name": "Kendre Miller",
       "pos": "RB",
-      "team": "—"
+      "team": "DAL"
     },
     "9758": {
       "name": "C.J. Stroud",
@@ -674,7 +674,7 @@
     "10937": {
       "name": "Jake Moody",
       "pos": "K",
-      "team": "BAL"
+      "team": "ATL"
     },
     "10955": {
       "name": "Chad Ryland",

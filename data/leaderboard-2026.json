@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T07:59:17.615Z",
+  "generatedAt": "2026-11-11T13:31:37.932Z",
   "season": "2026",
   "rows": [
     {
@@ -408,7 +408,7 @@
     {
       "id": "650",
       "name": "Nick Folk",
-      "team": "ATL",
+      "team": "—",
       "pos": "K",
       "gp": 9,
       "raw": 56,
@@ -460,7 +460,7 @@
     {
       "id": "9500",
       "name": "Josh Downs",
-      "team": "IND",
+      "team": "KC",
       "pos": "WR",
       "gp": 9,
       "raw": 58.6,
@@ -1708,7 +1708,7 @@
     {
       "id": "1479",
       "name": "Keenan Allen",
-      "team": "IND",
+      "team": "SF",
       "pos": "WR",
       "gp": 8,
       "raw": 61.1,
@@ -2215,7 +2215,7 @@
     {
       "id": "9757",
       "name": "Kendre Miller",
-      "team": "—",
+      "team": "DAL",
       "pos": "RB",
       "gp": 6,
       "raw": 31.1,
@@ -5985,7 +5985,7 @@
     {
       "id": "1166",
       "name": "Kirk Cousins",
-      "team": "LV",
+      "team": "MIN",
       "pos": "QB",
       "gp": 9,
       "raw": 154.3,
@@ -6752,7 +6752,7 @@
     {
       "id": "12938",
       "name": "Jackson Meeks",
-      "team": "DET",
+      "team": "—",
       "pos": "TE",
       "gp": 4,
       "raw": 1.3,
@@ -7272,7 +7272,7 @@
     {
       "id": "10937",
       "name": "Jake Moody",
-      "team": "BAL",
+      "team": "ATL",
       "pos": "K",
       "gp": 1,
       "raw": 6,
@@ -7948,7 +7948,7 @@
     {
       "id": "11168",
       "name": "Xavier Smith",
-      "team": "SF",
+      "team": "LAR",
       "pos": "WR",
       "gp": 3,
       "raw": 0,
@@ -8117,7 +8117,7 @@
     {
       "id": "12079",
       "name": "Treyton Welch",
-      "team": "—",
+      "team": "NO",
       "pos": "TE",
       "gp": 5,
       "raw": 0,
@@ -8637,7 +8637,7 @@
     {
       "id": "13827",
       "name": "Tanner Arkin",
-      "team": "NE",
+      "team": "—",
       "pos": "TE",
       "gp": 5,
       "raw": 0,
