@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-10T07:59:17.615Z",
+  "generatedAt": "2026-11-13T13:53:49.990Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -38,12 +38,12 @@
   "standings": [
     {
       "rosterId": 1,
-      "w": 9,
+      "w": 10,
       "l": 0,
       "t": 0,
-      "gp": 9,
-      "adjPF": 1294.48,
-      "rawPF": 854.48,
+      "gp": 10,
+      "adjPF": 1301.68,
+      "rawPF": 861.68,
       "settledPenalties": 22,
       "median": {
         "w": 2,
@@ -55,12 +55,12 @@
     },
     {
       "rosterId": 3,
-      "w": 5,
+      "w": 6,
       "l": 4,
       "t": 0,
-      "gp": 9,
-      "adjPF": 1414.5,
-      "rawPF": 1014.5,
+      "gp": 10,
+      "adjPF": 1416.3,
+      "rawPF": 1016.3,
       "settledPenalties": 20,
       "median": {
         "w": 0,
@@ -68,58 +68,58 @@
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.5555555555555556
+      "winPct": 0.6
     },
     {
       "rosterId": 4,
       "w": 3,
-      "l": 6,
+      "l": 7,
       "t": 0,
-      "gp": 9,
-      "adjPF": 1644.22,
+      "gp": 10,
+      "adjPF": 1724.22,
       "rawPF": 944.22,
-      "settledPenalties": 35,
+      "settledPenalties": 39,
       "median": {
         "w": 1,
         "l": 1,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.3333333333333333
+      "winPct": 0.3
     },
     {
       "rosterId": 5,
       "w": 3,
-      "l": 6,
+      "l": 7,
       "t": 0,
-      "gp": 9,
-      "adjPF": 1785.34,
-      "rawPF": 925.34,
-      "settledPenalties": 43,
+      "gp": 10,
+      "adjPF": 1825.44,
+      "rawPF": 925.44,
+      "settledPenalties": 45,
       "median": {
         "w": 1,
         "l": 1,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.3333333333333333
+      "winPct": 0.3
     },
     {
       "rosterId": 2,
       "w": 2,
-      "l": 7,
+      "l": 8,
       "t": 0,
-      "gp": 9,
-      "adjPF": 1653.82,
-      "rawPF": 1013.82,
-      "settledPenalties": 32,
+      "gp": 10,
+      "adjPF": 1712.82,
+      "rawPF": 1012.82,
+      "settledPenalties": 35,
       "median": {
         "w": 0,
-        "l": 1,
+        "l": 2,
         "t": 0
       },
       "unresolvedTie": false,
-      "winPct": 0.2222222222222222
+      "winPct": 0.2
     }
   ]
 }

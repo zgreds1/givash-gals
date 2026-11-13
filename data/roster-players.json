@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T14:35:44.339Z",
+  "generatedAt": "2026-11-13T13:53:49.990Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -866,6 +866,11 @@
       "pos": "RB",
       "team": "CLE"
     },
+    "12473": {
+      "name": "Mitchell Evans",
+      "pos": "TE",
+      "team": "CAR"
+    },
     "12474": {
       "name": "Woody Marks",
       "pos": "RB",
@@ -1071,6 +1076,11 @@
       "pos": "WR",
       "team": "ATL"
     },
+    "13333": {
+      "name": "Deion Burks",
+      "pos": "WR",
+      "team": "IND"
+    },
     "13337": {
       "name": "Emmett Johnson",
       "pos": "RB",
@@ -1105,6 +1115,11 @@
       "name": "Kaytron Allen",
       "pos": "RB",
       "team": "MIA"
+    },
+    "13413": {
+      "name": "Cyrus Allen",
+      "pos": "WR",
+      "team": "KC"
     },
     "13414": {
       "name": "Kaelon Black",
