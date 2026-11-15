@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T12:56:44.790Z",
+  "generatedAt": "2026-11-15T21:33:12.114Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -25,6 +25,11 @@
       "name": "Geno Smith",
       "pos": "QB",
       "team": "NYJ"
+    },
+    "1379": {
+      "name": "Kyle Juszczyk",
+      "pos": "RB",
+      "team": "SF"
     },
     "1479": {
       "name": "Keenan Allen",
@@ -656,6 +661,11 @@
       "pos": "QB",
       "team": "HOU"
     },
+    "10218": {
+      "name": "Xavier Hutchinson",
+      "pos": "WR",
+      "team": "HOU"
+    },
     "10219": {
       "name": "Chris Rodriguez Jr.",
       "pos": "RB",
@@ -1021,6 +1031,11 @@
       "pos": "QB",
       "team": "LV"
     },
+    "13272": {
+      "name": "Carson Beck",
+      "pos": "QB",
+      "team": "ARI"
+    },
     "13276": {
       "name": "Omar Cooper Jr.",
       "pos": "WR",
@@ -1076,6 +1091,11 @@
       "pos": "WR",
       "team": "ATL"
     },
+    "13330": {
+      "name": "Kenyon Sadiq",
+      "pos": "TE",
+      "team": "NYJ"
+    },
     "13333": {
       "name": "Deion Burks",
       "pos": "WR",
@@ -1110,6 +1130,11 @@
       "name": "Joe Fagnano",
       "pos": "QB",
       "team": "BAL"
+    },
+    "13394": {
+      "name": "Josh Cameron",
+      "pos": "WR",
+      "team": "JAX"
     },
     "13405": {
       "name": "Kaytron Allen",
