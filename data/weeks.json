@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-15T21:33:12.114Z",
+  "generatedAt": "2026-11-16T01:41:04.183Z",
   "weeks": [
     {
       "week": 1,
@@ -1662,25 +1662,19 @@
       "week": 10,
       "played": true,
       "degenerate": false,
-      "median": 125.79,
+      "median": 158.33,
       "medianPool": [
-        182.86,
-        129.24,
-        122.34,
-        105.78
+        208.66,
+        173.84,
+        142.82,
+        97.48
       ],
       "teams": {
         "1": {
-          "raw": 82.34,
-          "adjusted": 122.34,
-          "inPlay": 142.34,
+          "raw": 102.82,
+          "adjusted": 142.82,
+          "inPlay": 142.82,
           "penalties": [
-            {
-              "playerId": "13414",
-              "name": "Kaelon Black",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "5995",
               "name": "Justice Hill",
@@ -1716,9 +1710,9 @@
           "yetToPlay": 3
         },
         "2": {
-          "raw": 71.28,
-          "adjusted": 151.28,
-          "inPlay": 231.28,
+          "raw": 71.3,
+          "adjusted": 171.3,
+          "inPlay": 231.3,
           "penalties": [
             {
               "playerId": "3257",
@@ -1736,7 +1730,7 @@
               "playerId": "12497",
               "name": "Tory Horton",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": null,
@@ -1775,23 +1769,17 @@
               "phase": "live"
             }
           ],
-          "settledPenalties": 4,
+          "settledPenalties": 5,
           "yetToPlay": 1
         },
         "3": {
-          "raw": 65.78,
-          "adjusted": 105.78,
-          "inPlay": 105.78,
+          "raw": 57.48,
+          "adjusted": 97.48,
+          "inPlay": 97.48,
           "penalties": [
             {
               "playerId": "6797",
               "name": "Justin Herbert",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "4147",
-              "name": "Samaje Perine",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -1821,12 +1809,12 @@
             }
           ],
           "settledPenalties": 2,
-          "yetToPlay": 4
+          "yetToPlay": 3
         },
         "4": {
-          "raw": 82.86,
-          "adjusted": 182.86,
-          "inPlay": 202.86,
+          "raw": 88.66,
+          "adjusted": 208.66,
+          "inPlay": 208.66,
           "penalties": [
             {
               "playerId": "11655",
@@ -1856,7 +1844,7 @@
               "playerId": "8110",
               "name": "Jake Ferguson",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "6826",
@@ -1871,19 +1859,19 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 5,
+          "settledPenalties": 6,
           "yetToPlay": 1
         },
         "5": {
-          "raw": 89.24,
-          "adjusted": 129.24,
-          "inPlay": 189.24,
+          "raw": 93.84,
+          "adjusted": 173.84,
+          "inPlay": 193.84,
           "penalties": [
             {
               "playerId": "96",
               "name": "Aaron Rodgers",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "6931",
@@ -1895,7 +1883,7 @@
               "playerId": "1379",
               "name": "Kyle Juszczyk",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "2359",
@@ -1907,17 +1895,11 @@
               "playerId": "10231",
               "name": "Elijah Higgins",
               "reason": "zeroed",
-              "phase": "live"
-            },
-            {
-              "playerId": "1479",
-              "name": "Keenan Allen",
-              "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 1
+          "settledPenalties": 4,
+          "yetToPlay": 0
         }
       },
       "matchups": [
@@ -1940,7 +1922,7 @@
         {
           "type": "median",
           "rosterId": 2,
-          "line": 125.79,
+          "line": 158.33,
           "result": "L"
         }
       ]
