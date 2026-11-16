@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T01:41:04.183Z",
+  "generatedAt": "2026-11-16T04:58:18.583Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -59,8 +59,8 @@
       "l": 4,
       "t": 0,
       "gp": 10,
-      "adjPF": 1511.98,
-      "rawPF": 1071.98,
+      "adjPF": 1522.08,
+      "rawPF": 1082.08,
       "settledPenalties": 22,
       "median": {
         "w": 0,
@@ -93,8 +93,8 @@
       "l": 7,
       "t": 0,
       "gp": 10,
-      "adjPF": 1959.18,
-      "rawPF": 1019.18,
+      "adjPF": 1970.2,
+      "rawPF": 1030.2,
       "settledPenalties": 47,
       "median": {
         "w": 1,

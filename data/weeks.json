@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T01:41:04.183Z",
+  "generatedAt": "2026-11-16T04:58:18.583Z",
   "weeks": [
     {
       "week": 1,
@@ -1662,12 +1662,12 @@
       "week": 10,
       "played": true,
       "degenerate": false,
-      "median": 158.33,
+      "median": 163.84,
       "medianPool": [
         208.66,
-        173.84,
+        184.86,
         142.82,
-        97.48
+        107.58
       ],
       "teams": {
         "1": {
@@ -1773,9 +1773,9 @@
           "yetToPlay": 1
         },
         "3": {
-          "raw": 57.48,
-          "adjusted": 97.48,
-          "inPlay": 97.48,
+          "raw": 67.58,
+          "adjusted": 107.58,
+          "inPlay": 107.58,
           "penalties": [
             {
               "playerId": "6797",
@@ -1863,16 +1863,10 @@
           "yetToPlay": 1
         },
         "5": {
-          "raw": 93.84,
-          "adjusted": 173.84,
-          "inPlay": 193.84,
+          "raw": 104.86,
+          "adjusted": 184.86,
+          "inPlay": 184.86,
           "penalties": [
-            {
-              "playerId": "96",
-              "name": "Aaron Rodgers",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "6931",
               "name": "DeeJay Dallas",
@@ -1922,7 +1916,7 @@
         {
           "type": "median",
           "rosterId": 2,
-          "line": 158.33,
+          "line": 163.84,
           "result": "L"
         }
       ]
