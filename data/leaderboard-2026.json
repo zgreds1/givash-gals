@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T08:48:04.778Z",
+  "generatedAt": "2026-11-17T21:33:45.115Z",
   "season": "2026",
   "rows": [
     {
@@ -536,19 +536,6 @@
       "ppg": 6.99
     },
     {
-      "id": "LV",
-      "name": "Las Vegas Raiders",
-      "team": "LV",
-      "pos": "DEF",
-      "gp": 10,
-      "raw": 70,
-      "pen": 0,
-      "truePen": 0,
-      "saved": 0,
-      "total": 70,
-      "ppg": 7
-    },
-    {
       "id": "CLE",
       "name": "Cleveland Browns",
       "team": "CLE",
@@ -599,6 +586,19 @@
       "saved": 0,
       "total": 70.9,
       "ppg": 7.09
+    },
+    {
+      "id": "LV",
+      "name": "Las Vegas Raiders",
+      "team": "LV",
+      "pos": "DEF",
+      "gp": 10,
+      "raw": 71,
+      "pen": 0,
+      "truePen": 0,
+      "saved": 0,
+      "total": 71,
+      "ppg": 7.1
     },
     {
       "id": "CAR",
