@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T08:48:04.778Z",
+  "generatedAt": "2026-11-18T15:04:10.533Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -160,6 +160,11 @@
       "name": "Jeremy McNichols",
       "pos": "RB",
       "team": "WAS"
+    },
+    "4227": {
+      "name": "Harrison Butker",
+      "pos": "K",
+      "team": "KC"
     },
     "4381": {
       "name": "Taysom Hill",

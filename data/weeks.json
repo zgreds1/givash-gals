@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T08:48:04.778Z",
+  "generatedAt": "2026-11-18T15:04:10.533Z",
   "weeks": [
     {
       "week": 1,
@@ -1882,7 +1882,7 @@
         120,
         120,
         80,
-        60
+        0
       ],
       "teams": {
         "1": {
@@ -2127,8 +2127,8 @@
         },
         "3": {
           "raw": 0,
-          "adjusted": 60,
-          "inPlay": 60,
+          "adjusted": 0,
+          "inPlay": 0,
           "penalties": [
             {
               "playerId": "12494",
@@ -2203,16 +2203,16 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "3202",
-              "name": "Austin Hooper",
+              "playerId": "12493",
+              "name": "Oronde Gadsden",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
-              "playerId": "6783",
-              "name": "Jerry Jeudy",
+              "playerId": "9511",
+              "name": "Keaton Mitchell",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             },
             {
               "playerId": "12509",
@@ -2233,14 +2233,14 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "12713",
-              "name": "Andy Borregales",
+              "playerId": "4227",
+              "name": "Harrison Butker",
               "reason": "zeroed",
-              "phase": "final"
+              "phase": "upcoming"
             }
           ],
-          "settledPenalties": 3,
-          "yetToPlay": 16
+          "settledPenalties": 0,
+          "yetToPlay": 19
         },
         "4": {
           "raw": 0,

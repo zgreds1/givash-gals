@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T21:33:45.115Z",
+  "generatedAt": "2026-11-18T15:04:10.533Z",
   "season": "2026",
   "rows": [
     {
@@ -2137,7 +2137,7 @@
     {
       "id": "5095",
       "name": "Daniel Carlson",
-      "team": "—",
+      "team": "MIA",
       "pos": "K",
       "gp": 7,
       "raw": 41,
@@ -4581,7 +4581,7 @@
     {
       "id": "4233",
       "name": "Zane Gonzalez",
-      "team": "MIA",
+      "team": "—",
       "pos": "K",
       "gp": 4,
       "raw": 25,
@@ -5400,7 +5400,7 @@
     {
       "id": "10228",
       "name": "Charlie Jones",
-      "team": "NYG",
+      "team": "—",
       "pos": "WR",
       "gp": 6,
       "raw": -0.4,
@@ -6349,7 +6349,7 @@
     {
       "id": "12829",
       "name": "Coleman Owen",
-      "team": "—",
+      "team": "GB",
       "pos": "WR",
       "gp": 4,
       "raw": -4,
@@ -7129,7 +7129,7 @@
     {
       "id": "7607",
       "name": "Michael Carter",
-      "team": "—",
+      "team": "TEN",
       "pos": "RB",
       "gp": 3,
       "raw": 1.9,
