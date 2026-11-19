@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T15:04:10.533Z",
+  "generatedAt": "2026-11-19T15:13:41.232Z",
   "season": "2026",
   "rows": [
     {
@@ -3697,7 +3697,7 @@
     {
       "id": "12015",
       "name": "Harrison Mevis",
-      "team": "BAL",
+      "team": "—",
       "pos": "K",
       "gp": 5,
       "raw": 28,
@@ -5400,7 +5400,7 @@
     {
       "id": "10228",
       "name": "Charlie Jones",
-      "team": "—",
+      "team": "NYG",
       "pos": "WR",
       "gp": 6,
       "raw": -0.4,
@@ -8600,10 +8600,10 @@
       "name": "Jeff Caldwell",
       "team": "KC",
       "pos": "WR",
-      "gp": 2,
+      "gp": 1,
       "raw": 0,
       "pen": 10,
-      "truePen": 2,
+      "truePen": 1,
       "saved": 0,
       "total": 200,
       "ppg": 20
@@ -8741,7 +8741,7 @@
     {
       "id": "13580",
       "name": "Carsen Ryan",
-      "team": "CLE",
+      "team": "—",
       "pos": "TE",
       "gp": 9,
       "raw": 0,
@@ -8806,7 +8806,7 @@
     {
       "id": "13904",
       "name": "Jacob De Jesus",
-      "team": "KC",
+      "team": "—",
       "pos": "WR",
       "gp": 1,
       "raw": 0,
