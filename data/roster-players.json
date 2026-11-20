@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T15:04:10.533Z",
+  "generatedAt": "2026-11-20T14:52:21.766Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -406,6 +406,11 @@
       "pos": "RB",
       "team": "—"
     },
+    "7561": {
+      "name": "Elijah Mitchell",
+      "pos": "RB",
+      "team": "PHI"
+    },
     "7564": {
       "name": "Ja'Marr Chase",
       "pos": "WR",
@@ -435,6 +440,11 @@
       "name": "Tommy Tremble",
       "pos": "TE",
       "team": "CAR"
+    },
+    "7828": {
+      "name": "Noah Gray",
+      "pos": "TE",
+      "team": "KC"
     },
     "7842": {
       "name": "Luke Farrell",
@@ -540,6 +550,11 @@
       "name": "Chig Okonkwo",
       "pos": "TE",
       "team": "WAS"
+    },
+    "8408": {
+      "name": "Jordan Mason",
+      "pos": "RB",
+      "team": "MIN"
     },
     "8676": {
       "name": "Rashid Shaheed",
@@ -811,6 +826,11 @@
       "pos": "WR",
       "team": "CHI"
     },
+    "11624": {
+      "name": "Xavier Worthy",
+      "pos": "WR",
+      "team": "KC"
+    },
     "11625": {
       "name": "Adonai Mitchell",
       "pos": "WR",
@@ -1061,6 +1081,11 @@
       "pos": "WR",
       "team": "NYG"
     },
+    "13286": {
+      "name": "Jadarian Price",
+      "pos": "RB",
+      "team": "SEA"
+    },
     "13293": {
       "name": "Ja'Kobi Lane",
       "pos": "WR",
@@ -1245,6 +1270,11 @@
       "name": "New England Patriots",
       "pos": "DEF",
       "team": "NE"
+    },
+    "NO": {
+      "name": "New Orleans Saints",
+      "pos": "DEF",
+      "team": "NO"
     },
     "NYJ": {
       "name": "New York Jets",
