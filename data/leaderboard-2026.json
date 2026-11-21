@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-20T14:52:21.766Z",
+  "generatedAt": "2026-11-21T14:11:33.176Z",
   "season": "2026",
   "rows": [
     {
@@ -4126,7 +4126,7 @@
     {
       "id": "8116",
       "name": "Pierre Strong Jr.",
-      "team": "GB",
+      "team": "—",
       "pos": "RB",
       "gp": 5,
       "raw": 17,
@@ -5490,7 +5490,7 @@
     },
     {
       "id": "13603",
-      "name": "Gregory Desrosiers",
+      "name": "Gregory Desrosiers Jr.",
       "team": "NYG",
       "pos": "RB",
       "gp": 2,
@@ -5868,7 +5868,7 @@
     {
       "id": "7865",
       "name": "Brandon Smith",
-      "team": "PIT",
+      "team": "—",
       "pos": "WR",
       "gp": 5,
       "raw": 5.9,
