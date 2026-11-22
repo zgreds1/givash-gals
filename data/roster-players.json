@@ -1,10 +1,15 @@
 {
-  "generatedAt": "2026-11-21T14:11:33.176Z",
+  "generatedAt": "2026-11-22T22:21:13.816Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
       "pos": "QB",
       "team": "PIT"
+    },
+    "260": {
+      "name": "Josh Johnson",
+      "pos": "QB",
+      "team": "ARI"
     },
     "421": {
       "name": "Matthew Stafford",
@@ -264,7 +269,7 @@
     "5870": {
       "name": "Daniel Jones",
       "pos": "QB",
-      "team": "IND"
+      "team": "—"
     },
     "5906": {
       "name": "Dawson Knox",
@@ -476,6 +481,11 @@
       "pos": "WR",
       "team": "ATL"
     },
+    "8122": {
+      "name": "Zonovan Knight",
+      "pos": "RB",
+      "team": "ARI"
+    },
     "8127": {
       "name": "Charlie Kolar",
       "pos": "TE",
@@ -495,6 +505,11 @@
       "name": "Khalil Shakir",
       "pos": "WR",
       "team": "BUF"
+    },
+    "8136": {
+      "name": "Rachaad White",
+      "pos": "RB",
+      "team": "WAS"
     },
     "8137": {
       "name": "George Pickens",
@@ -730,6 +745,11 @@
       "name": "Brady Russell",
       "pos": "RB",
       "team": "SEA"
+    },
+    "11292": {
+      "name": "Tommy DeVito",
+      "pos": "QB",
+      "team": "NE"
     },
     "11370": {
       "name": "Chris Brooks",
