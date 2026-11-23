@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T22:21:13.816Z",
+  "generatedAt": "2026-11-23T03:36:32.358Z",
   "weeks": [
     {
       "week": 1,
@@ -1877,25 +1877,19 @@
       "week": 11,
       "played": true,
       "degenerate": false,
-      "median": 117.74,
+      "median": 167.34,
       "medianPool": [
-        247.3,
-        129.94,
-        105.54,
-        99.86
+        280.36,
+        187.42,
+        147.26,
+        118.14
       ],
       "teams": {
         "1": {
-          "raw": 99.86,
-          "adjusted": 99.86,
-          "inPlay": 99.86,
+          "raw": 118.14,
+          "adjusted": 118.14,
+          "inPlay": 118.14,
           "penalties": [
-            {
-              "playerId": "13414",
-              "name": "Kaelon Black",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "4663",
               "name": "Austin Ekeler",
@@ -1904,19 +1898,13 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 2
+          "yetToPlay": 1
         },
         "2": {
-          "raw": 65.54,
-          "adjusted": 105.54,
-          "inPlay": 145.54,
+          "raw": 87.26,
+          "adjusted": 147.26,
+          "inPlay": 147.26,
           "penalties": [
-            {
-              "playerId": "1166",
-              "name": "Kirk Cousins",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
             {
               "playerId": "7561",
               "name": "Elijah Mitchell",
@@ -1924,22 +1912,10 @@
               "phase": "final"
             },
             {
-              "playerId": "8408",
-              "name": "Jordan Mason",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "6130",
-              "name": "Devin Singletary",
-              "reason": "zeroed",
-              "phase": "live"
-            },
-            {
               "playerId": "13276",
               "name": "Omar Cooper Jr.",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "9757",
@@ -1948,13 +1924,13 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 2,
-          "yetToPlay": 2
+          "settledPenalties": 3,
+          "yetToPlay": 0
         },
         "3": {
-          "raw": 49.94,
-          "adjusted": 129.94,
-          "inPlay": 189.94,
+          "raw": 67.42,
+          "adjusted": 187.42,
+          "inPlay": 187.42,
           "penalties": [
             {
               "playerId": "4147",
@@ -1978,19 +1954,13 @@
               "playerId": "7090",
               "name": "Darnell Mooney",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "12493",
               "name": "Oronde Gadsden",
               "reason": "zeroed",
-              "phase": "live"
-            },
-            {
-              "playerId": "12509",
-              "name": "Tre' Harris",
-              "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "12535",
@@ -2005,13 +1975,13 @@
               "phase": "final"
             }
           ],
-          "settledPenalties": 4,
+          "settledPenalties": 6,
           "yetToPlay": 1
         },
         "4": {
-          "raw": 107.3,
-          "adjusted": 247.3,
-          "inPlay": 287.3,
+          "raw": 120.36,
+          "adjusted": 280.36,
+          "inPlay": 280.36,
           "penalties": [
             {
               "playerId": "12491",
@@ -2023,7 +1993,7 @@
               "playerId": "11655",
               "name": "Tyrone Tracy Jr.",
               "reason": "zeroed",
-              "phase": "live"
+              "phase": "final"
             },
             {
               "playerId": "13346",
@@ -2056,53 +2026,35 @@
               "phase": "final"
             },
             {
-              "playerId": "9482",
-              "name": "Michael Mayer",
-              "reason": "zeroed",
-              "phase": "live"
-            },
-            {
               "playerId": "6826",
               "name": "Cole Kmet",
               "reason": "zeroed",
               "phase": "final"
             }
           ],
-          "settledPenalties": 7,
+          "settledPenalties": 8,
           "yetToPlay": 0
         },
         "5": {
-          "raw": 68.9,
-          "adjusted": 68.9,
-          "inPlay": 88.9,
+          "raw": 81.1,
+          "adjusted": 81.1,
+          "inPlay": 101.1,
           "penalties": [
             {
               "playerId": "6931",
               "name": "DeeJay Dallas",
               "reason": "zeroed",
-              "phase": "upcoming"
+              "phase": "live"
             },
             {
               "playerId": "8136",
               "name": "Rachaad White",
               "reason": "zeroed",
               "phase": "upcoming"
-            },
-            {
-              "playerId": "1479",
-              "name": "Keenan Allen",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "13394",
-              "name": "Josh Cameron",
-              "reason": "zeroed",
-              "phase": "live"
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 3
+          "yetToPlay": 1
         }
       },
       "matchups": [
@@ -2125,7 +2077,7 @@
         {
           "type": "median",
           "rosterId": 5,
-          "line": 117.74,
+          "line": 167.34,
           "result": "W"
         }
       ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T22:21:13.816Z",
+  "generatedAt": "2026-11-23T03:36:32.358Z",
   "ghostRosterId": 6,
   "teams": {
     "1": "LilDaveIII",
@@ -42,8 +42,8 @@
       "l": 0,
       "t": 0,
       "gp": 11,
-      "adjPF": 1558.06,
-      "rawPF": 1078.06,
+      "adjPF": 1576.34,
+      "rawPF": 1096.34,
       "settledPenalties": 24,
       "median": {
         "w": 2,
@@ -59,9 +59,9 @@
       "l": 5,
       "t": 0,
       "gp": 11,
-      "adjPF": 1684.98,
-      "rawPF": 1164.98,
-      "settledPenalties": 26,
+      "adjPF": 1742.46,
+      "rawPF": 1182.46,
+      "settledPenalties": 28,
       "median": {
         "w": 0,
         "l": 2,
@@ -76,8 +76,8 @@
       "l": 7,
       "t": 0,
       "gp": 11,
-      "adjPF": 2039.7,
-      "rawPF": 1099.7,
+      "adjPF": 2051.9,
+      "rawPF": 1111.9,
       "settledPenalties": 47,
       "median": {
         "w": 2,
@@ -93,9 +93,9 @@
       "l": 8,
       "t": 0,
       "gp": 11,
-      "adjPF": 2000.46,
-      "rawPF": 1160.46,
-      "settledPenalties": 42,
+      "adjPF": 2042.18,
+      "rawPF": 1182.18,
+      "settledPenalties": 43,
       "median": {
         "w": 0,
         "l": 2,
@@ -110,9 +110,9 @@
       "l": 8,
       "t": 0,
       "gp": 11,
-      "adjPF": 2105.88,
-      "rawPF": 1145.88,
-      "settledPenalties": 48,
+      "adjPF": 2138.94,
+      "rawPF": 1158.94,
+      "settledPenalties": 49,
       "median": {
         "w": 1,
         "l": 1,
