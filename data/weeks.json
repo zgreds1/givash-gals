@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-23T03:36:32.358Z",
+  "generatedAt": "2026-11-23T05:57:43.757Z",
   "weeks": [
     {
       "week": 1,
@@ -1877,18 +1877,18 @@
       "week": 11,
       "played": true,
       "degenerate": false,
-      "median": 167.34,
+      "median": 169.12,
       "medianPool": [
         280.36,
         187.42,
-        147.26,
-        118.14
+        150.82,
+        119.74
       ],
       "teams": {
         "1": {
-          "raw": 118.14,
-          "adjusted": 118.14,
-          "inPlay": 118.14,
+          "raw": 119.74,
+          "adjusted": 119.74,
+          "inPlay": 119.74,
           "penalties": [
             {
               "playerId": "4663",
@@ -1901,9 +1901,9 @@
           "yetToPlay": 1
         },
         "2": {
-          "raw": 87.26,
-          "adjusted": 147.26,
-          "inPlay": 147.26,
+          "raw": 90.82,
+          "adjusted": 150.82,
+          "inPlay": 150.82,
           "penalties": [
             {
               "playerId": "7561",
@@ -2036,16 +2036,10 @@
           "yetToPlay": 0
         },
         "5": {
-          "raw": 81.1,
-          "adjusted": 81.1,
-          "inPlay": 101.1,
+          "raw": 85.7,
+          "adjusted": 85.7,
+          "inPlay": 85.7,
           "penalties": [
-            {
-              "playerId": "6931",
-              "name": "DeeJay Dallas",
-              "reason": "zeroed",
-              "phase": "live"
-            },
             {
               "playerId": "8136",
               "name": "Rachaad White",
@@ -2077,7 +2071,7 @@
         {
           "type": "median",
           "rosterId": 5,
-          "line": 167.34,
+          "line": 169.12,
           "result": "W"
         }
       ]
