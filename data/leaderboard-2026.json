@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T10:39:55.381Z",
+  "generatedAt": "2026-11-25T16:46:16.117Z",
   "season": "2026",
   "rows": [
     {
@@ -6180,7 +6180,7 @@
     {
       "id": "7865",
       "name": "Brandon Smith",
-      "team": "—",
+      "team": "PIT",
       "pos": "WR",
       "gp": 5,
       "raw": 5.9,
@@ -7128,8 +7128,8 @@
     },
     {
       "id": "8200",
-      "name": "Kevin Austin",
-      "team": "—",
+      "name": "Kevin Austin Jr.",
+      "team": "NO",
       "pos": "WR",
       "gp": 4,
       "raw": 1.2,
@@ -7922,7 +7922,7 @@
     {
       "id": "6803",
       "name": "Brandon Aiyuk",
-      "team": "SF",
+      "team": "—",
       "pos": "WR",
       "gp": 1,
       "raw": 0,
@@ -8338,7 +8338,7 @@
     {
       "id": "11963",
       "name": "Chris Collier",
-      "team": "LV",
+      "team": "—",
       "pos": "RB",
       "gp": 1,
       "raw": 0,
@@ -8871,7 +8871,7 @@
     {
       "id": "13904",
       "name": "Jacob De Jesus",
-      "team": "—",
+      "team": "SEA",
       "pos": "WR",
       "gp": 1,
       "raw": 0,

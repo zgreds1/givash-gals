@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-22T22:21:13.816Z",
+  "generatedAt": "2026-11-25T16:46:16.117Z",
   "players": {
     "96": {
       "name": "Aaron Rodgers",
@@ -611,6 +611,11 @@
       "pos": "QB",
       "team": "CAR"
     },
+    "9229": {
+      "name": "Anthony Richardson Sr.",
+      "pos": "QB",
+      "team": "IND"
+    },
     "9230": {
       "name": "Tanner McKee",
       "pos": "QB",
@@ -915,6 +920,11 @@
       "name": "Dylan Sampson",
       "pos": "RB",
       "team": "CLE"
+    },
+    "12471": {
+      "name": "DJ Giddens",
+      "pos": "RB",
+      "team": "IND"
     },
     "12472": {
       "name": "Raheim Sanders",
