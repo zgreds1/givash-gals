@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T16:46:16.117Z",
+  "generatedAt": "2026-11-26T16:21:35.298Z",
   "weeks": [
     {
       "week": 1,
@@ -2065,7 +2065,7 @@
     },
     {
       "week": 12,
-      "played": false,
+      "played": true,
       "degenerate": false,
       "median": 0,
       "medianPool": [
@@ -2310,9 +2310,9 @@
           "yetToPlay": 19
         },
         "3": {
-          "raw": 0,
-          "adjusted": 0,
-          "inPlay": 0,
+          "raw": 3.7,
+          "adjusted": 3.7,
+          "inPlay": 3.7,
           "penalties": [
             {
               "playerId": "12494",
@@ -2347,12 +2347,6 @@
             {
               "playerId": "11199",
               "name": "Emari Demercado",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
-              "playerId": "12504",
-              "name": "Kaleb Johnson",
               "reason": "zeroed",
               "phase": "upcoming"
             },
@@ -2424,7 +2418,7 @@
             }
           ],
           "settledPenalties": 0,
-          "yetToPlay": 19
+          "yetToPlay": 18
         },
         "4": {
           "raw": 0,
@@ -2682,7 +2676,7 @@
           "type": "median",
           "rosterId": 3,
           "line": 0,
-          "result": "T"
+          "result": "L"
         }
       ]
     }
