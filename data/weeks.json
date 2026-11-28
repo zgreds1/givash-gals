@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T16:06:42.112Z",
+  "generatedAt": "2026-11-28T15:00:15.002Z",
   "weeks": [
     {
       "week": 1,
@@ -2067,12 +2067,12 @@
       "week": 12,
       "played": true,
       "degenerate": false,
-      "median": 53.6,
+      "median": 54.32,
       "medianPool": [
+        67.16,
         65.6,
-        64.16,
         43.04,
-        27.5
+        27.3
       ],
       "teams": {
         "1": {
@@ -2367,9 +2367,9 @@
           "yetToPlay": 14
         },
         "4": {
-          "raw": 4.16,
-          "adjusted": 64.16,
-          "inPlay": 64.16,
+          "raw": 7.16,
+          "adjusted": 67.16,
+          "inPlay": 67.16,
           "penalties": [
             {
               "playerId": "5870",
@@ -2466,21 +2466,15 @@
               "name": "Cole Kmet",
               "reason": "zeroed",
               "phase": "final"
-            },
-            {
-              "playerId": "3678",
-              "name": "Wil Lutz",
-              "reason": "zeroed",
-              "phase": "upcoming"
             }
           ],
           "settledPenalties": 3,
-          "yetToPlay": 15
+          "yetToPlay": 14
         },
         "5": {
-          "raw": 7.5,
-          "adjusted": 27.5,
-          "inPlay": 27.5,
+          "raw": 7.3,
+          "adjusted": 27.3,
+          "inPlay": 27.3,
           "penalties": [
             {
               "playerId": "12522",
@@ -2543,12 +2537,6 @@
               "phase": "upcoming"
             },
             {
-              "playerId": "9494",
-              "name": "Marvin Mims Jr.",
-              "reason": "zeroed",
-              "phase": "upcoming"
-            },
-            {
               "playerId": "12502",
               "name": "Gunnar Helm",
               "reason": "zeroed",
@@ -2586,7 +2574,7 @@
             }
           ],
           "settledPenalties": 1,
-          "yetToPlay": 16
+          "yetToPlay": 15
         }
       },
       "matchups": [
@@ -2609,7 +2597,7 @@
         {
           "type": "median",
           "rosterId": 3,
-          "line": 53.6,
+          "line": 54.32,
           "result": "W"
         }
       ]
